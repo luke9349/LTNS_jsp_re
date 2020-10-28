@@ -1,16 +1,16 @@
-/ *!
- * jQuery 자바 스크립트 라이브러리 v3.5.1
- * https://jquery.com/
- *
- * Sizzle.js 포함
- * https://sizzlejs.com/
- *
- * 저작권 JS 재단 및 기타 기여자
- * MIT 라이선스로 출시
- * https://jquery.org/license
- *
- * 날짜 : 2020-05-04T22 : 49Z
- * /
+/// *!
+// * jQuery 자바 스크립트 라이브러리 v3.5.1
+// * https://jquery.com/
+// *
+// * Sizzle.js 포함
+// * https://sizzlejs.com/
+// *
+// * 저작권 JS 재단 및 기타 기여자
+// * MIT 라이선스로 출시
+// * https://jquery.org/license
+// *
+// * 날짜 : 2020-05-04T22 : 49Z
+// * /
 (function (global, factory) {
 
 	"엄격한 사용";
