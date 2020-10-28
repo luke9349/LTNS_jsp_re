@@ -1,28 +1,26 @@
 package util;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 public class DataUtil {
 
 	public static Connection getConnection() {
 
-		Connection conn = null;
-
 		try {
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String user = "scott_b";
-			String password = "tiger_b";
-
-			Class.forName("oracle.jdbc.OracleDriver");
-
-			return conn = DriverManager.getConnection(url, user, password);
+			
+			InitialContext initCon = new InitialContext();
+			Context context = (Context) initCon.lookup("java:/comp/env");
+			DataSource dataSource = (DataSource) context.lookup("jdbc/LTNS_jsp");
+			return dataSource.getConnection();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return conn;
-
+		return null;
 	}
 
 }
