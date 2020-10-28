@@ -82,17 +82,17 @@ CREATE SEQUENCE SEQ_sports_board_post_id INCREMENT BY 1 START WITH 1;
 
 /* Create Domains */
 -- 회원 등급
-CREATE DOMAIN _GRADE VARCHAR2(20)
+CREATE DOMAIN _GRADE VARCHAR2(32)
 	CONSTRAINT valid-grade CHECK (VALUE IN ('admin','member'));
 
 
 -- 게시판 카테고리
-CREATE DOMAIN _CATEGORY VARCHAR2(20)
+CREATE DOMAIN _CATEGORY VARCHAR2(32)
 	CONSTRAINT valid-category CHECK (VALUE IN ('notice','movie','book','sports','game'));
 
 
 -- 파일 분류
-CREATE DOMAIN _FILEKIND VARCHAR2(20)
+CREATE DOMAIN _FILEKIND VARCHAR2(32)
 	CONSTRAINT valid-filekind CHECK (VALUE IN ('file','image','postcontents'));
 
 
@@ -106,7 +106,7 @@ CREATE TABLE comment_table
 	-- 댓글 고유번호
 	comment_id number NOT NULL,
 	-- 내용
-	comment_contents varchar2(512) NOT NULL,
+	comment_contents varchar2(1024) NOT NULL,
 	-- 작성자
 	writer number NOT NULL,
 	-- 게시글 고유번호
@@ -138,9 +138,9 @@ CREATE TABLE file_table
 	-- 분류 : _FILEKIND 도메인을 사용
 	filekind _FILEKIND NOT NULL,
 	-- 실제파일명
-	real_filename varchar2(100) NOT NULL,
+	real_filename varchar2(256) NOT NULL,
 	-- 업로드 파일명
-	filename varchar2(100) NOT NULL,
+	filename varchar2(256) NOT NULL,
 	PRIMARY KEY (file_id)
 );
 
