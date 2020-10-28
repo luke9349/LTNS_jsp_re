@@ -453,7 +453,11 @@ COMMENT ON COLUMN post_table.viewCnt IS '조회수';
 
 --총 게시글
 CREATE VIEW tot_post_view (post_id,regdate,empathize_cnt,view_cnt,category)
-AS SELECT post_table.post_id, post_table.regdate, 
-	(),
-	()
-FROM post_table
+AS SELECT P.post_id, P.regdate, E.empathCnt, P.viewCnt, P.category
+FROM post_table P LEFT OUTER JOIN (
+									SELECT post_id, COUNT(*) AS empathCnt
+									FROM empathize_table
+									GROUP BY post_id
+									) E 
+ON P.post_id=E.post_id 
+;
