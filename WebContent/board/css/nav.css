@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.navbar__logo {
+	width: 100px;
+	height: 50px;
+}
+
+.hide {
+	display: none;
+}
