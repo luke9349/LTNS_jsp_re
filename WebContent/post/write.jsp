@@ -21,8 +21,6 @@
 <!-- smartedit -->
 <script type="text/javascript" src="<%=ctx %>/post/S2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
-
-
 var oEditors = [];
 $(function(){
       nhn.husky.EZCreator.createInIFrame({
@@ -36,7 +34,7 @@ $(function(){
               // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
               bUseVerticalResizer : true,     
               // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-              bUseModeChanger : true,         
+              bUseModeChanger : false,         
               fOnBeforeUnload : function(){
                    
               }
@@ -47,53 +45,68 @@ $(function(){
           },
           fCreator: "createSEditor2"
       });
-      
-      
+    
+  
       //저장버튼 클릭시 form 전송
       $("#save").click(function(){
-          oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-          $("#frm").submit();
-      });    
+        oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+        $("#frm").submit();
+    }); 
+	return true;
+  
 });
  
+ 
+function chkSubmit(){
+	frm = document.forms['frm'];
+	
+	var title = frm["title"].value.trim();
+	
+	if( title == "" ){
+		alert("제목이 비었습니다 제목은 필수사항 입니다.");		
+		frm["title"].focus();
+		return false;
+	}
+
+}
  
 </script>
 
 <body>
-
-    
 	<div class="container">
 	   <div>
-		<form id="frm" action="insert.jsp" method="post" >
-		<table class="table">
-		        <tr>
-		       		<td>
+		<form name="frm" action="view.jsp" method="post" onsubmit="return chkSubmit()">
+			<table class="table">
+		        <tr >
+		       		<td class="text-center">
 		       		<select name="category">
-		       		<option value="movie"> 영화게시판 </option>
+		       		<option value="movie" selected="selected"> 영화게시판 </option>
 		       		<option value="game"> 게임게시판 </option>
 		       		<option value="read">독서게시판  </option>
 		       		<option value="sport"> 스포츠게시판 </option>	
 		       		</select>
 		       		</td>     
-		            <td><input type="text" id="title" name="title" style="width:650px"/></td>
+		            <td>
+		            <input type="text" id="title" name="title" style="width:650px"/>
+		            </td>
 		        </tr>
 		          <tr class="mt-2 text-right">
 		            <td colspan="2" >
-		                <input class="btn-sm" type="button" id="save" value="저장"/>
-		                <input class="btn-sm" type="button" value="취소"/>
+		                <input class="btn-sm" type="button" value="취소" onclick="History.back()"/>
+		                <input class="btn-sm" type="submit" id="save" value="저장"/>
+		              
 		            </td>
 		        </tr>
 		        <tr class="justify-content-center">
-		            <td></td>
-		            <td>
-		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:640px; height:350px; "></textarea>
+		            <td colspan="2">
+		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px; ">
+		                </textarea>
 		            </td>
 		        </tr>
-			</table>
+				</table>
 			</form>
 	  </div>
 	</div>
-
 </body>
 
 </html>
