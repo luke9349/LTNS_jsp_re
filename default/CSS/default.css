@@ -76,7 +76,7 @@ body{
 
 }
 /* 780 해상도 이상 (pc) */
-@media (min-width:780px){
+@media (min-width:781px){
 
 }
 /* 1024px 해상도 이상 */
@@ -89,7 +89,7 @@ body{
     }
     #wrap{
         width: 1024px;
-        min-height: 980px;
+        height: 100vh;
         margin: 0 auto 0;
         background-color: #ffffff;
         background-size: 1024px;
