@@ -1,18 +1,9 @@
 
 /* Drop Triggers */
 
-DROP TRIGGER TRI_commenttable_comment_id;
-DROP TRIGGER TRI_comment_comment_id;
 DROP TRIGGER TRI_comment_table_comment_id;
-DROP TRIGGER TRI_filetable_file_id;
-DROP TRIGGER TRI_file_file_id;
 DROP TRIGGER TRI_file_table_file_id;
-DROP TRIGGER TRI_membermanagement_mm_id;
-DROP TRIGGER TRI_member_mem_id;
-DROP TRIGGER TRI_mmtable_mm_id;
 DROP TRIGGER TRI_mm_table_mm_id;
-DROP TRIGGER TRI_posttable_post_id;
-DROP TRIGGER TRI_post_post_id;
 DROP TRIGGER TRI_post_table_post_id;
 
 
@@ -29,18 +20,9 @@ DROP TABLE mm_table CASCADE CONSTRAINTS;
 
 /* Drop Sequences */
 
-DROP SEQUENCE SEQ_commenttable_comment_id;
-DROP SEQUENCE SEQ_comment_comment_id;
 DROP SEQUENCE SEQ_comment_table_comment_id;
-DROP SEQUENCE SEQ_filetable_file_id;
-DROP SEQUENCE SEQ_file_file_id;
 DROP SEQUENCE SEQ_file_table_file_id;
-DROP SEQUENCE SEQ_membermanagement_mm_id;
-DROP SEQUENCE SEQ_member_mem_id;
-DROP SEQUENCE SEQ_mmtable_mm_id;
 DROP SEQUENCE SEQ_mm_table_mm_id;
-DROP SEQUENCE SEQ_posttable_post_id;
-DROP SEQUENCE SEQ_post_post_id;
 DROP SEQUENCE SEQ_post_table_post_id;
 
 
@@ -48,38 +30,29 @@ DROP SEQUENCE SEQ_post_table_post_id;
 
 /* Create Sequences */
 
-CREATE SEQUENCE SEQ_commenttable_comment_id INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_comment_comment_id INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_comment_table_comment_id INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_filetable_file_id INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_file_file_id INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_file_table_file_id INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_membermanagement_mm_id INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_member_mem_id INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_mmtable_mm_id INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_mm_table_mm_id INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_posttable_post_id INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE SEQ_post_post_id INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_post_table_post_id INCREMENT BY 1 START WITH 1;
 
 
 
 
-DROP DOMAIN GRADE_D CASCADE;
-
-/* Create Domains */
--- 회원 등급
-CREATE DOMAIN GRADE_D VARCHAR2(30)
-   CONSTRAINT valid-grade CHECK(VALUE IN('admin','member'));
-  
--- 게시판 카테고리
-CREATE DOMAIN _CATEGORY VARCHAR2(30)
-   CONSTRAINT valid-category CHECK (VALUE IN('notice','movie','book','sports','game'));
-
-
--- 파일 분류
-CREATE DOMAIN _FILEKIND VARCHAR2(30)
-   CONSTRAINT valid-filekind CHECK (VALUE IN('file','image','postcontents'));
+--DROP DOMAIN GRADE_D CASCADE;
+--
+--/* Create Domains */
+---- 회원 등급
+--CREATE DOMAIN GRADE_D VARCHAR2(30)
+--   CONSTRAINT valid-grade CHECK(VALUE IN('admin','member'));
+--  
+---- 게시판 카테고리
+--CREATE DOMAIN _CATEGORY VARCHAR2(30)
+--   CONSTRAINT valid-category CHECK (VALUE IN('notice','movie','book','sports','game'));
+--
+--
+---- 파일 분류
+--CREATE DOMAIN _FILEKIND VARCHAR2(30)
+--   CONSTRAINT valid-filekind CHECK (VALUE IN('file','image','postcontents'));
 
 
 /* Create Tables */
@@ -159,6 +132,8 @@ CREATE TABLE post_table
    category varchar2(30) NOT NULL,
    -- 작성일
    regdate timestamp NOT NULL,
+   -- 게시글 내용 파일 고유번호
+   post_contents NUMBER NOT NULL,
    -- 조회수
    viewCnt number DEFAULT 0 NOT NULL,
    PRIMARY KEY (post_id)
@@ -167,6 +142,12 @@ CREATE TABLE post_table
 COMMIT;
 
 /* Create Foreign Keys */
+
+ALTER TABLE post_table
+   ADD FOREIGN KEY (post_contents)
+   REFERENCES file_table (file_id)
+      ON DELETE CASCADE
+;
 
 ALTER TABLE comment_table
    ADD FOREIGN KEY (writer)
@@ -299,6 +280,8 @@ COMMENT ON COLUMN post_table.viewCnt IS '조회수';
 
 /* Create Views*/
 
+
+DROP VIEW tot_post_view;
 --총 게시글
 CREATE VIEW tot_post_view (post_id,regdate,empathize_cnt,view_cnt)
 AS (SELECT P.post_id, P.regdate, E.empathCnt, P.viewCnt
