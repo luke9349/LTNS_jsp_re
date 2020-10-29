@@ -81,105 +81,105 @@ CREATE SEQUENCE SEQ_sports_board_post_id INCREMENT BY 1 START WITH 1;
 
 
 /* Create Domains */
--- È¸¿ø µî±Ş
+-- íšŒì› ë“±ê¸‰
 CREATE DOMAIN _GRADE VARCHAR2(32)
-	CONSTRAINT valid-grade CHECK (VALUE IN ('admin','member'));
+   CONSTRAINT valid-grade CHECK (VALUE IN ('admin','member'));
 
 
--- °Ô½ÃÆÇ Ä«Å×°í¸®
+-- ê²Œì‹œíŒ ì¹´í…Œê³ ë¦¬
 CREATE DOMAIN _CATEGORY VARCHAR2(32)
-	CONSTRAINT valid-category CHECK (VALUE IN ('notice','movie','book','sports','game'));
+   CONSTRAINT valid-category CHECK (VALUE IN ('notice','movie','book','sports','game'));
 
 
--- ÆÄÀÏ ºĞ·ù
+-- íŒŒì¼ ë¶„ë¥˜
 CREATE DOMAIN _FILEKIND VARCHAR2(32)
-	CONSTRAINT valid-filekind CHECK (VALUE IN ('file','image','postcontents'));
+   CONSTRAINT valid-filekind CHECK (VALUE IN ('file','image','postcontents'));
 
 
 
 
 /* Create Tables */
 
--- ´ñ±Û
+-- ëŒ“ê¸€
 CREATE TABLE comment_table
 (
-	-- ´ñ±Û °íÀ¯¹øÈ£
-	comment_id number NOT NULL,
-	-- ³»¿ë
-	comment_contents varchar2(1024) NOT NULL,
-	-- ÀÛ¼ºÀÚ
-	writer number NOT NULL,
-	-- °Ô½Ã±Û °íÀ¯¹øÈ£
-	post_id number NOT NULL,
-	-- ÀÛ¼ºÀÏ
-	regdate timestamp NOT NULL,
-	PRIMARY KEY (comment_id)
+   -- ëŒ“ê¸€ ê³ ìœ ë²ˆí˜¸
+   comment_id number NOT NULL,
+   -- ë‚´ìš©
+   comment_contents varchar2(1024) NOT NULL,
+   -- ì‘ì„±ì
+   writer number NOT NULL,
+   -- ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸
+   post_id number NOT NULL,
+   -- ì‘ì„±ì¼
+   regdate timestamp NOT NULL,
+   PRIMARY KEY (comment_id)
 );
 
 
--- °ø°¨ Å×ÀÌºí
+-- ê³µê° í…Œì´ë¸”
 CREATE TABLE empathize_table
 (
-	-- °Ô½Ã±Û °íÀ¯¹øÈ£
-	post_id number NOT NULL,
-	-- È¸¿ø°íÀ¯¹øÈ£
-	mm_id number NOT NULL,
-	CONSTRAINT empath UNIQUE (post_id, mm_id)
+   -- ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸
+   post_id number NOT NULL,
+   -- íšŒì›ê³ ìœ ë²ˆí˜¸
+   mm_id number NOT NULL,
+   CONSTRAINT empath UNIQUE (post_id, mm_id)
 );
 
 
--- ÆÄÀÏ Å×ÀÌºí
+-- íŒŒì¼ í…Œì´ë¸”
 CREATE TABLE file_table
 (
-	-- ÆÄÀÏ °íÀ¯¹øÈ£
-	file_id number NOT NULL,
-	-- °Ô½Ã±Û °íÀ¯¹øÈ£
-	post_id number NOT NULL,
-	-- ºĞ·ù : _FILEKIND µµ¸ŞÀÎÀ» »ç¿ë
-	filekind _FILEKIND NOT NULL,
-	-- ½ÇÁ¦ÆÄÀÏ¸í
-	real_filename varchar2(256) NOT NULL,
-	-- ¾÷·Îµå ÆÄÀÏ¸í
-	filename varchar2(256) NOT NULL,
-	PRIMARY KEY (file_id)
+   -- íŒŒì¼ ê³ ìœ ë²ˆí˜¸
+   file_id number NOT NULL,
+   -- ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸
+   post_id number NOT NULL,
+   -- ë¶„ë¥˜ : _FILEKIND ë„ë©”ì¸ì„ ì‚¬ìš©
+   filekind _FILEKIND NOT NULL,
+   -- ì‹¤ì œíŒŒì¼ëª…
+   real_filename varchar2(256) NOT NULL,
+   -- ì—…ë¡œë“œ íŒŒì¼ëª…
+   filename varchar2(256) NOT NULL,
+   PRIMARY KEY (file_id)
 );
 
 
--- È¸¿ø
+-- íšŒì›
 CREATE TABLE mm_table
 (
-	-- È¸¿ø°íÀ¯¹øÈ£
-	mm_id number NOT NULL UNIQUE,
-	-- È¸¿øid : ¿µ¹® ´ë¼Ò¹®ÀÚ ¼ıÀÚ Á¶ÇÕ
-	id varchar2(20) NOT NULL UNIQUE,
-	-- ºñ¹Ğ¹øÈ£ : Æ¯¼ö¹®ÀÚ ¿µ¹® ¼ıÀÚ 8~25
-	password varchar2(50) NOT NULL,
-	-- ´Ğ³×ÀÓ
-	nickname varchar2(20) NOT NULL UNIQUE,
-	-- ÀÌ¸ŞÀÏ : ÀÌ¸ŞÀÏ Çü½Ä @ °Ë»ç
-	email varchar2(100) NOT NULL UNIQUE,
-	-- µî±Ş : µµ¸ŞÀÎ grade »ç¿ë
-	grade  _GRADE NOT NULL,
-	PRIMARY KEY (mm_id)
+   -- íšŒì›ê³ ìœ ë²ˆí˜¸
+   mm_id number NOT NULL UNIQUE,
+   -- íšŒì›id : ì˜ë¬¸ ëŒ€ì†Œë¬¸ì ìˆ«ì ì¡°í•©
+   id varchar2(20) NOT NULL UNIQUE,
+   -- ë¹„ë°€ë²ˆí˜¸ : íŠ¹ìˆ˜ë¬¸ì ì˜ë¬¸ ìˆ«ì 8~25
+   password varchar2(50) NOT NULL,
+   -- ë‹‰ë„¤ì„
+   nickname varchar2(20) NOT NULL UNIQUE,
+   -- ì´ë©”ì¼ : ì´ë©”ì¼ í˜•ì‹ @ ê²€ì‚¬
+   email varchar2(100) NOT NULL UNIQUE,
+   -- ë“±ê¸‰ : ë„ë©”ì¸ grade ì‚¬ìš©
+   grade  _GRADE NOT NULL,
+   PRIMARY KEY (mm_id)
 );
 
 
--- °Ô½Ã±Û
+-- ê²Œì‹œê¸€
 CREATE TABLE post_table
 (
-	-- °Ô½Ã±Û °íÀ¯¹øÈ£
-	post_id number NOT NULL,
-	-- Á¦¸ñ
-	title varchar2(100) NOT NULL,
-	-- ÀÛ¼ºÀÚ : member Å×ÀÌºíÀÇ mem_id ¿Ü·¡Å°
-	writer number NOT NULL,
-	-- Ä«Å×°í¸® : _CATEGORY  µµ¸ŞÀÎÀ» µû¸§
-	category _CATEGORY NOT NULL,
-	-- ÀÛ¼ºÀÏ
-	regdate timestamp NOT NULL,
-	-- Á¶È¸¼ö
-	viewCnt number DEFAULT 0 NOT NULL,
-	PRIMARY KEY (post_id)
+   -- ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸
+   post_id number NOT NULL,
+   -- ì œëª©
+   title varchar2(100) NOT NULL,
+   -- ì‘ì„±ì : member í…Œì´ë¸”ì˜ mem_id ì™¸ë˜í‚¤
+   writer number NOT NULL,
+   -- ì¹´í…Œê³ ë¦¬ : _CATEGORY  ë„ë©”ì¸ì„ ë”°ë¦„
+   category _CATEGORY NOT NULL,
+   -- ì‘ì„±ì¼
+   regdate timestamp NOT NULL,
+   -- ì¡°íšŒìˆ˜
+   viewCnt number DEFAULT 0 NOT NULL,
+   PRIMARY KEY (post_id)
 );
 
 
@@ -187,44 +187,44 @@ CREATE TABLE post_table
 /* Create Foreign Keys */
 
 ALTER TABLE comment_table
-	ADD FOREIGN KEY (writer)
-	REFERENCES mm_table (mm_id)
-		ON DELETE CASCADE
+   ADD FOREIGN KEY (writer)
+   REFERENCES mm_table (mm_id)
+      ON DELETE CASCADE
 ;
 
 
 ALTER TABLE empathize_table
-	ADD FOREIGN KEY (mm_id)
-	REFERENCES mm_table (mm_id)
-		ON DELETE CASCADE
+   ADD FOREIGN KEY (mm_id)
+   REFERENCES mm_table (mm_id)
+      ON DELETE CASCADE
 ;
 
 
 ALTER TABLE post_table
-	ADD FOREIGN KEY (writer)
-	REFERENCES mm_table (mm_id)
-		ON DELETE CASCADE
+   ADD FOREIGN KEY (writer)
+   REFERENCES mm_table (mm_id)
+      ON DELETE CASCADE
 ;
 
 
 ALTER TABLE comment_table
-	ADD FOREIGN KEY (post_id)
-	REFERENCES post_table (post_id)
-		ON DELETE CASCADE
+   ADD FOREIGN KEY (post_id)
+   REFERENCES post_table (post_id)
+      ON DELETE CASCADE
 ;
 
 
 ALTER TABLE empathize_table
-	ADD FOREIGN KEY (post_id)
-	REFERENCES post_table (post_id)
-		ON DELETE CASCADE
+   ADD FOREIGN KEY (post_id)
+   REFERENCES post_table (post_id)
+      ON DELETE CASCADE
 ;
 
 
 ALTER TABLE file_table
-	ADD FOREIGN KEY (post_id)
-	REFERENCES post_table (post_id)
-		ON DELETE CASCADE
+   ADD FOREIGN KEY (post_id)
+   REFERENCES post_table (post_id)
+      ON DELETE CASCADE
 ;
 
 
@@ -234,9 +234,9 @@ ALTER TABLE file_table
 CREATE OR REPLACE TRIGGER TRI_book_board_post_id BEFORE INSERT ON book_board
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_book_board_post_id.nextval
-	INTO :new.post_id
-	FROM dual;
+   SELECT SEQ_book_board_post_id.nextval
+   INTO :new.post_id
+   FROM dual;
 END;
 
 /
@@ -244,9 +244,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_commenttable_comment_id BEFORE INSERT ON commenttable
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_commenttable_comment_id.nextval
-	INTO :new.comment_id
-	FROM dual;
+   SELECT SEQ_commenttable_comment_id.nextval
+   INTO :new.comment_id
+   FROM dual;
 END;
 
 /
@@ -254,9 +254,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_comment_comment_id BEFORE INSERT ON comment
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_comment_comment_id.nextval
-	INTO :new.comment_id
-	FROM dual;
+   SELECT SEQ_comment_comment_id.nextval
+   INTO :new.comment_id
+   FROM dual;
 END;
 
 /
@@ -264,9 +264,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_comment_table_comment_id BEFORE INSERT ON comment_table
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_comment_table_comment_id.nextval
-	INTO :new.comment_id
-	FROM dual;
+   SELECT SEQ_comment_table_comment_id.nextval
+   INTO :new.comment_id
+   FROM dual;
 END;
 
 /
@@ -274,9 +274,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_filetable_file_id BEFORE INSERT ON filetable
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_filetable_file_id.nextval
-	INTO :new.file_id
-	FROM dual;
+   SELECT SEQ_filetable_file_id.nextval
+   INTO :new.file_id
+   FROM dual;
 END;
 
 /
@@ -284,9 +284,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_file_file_id BEFORE INSERT ON file
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_file_file_id.nextval
-	INTO :new.file_id
-	FROM dual;
+   SELECT SEQ_file_file_id.nextval
+   INTO :new.file_id
+   FROM dual;
 END;
 
 /
@@ -294,9 +294,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_file_table_file_id BEFORE INSERT ON file_table
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_file_table_file_id.nextval
-	INTO :new.file_id
-	FROM dual;
+   SELECT SEQ_file_table_file_id.nextval
+   INTO :new.file_id
+   FROM dual;
 END;
 
 /
@@ -304,9 +304,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_game_board_post_id BEFORE INSERT ON game_board
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_game_board_post_id.nextval
-	INTO :new.post_id
-	FROM dual;
+   SELECT SEQ_game_board_post_id.nextval
+   INTO :new.post_id
+   FROM dual;
 END;
 
 /
@@ -314,9 +314,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_membermanagement_mm_id BEFORE INSERT ON membermanagement
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_membermanagement_mm_id.nextval
-	INTO :new.mm_id
-	FROM dual;
+   SELECT SEQ_membermanagement_mm_id.nextval
+   INTO :new.mm_id
+   FROM dual;
 END;
 
 /
@@ -324,9 +324,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_member_mem_id BEFORE INSERT ON member
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_member_mem_id.nextval
-	INTO :new.mem_id
-	FROM dual;
+   SELECT SEQ_member_mem_id.nextval
+   INTO :new.mem_id
+   FROM dual;
 END;
 
 /
@@ -334,9 +334,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_mmtable_mm_id BEFORE INSERT ON mmtable
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_mmtable_mm_id.nextval
-	INTO :new.mm_id
-	FROM dual;
+   SELECT SEQ_mmtable_mm_id.nextval
+   INTO :new.mm_id
+   FROM dual;
 END;
 
 /
@@ -344,9 +344,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_mm_table_mm_id BEFORE INSERT ON mm_table
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_mm_table_mm_id.nextval
-	INTO :new.mm_id
-	FROM dual;
+   SELECT SEQ_mm_table_mm_id.nextval
+   INTO :new.mm_id
+   FROM dual;
 END;
 
 /
@@ -354,9 +354,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_movie_board_post_id BEFORE INSERT ON movie_board
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_movie_board_post_id.nextval
-	INTO :new.post_id
-	FROM dual;
+   SELECT SEQ_movie_board_post_id.nextval
+   INTO :new.post_id
+   FROM dual;
 END;
 
 /
@@ -364,9 +364,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_notice_board_post_id BEFORE INSERT ON notice_board
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_notice_board_post_id.nextval
-	INTO :new.post_id
-	FROM dual;
+   SELECT SEQ_notice_board_post_id.nextval
+   INTO :new.post_id
+   FROM dual;
 END;
 
 /
@@ -374,9 +374,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_posttable_post_id BEFORE INSERT ON posttable
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_posttable_post_id.nextval
-	INTO :new.post_id
-	FROM dual;
+   SELECT SEQ_posttable_post_id.nextval
+   INTO :new.post_id
+   FROM dual;
 END;
 
 /
@@ -384,9 +384,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_post_post_id BEFORE INSERT ON post
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_post_post_id.nextval
-	INTO :new.post_id
-	FROM dual;
+   SELECT SEQ_post_post_id.nextval
+   INTO :new.post_id
+   FROM dual;
 END;
 
 /
@@ -394,9 +394,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_post_table_post_id BEFORE INSERT ON post_table
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_post_table_post_id.nextval
-	INTO :new.post_id
-	FROM dual;
+   SELECT SEQ_post_table_post_id.nextval
+   INTO :new.post_id
+   FROM dual;
 END;
 
 /
@@ -404,9 +404,9 @@ END;
 CREATE OR REPLACE TRIGGER TRI_sports_board_post_id BEFORE INSERT ON sports_board
 FOR EACH ROW
 BEGIN
-	SELECT SEQ_sports_board_post_id.nextval
-	INTO :new.post_id
-	FROM dual;
+   SELECT SEQ_sports_board_post_id.nextval
+   INTO :new.post_id
+   FROM dual;
 END;
 
 /
@@ -416,48 +416,48 @@ END;
 
 /* Comments */
 
-COMMENT ON TABLE comment_table IS '´ñ±Û';
-COMMENT ON COLUMN comment_table.comment_id IS '´ñ±Û °íÀ¯¹øÈ£';
-COMMENT ON COLUMN comment_table.comment_contents IS '³»¿ë';
-COMMENT ON COLUMN comment_table.writer IS 'ÀÛ¼ºÀÚ';
-COMMENT ON COLUMN comment_table.post_id IS '°Ô½Ã±Û °íÀ¯¹øÈ£';
-COMMENT ON COLUMN comment_table.regdate IS 'ÀÛ¼ºÀÏ';
-COMMENT ON TABLE empathize_table IS '°ø°¨ Å×ÀÌºí';
-COMMENT ON COLUMN empathize_table.post_id IS '°Ô½Ã±Û °íÀ¯¹øÈ£';
-COMMENT ON COLUMN empathize_table.mm_id IS 'È¸¿ø°íÀ¯¹øÈ£';
-COMMENT ON TABLE file_table IS 'ÆÄÀÏ Å×ÀÌºí';
-COMMENT ON COLUMN file_table.file_id IS 'ÆÄÀÏ °íÀ¯¹øÈ£';
-COMMENT ON COLUMN file_table.post_id IS '°Ô½Ã±Û °íÀ¯¹øÈ£';
-COMMENT ON COLUMN file_table.filekind IS 'ºĞ·ù : _FILEKIND µµ¸ŞÀÎÀ» »ç¿ë';
-COMMENT ON COLUMN file_table.real_filename IS '½ÇÁ¦ÆÄÀÏ¸í';
-COMMENT ON COLUMN file_table.filename IS '¾÷·Îµå ÆÄÀÏ¸í';
-COMMENT ON TABLE mm_table IS 'È¸¿ø';
-COMMENT ON COLUMN mm_table.mm_id IS 'È¸¿ø°íÀ¯¹øÈ£';
-COMMENT ON COLUMN mm_table.id IS 'È¸¿øid : ¿µ¹® ´ë¼Ò¹®ÀÚ ¼ıÀÚ Á¶ÇÕ';
-COMMENT ON COLUMN mm_table.password IS 'ºñ¹Ğ¹øÈ£ : Æ¯¼ö¹®ÀÚ ¿µ¹® ¼ıÀÚ 8~25';
-COMMENT ON COLUMN mm_table.nickname IS '´Ğ³×ÀÓ';
-COMMENT ON COLUMN mm_table.email IS 'ÀÌ¸ŞÀÏ : ÀÌ¸ŞÀÏ Çü½Ä @ °Ë»ç';
-COMMENT ON COLUMN mm_table.grade IS 'µî±Ş : µµ¸ŞÀÎ grade »ç¿ë';
-COMMENT ON TABLE post_table IS '°Ô½Ã±Û';
-COMMENT ON COLUMN post_table.post_id IS '°Ô½Ã±Û °íÀ¯¹øÈ£';
-COMMENT ON COLUMN post_table.title IS 'Á¦¸ñ';
-COMMENT ON COLUMN post_table.writer IS 'ÀÛ¼ºÀÚ : member Å×ÀÌºíÀÇ mem_id ¿Ü·¡Å°';
-COMMENT ON COLUMN post_table.category IS 'Ä«Å×°í¸® : _CATEGORY  µµ¸ŞÀÎÀ» µû¸§';
-COMMENT ON COLUMN post_table.regdate IS 'ÀÛ¼ºÀÏ';
-COMMENT ON COLUMN post_table.viewCnt IS 'Á¶È¸¼ö';
+COMMENT ON TABLE comment_table IS 'ëŒ“ê¸€';
+COMMENT ON COLUMN comment_table.comment_id IS 'ëŒ“ê¸€ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN comment_table.comment_contents IS 'ë‚´ìš©';
+COMMENT ON COLUMN comment_table.writer IS 'ì‘ì„±ì';
+COMMENT ON COLUMN comment_table.post_id IS 'ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN comment_table.regdate IS 'ì‘ì„±ì¼';
+COMMENT ON TABLE empathize_table IS 'ê³µê° í…Œì´ë¸”';
+COMMENT ON COLUMN empathize_table.post_id IS 'ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN empathize_table.mm_id IS 'íšŒì›ê³ ìœ ë²ˆí˜¸';
+COMMENT ON TABLE file_table IS 'íŒŒì¼ í…Œì´ë¸”';
+COMMENT ON COLUMN file_table.file_id IS 'íŒŒì¼ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN file_table.post_id IS 'ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN file_table.filekind IS 'ë¶„ë¥˜ : _FILEKIND ë„ë©”ì¸ì„ ì‚¬ìš©';
+COMMENT ON COLUMN file_table.real_filename IS 'ì‹¤ì œíŒŒì¼ëª…';
+COMMENT ON COLUMN file_table.filename IS 'ì—…ë¡œë“œ íŒŒì¼ëª…';
+COMMENT ON TABLE mm_table IS 'íšŒì›';
+COMMENT ON COLUMN mm_table.mm_id IS 'íšŒì›ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN mm_table.id IS 'íšŒì›id : ì˜ë¬¸ ëŒ€ì†Œë¬¸ì ìˆ«ì ì¡°í•©';
+COMMENT ON COLUMN mm_table.password IS 'ë¹„ë°€ë²ˆí˜¸ : íŠ¹ìˆ˜ë¬¸ì ì˜ë¬¸ ìˆ«ì 8~25';
+COMMENT ON COLUMN mm_table.nickname IS 'ë‹‰ë„¤ì„';
+COMMENT ON COLUMN mm_table.email IS 'ì´ë©”ì¼ : ì´ë©”ì¼ í˜•ì‹ @ ê²€ì‚¬';
+COMMENT ON COLUMN mm_table.grade IS 'ë“±ê¸‰ : ë„ë©”ì¸ grade ì‚¬ìš©';
+COMMENT ON TABLE post_table IS 'ê²Œì‹œê¸€';
+COMMENT ON COLUMN post_table.post_id IS 'ê²Œì‹œê¸€ ê³ ìœ ë²ˆí˜¸';
+COMMENT ON COLUMN post_table.title IS 'ì œëª©';
+COMMENT ON COLUMN post_table.writer IS 'ì‘ì„±ì : member í…Œì´ë¸”ì˜ mem_id ì™¸ë˜í‚¤';
+COMMENT ON COLUMN post_table.category IS 'ì¹´í…Œê³ ë¦¬ : _CATEGORY  ë„ë©”ì¸ì„ ë”°ë¦„';
+COMMENT ON COLUMN post_table.regdate IS 'ì‘ì„±ì¼';
+COMMENT ON COLUMN post_table.viewCnt IS 'ì¡°íšŒìˆ˜';
 
 
 
 
 /* Create Views*/
 
---ÃÑ °Ô½Ã±Û
-CREATE VIEW tot_post_view (post_id,regdate,empathize_cnt,view_cnt,category)
+--ì´ ê²Œì‹œê¸€
+CREATE VIEW tot_post_view (post_id,regdate,empathize_cnt,view_cnt)
 AS SELECT P.post_id, P.regdate, E.empathCnt, P.viewCnt, P.category
 FROM post_table P LEFT OUTER JOIN (
-									SELECT post_id, COUNT(*) AS empathCnt
-									FROM empathize_table
-									GROUP BY post_id
-									) E 
+                           SELECT post_id, COUNT(*) AS empathCnt
+                           FROM empathize_table
+                           GROUP BY post_id
+                           ) E 
 ON P.post_id=E.post_id 
 ;
