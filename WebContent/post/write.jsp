@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title> Write Page </title>
 </head>
-<link rel="stylesheet" href="../default/CSS/default.css">
+
 <!-- bootstrep -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -47,9 +47,6 @@ $(function(){
           },
           fCreator: "createSEditor2"
       });
-      
-      
-      
       
       
       //저장버튼 클릭시 form 전송
