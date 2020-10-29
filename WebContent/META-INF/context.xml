@@ -9,8 +9,8 @@
 		validationQuery="SELECT 1 FROM DUAL"
 		maxWait="5000"
 		url="jdbc:oracle:thin:@localhost:1521:xe"
-		username="scott_b"
-		password="tiger_b"
+		username="ltns"
+		password="ltns"
 		testOnBorrow="true"
 	/>
 	<ReSourceLink 
