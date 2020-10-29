@@ -12,6 +12,15 @@
 	padding: 0.5rem;
 }
 
+.card {
+	-webkit-box-shadow: 4px 6px 14px 1px rgba(68, 68, 68, 0.34);
+	box-shadow: 4px 6px 14px 1px rgba(68, 68, 68, 0.34);
+}
+
+.card-wrapper:hover {
+	transform: scale(1.05);
+}
+
 .card-body {
 	order: 0;
 }
