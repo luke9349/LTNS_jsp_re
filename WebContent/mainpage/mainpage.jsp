@@ -13,6 +13,15 @@
 <head>
 <meta charset="UTF-8">
 <title>LTNS_jsp</title>
+<link href="./CSS/board/empath_board.css" rel="stylesheet" type="text/css">
+<link href="./CSS/board/nearest_board.css" rel="stylesheet" type="text/css">
+<link href="./CSS/board/viewcnt_board.css" rel="stylesheet" type="text/css">
+<link href="./CSS/board/card/card_post.css" rel="stylesheet" type="text/css">
+<link href="./CSS/board/card/sm_card_album.css" rel="stylesheet" type="text/css">
+<link href="./CSS/board/card/sm_card_list.css" rel="stylesheet" type="text/css">
+<link href="./CSS/board/card/sm_card_post.css" rel="stylesheet" type="text/css">
+<link href="./CSS/header/header.css" rel="stylesheet" type="text/css">
+<link href="./CSS/footer/footer.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.min.css" />
