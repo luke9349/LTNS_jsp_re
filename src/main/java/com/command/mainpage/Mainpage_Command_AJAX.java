@@ -17,13 +17,11 @@ public class Mainpage_Command_AJAX implements Mainpage_Command,By_AJAX {
 		switch(reqType) {
 		
 		case "xml":
-			//responseXML(request, response);  // jdom 사용하여 xml response
-			responseXML2(request, response);  // Jackson 사용
+			responseXML(request, response);  // jdom 사용하여 xml response
 			break;
 			
 		case "json":
-			//responseJSON(request, response);  // org.json 사용
-			responseJSON2(request, response);  // Jackson 사용
+			responseJSON(request, response);  // org.json 사용
 			break;
 			
 		default:
@@ -36,14 +34,29 @@ public class Mainpage_Command_AJAX implements Mainpage_Command,By_AJAX {
 
 	@Override
 	public void responseJSON(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+		try {
+			responseJSONbyJackson(request,response);
+		}catch(Exception e) {
+			
+		}
 	}
 
 	@Override
 	public void responseXML(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+		try {
+			responseXMLbyJackson(request,response);
+		}catch(Exception e) {
+			
+		}
 	}
 
+	public void responseJSONbyJackson(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+	}
+	
+	public void responseXMLbyJackson(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+	}
 }

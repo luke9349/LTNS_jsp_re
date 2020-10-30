@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.mainpage.Mainpage_Command_AJAX;
+import main.java.com.command.mainpage.Mainpage_Command_do;
 
 @WebServlet("*.ajax")
 public class AjaxController extends HttpServlet {
@@ -32,6 +33,7 @@ public class AjaxController extends HttpServlet {
 		
 		switch(type) {
 		case "mainpage":
+			new Mainpage_Command_do().execute(request, response);
 			new Mainpage_Command_AJAX().execute(request, response);
 			break;
 		case "free":
