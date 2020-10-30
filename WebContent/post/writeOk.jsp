@@ -50,7 +50,7 @@
             
             	String filePath= saveDirectory+ File.separator +fName; //파일경로 
 				// out.println(saveDirectory+"세이브디렉토리 <br>"+fName +"파일이름 <br>"+filePath+"파일패스"); 
-                
+               
                 //내용저장객체 생성
                 pw = new PrintWriter(filePath);
        			pw.println("title"+title);
