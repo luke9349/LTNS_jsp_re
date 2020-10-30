@@ -74,8 +74,11 @@
 	%>
 	
 	 --> 
-		<textarea rows="1" style="width:100%; height:50px;  name="commentArea"></textarea> 
-
+	 
+	 <div>
+	<textarea rows="1" class="d-block" name="commentArea" style="width:85%; height:50px;"></textarea> 
+	<input type="button" class="d-inline" style="width:10%; height:50px;" value="작성">
+	</div>
 	
 </div>
 
