@@ -62,7 +62,7 @@
         // 정보 출력
         sFileInfo += "&bNewLine=true";    
         sFileInfo += "&sFileName=" + filename;    
-        sFileInfo += "&sFileURL=/LTNS_jsp/post/multiupload/"+realFileNm;
+        sFileInfo += "&sFileURL=/LTNS_jsp_re/post/multiupload/"+realFileNm;
         out.println(sFileInfo);
     }
 %>
