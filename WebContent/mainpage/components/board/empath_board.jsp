@@ -18,7 +18,7 @@
 
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 <div id="empath_board" class="sm_board">
-	<div><h2>공감 게시판</h2></div> <a href="#">더보기</a><br>
+	<div><h4>공감 게시판</h4></div> <a href="#">더보기</a><br>
 	<jsp:include page="./card/sm_card_post.jsp" />
 	<jsp:include page="./card/sm_card_post.jsp" />
 	<jsp:include page="./card/sm_card_post.jsp" />
