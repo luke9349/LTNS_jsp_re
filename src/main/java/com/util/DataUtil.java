@@ -15,8 +15,8 @@ public class DataUtil {
 			InitialContext initCon = new InitialContext();
 			Context context = (Context) initCon.lookup("java:/comp/env");
 			DataSource dataSource = (DataSource) context.lookup("jdbc/LTNS_jsp");
-			return dataSource.getConnection();
 			
+			//추가
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -34,20 +34,49 @@
 <body>
 <!-- 상단  -->
 <div class="container">
-	<table class="table">
-		<tr>
-		<th class="text-center"><%=category %> 게시판</th>		<th style="width:80%;" class="text-left"><%=title %></th>
-		</tr>
-		<tr>
-		<td><%=name %> <%=fomat.format(today) %></td><td class="text-right">[<%=view_cnt%>][<%=like%>]</td> 
-		</tr>
-		<tr>
-		<td><%=content %></td>
-		</tr>
-		<!-- 버튼 
-		수정,삭제
-		-->
-	</table>
+	
+	<!-- 제목 카테고리  -->
+	<div class="top title">
+		<h3>[<%=category %>게시판]  &nbsp; [<%= title%>]</h3> 
+	</div>
+	<hr>
+	<!-- 작성자 시간 조회수 추천수 -->
+	<div class="d-block">
+		<h5><%=name %> </h5> 
+	</div>
+	<hr>
+	<!-- 내용 -->
+	<div class="centents">
+		<h5><%=content %> </h5> 
+		<div class="text-center"> <br>
+		<input type="button" value="추천" class="text-center"> <br>
+		</div>
+	</div>
+	<hr>
+	<!-- 추천버튼 -->
+	<div class="text-center">
+		
+	</div>
+	<hr>
+	
+	
+	
+	
+	<!--  로그인 될때 
+	<%
+		//	if(session.getAttribute("login") != null){
+	%>
+	*/
+			
+	<% 
+	 //	}
+
+	%>
+	
+	 --> 
+		<textarea rows="1" style="width:100%; height:50px;  name="commentArea"></textarea> 
+
+	
 </div>
 
 <!-- 댓글  -->
