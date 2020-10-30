@@ -3,6 +3,7 @@ package main.java.com.util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.naming.Context;
@@ -10,14 +11,13 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class DataUtil {
+	
+	
 	static Connection conn;
 	static PreparedStatement pstmt;
 	static Statement stmt;
 	static ResultSet rs;
 
-	
-	
-		
 	
 	
 	
@@ -38,6 +38,13 @@ public class DataUtil {
 	}
 	
 
+	public static void close() throws SQLException {
+		if(rs != null) rs.close();
+		if(pstmt != null) pstmt.close();
+		if(stmt != null) stmt.close();
+		if(conn != null) conn.close();
+		
+	} // end close()
 	
 	
 

@@ -1,5 +1,9 @@
+<%@page import="java.io.FileReader"%>
+<%@page import="java.io.BufferedReader"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
+<%@ page import="java.io.*" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -11,13 +15,47 @@
 	SimpleDateFormat fomat = new SimpleDateFormat("[yyyy-mm-dd]");
 	
 	String name = "[홍길동]";
-	String content = request.getParameter("content");
 	int view_cnt = 3;
 	int like = 2;
 	
 	//DB접근시 
 	// getAttribute로 뽑아올 예정 
 %>    
+
+<%
+	//파일읽어오기  (DB접근시 수정할것임)
+	String titles ="";	
+	String contents ="";
+	String filename = "20201031010021.txt";
+	String saveDirectory = getServletContext().getRealPath("/") + "data" + File.separator + filename;
+	BufferedReader br = null;
+	try{
+	br = new BufferedReader(new FileReader(saveDirectory));
+	String line = null;
+	
+	while((line = br.readLine())!=null){
+		if(line.equals("title")){
+			 titles += line;
+		}else{
+			contents +=line;
+		}
+	}
+	
+	
+	}catch(Exception e){
+		e.printStackTrace();
+	}finally{
+		try{
+			br.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+
+%>
+
+
     
 <!DOCTYPE html>
 <html>
@@ -37,7 +75,7 @@
 	
 	<!-- 제목 카테고리  -->
 	<div class="top title">
-		<h3>[<%=category %>게시판]  &nbsp; [<%= title%>]</h3> 
+		<h3>[<%=category %>게시판]  &nbsp; [<%= titles%>]</h3> 
 	</div>
 	<hr>
 	<!-- 작성자 시간 조회수 추천수 -->
@@ -47,7 +85,7 @@
 	<hr>
 	<!-- 내용 -->
 	<div class="centents">
-		<h5><%=content %> </h5> 
+		<h5><%=contents %> </h5> 
 		<div class="text-center"> <br>
 		<input type="button" value="추천" class="text-center"> <br>
 		</div>

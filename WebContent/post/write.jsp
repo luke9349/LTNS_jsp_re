@@ -75,7 +75,7 @@ function chkSubmit(){
 <body>
 	<div class="container">
 	   <div>
-		<form name="frm" action="view.jsp" method="post" onsubmit="return chkSubmit()">
+		<form name="frm" action="writeOk.jsp" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
 		        <tr >
 		       		<td class="text-center">
