@@ -11,12 +11,12 @@ public class DataUtil {
 	public static Connection getConnection() {
 
 		try {
-			
+
 			InitialContext initCon = new InitialContext();
 			Context context = (Context) initCon.lookup("java:/comp/env");
 			DataSource dataSource = (DataSource) context.lookup("jdbc/LTNS_jsp");
-			
-			//추가
+
+			return dataSource.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
