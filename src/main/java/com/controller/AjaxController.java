@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import main.java.com.command.mainpage.Mainpage_Command_AJAX;
+
 @WebServlet("*.ajax")
 public class AjaxController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,22 +31,25 @@ public class AjaxController extends HttpServlet {
 		String type = request.getParameter("root");
 		
 		switch(type) {
+		case "mainpage":
+			new Mainpage_Command_AJAX().execute(request, response);
+			break;
 		case "free":
-			return;
+			break;
 		case "reading":
-			return;
+			break;
 		case "movie":
-			return;
+			break;
 		case "sports":
-			return;
+			break;
 		case "game":
-			return;
+			break;
 		case "empath":
-			return;
+			break;
 		case "viewcnt":
-			return;
+			break;
 		default:
-			return;
+			break;
 		}
 	} // end actionAjax
 
