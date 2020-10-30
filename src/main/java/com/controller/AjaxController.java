@@ -16,11 +16,36 @@ public class AjaxController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		actionAjax(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		actionAjax(request, response);
 	}
+	
+	protected void actionAjax(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
+		String type = request.getParameter("root");
+		
+		switch(type) {
+		case "free":
+			return;
+		case "reading":
+			return;
+		case "movie":
+			return;
+		case "sports":
+			return;
+		case "game":
+			return;
+		case "empath":
+			return;
+		case "viewcnt":
+			return;
+		default:
+			return;
+		}
+	} // end actionAjax
 
 }
