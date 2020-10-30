@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.model.DAO;
 import main.java.com.model.DTO;
-import main.java.com.model.mainpage.Mainpage_DAO;
+import main.java.com.model.board.Mainpage_DAO;
 
 public class Mainpage_Command_do implements Mainpage_Command {
 

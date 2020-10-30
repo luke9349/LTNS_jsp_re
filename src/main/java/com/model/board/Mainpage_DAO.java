@@ -1,4 +1,4 @@
-package main.java.com.model.mainpage;
+package main.java.com.model.board;
 
 import main.java.com.model.DAO;
 import main.java.com.model.DTO;
