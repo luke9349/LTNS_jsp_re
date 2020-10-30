@@ -1,14 +1,15 @@
 package main.java.com.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.java.com.command.mainpage.Mainpage_Command_AJAX;
-import main.java.com.command.mainpage.Mainpage_Command_do;
+import main.java.com.command.Command;
+import main.java.com.command.board.BoarAjax;
 
 @WebServlet("*.ajax")
 public class AjaxController extends HttpServlet {
@@ -29,29 +30,17 @@ public class AjaxController extends HttpServlet {
 	protected void actionAjax(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String type = request.getParameter("root");
+		String uri = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String type = uri.substring(contextPath.length());
+		
+		Command command  = null;
 		
 		switch(type) {
-		case "mainpage":
-			new Mainpage_Command_do().execute(request, response);
-			new Mainpage_Command_AJAX().execute(request, response);
-			break;
-		case "free":
-			break;
-		case "reading":
-			break;
-		case "movie":
-			break;
-		case "sports":
-			break;
-		case "game":
-			break;
-		case "empath":
-			break;
-		case "viewcnt":
-			break;
-		default:
-			break;
+		case "/list.ajax":
+			command = new BoarAjax();
+			command.execute(request, response);
+			return;
 		}
 	} // end actionAjax
 

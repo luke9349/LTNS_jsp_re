@@ -18,7 +18,7 @@
 	<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/5d1d5aa1e7.js" crossorigin="anonymous"></script>
 
-	<link href="./CSS/default.css">
+	<link href="./CSS/mainpage.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/board/empath_board.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/board/nearest_board.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/board/viewcnt_board.css" rel="stylesheet" type="text/css">
@@ -34,6 +34,7 @@
 	<main class="my-2">
 		<jsp:include page="./components/board/viewcnt_board.jsp"/>
 		<jsp:include page="./components/board/empath_board.jsp"/>
+		<hr>
 		<jsp:include page="./components/board/nearest_board.jsp"/>
 	</div>
 	<jsp:include page="./components/footer/footer.jsp" />
