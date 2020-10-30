@@ -43,7 +43,7 @@
             try{
             	saveDirectory = getServletContext().getRealPath("/") + "data";
             	File file = new File(saveDirectory);
-            	
+            
             	if(!file.exists()){	//디렉토리가 없으면 만들어줌 
             		file.mkdirs();
             	}
