@@ -18,8 +18,7 @@
 
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 <a class="sm_card_list list" href="#">
-	<p class="sm_card_list-title title">제목</p><p class="sm_card_list-writer small">작성자</p><time class="sm_card_list-regdate ">작성일</time>
-	<hr>
+	<p class="sm_card_list-title title">제목</p><p class="sm_card_list-writer small">작성자</p><time class="sm_card_list-regdate small">작성일</time>
 </a>
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 
