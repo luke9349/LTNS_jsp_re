@@ -47,7 +47,7 @@
             	if(!file.exists()){	//디렉토리가 없으면 만들어줌 
             		file.mkdirs();
             	}
-            	
+            
             	String filePath= saveDirectory+ File.separator +fName; //파일경로 
 				// out.println(saveDirectory+"세이브디렉토리 <br>"+fName +"파일이름 <br>"+filePath+"파일패스"); 
                 
