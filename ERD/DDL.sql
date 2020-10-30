@@ -85,6 +85,7 @@ CREATE TABLE empathize_table
 );
 
 
+
 -- 파일 테이블
 CREATE TABLE file_table
 (

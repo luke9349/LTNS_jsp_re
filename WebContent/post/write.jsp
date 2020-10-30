@@ -75,10 +75,10 @@ function chkSubmit(){
 <body>
 	<div class="container">
 	   <div>
-		<form name="frm" action="view.jsp" method="post" onsubmit="return chkSubmit()">
+		<form name="frm" action="writeOk.jsp" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
 		        <tr >
-		       		<td class="text-center">
+		      		<td class="text-center">
 		       		<select name="category">
 		       		<option value="movie" selected="selected"> 영화게시판 </option>
 		       		<option value="game"> 게임게시판 </option>
