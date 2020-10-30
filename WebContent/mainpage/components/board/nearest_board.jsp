@@ -17,9 +17,7 @@
 <body>
 
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
-<div>
-	<div><h2>인기 게시판</h2></div> <a href="#">더보기</a><br>
-	
+<div id="nearest_board">
 	<jsp:include page="./card/card_post.jsp" />
 	<jsp:include page="./card/card_post.jsp" />
 	<jsp:include page="./card/card_post.jsp" />
