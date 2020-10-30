@@ -17,17 +17,17 @@
 <body>
 
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
-<div id="viewcnt_board" class="sm_board">
-	<div><h4>인기 게시판</h4></div> <a href="#">더보기</a><br>
-	<jsp:include page="./card/sm_card_list.jsp" />
-	<jsp:include page="./card/sm_card_list.jsp" />
-	<jsp:include page="./card/sm_card_list.jsp" />
-	<jsp:include page="./card/sm_card_list.jsp" />
-	<jsp:include page="./card/sm_card_list.jsp" />
-	<!-- 방안1.프론트 단에서 처리 :  response된 데이터를, ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (비추) -->
-	<!-- 방안2.백 단에서 처리 :  ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (for문 사용해야하나?) 
-	include 되야할 것에 변수를 어떻게 넘길까?-->
-	<script src="../../JS/board/cardmaker_viewcnt_board.js"></script>
+<div id="viewcnt_board" class="sm_board card">
+	<div class="board">
+		<h3><a href="">인기 게시판</a></h3>
+		<c:forEach var="i" begin="1" end="5" step="1">
+			<jsp:include page="./card/sm_card_list.jsp" />
+		</c:forEach>
+		<!-- 방안1.프론트 단에서 처리 :  response된 데이터를, ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (비추) -->
+		<!-- 방안2.백 단에서 처리 :  ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (for문 사용해야하나?) 
+		include 되야할 것에 변수를 어떻게 넘길까?-->
+		<script src="../../JS/board/cardmaker_viewcnt_board.js"></script>
+	</div>
 </div>
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 

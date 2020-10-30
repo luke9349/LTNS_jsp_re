@@ -53,10 +53,12 @@
 		</div>
 	</div>
 	<hr>
-	<!-- 추천버튼 -->
-	<div class="text-center">
-		
+	<div class="text-right">
+	<input type="button" value="삭제" onclick="location.href='delete.jsp'">
+	<input type="button" value="수정" onclick="location.href='update.jsp'">
+	
 	</div>
+
 	<hr>
 	
 	
@@ -76,10 +78,11 @@
 	 --> 
 	 
 	 <div>
-	<textarea rows="1" class="d-block" name="commentArea" style="width:85%; height:50px;"></textarea> 
-	<input type="button" class="d-inline" style="width:10%; height:50px;" value="작성">
+	<textarea rows="1" class="d-block" name="commentArea" style="width:100%; height:50px;"></textarea> 
 	</div>
-	
+	<div class="text-right">
+	<input type="button" class="btn-lg mt-2"  value="작성">
+	</div>
 </div>
 
 <!-- 댓글  -->
