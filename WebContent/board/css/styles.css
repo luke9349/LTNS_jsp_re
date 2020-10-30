@@ -12,6 +12,8 @@
 
 @import './actionBar.css';
 
+@import './pagination.css';
+
 * {
 	box-sizing: border-box;
 }
