@@ -18,11 +18,26 @@
 	     </button>
 	     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	     	<ul class="navbar-nav mr-auto">
-	        	<li class="nav-item active">
-	          		<a class="nav-link" href="#">Home</a>
+	        	<li class="nav-item">
+	          		<a class="nav-link" href="board_list.jsp?root=free">자유게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="#">Link</a>
+	           		<a class="nav-link" href="board_list.jsp?root=reading">독서게시판</a>
+	         	</li>
+	         	<li class="nav-item">
+	           		<a class="nav-link" href="board_list.jsp?root=movie">영화게시판</a>
+	         	</li>
+	         	<li class="nav-item">
+	           		<a class="nav-link" href="board_list.jsp?root=sports">스포츠게시판</a>
+	         	</li>
+	         	<li class="nav-item">
+	           		<a class="nav-link" href="board_list.jsp?root=game">게임게시판</a>
+	         	</li>
+	         	<li class="nav-item">
+	           		<a class="nav-link" href="board_list.jsp?root=empath">공감게시판</a>
+	         	</li>
+	         	<li class="nav-item">
+	           		<a class="nav-link" href="board_list.jsp?root=viewcnt">조회수게시판</a>
 	         	</li>
 	       	</ul>
 	       	<a class="nav__login btn btn-primary mr-2">로그인</a>

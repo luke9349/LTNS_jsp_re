@@ -12,17 +12,19 @@
       <i class="far fa-address-card">post</i>
     </a>
   </div>
-  <div class="search__input input-group flex-nowrap">
-    <div class="input-group-prepend">
-      <select name="searchType" id="searchType">
-        <option value="" selected>제목</option>
-        <option value="">내용</option>
-        <option value="">제목 + 내용</option>
-      </select>
+  <form id="searchForm" name="searchForm" method="post" action="">
+    <div class="search__input input-group flex-nowrap">
+      <div class="input-group-prepend">
+        <select name="searchType" id="searchType">
+          <option value="" selected>제목</option>
+          <option value="">내용</option>
+          <option value="">제목 + 내용</option>
+        </select>
+      </div>
+      <input type="text" id="search" name="search" />
+      <div class="input-group-append">
+        <input class="btn btn-primary" type="submit" value="검색" />
+      </div>
     </div>
-    <input type="text" id="search" name="search" />
-    <div class="input-group-append">
-      <input class="btn btn-primary" type="submit" value="검색" />
-    </div>
-  </div>
+  </form>
 </div>
