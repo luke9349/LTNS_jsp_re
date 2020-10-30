@@ -20,7 +20,7 @@
 <div id="viewcnt_board" class="sm_board card">
 	<div class="board">
 		<h3><a href="">인기 게시판</a></h3>
-		<c:forEach var="i" begin="1" end="5" step="1">
+		<c:forEach var="i" begin="1" end="6" step="1">
 			<hr>
 			<jsp:include page="./card/sm_card_list.jsp" />
 		</c:forEach>
