@@ -18,8 +18,8 @@
 
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 <div class="card_post">
-	<div class="card_post-title"></div><div class="card_post-writer"></div><div class="card_post-regdate"></div>
-	<div class="card_post-contents"></div><div class="card_post-picture"></div>
+	<div class="card_post-title">제목</div><div class="card_post-writer">작성자</div><div class="card_post-regdate">작성일</div>
+	<div class="card_post-contents">내용</div><div class="card_post-picture">사진</div>
 </div>
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 
