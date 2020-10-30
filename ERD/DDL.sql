@@ -90,8 +90,6 @@ CREATE TABLE file_table
 (
    -- 파일 고유번호
    file_id number NOT NULL,
-   -- 게시글 고유번호
-   post_id number NOT NULL,
    -- 분류 : _FILEKIND 도메인을 사용
    filekind varchar2(30) NOT NULL,
    -- 실제파일명
@@ -184,12 +182,6 @@ ALTER TABLE empathize_table
 ;
 
 
-ALTER TABLE file_table
-   ADD FOREIGN KEY (post_id)
-   REFERENCES post_table (post_id)
-      ON DELETE CASCADE
-;
-
 COMMIT;
 
 
@@ -258,7 +250,6 @@ COMMENT ON COLUMN empathize_table.post_id IS '게시글 고유번호';
 COMMENT ON COLUMN empathize_table.mm_id IS '회원고유번호';
 COMMENT ON TABLE file_table IS '파일 테이블';
 COMMENT ON COLUMN file_table.file_id IS '파일 고유번호';
-COMMENT ON COLUMN file_table.post_id IS '게시글 고유번호';
 COMMENT ON COLUMN file_table.filekind IS '분류 : _FILEKIND 도메인을 사용';
 COMMENT ON COLUMN file_table.real_filename IS '실제파일명';
 COMMENT ON COLUMN file_table.filename IS '업로드 파일명';
