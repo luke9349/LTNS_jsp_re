@@ -1,3 +1,4 @@
+<%@page import="main.java.com.post.beans.WriteDTO"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -7,8 +8,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    
+    
 <%
 	request.setCharacterEncoding("utf-8");
+	
 	String category	= request.getParameter("category");
 	String title = request.getParameter("title");
 	Date today = new Date();
@@ -26,7 +30,7 @@
 	//파일읽어오기  (DB접근시 수정할것임)
 	String titles ="";	
 	String contents ="";
-	String filename = "20201031010021.txt";
+	String filename = "20201031230126.txt";
 	String saveDirectory = getServletContext().getRealPath("/") + "data" + File.separator + filename;
 	BufferedReader br = null;
 	try{

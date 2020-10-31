@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
+import main.java.com.command.post.ViewCommend;
 import main.java.com.command.post.WriteCommend;
 
 @WebServlet("*.do")
@@ -57,6 +58,14 @@ public class DoController extends HttpServlet {
 			cmd.execute(request, response);
 			viewPage = "writeOk.jsp";
 			break;
+			
+		case "/post/viewOk.do":
+			cmd = new ViewCommend();
+			cmd.execute(request, response);
+			viewPage = "viewOk.jsp";
+			break;
+			
+			
 
 		}//end swithc
 		

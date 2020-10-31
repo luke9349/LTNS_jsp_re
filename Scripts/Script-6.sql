@@ -39,11 +39,18 @@ VALUES (1,'POST','?','?');
 INSERT INTO file_table(file_id,filekind,real_filename,filename)
 VALUES (SEQ_FILE_TABLE_FILE_ID.NEXTVAL,'POST','?','?');
 
+INSERT INTO file_table(file_id,filekind,real_filename,filename)
+VALUES (SEQ_FILE_TABLE_FILE_ID.NEXTVAL,'POST', SEQ_file_table_file_id.CURRVAL,'?');
+
 --최신 AI 값
 SELECT SEQ_file_table_file_id.CURRVAL FROM DUAL;
 
 /*확인*/
 SELECT * FROM file_table;
+
+
+
+
 DELETE FROM file_table;
 
 
@@ -94,6 +101,14 @@ SELECT * FROM comment_table;
 DELETE FROM comment_table;
 
 
+INSERT INTO post_table
+(post_id,title,writer,category,regdate,post_contents,viewCnt) 
+VALUES
+(SEQ_post_table_post_id.NEXTVAL,'te',2,'te',SYSDATE, SEQ_file_table_file_id.CURRVAL, 02);
 
+INSERT INTO post_table
+(post_id,title,writer,category,regdate,post_contents,viewCnt) 
+VALUES
+(SEQ_post_table_post_id.NEXTVAL,'dd',2,'dd',SYSDATE, SEQ_file_table_file_id.CURRVAL, 02);
 
 

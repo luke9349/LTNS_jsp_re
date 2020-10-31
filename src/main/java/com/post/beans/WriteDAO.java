@@ -48,27 +48,27 @@ public class WriteDAO {
 		int cnt =0;
 		
 		String title = dto.getTitle(); //제목 
-		String writer = dto.getWriter(); // 글쓴이
+		//String writer = dto.getWriter(); // 글쓴이
 		String category = dto.getCategory(); // 카테고리 
-		//String post_contents = dto.getPost_contents(); //파일참조
 
 		
-		cnt = this.wr_insert( title, writer, category);
+		cnt = this.wr_insert(title, category);
 		return cnt;
 	}
 	
-	public int wr_insert(String title, String writer, String category) throws SQLException {
+	public int wr_insert(String title, String category) throws SQLException {
 		int cnt = 0;
 		
 		try {
-			String sql = "INSERT INTO POST_TABLE"
-					+ "(post_id, title, writer, category, regdate, post_contents, viewCnt) "
-					+ "VALUES"
-					+"(15555, ?, 1, ?, sysdate,0,1)";
+			String sql = "INSERT INTO post_table"
+					+"(post_id,title,writer,category,regdate,post_contents,viewCnt) "
+					+"VALUES" 
+					+"(SEQ_post_table_post_id.NEXTVAL,?,2,?,SYSDATE,SEQ_post_table_post_id.CURRVAL, 02)";
+
+					
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, title);
-			//psmt.setString(2, writer);
 			psmt.setString(2, category);
 			
 			cnt = psmt.executeUpdate();
@@ -98,9 +98,9 @@ public class WriteDAO {
 				regDate = new SimpleDateFormat("yyyy-mm-dd").format(d) + " "
 						+ new SimpleDateFormat("hh:mm:ss").format(t);
 			}
-			String content = rs.getString("real_filename"); //파일주소 
+			int content = rs.getInt("post_contents"); //파일주소 
 			int viewCnt = rs.getInt("viewCnt");
-			WriteDTO dto = new WriteDTO(post_id, title, writer, category,  content, viewCnt);
+			WriteDTO dto = new WriteDTO(post_id, title, writer,category, content, viewCnt);
 			dto.setRegDate(regDate);
 			list.add(dto);
 			

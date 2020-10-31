@@ -16,6 +16,8 @@ SELECT SEQ_mm_table_mm_id.CURRVAL FROM DUAL;
 
 /*확인*/
 SELECT * FROM mm_table;
+
+
 DELETE FROM mm_table;
 
 

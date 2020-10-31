@@ -3,6 +3,7 @@
 <%
 	String ctx = request.getContextPath();
 %>   
+
     
 <!DOCTYPE html>
 <html>
@@ -72,6 +73,8 @@ function chkSubmit(){
  
 </script>
 
+
+
 <body>
 	<div class="container">
 	   <div>
@@ -104,6 +107,7 @@ function chkSubmit(){
 		            </td>
 		        </tr>
 				</table>
+				
 			</form>
 	  </div>
 	</div>

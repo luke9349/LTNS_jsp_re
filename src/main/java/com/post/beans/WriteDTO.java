@@ -14,7 +14,7 @@ public class WriteDTO {
 		public String writer;
 		public String category ; // 카테고리 
 		public String regdate ; // 날짜
-		public String post_contents;
+		public int post_contents;
 		public int viewCnt ; // 조회수 
 		
 	
@@ -27,17 +27,25 @@ public class WriteDTO {
 		}
 		
 		
-		public WriteDTO(int post_id, String title, String writer, String category, String post_contents,
+		
+
+
+
+
+		public WriteDTO(int post_id, String title, String writer, String category, int post_contents,
 				int viewCnt) {
 			super();
 			this.post_id = post_id;
 			this.title = title;
 			this.writer = writer;
 			this.category = category;
+		
 			this.post_contents = post_contents;
 			this.viewCnt = viewCnt;
 		}
-		
+
+
+
 
 
 
@@ -62,14 +70,14 @@ public class WriteDTO {
 		}
 
 
-		public String getWriter() {
-			return writer;
-		}
-
-
-		public void setWriter(String writer) {
-			this.writer = writer;
-		}
+//		public String getWriter() {
+//			return writer;
+//		}
+//
+//
+//		public void setWriter(String writer) {
+//			this.writer = writer;
+//		}
 
 
 		public String getCategory() {
@@ -82,12 +90,12 @@ public class WriteDTO {
 		}
 
 
-		public String getPost_contents() {
+		public int getPost_contents() {
 			return post_contents;
 		}
 
 
-		public void setPost_contents(String post_contents) {
+		public void setPost_contents(int post_contents) {
 			this.post_contents = post_contents;
 		}
 
@@ -114,7 +122,7 @@ public class WriteDTO {
 
 		@Override
 		public String toString() {
-			return "WriteDTO [post_id=" + post_id + ", title=" + title + ", writer=" + writer + ", category=" + category
+			return "WriteDTO [post_id=" + post_id + ", title=" + title + ", writer="  + ", category=" + category
 					+ ", regdate=" + regdate + ", post_contents=" + post_contents + ", viewCnt=" + viewCnt + "]";
 		}
 
