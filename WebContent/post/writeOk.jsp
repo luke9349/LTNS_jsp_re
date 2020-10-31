@@ -10,7 +10,10 @@
 
 
 <%@ page import="java.text.SimpleDateFormat" %>
+ <%int cnt = (Integer) request.getAttribute("result"); 
  
+ 	System.out.println("방문했따");
+ %>
  
  
  
@@ -19,7 +22,6 @@
  	String saveDirectory = getServletContext().getRealPath("datas");
  	String encoding = "utf-8";
  	FileRenamePolicy policy = new DefaultFileRenamePolicy(); 
- 	
  	
  %>
  
