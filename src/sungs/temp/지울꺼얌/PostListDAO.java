@@ -1,4 +1,4 @@
-package main.java.com.model.board;
+package sungs.temp.지울꺼얌;
 
 import java.sql.Connection;
 import java.sql.Date;

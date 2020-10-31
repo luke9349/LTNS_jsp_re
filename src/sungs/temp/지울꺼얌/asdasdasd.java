@@ -41,7 +41,7 @@ public class asdasdasd {
 		return list.toArray(new String[list.size()]);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) { // findContent
 
 		String search = searchWord("좋은 아침 !");
 		System.out.println(search);
@@ -62,42 +62,45 @@ public class asdasdasd {
 		System.out.println(file.length());
 
 		boolean a = false;
+		StringBuffer content = null;
+		List<String> qwer = null;
 
 		try {
 
 			// 1. 쿼리문으로 반환된 파일들의 이름 들을 가진 배열이 있을 것임
 
 			// 2. 반복문으로 계속 파일을 생성해서 스트림으로 뽑아서 검색어와 대조
+			// 이부분이 문제가 심각 해질수 있음
 			BufferedReader gr = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-
+			content = new StringBuffer();
+			qwer = new ArrayList<String>();
+			
 			while (gr.read() != -1) {
 
 				String aaa = gr.readLine();
+				content.append(aaa);
 
 				System.out.println(aaa);
 
 				for (String string : ss) {
 					if (Pattern.matches(string, aaa)) {
 						a = true;
-						break;
 					}
 				}
 
-				// 3. 검색어와 일치된 파일의 이름 을 뽑아서 또다른 리스트에 담음
-				List<String> qwer = new ArrayList<String>();
+				// 3. 검색어 통과시 List에 추가
 				if (a) {
-					System.out.println("파일명: " + file.getName());
-					qwer.add(file.getName());
+					// System.out.println("파일명: " + file.getName());
+					// qwer.add(file.getName());
+					qwer.add(content.toString());
 					a = false;
 					break;
 				}
 
 				// 파일들을 담은 반목문 종료
 
-				// 4. 3 => 뽑아낸 리스트를 가지고 스트림을 이용해서 다시 한줄한줄뽑아 text 형태로 저장한 List를 생성
-
-				// 5. list 가 완성되면 반환 해서 반환받은 곳에서 반복문을 사용하여 DTO 컨텐츠 setting
-
+				// 4. 뽑아낸 list => array 반복문 돌려 dto setting
+				// 그냥 list 반환
 			}
 
 		} catch (FileNotFoundException e) {

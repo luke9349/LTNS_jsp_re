@@ -1,6 +1,4 @@
-package main.java.com.model.board;
-
-에러는 일부러 내는 중 나중에 빨리 찾아 볼라고 ^ㅡ^ 👀
+package sungs.temp.지울꺼얌;
 
 public class PostDTO {
 
