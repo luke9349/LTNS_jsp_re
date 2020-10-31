@@ -53,6 +53,9 @@ DELETE FROM file_table;
  * 			: BOOK : 도서
  * 			: SPORTS : 운동
  * 			: GAME : 게임
+ * 
+ * 문제는!
+ * 파일은 무적임.. cascade로 연결되지가 못해.. 반듯반듯반드시 게시글 지울때 찾아가서 지워줘야함..
  * */
 --AI 활용
 INSERT INTO post_table(post_id,title,writer,category,regdate,post_contents,viewCnt)
