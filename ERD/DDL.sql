@@ -197,6 +197,12 @@ SELECT * FROM post_table;
 
 /* Create Triggers */
 
+--게시글이 지워졌을 때, 해당 게시글 내용의 파일을 파일 테이블에서 지우기
+CREATE OR REPLACE TRIGGER TRI_when_post_table_delete_file_table
+AFTER DELETE ON post_table
+BEGIN
+	DELETE FROM file_table VALUES()
+END;
 --CREATE OR REPLACE TRIGGER TRI_comment_table_comment_id BEFORE INSERT ON comment_table
 --FOR EACH ROW
 --BEGIN
@@ -272,7 +278,6 @@ SELECT * FROM post_table;
 
 
 /* Create Views*/
-CREATE OR REPLACE PROCEDURE 
 
 DROP VIEW tot_post_view;
 --총 게시글
