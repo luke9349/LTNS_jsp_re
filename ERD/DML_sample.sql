@@ -94,5 +94,9 @@ DELETE FROM comment_table;
 
 
 
+/*공감-----------------------------------------------------------------------------*/
+/*insert sample empathize*/
+INSERT INTO empathize_table(post_id,mm_id)
+VALUES (post_id를넣어주세요, mm_id를넣어주세요);
 
 
