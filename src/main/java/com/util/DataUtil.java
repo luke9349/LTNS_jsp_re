@@ -12,13 +12,6 @@ import javax.sql.DataSource;
 
 public class DataUtil {
 
-	
-	
-	static Connection conn;
-	static PreparedStatement pstmt;
-	static Statement stmt;
-	static ResultSet rs;
-
 	public static Connection getConnection() {
 
 		try {
@@ -33,7 +26,6 @@ public class DataUtil {
 		}
 		return null;
 	}
-
 
 	public static void resourceClose(PreparedStatement pstmt, Connection conn) {
 		try {
