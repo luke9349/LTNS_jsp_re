@@ -63,7 +63,7 @@ public class WriteDAO {
 			String sql = "INSERT INTO post_table"
 					+"(post_id,title,writer,category,regdate,post_contents,viewCnt) "
 					+"VALUES" 
-					+"(SEQ_post_table_post_id.NEXTVAL,?,2,?,SYSDATE,SEQ_post_table_post_id.CURRVAL, 02)";
+					+"(SEQ_post_table_post_id.NEXTVAL,?,1,?,SYSDATE,SEQ_post_table_post_id.CURRVAL, 02)";
 
 					
 			
@@ -104,6 +104,9 @@ public class WriteDAO {
 			dto.setRegDate(regDate);
 			list.add(dto);
 			
+			
+			
+			
 		}
 		
 		int size = list.size();
@@ -116,11 +119,39 @@ public class WriteDAO {
 	
 	
 	
-	//글 수정하기 
-	public int wr_update(WriteDTO dto) {
+	//글 조회수증가 보기 뷰
+	public WriteDTO[] wr_view(int post_id) throws SQLException {
 		int cnt =0;
+		WriteDTO [] arr = null;
 		
-		return cnt;
+		String sql = "UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id=?";
+		String views = "SELECT  * FROM POST_TABLE pt WHERE POST_ID=?";
+		try {
+			
+			conn.setAutoCommit(false);
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, post_id);
+			cnt = psmt.executeUpdate();
+			
+			psmt.close();
+			psmt = conn.prepareStatement(views);
+			psmt.setInt(1, post_id);
+			rs = psmt.executeQuery();
+			arr= createArray(rs);
+			
+			conn.commit();
+			System.out.println("트랜잭션성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			conn.rollback();
+			System.out.println("트랜잭션 실패 roll back");
+			throw e;
+		} finally {
+			close();
+		} 
+		
+		
+		return arr;
 	}
 	
 	

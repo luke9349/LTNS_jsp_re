@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import main.java.com.command.Command;
 import main.java.com.command.post.ViewCommend;
 import main.java.com.command.post.WriteCommend;
+import main.java.com.command.post.realViewCommend;
 
 @WebServlet("*.do")
 public class DoController extends HttpServlet {
@@ -65,6 +66,11 @@ public class DoController extends HttpServlet {
 			viewPage = "viewOk.jsp";
 			break;
 			
+		case "/post/view.do":
+			cmd = new realViewCommend();
+			cmd.execute(request, response);
+			viewPage = "view.jsp";
+			break;
 			
 
 		}//end swithc
