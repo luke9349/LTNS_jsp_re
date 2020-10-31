@@ -58,7 +58,7 @@ public class WriteDAO {
 	
 	public int wr_insert(String title, String category) throws SQLException {
 		int cnt = 0;
-		
+	
 		try {
 			String sql = "INSERT INTO post_table"
 					+"(post_id,title,writer,category,regdate,post_contents,viewCnt) "
