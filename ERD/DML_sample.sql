@@ -62,7 +62,8 @@ INSERT INTO post_table(post_id,title,writer,category,regdate,post_contents,viewC
 VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',2,'NOTICE',SYSTIMESTAMP,3,0);
 
 --최신 AI 값
-SELECT SEQ_file_table_file_id.CURRVAL FROM DUAL;
+SELECT SEQ_post_table_post_id.CURRVAL FROM DUAL;
+
 /*조회수 늘리기*/
 UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id='포스트아이디를 입력해주세요';
 
@@ -79,6 +80,10 @@ VALUES (1,'샘플댓글입니다샘플댓글입니다샘플댓글이라구샘플
 --AI 활용
 INSERT INTO comment_table(comment_id,comment_contents,writer,post_id,regdate)
 VALUES (SEQ_comment_table_comment_id.NEXTVAL,'샘플댓글입니다샘퓨ㅡㄽㅁ니아럼니아험ㄴ이ㅏ',2,3,SYSTIMESTAMP);
+
+
+--최신 AI 값
+SELECT SEQ_comment_table_comment_id.CURRVAL FROM DUAL;
 
 /*확인*/
 SELECT * FROM comment_table;
