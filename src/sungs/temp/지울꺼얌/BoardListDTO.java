@@ -1,6 +1,6 @@
 package sungs.temp.지울꺼얌;
 
-public class PostListDTO {
+public class BoardListDTO {
 	private long postId; // 게시글 고유 번호
 	private String title; // 게시글 제목
 	private String writer; // 작성자

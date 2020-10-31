@@ -11,39 +11,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class PostListDAO {
+public class PostDAO {
 
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	Statement stmt = null;
 	ResultSet rs = null;
 
-	public String getContent() { // 파일테이블에서 컨텐츠 가져오기
-		StringBuffer result = new StringBuffer();
-		에러는 일부러 내는 중 나중에 빨리 찾아 볼라고 ^ㅡ^ 👀
-		여기도 여기 DTO 를 따로 만드는 것이 좋겠움 !!
-		그리고 이 메서든 FileDAO 로 운영하는게 맞는 듯 FILE 테이블 이므로 ..
-	FROM FILE_TABLE WHERE FILE_ID IN (POST_CONTENTS, POST_CONTENTS, POST_CONTENTS, ...)
-		return result.toString();
-	} // end getContent()
-
-	public int getEmpath() { // 추천 테이블에서 갯수 세서 가져오기
-		int result = 0;
-
-		에러는 일부러 내는 중 나중에 빨리 찾아 볼라고 ^ㅡ^ 👀
-		여기도 여기 DTO 를 따로 만드는 것이 좋겠움 !!
-		그리고 이 메서든 EMPATHIZE 로 운영하는게 맞는 듯 EMPATHIZE 테이블 이므로 ..
-	FROM EMPATHIZE_TABLE WHERE POST_ID IN (POST_ID, POST_ID, POST_ID, ...)
-		
-		return result;
-	} // end getEmpath()
-
 	public PostDTO[] getPosts(ResultSet rs) {
 		PostDTO[] result = null;
 
 		try {
-			List<PostDTO> list = new ArrayList<PostDTO>(); 
+			List<PostDTO> list = new ArrayList<PostDTO>();
 			while (rs.next()) {
 				PostDTO dto = new PostDTO();
 				dto.setPostId(rs.getInt("POST_ID"));
@@ -67,16 +46,16 @@ public class PostListDAO {
 				} // end if
 				String dateResult = strDate + " (" + meridiem + ")" + integerTime + strTime.substring(2);
 				dto.setRegdate(dateResult);
-				
+
 				dto.setPostContent(rs.getInt("POST_CONTENTS"));
 				dto.setViewcnt(rs.getInt("VIEWCNT"));
-				
+
 				list.add(dto);
 			} // end while
-			
+
 			result = new PostDTO[list.size()];
-			list.toArray(result); 
-			
+			list.toArray(result);
+
 			System.out.println("PostListDAO getPosts메서드 결과물 확인: " + result);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -85,27 +64,27 @@ public class PostListDAO {
 		return result;
 	} // end getPosts()
 
-	public PostListDTO[] getFreeList(String pageNum) {
-		PostListDTO[] result = null;
+	public BoardListDTO[] getFreeList(String pageNum) {
+		BoardListDTO[] result = null;
 		try {
 			int page = Integer.parseInt(pageNum);
 			int startPage = (page - 1) * 10 + 1;
 			int endPage = ((startPage - 1) / 10 + 1) * 10;
 
 			// 정렬기준
-			// 카테고리로 걸러내고, 
-			// 페이지 순대로 짜르고, 
+			// 카테고리로 걸러내고,
+			// 페이지 순대로 짜르고,
 			// 날짜 (regdate) - 최신순
-			
+
 			String sql = "SELECT * FROM POST_TABLE WHERE (로우넘) (로우넘)";
-			String[] cols = {"POST_ID", "POST_CONTENTS"};
+			String[] cols = { "POST_ID", "POST_CONTENTS" };
 			psmt = conn.prepareStatement(sql, cols);
 			// psmt.set // => argument 셋팅
 			rs = psmt.executeQuery();
 			PostDTO[] posts = getPosts(rs);
-			
+
 			// 파일 업다운 로드 writedao 참조 아직 잘모름
-			rs = psmt.getGeneratedKeys(); // rs가 두번 사용 되는지도 의문!! 
+			rs = psmt.getGeneratedKeys(); // rs가 두번 사용 되는지도 의문!!
 			// 예제에서는 insert 문을 날리면서 참조 시켯는데 지금은 select 문으로 참조 시킴
 		} catch (Exception e) {
 			e.printStackTrace();
