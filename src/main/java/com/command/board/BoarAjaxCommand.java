@@ -9,7 +9,7 @@ import main.java.com.command.Command;
 import main.java.com.command.mainpage.Mainpage_Command_AJAX;
 import main.java.com.command.mainpage.Mainpage_Command_do;
 
-public class BoarAjax implements Command {
+public class BoarAjaxCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {

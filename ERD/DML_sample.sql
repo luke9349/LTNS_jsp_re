@@ -53,7 +53,7 @@ DELETE FROM file_table;
 /*insert sample post*/
 /*
  * category : NOTICE : 공지사항
- * 			: MOVIEW : 영화
+ * 			: MOVIE : 영화
  * 			: BOOK : 도서
  * 			: SPORTS : 운동
  * 			: GAME : 게임

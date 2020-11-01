@@ -2,11 +2,13 @@ package sungs.temp.지울꺼얌;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AjaxBoardListJSON {
 	private long count;
 	private String status;
-	
-	// @JsonProperty("data")
+
+	@JsonProperty("data")
 	private List<BoardListDTO> list;
 
 	public long getCount() {
