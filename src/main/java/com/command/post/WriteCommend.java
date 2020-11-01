@@ -1,6 +1,5 @@
 package main.java.com.command.post;
 
-import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

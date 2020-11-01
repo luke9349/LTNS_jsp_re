@@ -27,10 +27,6 @@ public class WriteDTO {
 		}
 		
 		
-		
-
-
-
 
 		public WriteDTO(int post_id, String title, String writer, String category, int post_contents,
 				int viewCnt) {

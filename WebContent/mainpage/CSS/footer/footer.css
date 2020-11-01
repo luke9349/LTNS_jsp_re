@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
 .footer {
-	background-color: #ddd;
+	background-color: #badada;
 	color: #333;
-	height: 100vh;
+	height: 50vh;
+	width:100%;
 }
 
 .footer > ul {
@@ -11,6 +12,10 @@
 }
 
 .footer > div > ul > li {
-	background-color: #ddd;
+	background-color: #badada;
 	border: none;
+}
+
+.footer > div{
+	width:100%;
 }

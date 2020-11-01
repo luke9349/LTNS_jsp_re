@@ -12,15 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import main.java.com.command.Command;
 import main.java.com.command.post.ViewCommend;
 import main.java.com.command.post.WriteCommend;
+import main.java.com.command.post.comentCmd;
+import main.java.com.command.post.deleteCommend;
 import main.java.com.command.post.realViewCommend;
 
 @WebServlet("*.do")
 public class DoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	 
-	public DoController() {
-		// TODO Auto-generated constructor stub
-	}
+	   public DoController() {
+	        super();
+	    }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,9 +74,25 @@ public class DoController extends HttpServlet {
 			viewPage = "view.jsp";
 			break;
 			
+<<<<<<< HEAD
 		case "/board/board_list.do":
 			viewPage = "board_list.jsp";
 			break;
+=======
+		case "/post/deleteOk.do":
+			cmd = new deleteCommend();
+			cmd.execute(request, response);
+			viewPage = "deleteOk.jsp";
+			break;
+			
+			
+		case "/post/coment.do":
+			cmd = new comentCmd();
+			cmd.execute(request, response);
+			viewPage = "coment.jsp";
+			break;
+
+>>>>>>> branch 'master' of https://github.com/luke9349/LTNS_jsp_re.git
 		}//end swithc
 		
 		if(viewPage != null) {
