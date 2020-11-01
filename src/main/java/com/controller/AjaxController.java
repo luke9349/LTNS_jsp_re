@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.command.board.BoarAjaxCommand;
-import main.java.com.command.mainpage.Mainpage_Command_AJAX;
-import main.java.com.command.mainpage.Mainpage_Command_do;
+import main.java.com.command.mainpage.Mainpage_Add_NearestBoard_Command_By_AJAX;
 
 @WebServlet("*.ajax")
 public class AjaxController extends HttpServlet {
@@ -35,10 +34,12 @@ public class AjaxController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
+		// URL로부터 URI, ContextPath, Command 분리
 		String uri = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String type = uri.substring(contextPath.length());
-
+		System.out.println(uri);
+		
 		Command command = null;
 
 		switch (type) {
@@ -46,9 +47,8 @@ public class AjaxController extends HttpServlet {
 			command = new BoarAjaxCommand();
 			command.execute(request, response);
 			return;
-		case "mainpage.ajax":
-			new Mainpage_Command_do().execute(request, response);
-			new Mainpage_Command_AJAX().execute(request, response);
+		case "/mainpage/mainpage.ajax":
+			new Mainpage_Add_NearestBoard_Command_By_AJAX().execute(request, response);
 			break;
 		} // end switch
 	} // end actionAjax

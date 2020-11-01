@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
-import main.java.com.command.mainpage.Mainpage_Command_AJAX;
+import main.java.com.command.mainpage.Mainpage_Add_NearestBoard_Command_By_AJAX;
 import main.java.com.command.mainpage.Mainpage_Command_do;
 
 public class BoarAjaxCommand implements Command {

@@ -8,7 +8,7 @@ import main.java.com.model.DTO;
 
 public class Mainpage_DAO implements DAO {
 	/*--공감 순으로 뷰를 정렬하여,포스트 3개  가져오기--*/
-	final static String SELECT_3_POSTS_BY_EMPATHIZE_CNT="SELECT A.post_id AS post_id, B.title AS title, B.writer AS writer, B.category AS category, B.regdate AS regdate, B.post_contents AS post_contents "
+	public final static String SELECT_3_POSTS_BY_EMPATHIZE_CNT="SELECT A.post_id AS post_id, B.title AS title, B.writer AS writer, B.category AS category, B.regdate AS regdate, B.post_contents AS post_contents "
 			+"FROM tot_post_view A LEFT OUTER JOIN ("
 			+"										SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents "
 			+"										FROM post_table LEFT OUTER JOIN mm_table "
@@ -19,21 +19,21 @@ public class Mainpage_DAO implements DAO {
 			+"ORDER BY A.empathize_cnt DESC";
 	
 	/*--조회수 순으로 뷰를 정렬하여,포스트 6개  가져오기--*/
-	final static String SELECT_6_POSTS_BY_VIEWCNT="SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents "  
+	public final static String SELECT_6_POSTS_BY_VIEWCNT="SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents "  
 			+"FROM post_table LEFT OUTER JOIN mm_table " 
 			+"ON post_table.writer = mm_table.mm_id " 
 			+"WHERE rownum <=3" 
 			+"ORDER BY post_table.viewCnt DESC";
 	
 	/*--최신 순으로 포스트 5개 가져오기--*/
-	final static String SELECT_5_POSTS_BY_NEAREST="SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents " 
+	public final static String SELECT_5_POSTS_BY_NEAREST="SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents " 
 			+"FROM post_table LEFT OUTER JOIN mm_table " 
 			+"ON post_table.writer = mm_table.mm_id "
 			+"WHERE rownum <=5 "
 			+"ORDER BY post_table.regdate DESC";
 	
 	/*--최신 순으로, n번째 이후, 다음 포스트 3개 가져오기 매개변수로 regdate 받을것!--*/
-	final static String SELECT_NEXT_3_POSTS_BY_NEAREST="SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents " 
+	public final static String SELECT_NEXT_3_POSTS_BY_NEAREST="SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents " 
 			+"FROM post_table LEFT OUTER JOIN mm_table "  
 			+"ON post_table.writer = mm_table.mm_id " 
 			+"WHERE post_table.regdate<? AND rownum <=5 "  
@@ -77,6 +77,7 @@ public class Mainpage_DAO implements DAO {
 		String writer=rs.getString("writer");
 		String category=rs.getString("category");
 		String regdate=rs.getString("regdate");
+		regdate=regdate.substring(0,16);
 		int post_contents=rs.getInt("post_contents");
 		int viewCnt=0;//받지 않음
 		int empathCnt=0;//받지 않음
@@ -126,15 +127,12 @@ public class Mainpage_DAO implements DAO {
 	
 	
 	//String 매개변수를 받는 sql문으로 가져오기
-	@Override
-	public DTO[] selectBySQL(String sql,int[] intParamsForPstmt, String [] stringParamsForPstmt) throws SQLException {
+	public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException {
 		DTO [] arr=null;
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
-			for(int i=0;i<stringParamsForPstmt.length;i++) {
-				pstmt.setString(i, stringParamsForPstmt[i]);
-			}
+			pstmt.setString(1, stringParamForPstmt);
 			
 			rs=pstmt.executeQuery();
 			arr=mkDTOs(rs);
