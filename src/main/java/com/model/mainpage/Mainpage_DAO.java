@@ -1,7 +1,6 @@
 package main.java.com.model.mainpage;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import main.java.com.model.DAO;
 import main.java.com.model.DB;
@@ -122,5 +121,29 @@ public class Mainpage_DAO implements DAO {
 			close();
 		}
 		return arr;
-	}//sql문으로 가져오기
+	}//end - sql문으로 가져오기
+	
+	
+	
+	//String 매개변수를 받는 sql문으로 가져오기
+	@Override
+	public DTO[] selectBySQL(String sql,int[] intParamsForPstmt, String [] stringParamsForPstmt) throws SQLException {
+		DTO [] arr=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			for(int i=0;i<stringParamsForPstmt.length;i++) {
+				pstmt.setString(i, stringParamsForPstmt[i]);
+			}
+			
+			rs=pstmt.executeQuery();
+			arr=mkDTOs(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return arr;
+	}//end - String 매개변수를 받는 sql문으로 가져오기	
+	
 }
