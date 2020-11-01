@@ -19,7 +19,7 @@
 
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 <div id="nearest_board">
-	<c:forEach var="i" begin="1" end="3" step="1">
+	<c:forEach var="i" begin="1" end="5" step="1">
 		<jsp:include page="./card/card_post.jsp"><jsp:param name="i" value="${i }"/></jsp:include>
 		<hr>
 	</c:forEach>

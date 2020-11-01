@@ -4,7 +4,29 @@
 $(document).ready(function(){
 
 	$("button#nearest_board-add_post").click(function(){
-		JSON_list=[]
+		JSON_list=[
+			{
+				title:"하",
+				picture:"ㅓ우",
+				writer:"우ㅏ",
+				regdate:"ㅓㅎ",
+				contents:"아ㅓ어림나얼"
+			},
+			{
+				title:"하",
+				picture:"ㅓ우",
+				writer:"우ㅏ",
+				regdate:"ㅓㅎ",
+				contents:"아ㅓ어림나얼"
+			},
+			{
+				title:"하",
+				picture:"ㅓ우",
+				writer:"우ㅏ",
+				regdate:"ㅓㅎ",
+				contents:"아ㅓ어림나얼"
+			}
+		]
 		//ajax request를 보냄
 		//todo
 		
@@ -14,8 +36,9 @@ $(document).ready(function(){
 			//게시글을 카운트 i=다음 인덱스가 된다!
 			temp_title=JSON_list[i].title;
 			temp_picture="글의 첫번째 사진 태그";
-			temp_writer=JSON_list[i].title.writer;
-			temp_regdate=JSON_list[i].title.regdate;
+			temp_writer=JSON_list[i].writer;
+			temp_regdate=JSON_list[i].regdate;
+			temp_contents=JSON_list[i].contents;
 			var post_i=$("a.card_post").last().attr("id");
 			post_i=1+Number(post_i.slice(6));
 			card_post=$('<a id="whole_'+post_i+'" class="card_post article" href="#"></a>').html(
