@@ -13,10 +13,11 @@ public class ViewCommend implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		
+		
 		//파일 인설트 
 		int file_quert_cnt = 0;
 		FileWriteDAO filedao = new FileWriteDAO(); 
-		
 		
 		String real_filename = request.getParameter("real_filename");
 		String filename = request.getParameter("filename");

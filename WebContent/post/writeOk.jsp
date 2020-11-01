@@ -4,9 +4,6 @@
 <%@ page import="java.util.*" %>
 
 <%-- cos 라이브러리 --%>
-<%@ page import="com.oreilly.servlet.MultipartRequest" %>
-<%@ page import="com.oreilly.servlet.multipart.FileRenamePolicy" %>    
-<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 
 
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -19,7 +16,6 @@
  
  	String saveDirectory = getServletContext().getRealPath("datas");
  	String encoding = "utf-8";
- 	FileRenamePolicy policy = new DefaultFileRenamePolicy(); 
  	
  %>
  
