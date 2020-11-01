@@ -107,7 +107,7 @@ VALUES (post_id를넣어주세요, mm_id를넣어주세요);
 
 
 /*-----------------------------------메인페이지 관련-----------------------------------*/
-/*--조회수 순으로 뷰를 정렬하여,포스트 6개  가져오기--*/
+/*--공감수 순으로 뷰를 정렬하여,포스트 6개  가져오기--*/
 SELECT A.post_id, B.title, B.writer, B.category, B.regdate, B.post_contents
 FROM tot_post_view A LEFT OUTER JOIN (--post table과 mm table을 이용한 id 가져오기
 										SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents
@@ -119,7 +119,7 @@ WHERE rownum <= 6
 ORDER BY A.empathize_cnt DESC
 ;
 
-/*--공감수 순으로 뷰를 정렬하여,포스트 3개  가져오기--*/
+/*--조회수 순으로 뷰를 정렬하여,포스트 3개  가져오기--*/
 SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents
 FROM post_table LEFT OUTER JOIN mm_table
 ON post_table.writer = mm_table.mm_id
