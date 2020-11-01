@@ -108,10 +108,8 @@ public class FileWriteDAO {
 		
 		
 		
-	}	// end createArray 
-	
-	
-	
+	}	
+
 	
 	
 	

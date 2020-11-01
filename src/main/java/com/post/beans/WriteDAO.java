@@ -63,7 +63,7 @@ public class WriteDAO {
 			String sql = "INSERT INTO post_table"
 					+"(post_id,title,writer,category,regdate,post_contents,viewCnt) "
 					+"VALUES" 
-					+"(SEQ_post_table_post_id.NEXTVAL,?,1,?,SYSDATE,SEQ_post_table_post_id.CURRVAL, 02)";
+					+"(SEQ_post_table_post_id.NEXTVAL,?,2,?,SYSDATE,SEQ_post_table_post_id.CURRVAL, 02)";
 
 					
 			
@@ -124,23 +124,27 @@ public class WriteDAO {
 		int cnt =0;
 		WriteDTO [] arr = null;
 		
-		String sql = "UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id=?";
-		String views = "SELECT  * FROM POST_TABLE pt WHERE POST_ID=?";
+		String sql = "UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id = ?";
+		String views = "SELECT  * FROM POST_TABLE pt WHERE POST_ID = ?";
 		try {
 			
 			conn.setAutoCommit(false);
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, post_id);
 			cnt = psmt.executeUpdate();
-			
 			psmt.close();
+			
+			
+			
 			psmt = conn.prepareStatement(views);
 			psmt.setInt(1, post_id);
 			rs = psmt.executeQuery();
 			arr= createArray(rs);
+			System.out.println(post_id+"포스트아이디츌력해봐");
 			
 			conn.commit();
-			System.out.println("트랜잭션성공");
+			System.out.println("트랜잭션성공"+post_id);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			conn.rollback();
@@ -158,11 +162,33 @@ public class WriteDAO {
 	
 	
 	//글 삭제하기 
-	public int wr_delete(WriteDTO dto) {
+	public int post_delete(int numbers) throws SQLException {
 		int cnt =0;
+		
+		try {
+			String sql ="DELETE FROM POST_TABLE pt WHERE POST_CONTENTS =?";
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, numbers);
+	
+			cnt = psmt.executeUpdate();
+		} finally {
+			close();
+		}
 		
 		return cnt;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//덧글 달기 
