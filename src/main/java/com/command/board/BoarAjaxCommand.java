@@ -22,10 +22,6 @@ public class BoarAjaxCommand implements Command {
 			Board_Command command = null;
 
 			switch (category) {
-			case "mainpage":
-				new Mainpage_Command_do().execute(request, response);
-				new Mainpage_Command_AJAX().execute(request, response);
-				break;
 			case "empathize":
 				command = new EmpathizeBoardCommand();
 				command.execute(request, response);
