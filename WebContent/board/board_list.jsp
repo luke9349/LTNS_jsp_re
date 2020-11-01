@@ -3,13 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
-<c:set var="root" value="free" />
+<c:set var="root" value="NOTICE" />
 <c:if test="${param.root != null }">
 	<c:set var="root" value="${param.root }"/>
 </c:if>
@@ -25,22 +19,22 @@
 %>
 	
 <c:choose>	
-	<c:when test="${root eq 'free' }">
-		<% topic = "자유게시판"; %>				
+	<c:when test="${root eq 'NOTICE' }">
+		<% topic = "공지사항"; %>				
 	</c:when>
-	<c:when test="${root eq 'reading' }">		
-		<% topic = "독서게시판"; %>						
+	<c:when test="${root eq 'BOOK' }">		
+		<% topic = "도서게시판"; %>						
 	</c:when>
-	<c:when test="${root eq 'movie' }">					
+	<c:when test="${root eq 'MOVIE' }">					
 		<% topic = "영화게시판"; %>						
 	</c:when>
-	<c:when test="${root eq 'sports' }">
-		<% topic = "스포츠게시판"; %>										
+	<c:when test="${root eq 'SPORTS' }">
+		<% topic = "운동게시판"; %>										
 	</c:when>
-	<c:when test="${root eq 'game' }">		
+	<c:when test="${root eq 'GAME' }">		
 		<% topic = "게임게시판"; %>											
 	</c:when>
-	<c:when test="${root eq 'empath' }">					
+	<c:when test="${root eq 'empathize' }">					
 		<% topic = "공감게시판"; %>												
 	</c:when>
 	<c:when test="${root eq 'viewcnt' }">		
@@ -62,6 +56,12 @@
 		<c:set value="./components/post.jsp" var="componentPath" />	
 	</c:when>
 </c:choose>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 <jsp:include page="./components/title.jsp">
 	<jsp:param value="<%=URLEncoder.encode(title, \"UTF-8\") %>" name="title"/>
 </jsp:include>
@@ -72,13 +72,23 @@
 <c:if test="${type eq 'post'}">
 	<link rel="stylesheet" href="./css/post.css"/>
 </c:if>
+<!-- 
 <script async defer src="./js/board.js"></script>
+
+<script async defer src="./js/search.js"></script>
+<script async defer src="./js/ajaxTest.js"></script>
+ -->
+<script async defer type="module" src="./js/boardMain.js"></script>
+<script async defer src="./js/nav.js"></script>
+
 </head>
 <body class="container">
 <jsp:include page="./components/nav.jsp" />
 <main class="my-2">
 	<div class="board__title"><%=topic %></div>
-	<jsp:include page="./components/actionBar.jsp" />
+	<jsp:include page="./components/actionBar.jsp">
+		<jsp:param value="${root }" name="root"/>
+	</jsp:include>
 	<jsp:include page="${componentPath }" />
 	<c:if test="${type ne post}">
 		<jsp:include page="./components/pagination.jsp" />

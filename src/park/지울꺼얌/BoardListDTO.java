@@ -1,4 +1,4 @@
-package sungs.temp.지울꺼얌;
+package park.지울꺼얌;
 
 public class BoardListDTO {
 	private long postId; // 게시글 고유 번호

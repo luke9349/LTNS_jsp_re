@@ -1,4 +1,4 @@
-package sungs.temp.지울꺼얌;
+package park.지울꺼얌;
 
 import java.util.List;
 

@@ -74,6 +74,11 @@ public class DoController extends HttpServlet {
 			viewPage = "view.jsp";
 			break;
 			
+
+		case "/board/board_list.do":
+			viewPage = "board_list.jsp";
+			break;
+
 		case "/post/deleteOk.do":
 			cmd = new deleteCommend();
 			cmd.execute(request, response);
