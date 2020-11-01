@@ -40,7 +40,7 @@
 	           		<a class="nav-link" href="board_list.jsp?root=game">게임게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="board_list.jsp?root=empath">공감게시판</a>
+	           		<a class="nav-link" href="board_list.jsp?root=empathize">공감게시판</a>
 	         	</li>
 	         	<li class="nav-item">
 	           		<a class="nav-link" href="board_list.jsp?root=viewcnt">조회수게시판</a>

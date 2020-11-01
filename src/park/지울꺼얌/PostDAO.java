@@ -1,4 +1,4 @@
-package sungs.temp.지울꺼얌;
+package park.지울꺼얌;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,7 +15,10 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.regex.Pattern;
+
+import com.sun.javafx.collections.MappingChange.Map;
 
 import main.java.com.util.DataUtil;
 
@@ -251,7 +254,6 @@ public class PostDAO {
 				BoardListDTO dto = new BoardListDTO();
 
 				dto.setPostId(rs.getLong("POST_ID"));
-				dto.setTitle(rs.getString("TITLE"));
 				dto.setWriter(rs.getString("id"));
 
 				dto.setCategory(rs.getString("CATEGORY"));
@@ -269,10 +271,12 @@ public class PostDAO {
 					integerTime -= 12;
 				} // end if
 				String dateResult = strDate + " (" + meridiem + ")" + integerTime + strTime.substring(2);
-
 				dto.setRegdate(dateResult);
 
-				dto.setPostContent(changeFileToText(rs.getString("REAL_FILENAME")));
+				LinkedHashMap<String, String> titleAndContent = changeFileToText(rs.getString("REAL_FILENAME"));
+				dto.setTitle(titleAndContent.get("title"));
+				dto.setPostContent(titleAndContent.get("content"));
+				
 				dto.setEmpath(rs.getLong("EMPATHIZE_CNT")); // null 이 나오는 것이 아니네 ? 0으로 자동 셋팅이 되어 버리구나
 				dto.setViewcnt(rs.getLong("VIEWCNT"));
 
@@ -349,7 +353,9 @@ public class PostDAO {
 		return result;
 	} // end createSearchList
 
-	public String changeFileToText(String fileName) {
+	public LinkedHashMap<String, String> changeFileToText(String fileName) {
+
+		LinkedHashMap<String, String> result = null;
 
 		String path = this.contextPath + File.separator + fileName;
 
@@ -362,8 +368,23 @@ public class PostDAO {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			content = new StringBuffer();
 
+			int index = 0;
+			result = new LinkedHashMap<String, String>();
 			while (br.read() != -1) {
-				content.append(br.readLine());
+				String temp = br.readLine();
+				String replace = null;
+
+				if (index == 0) {
+					replace = temp.replaceAll("title", "");
+					result.put("title", replace);
+					content.append(replace);
+					index++;
+					continue;
+				} // end if
+
+				replace = temp.replaceAll("<.*>", "").replaceAll("&lt;", "").replaceAll("&gt;", "").replaceAll("&nbsp;",
+						" ");
+				content.append(replace);
 			} // end while
 
 			br.close();
@@ -373,7 +394,8 @@ public class PostDAO {
 			e.printStackTrace();
 		} // end try
 
-		return content.toString();
+		result.put("content", content.toString());
+		return result;
 	} // end changeFileToText()
 
 	public static void main(String[] args) {

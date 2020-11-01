@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
+div#login{
+	float:right;	
+}
 .navbar__logo {
-	width: 100px;
-	height: 50px;
+	width: 350px;
 }
 
 .hide {

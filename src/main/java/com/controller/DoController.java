@@ -72,7 +72,9 @@ public class DoController extends HttpServlet {
 			viewPage = "view.jsp";
 			break;
 			
-
+		case "/board/board_list.do":
+			viewPage = "board_list.jsp";
+			break;
 		}//end swithc
 		
 		if(viewPage != null) {

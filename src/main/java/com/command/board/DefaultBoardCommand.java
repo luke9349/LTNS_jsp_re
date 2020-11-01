@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
-import sungs.temp.지울꺼얌.AjaxBoardListJSON;
-import sungs.temp.지울꺼얌.BoardListDTO;
-import sungs.temp.지울꺼얌.PostDAO;
+import park.지울꺼얌.AjaxBoardListJSON;
+import park.지울꺼얌.BoardListDTO;
+import park.지울꺼얌.PostDAO;
 
 public class DefaultBoardCommand implements Board_Command {
 
@@ -20,9 +20,9 @@ public class DefaultBoardCommand implements Board_Command {
 		try {
 			request.setCharacterEncoding("UTF-8");
 
-			String category = null;
-			String searchType = null;
-			String search = null;
+			String category = "NOTICE";
+			String searchType = "titleAndContent";
+			String search = "";
 			int page = 1;
 			String contextPath = request.getServletContext().getRealPath("data");
 

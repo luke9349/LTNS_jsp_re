@@ -17,7 +17,9 @@ public class BoarAjaxCommand implements Command {
 		try {
 			request.setCharacterEncoding("UTF-8");
 
-			String category = request.getParameter("root");
+			String category = "NOTICE";
+			if (request.getParameter("root") != null)
+				category = request.getParameter("root");
 
 			Board_Command command = null;
 
