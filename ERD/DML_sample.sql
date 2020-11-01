@@ -135,4 +135,10 @@ WHERE rownum <=5
 ORDER BY post_table.regdate DESC
 ;	
 
-/*--최신 순으로, n번째 이후, 다음 포스트 3개 가져오기--*/
+/*--최신 순으로, n번째 이후, 다음 포스트 3개 가져오기 매개변수로 regdate 받을것!--*/
+SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents
+FROM post_table LEFT OUTER JOIN mm_table
+ON post_table.writer = mm_table.mm_id
+WHERE post_table.regdate<'2020-11-02 2:00:00' AND rownum <=5
+ORDER BY post_table.regdate DESC
+;
