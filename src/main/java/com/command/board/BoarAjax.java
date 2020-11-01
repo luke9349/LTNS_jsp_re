@@ -17,47 +17,27 @@ public class BoarAjax implements Command {
 		try {
 			request.setCharacterEncoding("UTF-8");
 
-			String type = request.getParameter("root");
+			String category = request.getParameter("root");
 
 			Board_Command command = null;
 
-			switch (type) {
+			switch (category) {
 			case "mainpage":
 				new Mainpage_Command_do().execute(request, response);
 				new Mainpage_Command_AJAX().execute(request, response);
 				break;
-			case "free":
-				command = new FreeBoard();
+			case "empathize":
+				command = new EmpathizeBoardCommand();
 				command.execute(request, response);
-				break;
-			case "reading":
-				command = new ReadingBoard();
-				command.execute(request, response);
-				break;
-			case "movie":
-				command = new MovieBoard();
-				command.execute(request, response);
-				break;
-			case "sports":
-				command = new SportsBoard();
-				command.execute(request, response);
-				break;
-			case "game":
-				command = new GameBoard();
-				command.execute(request, response);
-				break;
-			case "empath":
-				command = new EmpathBoard();
-				command.execute(request, response);
-				break;
+				return;
 			case "viewcnt":
-				command = new ViewcntBoard();
+				command = new ViewcntBoardCommand();
 				command.execute(request, response);
-				break;
+				return;
 			default:
-				command = new FreeBoard();
+				command = new DefaultBoardCommand();
 				command.execute(request, response);
-				break;
+				return;
 			}
 
 		} catch (UnsupportedEncodingException e) {

@@ -41,7 +41,7 @@ public class AjaxController extends HttpServlet {
 			command = new BoarAjax();
 			command.execute(request, response);
 			return;
-		}
+		} // end switch
 	} // end actionAjax
 
 }
