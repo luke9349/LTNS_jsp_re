@@ -3,7 +3,6 @@ package main.java.com.util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.naming.Context;
@@ -44,6 +43,17 @@ public class DataUtil {
 				stmt.close();
 			if (conn != null && !conn.isClosed())
 				conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void resourceClose(ResultSet rs, PreparedStatement pstmt) {
+		try {
+			if (rs != null && !rs.isClosed())
+				rs.close();
+			if (pstmt != null && !pstmt.isClosed())
+				pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

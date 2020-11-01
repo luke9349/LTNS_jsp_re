@@ -1,3 +1,4 @@
+<%@page import="main.java.com.post.beans.WriteDAO"%>
 <%@page import="main.java.com.post.beans.WriteDTO"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.BufferedReader"%>
@@ -8,22 +9,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%	//dao를 사용한 트랜잭션
+	WriteDTO[] arr = (WriteDTO[])request.getAttribute("views");
+%>  
+    
     
     
 <%
 	request.setCharacterEncoding("utf-8");
 	
-	String category	= request.getParameter("category");
-	String title = request.getParameter("title");
+	//String category	= arr[0].category;
+	//String title = arr[0].title;
 	Date today = new Date();
 	SimpleDateFormat fomat = new SimpleDateFormat("[yyyy-mm-dd]");
 	
-	String name = "[홍길동]";
-	int view_cnt = 3;
-	int like = 2;
 	
 	//DB접근시 
 	// getAttribute로 뽑아올 예정 
+	//String name = arr[0].getTitle();
 %>    
 
 <%
@@ -36,6 +39,7 @@
 	try{
 	br = new BufferedReader(new FileReader(saveDirectory));
 	String line = null;
+
 	
 	while((line = br.readLine())!=null){
 		if(line.equals("title")){
@@ -78,12 +82,12 @@
 	
 	<!-- 제목 카테고리  -->
 	<div class="top title">
-		<h3>[<%=category %>게시판]  &nbsp; [<%= titles%>]</h3> 
+		<h3>[]  &nbsp; []</h3> 
 	</div>
 	<hr>
 	<!-- 작성자 시간 조회수 추천수 -->
 	<div class="d-block">
-		<h5><%=name %> </h5> 
+		<h5><</h5> 
 	</div>
 	<hr>
 	<!-- 내용 -->

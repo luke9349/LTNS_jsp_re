@@ -1,5 +1,11 @@
 package sungs.temp.지울꺼얌;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,34 +15,246 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.regex.Pattern;
+
+import main.java.com.util.DataUtil;
 
 public class PostDAO {
-
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	Statement stmt = null;
 	ResultSet rs = null;
+	String contextPath = null;
 
-	public PostDTO[] getPosts(ResultSet rs) {
-		PostDTO[] result = null;
+	public PostDAO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public PostDAO(String contextPath) {
+		this.contextPath = contextPath;
+	}
+
+	public ArrayList<BoardListDTO> getCategoryList(String category, int page) {
+		int startNo = (page - 1) * 10 + 1;
+		int endNo = page * 10;
+
+		ArrayList<BoardListDTO> list = null;
+
+		final String SQL = "SELECT * FROM" + "(SELECT ROWNUM AS NO, t.* FROM" + "(SELECT * FROM"
+				+ "(SELECT t1.*, t2.EMPATHIZE_CNT FROM" + "(SELECT * FROM"
+				+ "(SELECT * FROM POST_TABLE t1, (SELECT * FROM MM_TABLE)t2" + " WHERE t1.WRITER = t2.MM_ID) t1,"
+				+ "(SELECT * FROM FILE_TABLE) t2" + " WHERE t1.POST_CONTENTS = t2.FILE_ID) t1,"
+				+ "(SELECT COUNT(*) AS EMPATHIZE_CNT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2"
+				+ " WHERE t1.POST_ID = t2.POST_ID(+))" + "WHERE CATEGORY = ?"
+				+ "ORDER BY REGDATE DESC, VIEWCNT DESC, EMPATHIZE_CNT DESC, POST_ID DESC)t)"
+				+ "WHERE NO >= ? AND NO <= ?";
+
+		System.out.println(SQL);
 
 		try {
-			List<PostDTO> list = new ArrayList<PostDTO>();
+			conn = DataUtil.getConnection();
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, category);
+			psmt.setInt(2, startNo);
+			psmt.setInt(3, endNo);
+			rs = psmt.executeQuery();
+			list = createList(rs);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DataUtil.resourceClose(rs, psmt, conn);
+		} // end try
+
+		return list;
+
+	} // end getCategoryList()
+
+	public ArrayList<BoardListDTO> getViewCntList(int page) {
+		int startNo = (page - 1) * 10 + 1;
+		int endNo = page * 10;
+
+		ArrayList<BoardListDTO> list = null;
+
+		final String SQL = "SELECT * FROM" + "(SELECT ROWNUM AS NO, t.* FROM" + "(SELECT * FROM"
+				+ "(SELECT t1.*, t2.EMPATHIZE_CNT FROM" + "(SELECT * FROM"
+				+ "(SELECT * FROM POST_TABLE t1, (SELECT * FROM MM_TABLE)t2" + " WHERE t1.WRITER = t2.MM_ID) t1,"
+				+ "(SELECT * FROM FILE_TABLE) t2" + " WHERE t1.POST_CONTENTS = t2.FILE_ID) t1,"
+				+ "(SELECT COUNT(*) AS EMPATHIZE_CNT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2"
+				+ " WHERE t1.POST_ID = t2.POST_ID(+))"
+				+ "ORDER BY VIEWCNT DESC, REGDATE DESC, EMPATHIZE_CNT DESC, POST_ID DESC)t)"
+				+ "WHERE NO >= ? AND NO <= ?";
+
+		System.out.println(SQL);
+
+		try {
+			conn = DataUtil.getConnection();
+			psmt = conn.prepareStatement(SQL);
+			psmt.setInt(1, startNo);
+			psmt.setInt(2, endNo);
+			rs = psmt.executeQuery();
+			list = createList(rs);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DataUtil.resourceClose(rs, psmt, conn);
+		} // end try
+
+		return list;
+
+	} // end getViewCntList()
+
+	public ArrayList<BoardListDTO> getEmpathizeCntList(int page) {
+		int startNo = (page - 1) * 10 + 1;
+		int endNo = page * 10;
+
+		ArrayList<BoardListDTO> list = null;
+
+		final String SQL = "SELECT * FROM" + "(SELECT ROWNUM AS NO, t.* FROM" + "(SELECT * FROM"
+				+ "(SELECT t1.*, t2.EMPATHIZE_CNT FROM" + "(SELECT * FROM"
+				+ "(SELECT * FROM POST_TABLE t1, (SELECT * FROM MM_TABLE)t2" + " WHERE t1.WRITER = t2.MM_ID) t1,"
+				+ "(SELECT * FROM FILE_TABLE) t2" + " WHERE t1.POST_CONTENTS = t2.FILE_ID) t1,"
+				+ "(SELECT COUNT(*) AS EMPATHIZE_CNT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2"
+				+ " WHERE t1.POST_ID = t2.POST_ID(+))"
+				+ "ORDER BY EMPATHIZE_CNT DESC, REGDATE DESC, VIEWCNT DESC, POST_ID DESC)t)"
+				+ "WHERE NO >= ? AND NO <= ?";
+
+		System.out.println(SQL);
+
+		try {
+			conn = DataUtil.getConnection();
+			psmt = conn.prepareStatement(SQL);
+			psmt.setInt(1, startNo);
+			psmt.setInt(2, endNo);
+			rs = psmt.executeQuery();
+			list = createList(rs);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DataUtil.resourceClose(rs, psmt, conn);
+		} // end try
+
+		return list;
+
+	} // end getEmpathizeCntList()
+
+	public ArrayList<BoardListDTO> getCategorySearchList(String category, String searchType, String search, int page) {
+		int startNo = (page - 1) * 10 + 1;
+		int endNo = page * 10;
+
+		ArrayList<BoardListDTO> list = null;
+
+		final String SQL = "SELECT * FROM" + "(SELECT * FROM" + "(SELECT t1.*, t2.EMPATHIZE_CNT FROM" + "(SELECT * FROM"
+				+ "(SELECT * FROM POST_TABLE t1, (SELECT * FROM MM_TABLE)t2" + " WHERE t1.WRITER = t2.MM_ID) t1,"
+				+ "(SELECT * FROM FILE_TABLE) t2" + " WHERE t1.POST_CONTENTS = t2.FILE_ID) t1,"
+				+ "(SELECT COUNT(*) AS EMPATHIZE_CNT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2"
+				+ " WHERE t1.POST_ID = t2.POST_ID(+))" + " WHERE CATEGORY = ?"
+				+ "ORDER BY REGDATE DESC, VIEWCNT DESC, EMPATHIZE_CNT DESC, POST_ID DESC)";
+
+		System.out.println(SQL);
+
+		try {
+			conn = DataUtil.getConnection();
+			psmt = conn.prepareStatement(SQL);
+			psmt.setString(1, category);
+			rs = psmt.executeQuery();
+			list = createList(rs);
+			list = createSearchList(list, searchType, search, startNo, endNo);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DataUtil.resourceClose(rs, psmt, conn);
+		} // end try
+
+		return list;
+
+	} // end getCategorySearchList()
+
+	public ArrayList<BoardListDTO> getViewCntSearchList(String searchType, String search, int page) {
+		int startNo = (page - 1) * 10 + 1;
+		int endNo = page * 10;
+
+		ArrayList<BoardListDTO> list = null;
+
+		final String SQL = "SELECT * FROM" + "(SELECT * FROM" + "(SELECT t1.*, t2.EMPATHIZE_CNT FROM" + "(SELECT * FROM"
+				+ "(SELECT * FROM POST_TABLE t1, (SELECT * FROM MM_TABLE)t2" + " WHERE t1.WRITER = t2.MM_ID) t1,"
+				+ "(SELECT * FROM FILE_TABLE) t2" + " WHERE t1.POST_CONTENTS = t2.FILE_ID) t1,"
+				+ "(SELECT COUNT(*) AS EMPATHIZE_CNT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2"
+				+ " WHERE t1.POST_ID = t2.POST_ID(+))"
+				+ "ORDER BY VIEWCNT DESC, REGDATE DESC, EMPATHIZE_CNT DESC, POST_ID DESC)";
+
+		System.out.println(SQL);
+
+		try {
+			conn = DataUtil.getConnection();
+			psmt = conn.prepareStatement(SQL);
+			rs = psmt.executeQuery();
+			list = createList(rs);
+			list = createSearchList(list, searchType, search, startNo, endNo);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DataUtil.resourceClose(rs, psmt, conn);
+		} // end try
+
+		return list;
+
+	} // end getViewCntSearchList()
+
+	public ArrayList<BoardListDTO> getEmpathizeCnttSearchList(String searchType, String search, int page) {
+		int startNo = (page - 1) * 10 + 1;
+		int endNo = page * 10;
+
+		ArrayList<BoardListDTO> list = null;
+
+		final String SQL = "SELECT * FROM" + "(SELECT * FROM" + "(SELECT t1.*, t2.EMPATHIZE_CNT FROM" + "(SELECT * FROM"
+				+ "(SELECT * FROM POST_TABLE t1, (SELECT * FROM MM_TABLE)t2" + " WHERE t1.WRITER = t2.MM_ID) t1,"
+				+ "(SELECT * FROM FILE_TABLE) t2" + " WHERE t1.POST_CONTENTS = t2.FILE_ID) t1,"
+				+ "(SELECT COUNT(*) AS EMPATHIZE_CNT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2"
+				+ " WHERE t1.POST_ID = t2.POST_ID(+))"
+				+ "ORDER BY EMPATHIZE_CNT DESC, REGDATE DESC, VIEWCNT DESC, POST_ID DESC)";
+
+		System.out.println(SQL);
+
+		try {
+			conn = DataUtil.getConnection();
+			psmt = conn.prepareStatement(SQL);
+			rs = psmt.executeQuery();
+			list = createList(rs);
+			list = createSearchList(list, searchType, search, startNo, endNo);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DataUtil.resourceClose(rs, psmt, conn);
+		} // end try
+
+		return list;
+
+	} // end getEmpathizeCntSearchList()
+
+	public ArrayList<BoardListDTO> createList(ResultSet rs) {
+		ArrayList<BoardListDTO> list = new ArrayList<BoardListDTO>();
+
+		try {
 			while (rs.next()) {
-				PostDTO dto = new PostDTO();
-				dto.setPostId(rs.getInt("POST_ID"));
+				BoardListDTO dto = new BoardListDTO();
+
+				dto.setPostId(rs.getLong("POST_ID"));
 				dto.setTitle(rs.getString("TITLE"));
-				dto.setWriter(rs.getString("WRITER"));
+				dto.setWriter(rs.getString("id"));
+
 				dto.setCategory(rs.getString("CATEGORY"));
 
 				Date date = rs.getDate("REGDATE");
 				Time time = rs.getTime("REGDATE");
 
-				String strDate = new SimpleDateFormat("yyyy-mm-dd").format(date);
-				String strTime = new SimpleDateFormat("HH-mm-ss").format(time);
-
-				System.out.println("여기서 time이 어떻게 뽑히는지 한번 보고 가야함: " + strTime);
+				String strDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+				String strTime = new SimpleDateFormat("HH:mm").format(time);
 
 				String meridiem = "오전";
 				int integerTime = Integer.parseInt(strTime.substring(0, 2));
@@ -45,60 +263,121 @@ public class PostDAO {
 					integerTime -= 12;
 				} // end if
 				String dateResult = strDate + " (" + meridiem + ")" + integerTime + strTime.substring(2);
+
 				dto.setRegdate(dateResult);
 
-				dto.setPostContent(rs.getInt("POST_CONTENTS"));
-				dto.setViewcnt(rs.getInt("VIEWCNT"));
+				dto.setPostContent(changeFileToText(rs.getString("REAL_FILENAME")));
+				dto.setEmpath(rs.getLong("EMPATHIZE_CNT")); // null 이 나오는 것이 아니네 ? 0으로 자동 셋팅이 되어 버리구나
+				dto.setViewcnt(rs.getLong("VIEWCNT"));
+
+				System.out.println(dto);
 
 				list.add(dto);
 			} // end while
-
-			result = new PostDTO[list.size()];
-			list.toArray(result);
-
-			System.out.println("PostListDAO getPosts메서드 결과물 확인: " + result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // end try
 
-		return result;
-	} // end getPosts()
+		return list;
+	} // end createList
 
-	public BoardListDTO[] getFreeList(String pageNum) {
-		BoardListDTO[] result = null;
+	public ArrayList<BoardListDTO> createSearchList(ArrayList<BoardListDTO> list, String searchType, String search,
+			int startNo, int endNo) {
+		ArrayList<BoardListDTO> temp = new ArrayList<BoardListDTO>();
+
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+		String[] regexs = search.split(" ");
+
+		for (BoardListDTO dto : list) {
+
+			String content = null;
+			switch (searchType) {
+			case "title":
+				content = dto.getTitle();
+				break;
+			case "content":
+				content = dto.getPostContent();
+				break;
+			case "titleAndContent":
+				content = dto.getTitle() + dto.getPostContent();
+				break;
+			default:
+				content = dto.getTitle() + dto.getPostContent();
+			} // end switch
+
+			for (String regex : regexs) {
+				StringBuffer word = new StringBuffer(".*");
+				word.append(regex.trim());
+				word.append(".*");
+				if (Pattern.matches(word.toString(), content)) {
+					temp.add(dto);
+					System.out.println(dto);
+					break;
+				} // end if
+
+			} // end for
+		} // end for
+
+		ArrayList<BoardListDTO> result = new ArrayList<BoardListDTO>();
+
 		try {
-			int page = Integer.parseInt(pageNum);
-			int startPage = (page - 1) * 10 + 1;
-			int endPage = ((startPage - 1) / 10 + 1) * 10;
+			for (int i = startNo - 1; i < endNo - 1; i++) {
+				result.add(temp.get(i));
+			} // end for
+		} catch (Exception e) { // exception 이 발생했다면 index exception
+			// 없으면 없는 것을 마지막으로 리턴
+			return result;
+		} // end try
 
-			// 정렬기준
-			// 카테고리로 걸러내고,
-			// 페이지 순대로 짜르고,
-			// 날짜 (regdate) - 최신순
+		return result;
+	} // end createSearchList
 
-			String sql = "SELECT * FROM POST_TABLE WHERE (로우넘) (로우넘)";
-			String[] cols = { "POST_ID", "POST_CONTENTS" };
-			psmt = conn.prepareStatement(sql, cols);
-			// psmt.set // => argument 셋팅
-			rs = psmt.executeQuery();
-			PostDTO[] posts = getPosts(rs);
+	public String changeFileToText(String fileName) {
 
-			// 파일 업다운 로드 writedao 참조 아직 잘모름
-			rs = psmt.getGeneratedKeys(); // rs가 두번 사용 되는지도 의문!!
-			// 예제에서는 insert 문을 날리면서 참조 시켯는데 지금은 select 문으로 참조 시킴
-		} catch (Exception e) {
+		String path = this.contextPath + File.separator + fileName;
+
+		File file = new File(path);
+
+		StringBuffer content = null;
+
+		try {
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			content = new StringBuffer();
+
+			while (br.read() != -1) {
+				content.append(br.readLine());
+			} // end while
+
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		} // end try
 
-		// 1. post table 정보 추출
+		return content.toString();
+	} // end changeFileToText()
 
-		// 2. post table 의 contentId 로 파일 테이블에서 content get
-		// 위의 rs = psmt.getGeneratedKeys(); 에서 참조
-
-		// 3. 게시글 아이디로 empath 테이블에서 추천 갯수 새오기
-		// 위의 rs = psmt.getGeneratedKeys(); 에서 참조
-
-		return result;
-	} // end getFreeList()
-
+	public static void main(String[] args) {
+		// new PostDAO("src/data/").getCategoryList("movie", 1);
+		// new PostDAO("src/data/").getViewCntList(1);
+		// new PostDAO("src/data/").getEmpathizeCntList(1);
+		new PostDAO("src/data/").getCategorySearchList("movie", "titleAndContent", "! 안녕 하세요", 1);
+		// new PostDAO("src/data/").getViewCntSearchList("movie", "titleAndContent", "!
+		// 안녕 하세요", 1);
+		// new PostDAO("src/data/").getEmpathizeCntSearchList("movie",
+		// "titleAndContent", "! 안녕 하세요", 1, 20);
+	}
 }

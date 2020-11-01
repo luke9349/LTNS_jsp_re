@@ -9,7 +9,7 @@ VALUES (1,'sampleid','sample_pwd1','샘플닉네임','sampleemail@sample.com','M
 
 --AI 활용
 INSERT INTO mm_table(mm_id,id,password,nickname,email,grade)
-VALUES (SEQ_mm_table_mm_id.NEXTVAL,'sampleid2','sample_pwd1','샘플닉네임2','sample2email@sample.com','MEMBER');
+VALUES (SEQ_mm_table_mm_id.NEXTVAL,'sampleid22','sample_pwd12','샘플닉네임22','sample2email@sample.com1','MEMBER1');
 
 --최신 AI 값
 SELECT SEQ_mm_table_mm_id.CURRVAL FROM DUAL;
@@ -55,7 +55,6 @@ DELETE FROM file_table;
 
 
 
-
 /*게시글-----------------------------------------------------------------------------*/
 /*insert sample post*/
 /*
@@ -70,13 +69,25 @@ INSERT INTO post_table(post_id,title,writer,category,regdate,post_contents,viewC
 VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',회원id(mm_id)를입력하세요,'NOTICE',SYSTIMESTAMP,파일id(file_id)를입력하세요,0);
 
 INSERT INTO post_table(post_id,title,writer,category,regdate,post_contents,viewCnt)
-VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',2,'NOTICE',SYSTIMESTAMP,3,0);
+VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',2,'NOTICE',SYSTIMESTAMP,3,5);
+
+
+INSERT INTO post_table
+(post_id,title,writer,category,regdate,post_contents,viewCnt) 
+VALUES
+(SEQ_post_table_post_id.NEXTVAL,'dd',1,'dd',SYSDATE,SEQ_post_table_post_id.CURRVAL, 02)
+
+
+
+SELECT * FROM USER_SEQUENCES;
+
 
 --최신 AI 값
 SELECT SEQ_post_table_post_id.CURRVAL FROM DUAL;
 
 /*조회수 늘리기*/
-UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id='포스트아이디를 입력해주세요';
+UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id='32';
+SELECT  * FROM POST_TABLE pt WHERE POST_ID='32';
 
 /*확인*/
 SELECT * FROM post_table;
