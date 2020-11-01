@@ -18,7 +18,6 @@ div.card_post-metadata{
 
 p.card_post-title{
 	width : 70%;
-	font-size:13px;
 	height: 17px;
     line-height: 18px;
     white-space: nowrap;
@@ -43,10 +42,14 @@ p.card_post-contents{
 	float:left;
 	width:79%;
 	margin-bottom: 5px;
-    height: 36px;
+    height: 100px;
     line-height: 18px;
-    white-space: normal;
-    overflow: hidden;
+    white-space: nowrap;
+	overflow: hidden;
+    text-overflow: ellipsis;
+	display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
     color: #4c4c4c;
     font-size: 13px;
 }
