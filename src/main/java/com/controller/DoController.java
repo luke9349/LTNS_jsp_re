@@ -74,11 +74,11 @@ public class DoController extends HttpServlet {
 			viewPage = "view.jsp";
 			break;
 			
-<<<<<<< HEAD
+
 		case "/board/board_list.do":
 			viewPage = "board_list.jsp";
 			break;
-=======
+
 		case "/post/deleteOk.do":
 			cmd = new deleteCommend();
 			cmd.execute(request, response);
@@ -92,7 +92,6 @@ public class DoController extends HttpServlet {
 			viewPage = "coment.jsp";
 			break;
 
->>>>>>> branch 'master' of https://github.com/luke9349/LTNS_jsp_re.git
 		}//end swithc
 		
 		if(viewPage != null) {
