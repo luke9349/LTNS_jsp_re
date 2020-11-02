@@ -17,8 +17,9 @@ public class Post_Contents {
 	Post_Contents(){
 	}
 	
-	Post_Contents(String filePath){
+	public Post_Contents(String filePath){
 		File file=new File(filePath);
+		System.out.println(file);
 		StringBuffer _contentsText = null;
 		try {
 			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -37,10 +38,16 @@ public class Post_Contents {
 				}//end title if
 				if(thumbnail_index==0) {
 					if(beforeStr.contains("<img")) {
-						thumbnailPath=beforeStr.substring(beforeStr.indexOf("src="));
+						thumbnailPath=beforeStr.substring(beforeStr.indexOf("src=")+5);//첫번째 이미지 경로
+						System.out.println("썸네일:"+thumbnailPath);//맞을까..
+						br.readLine();
+						br.readLine();
+						br.readLine();
+						thumbnail_index++;
 					}
 				}
-				afterStr=beforeStr.replaceAll("<br.*>", "\n").replaceAll("<.*>", "").replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&nbsp;"," ");
+				//replaceAll("<img.*","").replaceAll("\" title=.*\">","") 이미지 태그 제거용
+				afterStr=beforeStr.replaceAll("<img.*\" title=.*\">","").replaceAll("<br.*>", "\n").replaceAll("<.*>", "").replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&nbsp;"," ").replaceAll("\n","");
 				_contentsText.append(afterStr);
 			}//end while
 			br.close();
@@ -48,6 +55,9 @@ public class Post_Contents {
 			e.printStackTrace();
 		}catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+			contentsText=_contentsText.toString();
+			System.out.println(contentsText);
 		}
 	}
 	
