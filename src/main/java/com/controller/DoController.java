@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
+import main.java.com.command.mainpage.Mainpage_Command;
 import main.java.com.command.post.ViewCommend;
 import main.java.com.command.post.WriteCommend;
 import main.java.com.command.post.comentCmd;
@@ -91,7 +92,12 @@ public class DoController extends HttpServlet {
 			cmd.execute(request, response);
 			viewPage = "coment.jsp";
 			break;
-
+		
+		case "/mainpage/mainpage.do":
+			cmd=new Mainpage_Command();
+			cmd.execute(request, response);
+			viewPage="mainpage.jsp";
+			break;
 		}//end swithc
 		
 		if(viewPage != null) {

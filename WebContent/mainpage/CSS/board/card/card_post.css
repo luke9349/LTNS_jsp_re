@@ -12,6 +12,10 @@ a.card_post *{
 	display:inline-block;
 }
 
+div.card_post-main{
+	width:80%;
+}
+
 div.card_post-metadata{
 	float:right;
 }

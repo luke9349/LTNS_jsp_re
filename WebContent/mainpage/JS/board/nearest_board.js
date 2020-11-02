@@ -4,29 +4,6 @@
 $(document).ready(function(){
 
 	$("button#nearest_board-add_post").click(function(){
-		JSON_list=[
-			{
-				title:"하",
-				picture:"ㅓ우",
-				writer:"우ㅏ",
-				regdate:"ㅓㅎ",
-				contents:"아ㅓ어림나얼"
-			},
-			{
-				title:"하",
-				picture:"ㅓ우",
-				writer:"우ㅏ",
-				regdate:"ㅓㅎ",
-				contents:"아ㅓ어림나얼"
-			},
-			{
-				title:"하",
-				picture:"ㅓ우",
-				writer:"우ㅏ",
-				regdate:"ㅓㅎ",
-				contents:"아ㅓ어림나얼"
-			}
-		]
 		//ajax request를 보냄
 		url="mainpage.ajax?reqType=json&regdate="+$("time.card_post-regdate").last().html();
 		$.ajax({
@@ -56,10 +33,10 @@ function parseJSON(jsonObj){
 		var post_i=$("a.card_post").last().attr("id");
 		post_i=1+Number(post_i.slice(6));
 		card_post=$('<a id="whole_'+post_i+'" class="card_post article" href="#"></a>').html(
-				'				<p class="card_post-title title">'+temp_title+'</p><div class="card_post-picture">'+temp_picture+'</div>'+
+				'		   <div class="card_post-main"><p class="card_post-title title">'+temp_title+'</p>'+
 				'				<div class="sm_card_list-metadata"><p class="card_post-writer small">'+temp_writer+'</p><time class="card_post-regdate small">'+temp_regdate+'</time></div>'+
-				'				<p class="card_post-contents small">내용</p>'+
-		'			</a>');
+				'				<p class="card_post-contents small">내용</p></div>'+
+				'		   <div class="card_post-picture">'+temp_picture+'</div>');
 		$("div#nearest_board").append(card_post);
 		$("div#nearest_board").append("<hr>");
 	}

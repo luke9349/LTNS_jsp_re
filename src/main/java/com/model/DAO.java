@@ -17,5 +17,5 @@ public interface DAO {
 	DTO[] selectBySQL(String sql) throws SQLException;
 	
 	// 0-1. sql => ResultSet : String 매개변수를 받는 sql문으로 가져오기
-	public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException;
+	public DTO[] selectBySQL(String sql, String ...stringParamForPstmt) throws SQLException;
 }
