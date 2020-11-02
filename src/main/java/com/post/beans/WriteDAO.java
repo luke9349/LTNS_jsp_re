@@ -162,17 +162,17 @@ public class WriteDAO {
 	
 	
 	//글 삭제하기 
-	public int post_delete(int numbers) throws SQLException {
+	public int post_delete(int requestsdata) throws SQLException {
 		int cnt =0;
 		
 		try {
-			String sql ="DELETE FROM POST_TABLE pt WHERE POST_CONTENTS =?";
-			
+			String sql ="DELETE FROM POST_TABLE pt WHERE post_id = ?";
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, numbers);
-	
+			psmt.setInt(1, requestsdata);
 			cnt = psmt.executeUpdate();
+	
 		} finally {
+			System.out.println(requestsdata + "값얼마니?");
 			close();
 		}
 		
