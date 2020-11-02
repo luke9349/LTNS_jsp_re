@@ -36,10 +36,15 @@ public class ViewcntBoardCommand implements Board_Command {
 				page = Integer.parseInt(request.getParameter("page"));
 			
 			ArrayList<BoardListDTO> list = null;
-			if (searchType != null)
-				list = new PostDAO(contextPath).getCategorySearchList(category, searchType, search, page);
-			else
-				list = new PostDAO(contextPath).getCategoryList(category, page);
+			if (searchType == null && search == null) {
+				list = new PostDAO().getCategoryList(category, page);
+				list = createJSONList(list);
+			} else {
+				list = new PostDAO().getCategorySearchList(category);
+				list = createJSONList(list);
+				list = createSearchList(list, searchType, search, page);
+			}
+			
 			request.setAttribute("list", list);
 			responseJSON(request, response);
 
