@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<context path="/LTNS_jsp" docbase="www">
+<context path="/LTNS_jsp_re" docbase="www">
 	<Resource 
-		name="jdbc/LTNS_jsp"
+		name="jdbc/LTNS_jsp_re"
 		auto="Container"
 		type="javax.sql.DataSource"
 		driverClassName="oracle.jdbc.driver.OracleDriver"
@@ -15,7 +15,7 @@
 	/>
 	<ReSourceLink 
 	type="javax.sql.DataSource"
-	name="jdbc/LTNS_jsp"
-	global="jdbc/LTNS_jsp"
+	name="jdbc/LTNS_jsp_re"
+	global="jdbc/LTNS_jsp_re"
 	/>
 </context>

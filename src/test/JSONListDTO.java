@@ -1,15 +1,16 @@
-package park.지울꺼얌;
+package test;
 
-public class BoardListDTO {
+public class JSONListDTO {
+
 	private long postId; // 게시글 고유 번호
 	private String title; // 게시글 제목
 	private String writer; // 작성자
 	private String category; // 카테고리
 	private String regdate; // 작성일
-	private String postContent; // 내용
+	private String contentsText; // 컨텐트 텍스트
+	private String thumbnailPath; // img 주소
 	private long empathizeCnt; // 공감
 	private long viewcnt; // 조회수
-	private long dataLength; // 데이터 길이 => pagination
 
 	public long getPostId() {
 		return postId;
@@ -51,12 +52,20 @@ public class BoardListDTO {
 		this.regdate = regdate;
 	}
 
-	public String getPostContent() {
-		return postContent;
+	public String getContentsText() {
+		return contentsText;
 	}
 
-	public void setPostContent(String postContent) {
-		this.postContent = postContent;
+	public void setContentsText(String contentsText) {
+		this.contentsText = contentsText;
+	}
+
+	public String getThumbnailPath() {
+		return thumbnailPath;
+	}
+
+	public void setThumbnailPath(String thumbnailPath) {
+		this.thumbnailPath = thumbnailPath;
 	}
 
 	public long getEmpathizeCnt() {
@@ -75,19 +84,11 @@ public class BoardListDTO {
 		this.viewcnt = viewcnt;
 	}
 
-	public long getDataLength() {
-		return dataLength;
-	}
-
-	public void setDataLength(long dataLength) {
-		this.dataLength = dataLength;
-	}
-
 	@Override
 	public String toString() {
-		return "BoardListDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", category=" + category
-				+ ", regdate=" + regdate + ", postContent=" + postContent + ", empathizeCnt=" + empathizeCnt
-				+ ", viewcnt=" + viewcnt + ", dataLength=" + dataLength + "]";
+		return "JSONListDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", category=" + category
+				+ ", regdate=" + regdate + ", contentsText=" + contentsText + ", thumbnailPath=" + thumbnailPath
+				+ ", empathizeCnt=" + empathizeCnt + ", viewcnt=" + viewcnt + "]";
 	}
 
 }

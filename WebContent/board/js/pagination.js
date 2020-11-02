@@ -23,9 +23,15 @@ const createPaginationList = (className) => {
 };
 
 const handledPagination = () => {
-  let { root, page, type } = params;
-  if (type === 'post') return;
-  if (page !== 1) page = parseInt(page);
+  if (params.type === 'post') return;
+  let { root, type, page, searchType, search } = params;
+  page = parseInt(page);
+  let url = '';
+  if (searchType && search) {
+    url += `root=${root}&type=${type}&searchType=${searchType}&search=${search}`;
+  } else {
+    url += `root=${root}&type=${type}`;
+  }
 
   const startPagination = Math.floor((page - 1) / 10) * 10 + 1;
   // let endPagination = (Math.floor((page - 1) / 10) + 1) * 10;
@@ -41,11 +47,10 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
+    page = 1;
     const li = createPaginationList('page-item');
     const i = createPaginationIcon('fas fa-angle-double-left');
-    const a = createPaginationAnchor(
-      `board_list.do?root=${root}&type=${type}&page=${1}`
-    );
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);
@@ -58,24 +63,19 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
+    page = (Math.floor(page / 10) - 1) * 10 + 1;
     const li = createPaginationList('page-item');
     const i = createPaginationIcon('fas fa-chevron-left');
-    const a = createPaginationAnchor(
-      `board_list.do?root=${root}&type=${type}&page=${
-        (Math.floor(page / 10) - 1) * 10 + 1
-      }`
-    );
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);
   }
+
   for (let i = startPagination; i <= endPagination; i++) {
-    let li = null;
-    if (i === page) li = createPaginationList('page-item active');
-    else li = createPaginationList('page-item');
-    const a = createPaginationAnchor(
-      `board_list.do?root=${root}&type=${type}&page=${i}`
-    );
+    let li = createPaginationList('page-item');
+    if (i === page) li.classList.add('active');
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${i}`);
     a.innerText = i;
     li.appendChild(a);
     pagination.appendChild(li);
@@ -88,13 +88,10 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
+    page = (Math.floor(page / 10) + 1) * 10 + 1;
     const li = createPaginationList('page-item');
     const i = createPaginationIcon('fas fa-chevron-right');
-    const a = createPaginationAnchor(
-      `board_list.do?root=${root}&type=${type}&page=${
-        (Math.floor(page / 10) + 1) * 10 + 1
-      }`
-    );
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);
@@ -107,11 +104,10 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
+    page = maxPagination;
     const li = createPaginationList('page-item');
     const i = createPaginationIcon('fas fa-angle-double-right');
-    const a = createPaginationAnchor(
-      `board_list.do?root=${root}&type=${type}&page=${maxPagination}`
-    );
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);

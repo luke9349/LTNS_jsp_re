@@ -1,15 +1,31 @@
-package park.지울꺼얌;
+package test;
 
-public class BoardListDTO {
+import main.java.com.model.DTO;
+
+public class TestDTO implements DTO {
 	private long postId; // 게시글 고유 번호
 	private String title; // 게시글 제목
 	private String writer; // 작성자
 	private String category; // 카테고리
 	private String regdate; // 작성일
-	private String postContent; // 내용
+	String postContent; // 내용
 	private long empathizeCnt; // 공감
 	private long viewcnt; // 조회수
 	private long dataLength; // 데이터 길이 => pagination
+
+	public TestDTO(long postId, String title, String writer, String category, String regdate, String postContent,
+			long empathizeCnt, long viewcnt, long dataLength) {
+		super();
+		this.postId = postId;
+		this.title = title;
+		this.writer = writer;
+		this.category = category;
+		this.regdate = regdate;
+		this.postContent = postContent;
+		this.empathizeCnt = empathizeCnt;
+		this.viewcnt = viewcnt;
+		this.dataLength = dataLength;
+	}
 
 	public long getPostId() {
 		return postId;
@@ -85,7 +101,7 @@ public class BoardListDTO {
 
 	@Override
 	public String toString() {
-		return "BoardListDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", category=" + category
+		return "TestDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", category=" + category
 				+ ", regdate=" + regdate + ", postContent=" + postContent + ", empathizeCnt=" + empathizeCnt
 				+ ", viewcnt=" + viewcnt + ", dataLength=" + dataLength + "]";
 	}

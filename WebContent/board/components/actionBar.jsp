@@ -1,15 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String url = "";
+	if(request.getParameter("root") != null && !request.getParameter("root").equals(""))
+		url += "&root=" + request.getParameter("root");
+	if(request.getParameter("searchType") != null 
+			&& !request.getParameter("searchType").equals("")
+			&& request.getParameter("search") != null 
+			&& !request.getParameter("search").equals("")) {
+		url += "&searchType=" + request.getParameter("searchType");
+		url += "&search=" + request.getParameter("search");
+	}
+	if(request.getParameter("page") != null && !request.getParameter("page").equals(""))
+		url += "&page=" + request.getParameter("page");
+	
+	System.out.println(url);
+%> 
 <div class="actionBar py-3">
   <div class="actionBtns">
-    <a class="actionBtn btn" href="board_list.do?root=${param.root}&type=list">
+    <a class="actionBtn btn" href="board_list.do?type=list<%=url%>">
       <i class="fas fa-list">list</i>
     </a>
-    <a class="actionBtn btn" href="board_list.do?root=${param.root}&type=album">
+    <a class="actionBtn btn" href="board_list.do?type=album<%=url%>">
       <i class="far fa-images">album</i>
     </a>
-    <a class="actionBtn btn" href="board_list.do?root=${param.root}&type=post">
+    <a class="actionBtn btn" href="board_list.do?type=post<%=url%>">
       <i class="far fa-address-card">post</i>
     </a>
   </div>

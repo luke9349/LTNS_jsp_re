@@ -11,7 +11,6 @@ let params = initialParams;
 const handleParams = () => {
   const search = new URLSearchParams(location.search);
   const searchParams = Object.fromEntries(search);
-console.log(searchParams.searchType);
   if (searchParams.root) params.root = searchParams.root;
   if (searchParams.type) params.type = searchParams.type;
   if (searchParams.page) params.page = searchParams.page;

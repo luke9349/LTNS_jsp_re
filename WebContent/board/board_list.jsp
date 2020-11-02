@@ -7,7 +7,6 @@
 <c:if test="${param.root != null }">
 	<c:set var="root" value="${param.root }"/>
 </c:if>
-
 <c:set var="type" value="list" />
 <c:if test="${param.type != null }">
 	<c:set var="type" value="${param.type }"/>
@@ -72,12 +71,6 @@
 <c:if test="${type eq 'post'}">
 	<link rel="stylesheet" href="./css/post.css"/>
 </c:if>
-<!-- 
-<script async defer src="./js/board.js"></script>
-
-<script async defer src="./js/search.js"></script>
-<script async defer src="./js/ajaxTest.js"></script>
- -->
 <script async defer type="module" src="./js/boardMain.js"></script>
 <script async defer src="./js/nav.js"></script>
 

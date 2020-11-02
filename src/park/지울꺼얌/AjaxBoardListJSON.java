@@ -4,12 +4,14 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import test.JSONListDTO;
+
 public class AjaxBoardListJSON {
 	private long count;
 	private String status;
 
 	@JsonProperty("data")
-	private List<BoardListDTO> list;
+	private List<JSONListDTO> list;
 
 	public long getCount() {
 		return count;
@@ -27,11 +29,11 @@ public class AjaxBoardListJSON {
 		this.status = status;
 	}
 
-	public List<BoardListDTO> getList() {
+	public List<JSONListDTO> getList() {
 		return list;
 	}
 
-	public void setList(List<BoardListDTO> list) {
+	public void setList(List<JSONListDTO> list) {
 		this.list = list;
 	}
 
