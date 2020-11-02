@@ -1,6 +1,5 @@
 package main.java.com.model.mainpage;
 
-import java.sql.Timestamp;
 
 import main.java.com.model.DTO;
 

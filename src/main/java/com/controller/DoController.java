@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.command.mainpage.Mainpage_Command;
-import main.java.com.command.post.FileCommend;
 import main.java.com.command.post.WriteCommend;
 import main.java.com.command.post.comentCmd;
 import main.java.com.command.post.deleteCommend;
+import main.java.com.command.post.updateCommend;
 import main.java.com.command.post.ViewCommend;
 
 @WebServlet("*.do")
@@ -63,11 +63,6 @@ public class DoController extends HttpServlet {
 			viewPage = "writeOk.jsp";
 			break;
 			
-		case "/post/write_FileOk.do":
-			cmd = new FileCommend();
-			cmd.execute(request, response);
-			viewPage = "write_FileOk.jsp";
-			break;
 			
 		case "/post/view.do":
 			cmd = new ViewCommend();
@@ -85,6 +80,12 @@ public class DoController extends HttpServlet {
 			cmd.execute(request, response);
 			viewPage = "deleteOk.jsp";
 			break;
+		
+		case "/post/update.do":
+			cmd = new updateCommend();
+			cmd.execute(request, response);
+			viewPage = "update.jsp";
+			break;
 			
 			
 		case "/post/coment.do":
@@ -92,6 +93,7 @@ public class DoController extends HttpServlet {
 			cmd.execute(request, response);
 			viewPage = "coment.jsp";
 			break;
+			
 		
 		case "/mainpage/mainpage.do":
 			cmd=new Mainpage_Command();

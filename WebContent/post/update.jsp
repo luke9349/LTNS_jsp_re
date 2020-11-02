@@ -1,15 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="main.java.com.post.beans.WriteDTO"%>
+<%@page import="main.java.com.model.DTO"%>    
+    
 <%
 	String ctx = request.getContextPath();
-	String text = request.getParameter("content");
+	
 %>   
+
+<%
+	WriteDTO[] arr = (WriteDTO[])request.getAttribute("update");	
+%>
+
+<%
+	if( arr == null || arr.length==0){
+	
+%>
+	<scirpt>
+		alert("해당 정보없음");
+		history.back();
+	</scirpt>
+
+<%	return ;	} %>
+
+
+
+
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title> Write Page </title>
+<title> update Page </title>
 </head>
 
 <!-- bootstrep -->
@@ -94,13 +116,13 @@ function chkSubmit(){
 		          <tr class="mt-2 text-right">
 		            <td colspan="2" >
 		                <input class="btn-sm" type="button" value="취소" onclick="History.back()"/>
-		                <input class="btn-sm" type="submit" id="save" value="저장"/>
+		                <input class="btn-sm" type="submit" id="save" value="수정"/>
 		              
 		            </td>
 		        </tr>
 		        <tr class="justify-content-center">
 		            <td colspan="2">
-		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px;"> <%=text%>
+		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px;">
 		                </textarea>
 		            </td>
 		        </tr>

@@ -36,7 +36,6 @@ public class WriteDTO implements DTO{
 			this.title = title;
 			this.writer = writer;
 			this.category = category;
-		
 			this.post_contents = post_contents;
 			this.viewCnt = viewCnt;
 		}
@@ -67,14 +66,14 @@ public class WriteDTO implements DTO{
 		}
 
 
-//		public String getWriter() {
-//			return writer;
-//		}
-//
-//
-//		public void setWriter(String writer) {
-//			this.writer = writer;
-//		}
+		public String getWriter() {
+			return writer;
+		}
+
+
+		public void setWriter(String writer) {
+			this.writer = writer;
+		}
 
 
 		public String getCategory() {

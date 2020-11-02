@@ -19,6 +19,10 @@ public class FileWriteDAO implements DAO {
 	PreparedStatement psmt = null;
 	Statement stmt = null;
 	ResultSet rs = null;
+	
+	public static final String SQL_POST_CONTENT_VIEW = 
+			"SELECT * FROM FILE_TABLE ft WHERE FILE_ID =  ?";
+			
 
 	public FileWriteDAO() {
 
@@ -101,34 +105,94 @@ public class FileWriteDAO implements DAO {
 
 	}
 
-	// ResultSet => DTO
-	@Override
-	public DTO mkDTO(ResultSet rs) throws SQLException {
-		int file_id = rs.getInt("file_id");
-		String filekind = rs.getString("filekind");
-		String readl_filename = rs.getString("real_filename");
-		String filename = rs.getString("filename");
-		DTO dto = new FileWriteDTO(file_id, filekind, readl_filename, filename);
-		return dto;
+	
+	//글 내용 꺼내오기 
+	public FileWriteDTO[] view_cotent(int post_contents) throws SQLException {
+		
+		int cnt = 0;
+		FileWriteDTO[] arr = null;
+		
+		try {
+			psmt = conn.prepareStatement(SQL_POST_CONTENT_VIEW);
+			psmt.setInt(1, post_contents);
+			rs = psmt.executeQuery();
+			arr = createFiles(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return arr;
+		
+	}
 
-	}// end mkDTO
+	
 
-	// ResultSet => DTOs
-	@Override
-	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
-		DTO[] arr=null;
-		ArrayList<DTO> list=new ArrayList<DTO>();
+	public FileWriteDTO[] createFiles(ResultSet rs) throws SQLException {
+		ArrayList<FileWriteDTO> Filelist = new ArrayList<FileWriteDTO>();
 		
 		while(rs.next()) {
-			list.add(mkDTO(rs));
-		}
-		int size=list.size();
-		if(size==0)return null;
-		arr=new DTO[size];
-		list.toArray(arr);
+
+			int file_id = rs.getInt("file_id");
+			String filekind = rs.getString("filekind");
+			String readl_filename = rs.getString("real_filename");
+			String filename = rs.getString("filename");
+			FileWriteDTO filedto = new FileWriteDTO(file_id, filekind, readl_filename, filename);
 		
+			
+			
+			FileWriteDTO dtos = new FileWriteDTO(file_id, filekind, readl_filename, filename);
+			Filelist.add(filedto);
+			
+		}
+		
+		int size = Filelist.size();
+		if(size == 0 ) return null;
+		
+		FileWriteDTO arr[] = new FileWriteDTO[size];
+		Filelist.toArray(arr);
 		return arr;
-	}// end mkDTOs()
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	
+//	// ResultSet => DTO
+//	@Override
+//	public DTO mkDTO(ResultSet rs) throws SQLException {
+//		int file_id = rs.getInt("file_id");
+//		String filekind = rs.getString("filekind");
+//		String readl_filename = rs.getString("real_filename");
+//		String filename = rs.getString("filename");
+//		DTO dto = new FileWriteDTO(file_id, filekind, readl_filename, filename);
+//		return dto;
+//
+//	}// end mkDTO
+//
+//	// ResultSet => DTOs
+//	@Override
+//	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
+//		DTO[] arr=null;
+//		ArrayList<DTO> list=new ArrayList<DTO>();
+//		
+//		while(rs.next()) {
+//			list.add(mkDTO(rs));
+//		}
+//		int size=list.size();
+//		if(size==0)return null;
+//		arr=new DTO[size];
+//		list.toArray(arr);
+//		
+//		return arr;
+//	}// end mkDTOs()
 
 	@Override
 	public DTO[] selectBySQL(String sql) throws SQLException {
@@ -144,6 +208,18 @@ public class FileWriteDAO implements DAO {
 
 	@Override
 	public DTO[] selectBySQL(String sql, String... stringParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DTO mkDTO(ResultSet rs) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -23,6 +23,11 @@ public class WriteDAO implements DAO {
 	ResultSet rs = null;
 	
 	
+	public static final String SQL_WRITE_SEARCH_BY_UID =
+			"SELECT * FROM POST_TABLE pt WHERE POST_ID  = ?";
+	
+
+	
 	
 	public WriteDAO() {
 		
@@ -88,82 +93,74 @@ public class WriteDAO implements DAO {
 	}
 	
 	
-//	public WriteDTO[] createArray(ResultSet rs) throws SQLException {
-//		ArrayList<WriteDTO> list = new ArrayList<WriteDTO>();
-//		
-//		while(rs.next()) {
-//
-//			int post_id = rs.getInt("post_id"); // 게시글 고유번호 
-//			String title = rs.getString("title"); //제목 
-//			String writer = rs.getString("writer"); //제목 
-//			String category = rs.getString("category"); //제목 
-//			//sysdate
-//			Date d = rs.getDate("regdate");
-//			Time t = rs.getTime("regdate");
-//			String regDate = "";
-//			if( d != null) {
-//				regDate = new SimpleDateFormat("yyyy-mm-dd").format(d) + " "
-//						+ new SimpleDateFormat("hh:mm:ss").format(t);
-//			}
-//			int content = rs.getInt("post_contents"); //파일주소 
-//			int viewCnt = rs.getInt("viewCnt");
-//			WriteDTO dto = new WriteDTO(post_id, title, writer,category, content, viewCnt);
-//			dto.setRegDate(regDate);
-//			list.add(dto);
-//			
-//			
-//			
-//			
-//		}
-//		
-//		int size = list.size();
-//		if(size == 0 ) return null;
-//		
-//		WriteDTO arr[] = new WriteDTO[size];
-//		list.toArray(arr);
-//		return arr;
-//	}
+	public WriteDTO[] createArray(ResultSet rs) throws SQLException {
+		ArrayList<WriteDTO> list = new ArrayList<WriteDTO>();
+		
+		while(rs.next()) {
+
+			int post_id = rs.getInt("post_id"); // 게시글 고유번호 
+			String title = rs.getString("title"); //제목 
+			String writer = rs.getString("writer"); //제목 
+			String category = rs.getString("category"); //제목 
+			//sysdate
+			Date d = rs.getDate("regdate");
+			Time t = rs.getTime("regdate");
+			String regDate = "";
+			if( d != null) {
+				regDate = new SimpleDateFormat("yyyy-mm-dd").format(d) + " "
+						+ new SimpleDateFormat("hh:mm:ss").format(t);
+			}
+			int content = rs.getInt("post_contents"); //파일주소 
+			int viewCnt = rs.getInt("viewCnt");
+			WriteDTO dto = new WriteDTO(post_id, title, writer,category, content, viewCnt);
+			dto.setRegDate(regDate);
+			list.add(dto);
+			
+		}
+		
+		int size = list.size();
+		if(size == 0 ) return null;
+		
+		WriteDTO arr[] = new WriteDTO[size];
+		list.toArray(arr);
+		return arr;
+	}
 	
 	
 	
 	//글 조회수증가 보기 뷰
-//	public WriteDTO[] wr_view(int post_id) throws SQLException {
-//		int cnt =0;
-//		WriteDTO [] arr = null;
-//		
-//		String sql = "UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id = ?";
-//		String views = "SELECT  * FROM POST_TABLE pt WHERE POST_ID = ?";
-//		try {
-//			
-//			conn.setAutoCommit(false);
-//			psmt = conn.prepareStatement(sql);
-//			psmt.setInt(1, post_id);
-//			cnt = psmt.executeUpdate();
-//			psmt.close();
-//			
-//			
-//			
-//			psmt = conn.prepareStatement(views);
-//			psmt.setInt(1, post_id);
-//			rs = psmt.executeQuery();
-//			arr= createArray(rs);
-//			System.out.println(post_id+"포스트아이디츌력해봐");
-//			
-//			conn.commit();
-//			System.out.println("트랜잭션성공"+post_id);
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			conn.rollback();
-//			System.out.println("트랜잭션 실패 roll back");
-//			throw e;
-//		} finally {
-//			close();
-//		} 
-//		
-//		
-//		return arr;
-//	}
+	public WriteDTO[] wr_view(int post_id) throws SQLException {
+		int cnt =0;
+		WriteDTO [] arr = null;
+		
+		String sql = "UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id = ?";
+		String views = "SELECT  * FROM POST_TABLE pt WHERE POST_ID = ?";
+		try {
+			
+			conn.setAutoCommit(false);
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, post_id);
+			cnt = psmt.executeUpdate();
+			psmt.close();
+			
+			psmt = conn.prepareStatement(views);
+			psmt.setInt(1, post_id);
+			rs = psmt.executeQuery();
+			arr= createArray(rs);
+			conn.commit();
+			System.out.println("트랜잭션성공"+post_id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			conn.rollback();
+			System.out.println("트랜잭션 실패 roll back");
+			throw e;
+		} finally {
+			close();
+		} 
+		
+		return arr;
+	}
 	
 	
 	
@@ -187,49 +184,57 @@ public class WriteDAO implements DAO {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//글 업데이트하기 
+	public  WriteDTO[] _post_update(int post_id) throws SQLException {
+		int cnt = 0;
+		WriteDTO[] arr = null;
+		try {
+			psmt = conn.prepareStatement(SQL_WRITE_SEARCH_BY_UID);
+			psmt.setInt(1, post_id);
+			rs = psmt.executeQuery();
+			arr = createArray(rs);
+		} finally {
+			close();
+		}
+		return arr;
+	}
+
 	
 	
 
 	
-	@Override
-	public DTO mkDTO(ResultSet rs) throws SQLException {
-		int post_id = rs.getInt("post_id"); // 게시글 고유번호 
-		String title = rs.getString("title"); //제목 
-		String writer = rs.getString("writer"); //제목 
-		String category = rs.getString("category"); //제목 
-		String regdate = rs.getString("regdate");
-		int content = rs.getInt("post_contents"); //파일주소 
-		int viewCnt = rs.getInt("viewCnt");
-		DTO dto = new WriteDTO(post_id, title, writer,category, content, viewCnt);
-		((WriteDTO)dto).setRegDate(regdate);
-		return dto;
-	}
 	
-	@Override
-	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
-		DTO[] arr=null;
-		ArrayList<DTO> list=new ArrayList<DTO>();
-		
-		while(rs.next()) {
-			list.add(mkDTO(rs));
-		}
-		int size=list.size();
-		if(size==0)return null;
-		arr=new DTO[size];
-		list.toArray(arr);
-		
-		return arr;
-	}
+	
+	
+//	@Override
+//	public DTO mkDTO(ResultSet rs) throws SQLException {
+//		int post_id = rs.getInt("post_id"); // 게시글 고유번호 
+//		String title = rs.getString("title"); //제목 
+//		String writer = rs.getString("writer"); //제목 
+//		String category = rs.getString("category"); //제목 
+//		String regdate = rs.getString("regdate");
+//		int content = rs.getInt("post_contents"); //파일주소 
+//		int viewCnt = rs.getInt("viewCnt");
+//		DTO dto = new WriteDTO(post_id, title, writer,category, content, viewCnt);
+//		((WriteDTO)dto).setRegDate(regdate);
+//		return dto;
+//	}
+//	
+//	@Override
+//	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
+//		DTO[] arr=null;
+//		ArrayList<DTO> list=new ArrayList<DTO>();
+//		
+//		while(rs.next()) {
+//			list.add(mkDTO(rs));
+//		}
+//		int size=list.size();
+//		if(size==0)return null;
+//		arr=new DTO[size];
+//		list.toArray(arr);
+//		
+//		return arr;
+//	}
 
 	@Override
 	public DTO[] selectBySQL(String sql) throws SQLException {
@@ -245,6 +250,18 @@ public class WriteDAO implements DAO {
 
 	@Override
 	public DTO[] selectBySQL(String sql, String... stringParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DTO mkDTO(ResultSet rs) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -4,6 +4,9 @@
 	String ctx = request.getContextPath();
 	String saveDirectory =	getServletContext().getRealPath("/") + "data";
 	System.out.println(saveDirectory + "세이브디렉토리입니다.");
+	System.out.println(ctx + "/"+ "data" +"/");
+	
+	
 %>   
 
     

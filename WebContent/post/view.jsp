@@ -1,4 +1,5 @@
 <%@page import="main.java.com.post.beans.WriteDTO"%>
+<%@page import="main.java.com.model.DTO"%>
 <%@page import="main.java.com.post.beans.FileWriteDTO"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.BufferedReader"%>
@@ -10,15 +11,20 @@
     pageEncoding="UTF-8"%>
     
 <%	//dao를 사용한 트랜잭션
+	
 	WriteDTO[] arr = (WriteDTO[])request.getAttribute("views");
+	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("contents_view");
+
+	
+
 	String title = arr[0].getTitle();
-	String name = "홍길동 "; // mm테이블에서 받을에정 
-	String date = arr[0].regdate;
+	String name = arr[0].getWriter(); 
+	String date = arr[0].getRegDate();
 	int viewCnt = arr[0].getViewCnt();
 	String category = arr[0].getCategory();
 	int post_content = arr[0].getPost_contents();
+	int post_id = 22;
 	
- 	
 	
 %>  
 
@@ -35,7 +41,7 @@
 	//파일읽어오기  (DB접근시 수정할것임)
 	String titles ="";	
 	String contents ="";
-	String filename = "20201102001028.txt";
+	String filename = file_info[0].getFilename();
 	String saveDirectory = getServletContext().getRealPath("/") + "data" + File.separator + filename;
 	BufferedReader br = null;
 	try{
@@ -94,11 +100,10 @@ function deletePost(uid){
 	var r = confirm("삭제 하시겠습니까?");
 	
 	if(r){
-		location.href= 'deleteOk.do?post_content='+uid+'';
+		location.href= 'deleteOk.do?post_id='+uid+'';
 	}
 	
 }
-
 
 </script>
 
@@ -125,18 +130,13 @@ function deletePost(uid){
 	</div>
 	<hr>
 	<div class="text-right">
-	<button type="button"  onclick="location.href='deleteOk.do?post_content=15'">삭제</button>
-	<input type="button" value="수정" onclick="location.href='update.jsp'">
+	<button type="button"  onclick="deletePost(<%=post_id%>)">삭제</button>
+	<input type="button" value="수정" onclick="location.href='update.do?post_id=<%=post_id%>'">
 	
 	</div>
 	<hr>
 	
-	
-	
-	
-	
 	<!-- 댓글  -->
-	
 	<script>
 	function chkSubmit(){
 		frm = document.forms['comfrm'];
