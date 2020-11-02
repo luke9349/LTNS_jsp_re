@@ -3,6 +3,7 @@ package main.java.com.command.board;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,10 +22,9 @@ public class DefaultBoardCommand implements Board_Command {
 			request.setCharacterEncoding("UTF-8");
 
 			String category = "NOTICE";
-			String searchType = "titleAndContent";
-			String search = "";
+			String searchType = null;
+			String search = null;
 			int page = 1;
-			String contextPath = request.getServletContext().getRealPath("data");
 
 			if (request.getParameter("root") != null)
 				category = request.getParameter("root");
@@ -34,12 +34,17 @@ public class DefaultBoardCommand implements Board_Command {
 				search = URLDecoder.decode(request.getParameter("search"), "UTF-8");
 			if (request.getParameter("page") != null)
 				page = Integer.parseInt(request.getParameter("page"));
-			
+
 			ArrayList<BoardListDTO> list = null;
-			if (searchType != null)
-				list = new PostDAO(contextPath).getCategorySearchList(category, searchType, search, page);
-			else
-				list = new PostDAO(contextPath).getCategoryList(category, page);
+			if (searchType == null && search == null) {
+				list = new PostDAO().getCategoryList(category, page);
+				list = createJSONList(list);
+			} else {
+				list = new PostDAO().getCategorySearchList(category);
+				list = createJSONList(list);
+				list = createSearchList(list, searchType, search, page);
+			}
+
 			request.setAttribute("list", list);
 			responseJSON(request, response);
 
@@ -48,6 +53,68 @@ public class DefaultBoardCommand implements Board_Command {
 		} // end try
 
 	} // end execute
+
+	private ArrayList<BoardListDTO> createJSONList(ArrayList<BoardListDTO> list) {
+		ArrayList<BoardListDTO> result = new ArrayList<BoardListDTO>();
+
+		for (BoardListDTO dto : list) {
+			String content = 파일변환(dto.getPostContent());
+			dto.setPostContent(content);
+			result.add(dto);
+		}
+		return result;
+	}
+
+	private ArrayList<BoardListDTO> createSearchList(ArrayList<BoardListDTO> list, String searchType, String search,
+			int page) {
+		ArrayList<BoardListDTO> result = new ArrayList<BoardListDTO>();
+		ArrayList<BoardListDTO> temp = new ArrayList<BoardListDTO>();
+
+		for (BoardListDTO dto : list) {
+			String content = null;
+			switch (searchType) {
+			case "titleAndContent":
+				content = dto.getTitle() + dto.getPostContent();
+				break;
+			case "content":
+				content = dto.getPostContent();
+				break;
+			case "title":
+				content = dto.getTitle();
+				break;
+			} // end switch
+
+			if (searchMatches(content, search)) {
+				temp.add(dto);
+			} // end if
+
+		} // end for
+
+		int startNo = (page - 1) * 10 + 1;
+		int endNo = page * 10;
+
+		try {
+			for (int i = startNo; i <= endNo; i++) {
+				result.add(temp.get(i)); // 페이지 설정
+			} // end for
+		} catch (Exception e) {
+			return result;
+		} // end try
+
+		return result;
+	}
+
+	private boolean searchMatches(String content, String search) {
+		boolean result = false;
+		String[] searchArr = search.split(" ");
+		for (String string : searchArr) {
+			if (Pattern.matches(string, content)) {
+				result = true;
+				break;
+			} // end if
+		} // end for
+		return result;
+	}
 
 	@Override
 	public void responseJSON(HttpServletRequest request, HttpServletResponse response) {
