@@ -16,21 +16,19 @@ public class deleteCommend implements Command {
 		int cnt = 0;
 		WriteDAO dao = new WriteDAO();
 		
-		//int post_id = Integer.parseInt(request.getParameter("post_content"));
-		int post_id = 194;
-		
+		int requestsdata = Integer.parseInt(request.getParameter("post_content"));
 		
 			try {
-				cnt = dao.post_delete(post_id);
+				cnt = dao.post_delete(requestsdata);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println(requestsdata + "값얼마니?");
 			}		
 	
 		
 		request.setAttribute("deletePost", cnt);
+		System.out.println(requestsdata + "값얼마니?");
 		System.out.println("쿼리성공"+cnt);
-		
 		
 		
 		

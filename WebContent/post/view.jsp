@@ -134,7 +134,7 @@ function deletePost(uid){
 	</div>
 	<hr>
 	<div class="text-right">
-	<button type="button"  onclick="deletePost(<%=post_content%>)">삭제</button>
+	<button type="button"  onclick="location.href='deleteOk.do?post_content=<%= post_content%>'">삭제</button>
 	<input type="button" value="수정" onclick="location.href='update.jsp'">
 	
 	</div>
