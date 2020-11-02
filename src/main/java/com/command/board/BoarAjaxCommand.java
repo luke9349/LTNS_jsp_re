@@ -1,0 +1,47 @@
+package main.java.com.command.board;
+
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import main.java.com.command.Command;
+import main.java.com.command.mainpage.Mainpage_Add_NearestBoard_Command_By_AJAX;
+import main.java.com.command.mainpage.Mainpage_Command_do;
+
+public class BoarAjaxCommand implements Command {
+
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		try {
+			request.setCharacterEncoding("UTF-8");
+
+			String category = "NOTICE";
+			if (request.getParameter("root") != null)
+				category = request.getParameter("root");
+
+			Board_Command command = null;
+
+			switch (category) {
+			case "empathize":
+				command = new EmpathizeBoardCommand();
+				command.execute(request, response);
+				return;
+			case "viewcnt":
+				command = new ViewcntBoardCommand();
+				command.execute(request, response);
+				return;
+			default:
+				command = new DefaultBoardCommand();
+				command.execute(request, response);
+				return;
+			}
+
+		} catch (UnsupportedEncodingException e) {
+			System.out.println("request 인코딩 에러");
+			e.printStackTrace();
+		} // end try
+	} // end execute()
+
+}

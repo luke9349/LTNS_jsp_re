@@ -3,76 +3,109 @@ package main.java.com.post.beans;
 
 public class WriteDTO {
 
-	//회원
+/*		//회원
 		public int mm_id ;	//회원아이디
 		public String nickname ;	//회원 닉네임 
-		
+	*/
+	
 		// 게시글 
 		public int post_id ; // 게시글 고유번호 
 		public String title ; //제목 
+		public String writer;
 		public String category ; // 카테고리 
+		public String regdate ; // 날짜
+		public int post_contents;
+		public int viewCnt ; // 조회수 
 		
-		public  String regdate ; // 날짜 
-		public int viewCnt_contents ; // 조회수 
+	
+		
+		
+		
 		
 		
 		public WriteDTO() {
-			// TODO Auto-generated constructor stub
 		}
 		
 		
-		
-		
-		public WriteDTO(int mm_id, String nickname, int post_id, String title, String category, int viewCnt_contents) {
+
+		public WriteDTO(int post_id, String title, String writer, String category, int post_contents,
+				int viewCnt) {
 			super();
-			this.mm_id = mm_id;
-			this.nickname = nickname;
 			this.post_id = post_id;
 			this.title = title;
+			this.writer = writer;
 			this.category = category;
-			this.viewCnt_contents = viewCnt_contents;
+		
+			this.post_contents = post_contents;
+			this.viewCnt = viewCnt;
 		}
 
 
 
 
-		public int getMm_id() {
-			return mm_id;
-		}
-		public void setMm_id(int mm_id) {
-			this.mm_id = mm_id;
-		}
-		public String getNickname() {
-			return nickname;
-		}
-		public void setNickname(String nickname) {
-			this.nickname = nickname;
-		}
+
+
+
 		public int getPost_id() {
 			return post_id;
 		}
+
+
 		public void setPost_id(int post_id) {
 			this.post_id = post_id;
 		}
+
+
+		public String getTitle() {
+			return title;
+		}
+
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+
+//		public String getWriter() {
+//			return writer;
+//		}
+//
+//
+//		public void setWriter(String writer) {
+//			this.writer = writer;
+//		}
+
+
 		public String getCategory() {
 			return category;
 		}
+
+
 		public void setCategory(String category) {
 			this.category = category;
 		}
-		public String getRegdate() {
-			return regdate;
+
+
+		public int getPost_contents() {
+			return post_contents;
 		}
-		public void setRegdate(String regdate) {
-			this.regdate = regdate;
+
+
+		public void setPost_contents(int post_contents) {
+			this.post_contents = post_contents;
 		}
-		public int getViewCnt_contents() {
-			return viewCnt_contents;
+
+
+		public int getViewCnt() {
+			return viewCnt;
 		}
-		public void setViewCnt_contents(int viewCnt_contents) {
-			this.viewCnt_contents = viewCnt_contents;
+
+
+		public void setViewCnt(int viewCnt) {
+			this.viewCnt = viewCnt;
 		}
-		
+
+
 		public String getRegDate() {
 			//System.out.println("getRegdate() 호출");
 			return regdate;
@@ -83,14 +116,20 @@ public class WriteDTO {
 		}
 
 
-
-
 		@Override
 		public String toString() {
-			return String.format("WriteDTO [mm_id=" + mm_id + ", nickname=" + nickname + ", post_id=" + post_id + ", title=" + title
-					+ ", category=" + category + ", regdate=" + regdate + ", viewCnt_contents=" + viewCnt_contents
-					+ "]");
+			return "WriteDTO [post_id=" + post_id + ", title=" + title + ", writer="  + ", category=" + category
+					+ ", regdate=" + regdate + ", post_contents=" + post_contents + ", viewCnt=" + viewCnt + "]";
 		}
+
+
+
+
+	
+
+
+
+
 		
 		
 		

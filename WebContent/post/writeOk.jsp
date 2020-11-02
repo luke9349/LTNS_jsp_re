@@ -4,22 +4,18 @@
 <%@ page import="java.util.*" %>
 
 <%-- cos 라이브러리 --%>
-<%@ page import="com.oreilly.servlet.MultipartRequest" %>
-<%@ page import="com.oreilly.servlet.multipart.FileRenamePolicy" %>    
-<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 
 
 <%@ page import="java.text.SimpleDateFormat" %>
+ <%int cnt = (Integer) request.getAttribute("result"); 
  
- 
+ %>
  
  
  <%
  
  	String saveDirectory = getServletContext().getRealPath("datas");
  	String encoding = "utf-8";
- 	FileRenamePolicy policy = new DefaultFileRenamePolicy(); 
- 	
  	
  %>
  
@@ -58,9 +54,7 @@
                 System.out.println("저장되었습니다");
                 
                 %>
-                <script>
-                location.href="view.jsp";
-                </script>
+               
                 <% 
             }catch(IOException e){
                 out.println("저장 실패 : 파일에 데이터를 쓸 수 없습니다.");
@@ -75,9 +69,28 @@
             }
             }
 %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form name="writeokform" method="post" action="viewOk.do">
+<input type="hidden" name="real_filename" value="<%=saveDirectory%>"/>
+<input type="hidden" name="filename" value="<%=fName %>"/>
+<input type="hidden" name="filekind" value="txt">
+</form>
+ <script type="text/javascript">
+ window.onload = function(){
+	  document.forms['writeokform'].submit();
+ 
+ }
+</script>
 
-    
-    
+</body>
+</html>
+
     
     
     

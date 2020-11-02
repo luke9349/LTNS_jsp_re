@@ -3,6 +3,7 @@
 <%
 	String ctx = request.getContextPath();
 %>   
+
     
 <!DOCTYPE html>
 <html>
@@ -72,18 +73,21 @@ function chkSubmit(){
  
 </script>
 
+
+
 <body>
 	<div class="container">
 	   <div>
-		<form name="frm" action="writeOk.jsp" method="post" onsubmit="return chkSubmit()">
+		<form name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
 		        <tr >
 		      		<td class="text-center">
 		       		<select name="category">
-		       		<option value="movie" selected="selected"> 영화게시판 </option>
-		       		<option value="game"> 게임게시판 </option>
-		       		<option value="read">독서게시판  </option>
-		       		<option value="sport"> 스포츠게시판 </option>	
+		 			<option value="notice" selected="selected"> 공지사항 </option>
+		       		<option value="moview"> 영화 게시판 </option>
+		       		<option value="game"> 게임 게시판 </option>
+		       		<option value="book">도서 게시판  </option>
+		       		<option value="sport"> 운동 게시판 </option>	
 		       		</select>
 		       		</td>     
 		            <td>
@@ -104,6 +108,7 @@ function chkSubmit(){
 		            </td>
 		        </tr>
 				</table>
+				
 			</form>
 	  </div>
 	</div>

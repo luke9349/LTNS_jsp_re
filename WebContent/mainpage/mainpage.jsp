@@ -36,7 +36,7 @@
 		<jsp:include page="./components/board/empath_board.jsp"/>
 		<hr>
 		<jsp:include page="./components/board/nearest_board.jsp"/>
-	</div>
+	</main>
 	<jsp:include page="./components/footer/footer.jsp" />
 </body>
 </html>

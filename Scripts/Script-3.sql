@@ -17,6 +17,9 @@ VALUES
 SELECT * FROM  mm_table;
 
 select * from file_table;
+select * from post_table;
+
+
 
 
 
