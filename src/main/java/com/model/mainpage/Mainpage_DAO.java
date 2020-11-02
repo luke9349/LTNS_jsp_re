@@ -127,13 +127,12 @@ public class Mainpage_DAO implements DAO {
 	
 	
 	//String 매개변수를 받는 sql문으로 가져오기
-	public DTO[] selectBySQL(String sql, String ...stringParamForPstmt) throws SQLException {
+	public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException {
 		DTO [] arr=null;
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
-			for(int i=0;i<stringParamForPstmt.length+1;i++)
-				pstmt.setString(i+1, stringParamForPstmt[i]);
+			pstmt.setString(1, stringParamForPstmt);
 			
 			rs=pstmt.executeQuery();
 			arr=mkDTOs(rs);
@@ -144,5 +143,24 @@ public class Mainpage_DAO implements DAO {
 		}
 		return arr;
 	}//end - String 매개변수를 받는 sql문으로 가져오기	
+	
+	//String 매개변수를 받는 sql문으로 가져오기
+	public DTO[] selectBySQL(String sql, String ...stringParamForPstmt) throws SQLException {
+		DTO [] arr=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			for(int i=0;i<stringParamForPstmt.length;i++)
+				pstmt.setString(i+1, stringParamForPstmt[i]);
+			
+			rs=pstmt.executeQuery();
+			arr=mkDTOs(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return arr;
+	}//end - String 매개변수를 받는 sql문으로 가져오기
 	
 }
