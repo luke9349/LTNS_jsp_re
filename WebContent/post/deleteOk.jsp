@@ -3,6 +3,8 @@
     
 <% 
 	int cnt = (Integer)request.getAttribute("deletePost");
+	String datas = request.getParameter("post_content");
+	System.out.println(datas);
 %>
     
     

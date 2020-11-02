@@ -1,7 +1,8 @@
 package main.java.com.post.beans;
 
+import main.java.com.model.DTO;
 
-public class WriteDTO {
+public class WriteDTO implements DTO{
 
 /*		//회원
 		public int mm_id ;	//회원아이디

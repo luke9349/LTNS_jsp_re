@@ -1,6 +1,8 @@
 package main.java.com.post.beans;
 
-public class FileWriteDTO {
+import main.java.com.model.DTO;
+
+public class FileWriteDTO implements DTO{
 
 	//파일테이블 
 	public int file_id ;

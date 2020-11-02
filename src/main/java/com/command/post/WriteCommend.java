@@ -1,29 +1,124 @@
 package main.java.com.command.post;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
+import main.java.com.post.beans.FileWriteDAO;
 import main.java.com.post.beans.WriteDAO;
 
 public class WriteCommend implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+
+		// 1. 내용 파일화
+		String encoding = "utf-8";
+		String filePath =  null;
 		
 		
-		//글작성 
+		try {
+			request.setCharacterEncoding(encoding);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		} 
+		// request data
+		String title = request.getParameter("title"); // 요청에서, title, content라는 name을 가진 파라미터 리턴
+		String content = request.getParameter("content");
+		String saveDirectory = request.getServletContext().getRealPath("/") + "data";
+        String category = request.getParameter("category");
+		
+		
+		Date d = new Date();
+		SimpleDateFormat sm = new SimpleDateFormat("yyyyMMddHHmmss");
+
+		String fName = sm.format(d) + ".txt"; // DB연동이되면 UID값 추가할 예정
+
+		if (title.isEmpty() || content.isEmpty()) // 내용이없으면
+		{
+			try {
+				response.sendRedirect("write.jsp"); //복귀시키기
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("복귀실패");
+			}
+			
+		} else {
+			PrintWriter pw = null; //
+			try {
+				
+				File file = new File(saveDirectory);
+
+				if (!file.exists()) { // 디렉토리가 없으면 만들어줌
+					file.mkdirs();
+				}
+
+				filePath = saveDirectory + File.separator + fName; // 파일경로
+				// out.println(saveDirectory+"세이브디렉토리 <br>"+fName +"파일이름 <br>"+filePath+"파일패스");
+
+				// 내용저장객체 생성
+				pw = new PrintWriter(filePath);
+				pw.println("title" + title);
+				pw.println(content);
+				System.out.println("저장되었습니다sdfsf");
+				System.out.println("sdfj");
+			} catch (IOException e) {
+				
+				System.out.println("저장 실패 : 파일에 데이터를 쓸 수 없습니다.");
+			} finally {
+				try {
+					pw.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}// end else;
+		
+		
+		
+
+		//2.1 파일등록 
+		//파일 인설트 
+		int file_quert_cnt = 0;
+		FileWriteDAO filedao = new FileWriteDAO();
+
+		String filekind = "txt";
+		
+		if (fName != null && filePath != null) {
+			
+			
+			//System.out.println(filekind +"파일종류"+ filePath + "파일패스" + fName +"파일네임");
+			try {
+				file_quert_cnt = filedao.fileInsert(filekind, filePath, fName);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		request.setAttribute("fileOk", file_quert_cnt);
+		System.out.println("파일쿼리성공" + file_quert_cnt);
+				
+				
+		
+		
+		//2.글 등록  
+		
 		int cnt = 0;
 		WriteDAO dao = new WriteDAO();
-		String title = request.getParameter("title");//제목 
-		String category = request.getParameter("category"); //제목 
-		
 		if( title != null && title.trim().length() > 0) {
 			try {
-				cnt = dao.wr_insert(title, category);
-				
+				cnt = dao.wr_insert(title, category, file_quert_cnt);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -32,14 +127,6 @@ public class WriteCommend implements Command {
 		
 		request.setAttribute("result", cnt);
 		System.out.println("쿼리 결과 성공:" + cnt);
-		
-		
-	
-	
-
-		
-		
-		
 		
 		
 	}

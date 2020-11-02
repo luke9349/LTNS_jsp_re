@@ -43,6 +43,7 @@
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String today = formatter.format(new java.util.Date());
         realFileNm = today + UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
+        
         String rlFileNm = filePath + realFileNm;
         ///////////////// 서버에 파일쓰기 ///////////////// 
         InputStream is = request.getInputStream();

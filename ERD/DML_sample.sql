@@ -63,7 +63,7 @@ DELETE FROM file_table;
  * */
 --AI 활용
 INSERT INTO post_table(post_id,title,writer,category,regdate,post_contents,viewCnt)
-VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',회원id(mm_id)를입력하세요,'NOTICE',SYSTIMESTAMP,파일id(file_id)를입력하세요,0);
+VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',2,'NOTICE',SYSTIMESTAMP,SEQ_file_table_file_id.CURRVAL,0);
 
 INSERT INTO post_table(post_id,title,writer,category,regdate,post_contents,viewCnt)
 VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',3,'NOTICE',SYSTIMESTAMP,4,0);

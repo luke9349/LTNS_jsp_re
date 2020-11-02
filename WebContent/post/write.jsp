@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 	String ctx = request.getContextPath();
+	String saveDirectory =	getServletContext().getRealPath("/") + "data";
+	System.out.println(saveDirectory + "세이브디렉토리입니다.");
 %>   
 
     
@@ -108,6 +110,7 @@ function chkSubmit(){
 		            </td>
 		        </tr>
 				</table>
+				
 				
 			</form>
 	  </div>

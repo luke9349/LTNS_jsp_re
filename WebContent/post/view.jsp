@@ -11,11 +11,6 @@
     
 <%	//dao를 사용한 트랜잭션
 	WriteDTO[] arr = (WriteDTO[])request.getAttribute("views");
-	
-	
-	System.out.println(arr[0].getPost_contents());
-
-	
 	String title = arr[0].getTitle();
 	String name = "홍길동 "; // mm테이블에서 받을에정 
 	String date = arr[0].regdate;
@@ -25,12 +20,8 @@
 	
  	
 	
-	
 %>  
 
-     
-     
-     
      
     
 <%
@@ -134,7 +125,7 @@ function deletePost(uid){
 	</div>
 	<hr>
 	<div class="text-right">
-	<button type="button"  onclick="location.href='deleteOk.do?post_content=<%= post_content%>'">삭제</button>
+	<button type="button"  onclick="location.href='deleteOk.do?post_content=15'">삭제</button>
 	<input type="button" value="수정" onclick="location.href='update.jsp'">
 	
 	</div>
@@ -147,7 +138,6 @@ function deletePost(uid){
 	<!-- 댓글  -->
 	
 	<script>
-
 	function chkSubmit(){
 		frm = document.forms['comfrm'];
 		
