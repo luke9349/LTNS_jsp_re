@@ -1,6 +1,5 @@
 package main.java.com.command.board;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -15,10 +14,10 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import main.java.com.command.Command;
 import main.java.com.model.Post_Contents;
 import main.java.com.util.LogUtil;
-import test.JSONListDTO;
 import test.AjaxBoardListJSON;
 import test.BoardListDAO;
 import test.BoardListDTO;
+import test.JSONListDTO;
 
 public class BoarAjaxCommand implements Command, Board_Command {
 
@@ -57,12 +56,7 @@ public class BoarAjaxCommand implements Command, Board_Command {
 					HttpSession ssession = request.getSession();
 					ssession.setAttribute("messageType", "오류 메시지");
 					ssession.setAttribute("messageContent", "잘못된 접근입니다.");
-					try {
-						response.sendRedirect("board_list.do");
-						return;
-					} catch (IOException e1) {
-						LogUtil.error("[BoarAjaxCommand] [sendRedirect] " + e.getMessage());
-					}
+					return;
 				}
 			}
 

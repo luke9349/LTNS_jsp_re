@@ -12,10 +12,11 @@ import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class LogUtil {
 
 	public static void error(String message) {
-
+		
 		// String savePath = "/LTNS_jsp_re/src/main/java/com/log/error";
 		String savePath = "C:\\Users\\admin\\Desktop\\Park\\LTNS_jsp_re\\src\\main\\java\\com\\log\\error";
 
