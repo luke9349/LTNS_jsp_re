@@ -107,45 +107,65 @@ VALUES (post_id를넣어주세요, mm_id를넣어주세요);
 
 
 /*-----------------------------------메인페이지 관련-----------------------------------*/
-/*--공감수 순으로 뷰를 정렬하여,포스트 6개  가져오기--*/
-SELECT A.post_id AS post_id, B.title AS title, B.writer AS mm_id, B.category AS category, B.regdate AS regdate, B.post_contents AS post_contents
-FROM tot_post_view A LEFT OUTER JOIN post_table B
-ON A.post_id=B.post_id
-WHERE rownum <= 6
-ORDER BY A.empathize_cnt DESC
+/*--공감수 순으로 뷰를 정렬하여,포스트 3개  가져오기--*/
+SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt
+FROM tot_post_view V 
+LEFT OUTER JOIN post_table P
+ON V.post_id=P.post_id
+LEFT OUTER JOIN mm_table M
+ON P.writer=M.mm_id
+LEFT OUTER JOIN file_table F
+ON P.post_contents=F.file_id
+WHERE ROWNUM <= 3
+ORDER by V.empathize_cnt DESC
 ;
 
-/*--조회수 순으로 뷰를 정렬하여,포스트 3개  가져오기--*/
-SELECT post_id, title, writer AS mm_id, category, regdate, post_contents
-FROM post_table
-WHERE rownum <=3
-ORDER BY post_table.viewCnt DESC
-;				
+--viewCnt와 file_realname 뽑아야 한다!!
+/*--조회수 순으로 뷰를 정렬하여,포스트 6개  가져오기--*/
+SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt
+FROM tot_post_view V 
+LEFT OUTER JOIN post_table P
+ON V.post_id=P.post_id
+LEFT OUTER JOIN mm_table M
+ON P.writer=M.mm_id
+LEFT OUTER JOIN file_table F
+ON P.post_contents=F.file_id
+WHERE ROWNUM <= 6
+ORDER by P.viewcnt DESC
+;
+				
 
 /*--최신 순으로 포스트 5개 가져오기--*/
-SELECT post_id, title, writer AS mm_id, category, regdate, post_contents
-FROM post_table
-WHERE rownum <=5
-ORDER BY post_table.regdate DESC
-;	
+SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt
+FROM tot_post_view V 
+LEFT OUTER JOIN post_table P
+ON V.post_id=P.post_id
+LEFT OUTER JOIN mm_table M
+ON P.writer=M.mm_id
+LEFT OUTER JOIN file_table F
+ON P.post_contents=F.file_id
+WHERE ROWNUM <= 5
+ORDER by P.regdate DESC
+;
+
 
 /*--최신 순으로, n번째 이후, 다음 포스트 3개 가져오기 매개변수로 regdate 받을것!--*/
-SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents
-FROM post_table LEFT OUTER JOIN mm_table
-ON post_table.writer = mm_table.mm_id
-WHERE post_table.regdate<'2020-11-02 2:00:00' AND rownum <=5
-ORDER BY post_table.regdate DESC
+SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt
+FROM tot_post_view V 
+LEFT OUTER JOIN post_table P
+ON V.post_id=P.post_id
+LEFT OUTER JOIN mm_table M
+ON P.writer=M.mm_id
+LEFT OUTER JOIN file_table F
+ON P.post_contents=F.file_id
+WHERE P.regdate<'2020-11-02 2:00:00' AND rownum <=5
+ORDER BY P.regdate DESC
 ;
+
 
 
 /*--파일 가져오기--*/
 SELECT file_id, filekind, filename, real_filename
 FROM file_table
 WHERE file_id=?
-;
-
-/*--멤버 가져오기--*/
-SELECT	 mm_id, id, password, nickname, email, grade
-FROM mm_table
-WHERE mm_id=?
 ;

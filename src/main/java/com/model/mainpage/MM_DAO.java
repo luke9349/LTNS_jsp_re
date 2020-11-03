@@ -14,8 +14,8 @@ import main.java.com.model.DTO;
 
 public class MM_DAO implements DAO {
 	
-	public static final String SELECT_MM_BY_MM_ID="SELECT	 mm_id, id, password, nickname, email, grade" + 
-			"FROM mm_table" + 
+	public static final String SELECT_MM_BY_MM_ID="SELECT	 mm_id, id, password, nickname, email, grade " + 
+			"FROM mm_table " + 
 			"WHERE mm_id=?";
 
 	//DB 연결에 필요한 변수들
@@ -142,7 +142,20 @@ public class MM_DAO implements DAO {
 
 		@Override
 		public DTO[] selectBySQL(String sql, int integerParamForPstmt) throws SQLException {
-			return null;
+			DTO [] arr=null;
+			try {
+				pstmt=conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, integerParamForPstmt);
+				
+				rs=pstmt.executeQuery();
+				arr=mkDTOs(rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			return arr;
 		}
 
 
