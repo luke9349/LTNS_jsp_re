@@ -33,7 +33,7 @@ public class AjaxController extends HttpServlet {
 	protected void actionAjax(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
+		
 		// URL로부터 URI, ContextPath, Command 분리
 		String uri = request.getRequestURI();
 		String contextPath = request.getContextPath();

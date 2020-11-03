@@ -19,7 +19,6 @@ import test.JSONListDTO;
 import test.AjaxBoardListJSON;
 import test.BoardListDAO;
 import test.BoardListDTO;
-import test.TestQuery;
 
 public class BoarAjaxCommand implements Command, Board_Command {
 
@@ -36,12 +35,15 @@ public class BoarAjaxCommand implements Command, Board_Command {
 			request.setCharacterEncoding("UTF-8");
 
 			String category = "NOTICE";
+			String type = "list";
 			String searchType = null;
 			String search = null;
 			int page = 1;
 
 			if (request.getParameter("root") != null)
 				category = request.getParameter("root");
+			if (request.getParameter("type") != null)
+				type = request.getParameter("type");
 			if (request.getParameter("searchType") != null)
 				searchType = request.getParameter("searchType");
 			if (request.getParameter("search") != null)
@@ -53,10 +55,8 @@ public class BoarAjaxCommand implements Command, Board_Command {
 					e.printStackTrace();
 					LogUtil.error("[BoarAjaxCommand] [page] " + e.getMessage());
 					HttpSession ssession = request.getSession();
-					System.out.println(ssession);
 					ssession.setAttribute("messageType", "오류 메시지");
 					ssession.setAttribute("messageContent", "잘못된 접근입니다.");
-					System.out.println((String) request.getSession().getAttribute("messageType"));
 					try {
 						response.sendRedirect("board_list.do");
 						return;
@@ -72,18 +72,18 @@ public class BoarAjaxCommand implements Command, Board_Command {
 				if (inspectCategory(category)) {
 					list = new BoardListDAO().getAllList(category);
 					result = contentToText(list);
-					result = createSearchList(result, searchType, search, page);
+					result = createSearchList(result, searchType, search, page, type);
 				} else {
 					list = new BoardListDAO().getCategoryAllList(category);
 					result = contentToText(list);
-					result = createSearchList(result, searchType, search, page);
+					result = createSearchList(result, searchType, search, page, type);
 				} // end if
 			} else {
 				if (inspectCategory(category)) {
-					list = new BoardListDAO().getList(category, page);
+					list = new BoardListDAO().getList(category, type, page);
 					result = contentToText(list);
 				} else {
-					list = new BoardListDAO().getCategoryList(category, page);
+					list = new BoardListDAO().getCategoryList(category, type, page);
 					result = contentToText(list);
 				} // end if
 			} // end if
@@ -105,7 +105,6 @@ public class BoarAjaxCommand implements Command, Board_Command {
 		}
 		return result;
 	}
-
 
 	private boolean inspectCategory(String category) {
 		if (category.toLowerCase().equals("empathize") || category.toLowerCase().equals("viewcnt")) {
@@ -139,21 +138,19 @@ public class BoarAjaxCommand implements Command, Board_Command {
 
 			result.add(dto);
 
-			System.out.println(dto);
-
 		} // end for
 		return result;
 	} // end contentToText()
 
 	private ArrayList<JSONListDTO> createSearchList(ArrayList<JSONListDTO> list, String searchType, String search,
-			int page) {
+			int page, String type) {
 		ArrayList<JSONListDTO> result = new ArrayList<JSONListDTO>();
 		ArrayList<JSONListDTO> temp = new ArrayList<JSONListDTO>();
 		for (JSONListDTO dto : list) {
 			String content = null;
 			switch (searchType) {
 			case "titleAndContent":
-				content = dto.getTitle() + dto.getContentsText();
+				content = dto.getTitle() + " " + dto.getContentsText();
 				break;
 			case "content":
 				content = dto.getContentsText();
@@ -163,19 +160,25 @@ public class BoarAjaxCommand implements Command, Board_Command {
 				break;
 			} // end switch
 
-			if (searchMatches(content, search)) {
+			if (searchMatches(content, search))
 				temp.add(dto);
-			} // end if
 
 		} // end for
 
 		this.count = temp.size();
 
-		int startNo = (page - 1) * 10 + 1;
-		int endNo = page * 10;
+		int startNo = 1;
+		int endNo = 1;
+		if (type.equals("list")) {
+			startNo = (page - 1) * 10 + 1;
+			endNo = page * 10;
+		} else {
+			startNo = (page - 1) * 8 + 1;
+			endNo = page * 8;
+		}
 
 		try {
-			for (int i = startNo; i <= endNo; i++) {
+			for (int i = startNo - 1; i <= endNo - 1; i++) {
 				result.add(temp.get(i)); // 페이지 설정
 			} // end for
 		} catch (Exception e) {
@@ -188,8 +191,8 @@ public class BoarAjaxCommand implements Command, Board_Command {
 		boolean result = false;
 		String[] searchArr = search.split(" ");
 		for (String string : searchArr) {
-			if (Pattern.matches(string, content)) {
-				return result = true;
+			if (Pattern.matches(".*" + string + ".*".toLowerCase(), content.toLowerCase())) {
+				return true;
 			} // end if
 		} // end for
 		return result;
@@ -207,14 +210,13 @@ public class BoarAjaxCommand implements Command, Board_Command {
 			result.setCount(0);
 		} else {
 			result.setStatus("OK");
-			result.setCount(list.size());
+			result.setCount(this.count);
 			result.setList(list);
 		} // end if
 
 		try {
 			JsonMapper mapper = new JsonMapper();
 			String json = mapper.writeValueAsString(result);
-			System.out.println(json);
 			response.setContentType("application/json; charset=UTF-8");
 			response.getWriter().write(json);
 		} catch (Exception e) {

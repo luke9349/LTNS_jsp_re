@@ -13,7 +13,6 @@
 			</tr>
 		</thead>
 		<tbody id="jsonList">
-			
 		</tbody>
 	</table>
 </div>

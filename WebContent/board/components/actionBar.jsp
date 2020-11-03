@@ -17,6 +17,7 @@
 	
 	System.out.println(url);
 %> 
+<a href="<%=request.getContextPath() %>/post/write.do" class="btn btn-primary">글쓰기</a>
 <div class="actionBar py-3">
   <div class="actionBtns">
     <a class="actionBtn btn" href="board_list.do?type=list<%=url%>">
@@ -29,8 +30,9 @@
       <i class="far fa-address-card">post</i>
     </a>
   </div>
-  <form id="searchForm" name="searchForm" method="get">
-    <div class="search__input input-group flex-nowrap">
+  <div class="actionbar__wrapper">
+  <form class="form-inline" id="searchForm" name="searchForm" method="get">
+    <div class="input-group flex-nowrap">
       <div class="input-group-prepend">
         <select name="searchType" id="searchType">
           <option value="title" selected>제목</option>
@@ -44,4 +46,5 @@
       </div>
     </div>
   </form>
-</div>
+  </div>
+  </div>

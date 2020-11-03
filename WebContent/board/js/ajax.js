@@ -1,50 +1,94 @@
 import { initPagination } from './pagination.js';
 
-export const getData = (params) => {
-  const url = 'board_list.ajax?';
-	let query = '';
-  let i = 0;
-  for (let key in params) {
-    if (params[key]) {
-      if (i === 0) {
-        query += key + '=';
-        query += params[key];
-        i++;
-continue;
-      }
-      query += '&' + key + '=';
-      query += params[key];
-    }
-  }
+let params = null;
+const url = 'board_list.ajax?';
+let query = null;
+let contextPath = null;
 
-	console.log(query);
+const createList = (json) => {
+  if (json.data === null) return;
+  let table = '';
+  json.data.forEach((item) => {
+    table += '<tr>';
+    table += `<td class="text-center table__no">${item.postId}</td>`;
+    table += `<td class="text-center table__no"><a class="list__link" href="${contextPath}/post/view.do?${query}&post_id=${item.postId}">${item.title}</a></td>`;
+    table += `<td class="text-center table__user">${item.nickName}</td>`;
+    table += `<td class="text-center table__date">${item.regdate}</td>`;
+    table += `<td class="text-center table__views">${item.viewcnt}</td>`;
+    table += `<td class="text-center table__hit">${item.empathizeCnt}</td>`;
+    table += '</tr>';
+  });
+  $('#jsonList').html(table);
+};
 
-  const createList = (json) => {
-    if (json.data === null) return;
-    console.log(json);
-    let table = '';
-    json.data.forEach((item) => {
-      table += '<tr>';
-      table += `<td class="text-center table__no">${item.postId}</td>`;
-      table += `<td class="text-center table__no"><a class="list__link" href="${getContextPath()}/post/view.do?${query}&post_id=${item.postId}">${item.title}</a></td>`;
-      table += `<td class="text-center table__user">${item.nickName}</td>`;
-      table += `<td class="text-center table__date">${item.regdate}</td>`;
-      table += `<td class="text-center table__views">${item.viewcnt}</td>`;
-      table += `<td class="text-center table__hit">${item.empathizeCnt}</td>`;
-      table += '</tr>';
-    });
-    $('#jsonList').html(table);
-  };
+const createAlbum = (json) => {
+  if (json.data === null) return;
+  let post = '';
+  json.data.forEach((item) => {
+    const img = item.thumbnailPath
+      ? item.thumbnailPath
+      : '../images/default_image.png';
+    post += `<div class="card-wrapper" onclick=location.href="${contextPath}/post/view.do?${query}&post_id=${item.postId}">`;
+    post += `<div class="card">`;
+    post += `<div class="card-body">`;
+    post += `<h5 class="card-title">${item.title}</h5>`;
+    post += `<div class="card-user">${item.nickName}</div>`;
+    post += `<div class="card-text">${item.contentsText}</div>`;
+    post += `<div class="info__boardDate">${item.regdate}</div>`;
+    post += `<span class="info__boardViews">`;
+    post += `<i class="far fa-eye"></i>`;
+    post += `<span>${item.viewcnt}</span>`;
+    post += `</span>`;
+    post += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
+    post += `<span class="info__boardHits">`;
+    post += `<i class="far fa-thumbs-up"></i>`;
+    post += `<span>${item.empathizeCnt}</span>`;
+    post += `</span>`;
+    post += `</div>`;
+    post += `<div class="card-img-top">`;
+    post += `<img src=${img} alt="userImage">`;
+    post += `</div>`;
+    post += `</div>`;
+    post += `</div>`;
+  });
+  $('#jsonAlbum').html(post);
+};
 
-  const createAlbum = (json, params) => {
-    console.log(json, params);
-  };
+const createPost = (json) => {
+  if (json.data === null) return;
+  let post = '';
+  json.data.forEach((item) => {
+    const img = item.thumbnailPath
+      ? item.thumbnailPath
+      : '../images/default_image.png';
+    post += `<div class="card-wrapper" onclick=location.href="${contextPath}/post/view.do?${query}&post_id=${item.postId}">`;
+    post += `<div class="card">`;
+    post += `<div class="card-body">`;
+    post += `<h5 class="card-title">${item.title}</h5>`;
+    post += `<div class="card-user">${item.nickName}</div>`;
+    post += `<div class="card-text">${item.contentsText}</div>`;
+    post += `<div class="info__boardDate">${item.regdate}</div>`;
+    post += `<span class="info__boardViews">`;
+    post += `<i class="far fa-eye"></i>`;
+    post += `<span>${item.viewcnt}</span>`;
+    post += `</span>`;
+    post += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
+    post += `<span class="info__boardHits">`;
+    post += `<i class="far fa-thumbs-up"></i>`;
+    post += `<span>${item.empathizeCnt}</span>`;
+    post += `</span>`;
+    post += `</div>`;
+    post += `<div class="card-img-top">`;
+    post += `<img src=${img} alt="userImage">`;
+    post += `</div>`;
+    post += `</div>`;
+    post += `</div>`;
+  });
+  $('#jsonPost').html(post);
+};
 
-  const createPost = (json, params) => {
-    console.log(json, params);
-  };
-
-  fetch(url)
+const requestAjax = () => {
+  fetch(url + query)
     .then((response) => response.json())
     .then((json) => {
       $('#loading').removeClass('hide');
@@ -61,13 +105,42 @@ continue;
           createPost(json, params);
           break;
       }
-      initPagination(params, json.count);
+      if (params.type !== 'post') initPagination(params, json.count);
       $('#loading').addClass('hide');
       $('#main').removeClass('hide');
     });
 };
 
-const getContextPath = () => {
-  const hostIndex = location.href.indexOf( location.host ) + location.host.length;
-  return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-}
+export const getContextPath = () => {
+  //let contextPath = null;
+  const hostIndex = location.href.indexOf(location.host) + location.host.length;
+  return location.href.substring(
+    hostIndex,
+    location.href.indexOf('/', hostIndex + 1)
+  );
+};
+
+export const createQuery = () => {
+  let i = 0;
+  let query = '';
+  for (let key in params) {
+    if (params[key]) {
+      if (i === 0) {
+        query += key + '=';
+        query += params[key];
+        i++;
+        continue;
+      }
+      query += '&' + key + '=';
+      query += params[key];
+    }
+  }
+  return query;
+};
+
+export const getDate = (initialParams) => {
+  params = initialParams;
+  query = createQuery();
+  contextPath = getContextPath();
+  requestAjax();
+};
