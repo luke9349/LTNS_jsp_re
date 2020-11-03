@@ -14,8 +14,6 @@ public class Post_Contents {
 	private String thumbnailPath;
 	
 	private String contents;
-	Post_Contents(){
-	}
 	
 	public Post_Contents(String filePath){
 		File file=new File(filePath);
@@ -47,7 +45,7 @@ public class Post_Contents {
 					}
 				}
 				//replaceAll("<img.*","").replaceAll("\" title=.*\">","") 이미지 태그 제거용
-				afterStr=beforeStr.replaceAll("<img.*\" title=.*\">","").replaceAll("<br.*>", "\n").replaceAll("<.*>", "").replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&nbsp;"," ").replaceAll("\n","");
+				afterStr=beforeStr.replaceAll("<img.*","").replaceAll(" title=.*\"clear:both;\">","").replaceAll("<br.*>", "\n").replaceAll("<[^>]*>", "").replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&nbsp;"," ");
 				_contentsText.append(afterStr);
 			}//end while
 			br.close();
