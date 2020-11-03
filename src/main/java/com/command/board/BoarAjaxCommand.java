@@ -66,27 +66,24 @@ public class BoarAjaxCommand implements Command, Board_Command {
 				}
 			}
 
-			String sql = null;
 			ArrayList<BoardListDTO> list = null;
 			ArrayList<JSONListDTO> result = null;
 			if (inspectSearch(searchType, search)) {
-				sql = queryToSearch(category);
 				if (inspectCategory(category)) {
-					list = new BoardListDAO().getAllList(sql);
+					list = new BoardListDAO().getAllList(category);
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page);
 				} else {
-					list = new BoardListDAO().getCategoryAllList(sql, category);
+					list = new BoardListDAO().getCategoryAllList(category);
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page);
 				} // end if
 			} else {
-				sql = queryToCategory(category);
 				if (inspectCategory(category)) {
-					list = new BoardListDAO().getList(sql, page);
+					list = new BoardListDAO().getList(category, page);
 					result = contentToText(list);
 				} else {
-					list = new BoardListDAO().getCategoryList(sql, category, page);
+					list = new BoardListDAO().getCategoryList(category, page);
 					result = contentToText(list);
 				} // end if
 			} // end if
@@ -109,30 +106,9 @@ public class BoarAjaxCommand implements Command, Board_Command {
 		return result;
 	}
 
-	private String queryToCategory(String category) {
-		switch (category) {
-		case "EMPATHIZE":
-			return TestQuery.SELECT_POST_BY_EMAPTHIZE_PAGE;
-		case "VIEWCNT":
-			return TestQuery.SELECT_POST_BY_VIEWCNT_PAGE;
-		default:
-			return TestQuery.SELECT_POST_BY_CATEGORY_PAGE;
-		}
-	}
-
-	private String queryToSearch(String category) {
-		switch (category) {
-		case "EMPATHIZE":
-			return TestQuery.SELECT_POST_BY_EMPATHIZE_ALL;
-		case "VIEWCNT":
-			return TestQuery.SELECT_POST_BY_VIEWCNT_ALL;
-		default:
-			return TestQuery.SELECT_POST_BY_CATEGORY_ALL;
-		}
-	}
 
 	private boolean inspectCategory(String category) {
-		if (category.equals("empathize") || category.equals("viewcnt")) {
+		if (category.toLowerCase().equals("empathize") || category.toLowerCase().equals("viewcnt")) {
 			return true;
 		} else {
 			return false;
@@ -153,6 +129,7 @@ public class BoarAjaxCommand implements Command, Board_Command {
 			dto.setPostId(temp.getPostId());
 			dto.setTitle(temp.getTitle());
 			dto.setWriter(temp.getWriter());
+			dto.setNickName(temp.getNickName());
 			dto.setCategory(temp.getCategory());
 			dto.setRegdate(temp.getRegdate());
 			dto.setEmpathizeCnt(temp.getEmpathizeCnt());

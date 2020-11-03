@@ -7,8 +7,8 @@ const changeNavActive = () => {
     'BOOK',
     'SPORTS',
     'GAME',
-    'empathize',
-    'viewcnt',
+    'EMPATHIZE',
+    'VIEWCNT',
   ];
   const navItems = Array.from(document.querySelectorAll('.nav-item'));
   navItems[roots.indexOf(root)].classList.add('active');

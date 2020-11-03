@@ -23,9 +23,9 @@ public class ViewCommend implements Command {
 		FileWriteDAO filedao = new FileWriteDAO();
 		int post_contents ;
 		//post_id를 통한 글보기 
-		//int post_id = Integer.parseInt(request.getParameter("post_id"));
+		int post_id = Integer.parseInt(request.getParameter("post_id"));
 
-		int post_id = 336;
+		//int post_id = 336;
 		
 		if(post_id != 0) {
 			try {

@@ -40,10 +40,10 @@
 	           		<a class="nav-link" href="board_list.do?root=GAME">게임게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="board_list.do?root=empathize">공감게시판</a>
+	           		<a class="nav-link" href="board_list.do?root=EMPATHIZE">공감게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="board_list.do?root=viewcnt">조회수게시판</a>
+	           		<a class="nav-link" href="board_list.do?root=VIEWCNT">조회수게시판</a>
 	         	</li>
 	       	</ul>
 

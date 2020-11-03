@@ -33,10 +33,10 @@
 	<c:when test="${root eq 'GAME' }">		
 		<% topic = "게임게시판"; %>											
 	</c:when>
-	<c:when test="${root eq 'empathize' }">					
+	<c:when test="${root eq 'EMPATHIZE' }">					
 		<% topic = "공감게시판"; %>												
 	</c:when>
-	<c:when test="${root eq 'viewcnt' }">		
+	<c:when test="${root eq 'VIEWCNT' }">		
 		<% topic = "조회수게시판"; %>														
 	</c:when>
 </c:choose>	
@@ -65,6 +65,7 @@
 	<jsp:param value="<%=URLEncoder.encode(title, \"UTF-8\") %>" name="title"/>
 </jsp:include>
 <jsp:include page="./components/lib.jsp"></jsp:include>
+<link rel="stylesheet" href="./css/styles.css" />
 <c:if test="${type eq 'album'}">
 	<link rel="stylesheet" href="./css/album.css"/>
 </c:if>
@@ -74,12 +75,11 @@
 <script async defer type="module" src="./js/boardMain.js"></script>
 <script async defer src="../header/js/header.js"></script>
 <script async defer src="../modal/js/modal.js"></script>
-
 </head>
 <body class="container">
 <jsp:include page="../header/component/header.jsp" />
-<main class="my-2">
-	<div class="board__title"><%=topic %></div>
+<main id="main" class="my-2 hide">
+	<div class="board__title">#<%=topic %></div>
 	<jsp:include page="./components/actionBar.jsp">
 		<jsp:param value="${root }" name="root"/>
 	</jsp:include>
@@ -98,6 +98,7 @@
 	session.removeAttribute("messageContent");
 %>
 </main>
+<jsp:include page="../loading/component/loading.jsp" />
 <jsp:include page="../footer/component/footer.jsp" />
 </body>
 </html>

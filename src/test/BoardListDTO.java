@@ -4,6 +4,7 @@ public class BoardListDTO {
 	private long postId; // 게시글 고유 번호
 	private String title; // 게시글 제목
 	private String writer; // 작성자
+	private String nickName; // 닉네임
 	private String category; // 카테고리
 	private String regdate; // 작성일
 	private String realFilePath; // 내용
@@ -33,6 +34,14 @@ public class BoardListDTO {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getCategory() {
@@ -85,9 +94,9 @@ public class BoardListDTO {
 
 	@Override
 	public String toString() {
-		return "LastDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", category=" + category
-				+ ", regdate=" + regdate + ", realFilePath=" + realFilePath + ", empathizeCnt=" + empathizeCnt
-				+ ", viewcnt=" + viewcnt + ", dataLength=" + dataLength + "]";
+		return "BoardListDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", nickName=" + nickName
+				+ ", category=" + category + ", regdate=" + regdate + ", realFilePath=" + realFilePath
+				+ ", empathizeCnt=" + empathizeCnt + ", viewcnt=" + viewcnt + ", dataLength=" + dataLength + "]";
 	}
 
 }

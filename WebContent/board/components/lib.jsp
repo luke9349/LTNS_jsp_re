@@ -4,4 +4,3 @@
 <script src="../lib/jquery.js"></script>
 <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/5d1d5aa1e7.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="./css/styles.css" />
