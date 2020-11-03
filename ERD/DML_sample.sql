@@ -108,29 +108,23 @@ VALUES (post_id를넣어주세요, mm_id를넣어주세요);
 
 /*-----------------------------------메인페이지 관련-----------------------------------*/
 /*--공감수 순으로 뷰를 정렬하여,포스트 6개  가져오기--*/
-SELECT A.post_id, B.title, B.writer, B.category, B.regdate, B.post_contents
-FROM tot_post_view A LEFT OUTER JOIN (--post table과 mm table을 이용한 id 가져오기
-										SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents
-										FROM post_table LEFT OUTER JOIN mm_table
-										ON post_table.writer = mm_table.mm_id 
-					 															) B
+SELECT A.post_id AS post_id, B.title AS title, B.writer AS mm_id, B.category AS category, B.regdate AS regdate, B.post_contents AS post_contents
+FROM tot_post_view A LEFT OUTER JOIN post_table B
 ON A.post_id=B.post_id
 WHERE rownum <= 6
 ORDER BY A.empathize_cnt DESC
 ;
 
 /*--조회수 순으로 뷰를 정렬하여,포스트 3개  가져오기--*/
-SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents
-FROM post_table LEFT OUTER JOIN mm_table
-ON post_table.writer = mm_table.mm_id
+SELECT post_id, title, writer AS mm_id, category, regdate, post_contents
+FROM post_table
 WHERE rownum <=3
 ORDER BY post_table.viewCnt DESC
 ;				
 
 /*--최신 순으로 포스트 5개 가져오기--*/
-SELECT post_table.post_id AS post_id, post_table.title AS title, mm_table.id AS writer, post_table.category AS category, post_table.regdate AS regdate, post_table.post_contents AS post_contents
-FROM post_table LEFT OUTER JOIN mm_table
-ON post_table.writer = mm_table.mm_id
+SELECT post_id, title, writer AS mm_id, category, regdate, post_contents
+FROM post_table
 WHERE rownum <=5
 ORDER BY post_table.regdate DESC
 ;	
@@ -148,4 +142,10 @@ ORDER BY post_table.regdate DESC
 SELECT file_id, filekind, filename, real_filename
 FROM file_table
 WHERE file_id=?
+;
+
+/*--멤버 가져오기--*/
+SELECT	 mm_id, id, password, nickname, email, grade
+FROM mm_table
+WHERE mm_id=?
 ;
