@@ -26,7 +26,9 @@ public class ViewCommend implements Command {
 		//int post_id = Integer.parseInt(request.getParameter("post_id"));
 		//int writer_id = Integer.parseInt(request.getParameter("writer"));
 		int writer =2;
-		int post_id = 336;
+		int post_id = Integer.parseInt(request.getParameter("post_id"));
+
+		//int post_id = 336;
 		
 		if(post_id != 0) {
 			try {

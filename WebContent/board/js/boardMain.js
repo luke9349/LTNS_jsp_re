@@ -1,10 +1,13 @@
 import { initParams } from './handleParams.js';
-import { initActionbar } from './actionbar.js';
-import { initPagination } from './pagination.js';
+import { initActionbar } from './actionBar.js';
+import { getData } from './ajax.js';
 
 const params = initParams();
 
 initActionbar(params);
-initPagination(params);
+getData(params);
 
-console.log(params);
+
+
+
+

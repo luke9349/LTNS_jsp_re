@@ -1,5 +1,6 @@
 const pagination = document.getElementById('pagination');
 let params = null;
+let maxPagination = null;
 
 const createPaginationIcon = (className) => {
   const i = document.createElement('i');
@@ -36,7 +37,6 @@ const handledPagination = () => {
   const startPagination = Math.floor((page - 1) / 10) * 10 + 1;
   // let endPagination = (Math.floor((page - 1) / 10) + 1) * 10;
   let endPagination = startPagination + 9;
-  let maxPagination = 104;
   if (endPagination > maxPagination) endPagination = maxPagination;
 
   if (startPagination === 1) {
@@ -114,7 +114,8 @@ const handledPagination = () => {
   }
 };
 
-export const initPagination = (initialParams) => {
+export const initPagination = (initialParams, datalength) => {
   params = initialParams;
+  maxPagination = Math.ceil(datalength / 10);
   handledPagination();
 };

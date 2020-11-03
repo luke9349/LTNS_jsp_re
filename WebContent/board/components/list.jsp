@@ -12,23 +12,8 @@
 				<th class="text-center table__hit">추천</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td class="text-center table__no">1</td>
-				<td class="table__title">홍길동</td>
-				<td class="text-center table__user">admin</td>
-				<td class="text-center table__date">2020-10-26 (오후)4:26</td>
-				<td class="text-center table__views">10</td>
-				<td class="text-center table__hit">10</td>
-			</tr>
-			<tr>
-				<td class="text-center table__no">2</td>
-				<td class="table__title">asdjhnasadasdasdsfjkasda</td>
-				<td class="text-center table__user">asdasdasdasd</td>
-				<td class="text-center table__date">2020-10-26 (오후)4:26</td>
-				<td class="text-center table__views">10</td>
-				<td class="text-center table__hit">10</td>
-			</tr>
+		<tbody id="jsonList">
+			
 		</tbody>
 	</table>
 </div>

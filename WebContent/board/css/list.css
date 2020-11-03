@@ -32,3 +32,7 @@ table {
 	min-width: 12.5rem;
 	width: 12.5rem;
 }
+
+.list__link:hover {
+	text-decoration: none;
+}

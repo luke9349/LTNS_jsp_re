@@ -6,13 +6,15 @@
 
 @import './list.css';
 
-@import './nav.css';
+@import '../../header/css/header.css';
 
-@import './footer.css';
+@import '../../footer/css/footer.css';
 
 @import './actionBar.css';
 
 @import './pagination.css';
+
+@import '../../loading/css/loading.css';
 
 * {
 	box-sizing: border-box;
@@ -29,4 +31,8 @@ body {
 
 main {
 	flex: 1;
+}
+
+main.hied {
+	display: none;
 }

@@ -5,6 +5,7 @@ public class JSONListDTO {
 	private long postId; // 게시글 고유 번호
 	private String title; // 게시글 제목
 	private String writer; // 작성자
+	private String nickName; // 닉네임
 	private String category; // 카테고리
 	private String regdate; // 작성일
 	private String contentsText; // 컨텐트 텍스트
@@ -34,6 +35,14 @@ public class JSONListDTO {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getCategory() {
@@ -86,9 +95,9 @@ public class JSONListDTO {
 
 	@Override
 	public String toString() {
-		return "JSONListDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", category=" + category
-				+ ", regdate=" + regdate + ", contentsText=" + contentsText + ", thumbnailPath=" + thumbnailPath
-				+ ", empathizeCnt=" + empathizeCnt + ", viewcnt=" + viewcnt + "]";
+		return "JSONListDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", nickName=" + nickName
+				+ ", category=" + category + ", regdate=" + regdate + ", contentsText=" + contentsText
+				+ ", thumbnailPath=" + thumbnailPath + ", empathizeCnt=" + empathizeCnt + ", viewcnt=" + viewcnt + "]";
 	}
 
 }
