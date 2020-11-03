@@ -109,7 +109,7 @@ function chkSubmit(){
 		       		</select>
 		       		</td>     
 		            <td>
-		            <input type="text" id="title" name="title" style="width:100%"/>
+		            <input class="tests" type="text" id="title" name="title" style="width:100%"/>
 		            </td>
 		        </tr>
 		          <tr class="mt-2 text-right">
