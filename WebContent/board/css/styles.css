@@ -6,9 +6,9 @@
 
 @import './list.css';
 
-@import './nav.css';
+@import '../../header/css/header.css';
 
-@import './footer.css';
+@import '../../footer/css/footer.css';
 
 @import './actionBar.css';
 

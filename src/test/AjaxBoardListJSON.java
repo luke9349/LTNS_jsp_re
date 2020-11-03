@@ -1,4 +1,4 @@
-package park.지울꺼얌;
+package test;
 
 import java.util.List;
 

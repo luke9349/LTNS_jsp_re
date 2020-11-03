@@ -72,11 +72,12 @@
 	<link rel="stylesheet" href="./css/post.css"/>
 </c:if>
 <script async defer type="module" src="./js/boardMain.js"></script>
-<script async defer src="./js/nav.js"></script>
+<script async defer src="../header/js/header.js"></script>
+<script async defer src="../modal/js/modal.js"></script>
 
 </head>
 <body class="container">
-<jsp:include page="./components/nav.jsp" />
+<jsp:include page="../header/component/header.jsp" />
 <main class="my-2">
 	<div class="board__title"><%=topic %></div>
 	<jsp:include page="./components/actionBar.jsp">
@@ -86,7 +87,17 @@
 	<c:if test="${type ne post}">
 		<jsp:include page="./components/pagination.jsp" />
 	</c:if>
+<jsp:include page="../modal/component/modal.jsp" />
+<c:if test="${messageType != null && messageContent != null}">
+	<script>
+		showModal('${messageType}', '${messageContent}');
+	</script>
+</c:if>
+<%
+	session.removeAttribute("messageType");
+	session.removeAttribute("messageContent");
+%>
 </main>
-<jsp:include page="./components/footer.jsp" />
+<jsp:include page="../footer/component/footer.jsp" />
 </body>
 </html>
