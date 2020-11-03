@@ -16,10 +16,16 @@ public interface DAO {
 	// 0. sql => ResultSet : sql 문장을 매개변수로 받아, rs를 디비로 부터 받아내고, mkDTO로 rs를 넘겨서 DTO를 반환받으세요!
 	DTO[] selectBySQL(String sql) throws SQLException;
 	
-	// 0-1. sql => ResultSet : String 매개변수를 받는 sql문으로 가져오기
+	// 0-1-1. sql => ResultSet : Integer 매개변수를 받는 sql문으로 가져오기
+	public DTO[] selectBySQL(String sql, int integerParamForPstmt) throws SQLException;
+
+	// 0-1-2. sql => ResultSet : Integer 매개변수들을 받는 sql문으로 가져오기
+	public DTO[] selectBySQL(String sql, int ...integerParamForPstmt) throws SQLException;
+	
+	// 0-2-1. sql => ResultSet : String 매개변수를 받는 sql문으로 가져오기
 	public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException;
 	
-	// 0-2. sql => ResultSet : String 매개변수들을 받는 sql문으로 가져오기
+	// 0-2-2. sql => ResultSet : String 매개변수들을 받는 sql문으로 가져오기
 	public DTO[] selectBySQL(String sql, String ...stringParamForPstmt) throws SQLException;
 
 }

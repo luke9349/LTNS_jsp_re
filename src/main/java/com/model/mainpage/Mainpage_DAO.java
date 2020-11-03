@@ -127,6 +127,7 @@ public class Mainpage_DAO implements DAO {
 	
 	
 	//String 매개변수를 받는 sql문으로 가져오기
+	@Override
 	public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException {
 		DTO [] arr=null;
 		try {
@@ -145,6 +146,7 @@ public class Mainpage_DAO implements DAO {
 	}//end - String 매개변수를 받는 sql문으로 가져오기	
 	
 	//String 매개변수를 받는 sql문으로 가져오기
+	@Override
 	public DTO[] selectBySQL(String sql, String ...stringParamForPstmt) throws SQLException {
 		DTO [] arr=null;
 		try {
@@ -162,5 +164,17 @@ public class Mainpage_DAO implements DAO {
 		}
 		return arr;
 	}//end - String 매개변수를 받는 sql문으로 가져오기
+
+
+	@Override
+	public DTO[] selectBySQL(String sql, int integerParamForPstmt) throws SQLException {
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL(String sql, int... integerParamForPstmt) throws SQLException {
+		return null;
+	}
 	
 }

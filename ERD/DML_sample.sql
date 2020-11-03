@@ -142,3 +142,10 @@ ON post_table.writer = mm_table.mm_id
 WHERE post_table.regdate<'2020-11-02 2:00:00' AND rownum <=5
 ORDER BY post_table.regdate DESC
 ;
+
+
+/*--파일 가져오기--*/
+SELECT file_id, filekind, filename, real_filename
+FROM file_table
+WHERE file_id=?
+;
