@@ -20,31 +20,57 @@ public class Post_DTO implements DTO {
 	
 	private String writer; //writer 로 가져온 회원 id(mm_id가 아니다!)
 	
+	
+	//공감수, 조회수만 안받는 생성자
+	public Post_DTO(int post_id, String title, int mm_id, String category, String regdate, int post_contents_file_id) {
+		this.post_id = post_id;
+		this.title = title;
+		this.mm_id = mm_id;
+		this.category = category;
+		this.regdate = regdate;
+		this.post_contents_file_id = post_contents_file_id;
+		
+		add_writerNcontents(mm_id,post_contents_file_id);
+	}//end - 생성자 Post_DTO(int post_id, String title, int mm_id, String category, String regdate, int post_contents_file_id)
+
 
 	//전체 변수를 받는 용도
-	public Post_DTO(int post_id, String title, String writer, String category, String regdate, int post_contents_file_id,
-			int viewCnt, int empathCnt, int mm_id) {
+	public Post_DTO(int post_id, String title, int mm_id, String category, String regdate, int post_contents_file_id, int viewCnt, int empathCnt) {
 		super();
 		this.post_id = post_id;
 		this.title = title;
-		this.writer = writer;
+		this.mm_id = mm_id;
 		this.category = category;
 		this.regdate = regdate;
 		this.post_contents_file_id = post_contents_file_id;
 		this.viewCnt = viewCnt;
 		this.empathCnt = empathCnt;
-		this.mm_id = mm_id;
 		
+		add_writerNcontents(mm_id,post_contents_file_id);
+	}//end - 생성자 Post_DTO(int post_id, String title, int mm_id, String category, String regdate, int post_contents_file_id, int viewCnt, int empathCnt)
+	
+	
+	
+	//작성자 닉네임과 Post_Contents 객체를 반환해줌
+	public void add_writerNcontents(int mm_id, int post_contents_file_id) {
 		try {
-			this.post_contents=return_post_contents();
+			this.writer=return_writer(mm_id);
+			this.post_contents=return_post_contents(post_contents_file_id);
 		} catch (SQLException e) {
-			System.out.println("post_contents의 file_id에 정보가 없습니다!!!");
+			System.out.println("post_contents의 file_id에 정보가 없습니다!!! 혹은.. 없는 회원??");
 			e.printStackTrace();
 		}
+	}//end - add_writerNcontents()
+	
+	//MM을 DB에서 불러와 writer를 반환
+	public String return_writer(int mm_id) throws SQLException {
+		DTO mmDTO=new MM_DAO().selectBySQL(MM_DAO.SELECT_MM_BY_MM_ID, mm_id)[0];
+		String writer=((MM_DTO)mmDTO).getNickname();
+		return writer;
 	}
 	
 	//Post_Contents를 DB에서 불러와 생성 및 반환
-	public Post_Contents return_post_contents() throws SQLException {
+	public Post_Contents return_post_contents(int post_contents_file_id) throws SQLException {
 		
 		DTO fileDTO=new File_DAO().selectBySQL(File_DAO.SELECT_POSTFILE_BY_FILE_ID, post_contents_file_id)[0];
 		String file_path=((File_DTO)fileDTO).getReal_filename();

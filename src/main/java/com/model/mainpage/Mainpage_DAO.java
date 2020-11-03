@@ -83,7 +83,7 @@ public class Mainpage_DAO implements DAO {
 		int empathCnt=0;//받지 않음
 		int mm_id=0;// mm_id가 아닌, 아이디를 바로 받는다
 		
-		DTO dto=new Post_DTO(post_id, title, writer, category, regdate, post_contents, viewCnt, empathCnt, mm_id);
+		DTO dto=new Post_DTO(post_id, title, writer, category, regdate, post_contents, viewCnt, empathCnt);
 		return dto;
 	}//end mkDTO
 	
