@@ -1,27 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="main.java.com.post.beans.WriteDTO"%>
+<%@page import="main.java.com.post.beans.FileWriteDTO"%>
 <%@page import="main.java.com.model.DTO"%>    
-    
-<%
-	String ctx = request.getContextPath();
-	
-%>   
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@ page import="java.io.*" %>
 
 <%
 	WriteDTO[] arr = (WriteDTO[])request.getAttribute("update");	
+	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("file_view");
+
+	String ctx = request.getContextPath();
 %>
+
 
 <%
-	if( arr == null || arr.length==0){
-	
+	if( arr == null || arr.length ==0){
 %>
-	<scirpt>
-		alert("해당 정보없음");
+	<script>
+		alert("해당정보가 삭제되거나 없습니다");
 		history.back();
-	</scirpt>
+	</script>
+<%
+	return;
+	}
 
-<%	return ;	} %>
+%>
+
+
+
+<%
+	request.setCharacterEncoding("utf-8");
+	Date today = new Date();
+	SimpleDateFormat fomat = new SimpleDateFormat("[yyyy-mm-dd]");
+
+%>    
+
+<%
+	//파일읽어오기  (DB접근시 수정할것임)
+	String titles ="";	
+	String contents ="";
+	String filename = file_info[0].getFilename();
+	String saveDirectory = getServletContext().getRealPath("/") + "data" + File.separator + filename;
+	
+	BufferedReader br = null;
+	try{
+	br = new BufferedReader(new FileReader(saveDirectory));
+	String line = null;
+
+	
+	while((line = br.readLine())!=null){
+		if(line.equals("title")){
+			 titles += line;
+		}else{
+			contents +=line;
+		}
+	}
+	
+	
+	}catch(Exception e){
+		e.printStackTrace();
+	}finally{
+		try{
+			br.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -103,10 +173,11 @@ function chkSubmit(){
 		        <tr >
 		       		<td class="text-center">
 		       		<select name="category">
-		       		<option value="movie" selected="selected"> 영화게시판 </option>
-		       		<option value="game"> 게임게시판 </option>
-		       		<option value="read">독서게시판  </option>
-		       		<option value="sport"> 스포츠게시판 </option>	
+		       		<option value="NOTICE" selected="selected"> 공지사항 </option>
+		       		<option value="MOVIEW"> 영화 게시판 </option>
+		       		<option value="GAME"> 게임 게시판 </option>
+		       		<option value="BOOK">도서 게시판  </option>
+		       		<option value="SPORT"> 운동 게시판 </option>	
 		       		</select>
 		       		</td>     
 		            <td>
@@ -123,6 +194,7 @@ function chkSubmit(){
 		        <tr class="justify-content-center">
 		            <td colspan="2">
 		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px;">
+		                <%=contents %>
 		                </textarea>
 		            </td>
 		        </tr>

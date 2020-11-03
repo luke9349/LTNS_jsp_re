@@ -23,13 +23,15 @@
 	int viewCnt = arr[0].getViewCnt();
 	String category = arr[0].getCategory();
 	int post_content = arr[0].getPost_contents();
-	int post_id = 22;
+	int post_id = 302;
+	
+	String ctx = request.getContextPath();
 	
 	
 %>  
 
      
-    
+   
 <%
 	request.setCharacterEncoding("utf-8");
 	Date today = new Date();
@@ -43,6 +45,7 @@
 	String contents ="";
 	String filename = file_info[0].getFilename();
 	String saveDirectory = getServletContext().getRealPath("/") + "data" + File.separator + filename;
+	
 	BufferedReader br = null;
 	try{
 	br = new BufferedReader(new FileReader(saveDirectory));
