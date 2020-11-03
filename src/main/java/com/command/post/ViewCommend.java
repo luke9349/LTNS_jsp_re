@@ -25,7 +25,7 @@ public class ViewCommend implements Command {
 		//post_id를 통한 글보기 
 		//int post_id = Integer.parseInt(request.getParameter("post_id"));
 
-		int post_id = 288;
+		int post_id = 302;
 		
 		if(post_id != 0) {
 			try {
