@@ -174,7 +174,7 @@ function chkSubmit(){
 		       		<td class="text-center">
 		       		<select name="category">
 		       		<option value="NOTICE" selected="selected"> 공지사항 </option>
-		       		<option value="MOVIEW"> 영화 게시판 </option>
+		       		<option value="MOVIE"> 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
 		       		<option value="BOOK">도서 게시판  </option>
 		       		<option value="SPORT"> 운동 게시판 </option>	
