@@ -29,8 +29,22 @@ public class WriteDAO implements DAO {
 	public static final String SQL_WRITE_UPDATE_DATA = 
 			"UPDATE POST_TABLE SET title = ?, CATEGORY = ? WHERE post_id= ?";
 
+	public static final String SQL_MM_TABLE_SELECT = 
+			"SELECT * FROM MM_TABLE mt WHERE MM_ID = ?";
 	
+	public static final String SQL_WRITE_INSERT =
+					"INSERT INTO post_table"
+					+"(post_id,title,writer,category,regdate,post_contents,viewCnt) "
+					+"VALUES"
+					+"(SEQ_post_table_post_id.NEXTVAL,?,?,?,SYSTIMESTAMP,?,0)";
 
+	public static final String View_CNT_ADD =
+				"UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id = ?";
+			
+	public static final String SELETE_POST_ID=
+				"SELECT  * FROM POST_TABLE pt WHERE POST_ID = ?";
+	
+	
 	public WriteDAO() {
 		
 		try {
@@ -61,29 +75,24 @@ public class WriteDAO implements DAO {
 		int cnt =0;
 		
 		String title = dto.getTitle(); //제목 
-		//String writer = dto.getWriter(); // 글쓴이
+		String writer = dto.getWriter(); // 글쓴이
 		String category = dto.getCategory(); // 카테고리 
 		int currvaldata = currval;
 		
-		cnt = this.wr_insert(title, category, currvaldata);
+		cnt = this.wr_insert(title, category, writer ,currvaldata);
 		return cnt;
 	}
 	
-	public int wr_insert(String title, String category, int currvaldata) throws SQLException {
+	public int wr_insert(String title, String category, String writer ,int currvaldata) throws SQLException {
 		int cnt = 0;
 	
 		
 		try {
-			String sql =
-					"INSERT INTO post_table"
-					+"(post_id,title,writer,category,regdate,post_contents,viewCnt) "
-					+"VALUES"
-					+"(SEQ_post_table_post_id.NEXTVAL,?,2,?,SYSTIMESTAMP,?,0)";
-					
-			psmt = conn.prepareStatement(sql);
+			psmt = conn.prepareStatement(SQL_WRITE_INSERT);
 			psmt.setString(1, title);
-			psmt.setString(2, category);
-			psmt.setInt(3, currvaldata);
+			psmt.setString(2, writer);
+			psmt.setString(3, category);
+			psmt.setInt(4, currvaldata);
 			
 			
 			cnt = psmt.executeUpdate();
@@ -135,17 +144,15 @@ public class WriteDAO implements DAO {
 		int cnt =0;
 		WriteDTO [] arr = null;
 		
-		String sql = "UPDATE post_table SET viewCnt=viewCnt+1 WHERE post_id = ?";
-		String views = "SELECT  * FROM POST_TABLE pt WHERE POST_ID = ?";
 		try {
 			
 			conn.setAutoCommit(false);
-			psmt = conn.prepareStatement(sql);
+			psmt = conn.prepareStatement(View_CNT_ADD);
 			psmt.setInt(1, post_id);
 			cnt = psmt.executeUpdate();
 			psmt.close();
 			
-			psmt = conn.prepareStatement(views);
+			psmt = conn.prepareStatement(SELETE_POST_ID);
 			psmt.setInt(1, post_id);
 			rs = psmt.executeQuery();
 			arr= createArray(rs);
@@ -201,14 +208,11 @@ public class WriteDAO implements DAO {
 	
 	
 	//글 업데이트 하기 1.2 ( 수정 정보 저장하기 ) 
-
-		
 	public int post_Update(String title, String category,int post_id) throws SQLException {
 			int cnt = 0;
 			try {
 						
 				psmt = conn.prepareStatement(SQL_WRITE_UPDATE_DATA);
-				System.out.println("글 업데이트 쿼리 진입하나요??");
 				psmt.setString(1, title);
 				psmt.setString(2, category);
 				psmt.setInt(3, post_id);
@@ -218,42 +222,10 @@ public class WriteDAO implements DAO {
 			}
 			
 			return cnt;
-		}
-	
-
+		}//유저테이블 정보 가져오기 
 	
 	
 	
-	
-//	@Override
-//	public DTO mkDTO(ResultSet rs) throws SQLException {
-//		int post_id = rs.getInt("post_id"); // 게시글 고유번호 
-//		String title = rs.getString("title"); //제목 
-//		String writer = rs.getString("writer"); //제목 
-//		String category = rs.getString("category"); //제목 
-//		String regdate = rs.getString("regdate");
-//		int content = rs.getInt("post_contents"); //파일주소 
-//		int viewCnt = rs.getInt("viewCnt");
-//		DTO dto = new WriteDTO(post_id, title, writer,category, content, viewCnt);
-//		((WriteDTO)dto).setRegDate(regdate);
-//		return dto;
-//	}
-//	
-//	@Override
-//	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
-//		DTO[] arr=null;
-//		ArrayList<DTO> list=new ArrayList<DTO>();
-//		
-//		while(rs.next()) {
-//			list.add(mkDTO(rs));
-//		}
-//		int size=list.size();
-//		if(size==0)return null;
-//		arr=new DTO[size];
-//		list.toArray(arr);
-//		
-//		return arr;
-//	}
 
 	@Override
 	public DTO[] selectBySQL(String sql) throws SQLException {
@@ -281,6 +253,18 @@ public class WriteDAO implements DAO {
 
 	@Override
 	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DTO[] selectBySQL(String sql, int integerParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DTO[] selectBySQL(String sql, int... integerParamForPstmt) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

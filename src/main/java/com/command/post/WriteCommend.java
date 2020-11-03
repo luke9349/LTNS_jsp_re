@@ -25,7 +25,6 @@ public class WriteCommend implements Command {
 		String encoding = "utf-8";
 		String filePath =  null;
 		
-		
 		try {
 			request.setCharacterEncoding(encoding);
 		} catch (UnsupportedEncodingException e1) {
@@ -36,6 +35,7 @@ public class WriteCommend implements Command {
 		String content = request.getParameter("content");
 		String saveDirectory = request.getServletContext().getRealPath("/") + "data";
         String category = request.getParameter("category");
+        String wrtier = request.getParameter("writer");
 		
 		
 		Date d = new Date();
@@ -58,13 +58,10 @@ public class WriteCommend implements Command {
 			try {
 				
 				File file = new File(saveDirectory);
-
 				if (!file.exists()) { // 디렉토리가 없으면 만들어줌
 					file.mkdirs();
 				}
-
 				filePath = saveDirectory + File.separator + fName; // 파일경로
-				// out.println(saveDirectory+"세이브디렉토리 <br>"+fName +"파일이름 <br>"+filePath+"파일패스");
 
 				// 내용저장객체 생성
 				pw = new PrintWriter(filePath);
@@ -83,24 +80,17 @@ public class WriteCommend implements Command {
 			}
 		}// end else;
 		
-		
-		
 
 		//2.1 파일등록 
-		//파일 인설트 
 		int file_quert_cnt = 0;
 		FileWriteDAO filedao = new FileWriteDAO();
 
 		String filekind = "txt";
 		
 		if (fName != null && filePath != null) {
-			
-			
-			//System.out.println(filekind +"파일종류"+ filePath + "파일패스" + fName +"파일네임");
 			try {
 				file_quert_cnt = filedao.fileInsert(filekind, filePath, fName);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -108,16 +98,14 @@ public class WriteCommend implements Command {
 		request.setAttribute("fileOk", file_quert_cnt);
 		System.out.println("파일쿼리성공" + file_quert_cnt);
 				
-				
 		
 		
 		//2.글 등록  
-		
 		int cnt = 0;
 		WriteDAO dao = new WriteDAO();
 		if( title != null && title.trim().length() > 0) {
 			try {
-				cnt = dao.wr_insert(title, category, file_quert_cnt);
+				cnt = dao.wr_insert(title, category, wrtier, file_quert_cnt);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

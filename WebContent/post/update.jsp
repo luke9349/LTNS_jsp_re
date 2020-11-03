@@ -6,6 +6,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page import="java.io.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 
 <%
 	request.setCharacterEncoding("utf-8");
@@ -84,6 +88,11 @@
 <meta charset="UTF-8">
 <title> update Page </title>
 </head>
+<!-- css link  -->
+ <link rel="stylesheet" type="text/css" href="CSS/Write.css">
+ <link rel="stylesheet" type="text/css" href="../mainpage/CSS/footer/footer.css">
+ <link rel="stylesheet" type="text/css" href="../mainpage/CSS/header/header.css">
+
 
 <!-- bootstrep -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -147,13 +156,18 @@ function chkSubmit(){
 </script>
 
 <body>
-	<div class="container">
+
+	<!--  헤더  -->
+	<jsp:include page="../mainpage/components/header/header.jsp" />
+
+
+	<div class="container col-12">
 	   <div>
 		<form name="frm" action="updateOk.do?post_id=<%=post_id %>" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
 		        <tr >
-		       		<td class="text-center">
-		       		<select name="category">
+		       		<td class="text-center" style="width:5%;">
+		       		<select name="category" class='selector'>
 		       		<option value="NOTICE" selected="selected"> 공지사항 </option>
 		       		<option value="MOVIE"> 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
@@ -162,14 +176,13 @@ function chkSubmit(){
 		       		</select>
 		       		</td>     
 		            <td>
-		            <input type="text" id="title" name="title" style="width:650px"/>
+		            <input type="text" id="title" name="title" style="width:100%"/>
 		            </td>
 		        </tr>
 		          <tr class="mt-2 text-right">
 		            <td colspan="2" >
-		                <input class="btn-sm" type="button" value="취소" onclick="History.back()"/>
-		                <input class="btn-sm" type="submit" id="save" value="수정"/>
-		              
+		                <input class="fun-btn btn-sm font-weight-bold" type="button" value="취소" onclick="history.back()"/>
+		                <input class="fun-btn btn-sm font-weight-bold" type="submit" id="save" value="수정"/>
 		            </td>
 		        </tr>
 		        <tr class="justify-content-center">
@@ -184,6 +197,11 @@ function chkSubmit(){
 			</form>
 	  </div>
 	</div>
+	
+	<!--  footer -->
+		<jsp:include page="../mainpage/components/footer/footer.jsp" />
+	
+	
 </body>
 
 </html>

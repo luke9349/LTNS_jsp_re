@@ -24,7 +24,8 @@ public class ViewCommend implements Command {
 		int post_contents ;
 		//post_id를 통한 글보기 
 		//int post_id = Integer.parseInt(request.getParameter("post_id"));
-
+		//int writer_id = Integer.parseInt(request.getParameter("writer"));
+		int writer =2;
 		int post_id = 336;
 		
 		if(post_id != 0) {
@@ -38,6 +39,7 @@ public class ViewCommend implements Command {
 		}
 		
 		
+		
 		post_contents = arr[0].getPost_contents();
 		
 		if(post_contents != 0) {
@@ -49,7 +51,22 @@ public class ViewCommend implements Command {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+		}// end if
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	
 		

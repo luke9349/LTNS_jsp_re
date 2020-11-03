@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	String ctx = request.getContextPath();
 	String saveDirectory =	getServletContext().getRealPath("/") + "data";
 	System.out.println(saveDirectory + "세이브디렉토리입니다.");
 	System.out.println(ctx + "/"+ "data" +"/");
 	
+//		String witer = request.getParameter("writer");
+	int writer = 2;
 	
 %>   
 
@@ -14,14 +19,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title> Write Page </title>
 </head>
+<!-- css link  -->
+ <link rel="stylesheet" type="text/css" href="CSS/Write.css">
+ <link rel="stylesheet" type="text/css" href="../mainpage/CSS/footer/footer.css">
+ <link rel="stylesheet" type="text/css" href="../mainpage/CSS/header/header.css">
 
 <!-- bootstrep -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
 
 <!-- smartedit -->
@@ -81,13 +92,15 @@ function chkSubmit(){
 
 
 <body>
-	<div class="container">
-	   <div>
-		<form name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
+	<!--  헤더  -->
+	<jsp:include page="../mainpage/components/header/header.jsp" />
+	<jsp:include page="CSS/ltns.html"/>
+	<div class="container col-12">
+	   <form name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
-		        <tr >
-		      		<td class="text-center">
-		       		<select name="category">
+		        <tr class="tableheader">
+		      		<td class="text-center" style="width:5%;">
+		       		<select class='selector' name="category">
 		 			<option value="NOTICE" selected="selected"> 공지사항 </option>
 		       		<option value="MOVIE"> 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
@@ -96,28 +109,32 @@ function chkSubmit(){
 		       		</select>
 		       		</td>     
 		            <td>
-		            <input type="text" id="title" name="title" style="width:650px"/>
+		            <input type="text" id="title" name="title" style="width:100%"/>
 		            </td>
 		        </tr>
 		          <tr class="mt-2 text-right">
 		            <td colspan="2" >
-		                <input class="btn-sm" type="button" value="취소" onclick="History.back()"/>
-		                <input class="btn-sm" type="submit" id="save" value="저장"/>
+		                <input class="fun-btn btn-sm font-weight-bold" type="button" value="취소" onclick="history.back()"/>
+		                <input class="fun-btn btn-sm font-weight-bold" type="submit" id="save" value="저장"/>
 		              
 		            </td>
 		        </tr>
-		        <tr class="justify-content-center">
-		            <td colspan="2">
+		        <tr class="justify-content-center ">
+		            <td colspan="2" class="bg-white">
 		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px; ">
 		                </textarea>
 		            </td>
 		        </tr>
 				</table>
-				
-				
+				<input type="hidden" name="writer" value="<%=writer%>">
 			</form>
-	  </div>
-	</div>
+	  
+	  
+	  
+	  
+	</div> <!-- end container -->
+	
+	<jsp:include page="../mainpage/components/footer/footer.jsp" />
 </body>
 
 </html>

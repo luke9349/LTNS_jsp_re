@@ -158,7 +158,6 @@ public class updateOkCommend implements Command {
 		
 		int write_update_cnt = 0;
 		
-		
 		if(title != null) {
 			try {
 				System.out.println("글업데이트 진입");
@@ -169,7 +168,7 @@ public class updateOkCommend implements Command {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
+		}// end if
 		System.out.println("업데이트 성공 " + write_update_cnt);
 		
 		

@@ -255,4 +255,16 @@ public class FileWriteDAO implements DAO {
 		return null;
 	}
 
+	@Override
+	public DTO[] selectBySQL(String sql, int integerParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DTO[] selectBySQL(String sql, int... integerParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
