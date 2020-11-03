@@ -1,5 +1,6 @@
 package main.java.com.command.board;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -7,18 +8,17 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import main.java.com.command.Command;
-import main.java.com.model.DTO;
 import main.java.com.model.Post_Contents;
-import park.지울꺼얌.AjaxBoardListJSON;
-import park.지울꺼얌.BoardListDTO;
+import main.java.com.util.LogUtil;
 import test.JSONListDTO;
-import test.LastDAO;
-import test.LastDTO;
-import test.TestDAO;
+import test.AjaxBoardListJSON;
+import test.BoardListDAO;
+import test.BoardListDTO;
 import test.TestQuery;
 
 public class BoarAjaxCommand implements Command, Board_Command {
@@ -51,39 +51,48 @@ public class BoarAjaxCommand implements Command, Board_Command {
 					page = Integer.parseInt(request.getParameter("page"));
 				} catch (Exception e) {
 					e.printStackTrace();
+					LogUtil.error("[BoarAjaxCommand] [page] " + e.getMessage());
+					HttpSession ssession = request.getSession();
+					System.out.println(ssession);
+					ssession.setAttribute("messageType", "오류 메시지");
+					ssession.setAttribute("messageContent", "잘못된 접근입니다.");
+					System.out.println((String) request.getSession().getAttribute("messageType"));
+					try {
+						response.sendRedirect("board_list.do");
+						return;
+					} catch (IOException e1) {
+						LogUtil.error("[BoarAjaxCommand] [sendRedirect] " + e.getMessage());
+					}
 				}
 			}
 
-			String sql = null;
-			ArrayList<LastDTO> list = null;
+			ArrayList<BoardListDTO> list = null;
 			ArrayList<JSONListDTO> result = null;
 			if (inspectSearch(searchType, search)) {
-				sql = queryToSearch(category);
 				if (inspectCategory(category)) {
-					list = new LastDAO().getAllList(sql);
+					list = new BoardListDAO().getAllList(category);
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page);
 				} else {
-					list = new LastDAO().getCategoryAllList(sql, category);
+					list = new BoardListDAO().getCategoryAllList(category);
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page);
 				} // end if
 			} else {
-				sql = queryToCategory(category);
 				if (inspectCategory(category)) {
-					list = new LastDAO().getList(sql, page);
+					list = new BoardListDAO().getList(category, page);
 					result = contentToText(list);
 				} else {
-					list = new LastDAO().getCategoryList(sql, category, page);
+					list = new BoardListDAO().getCategoryList(category, page);
 					result = contentToText(list);
 				} // end if
 			} // end if
-			
+
 			request.setAttribute("list", result);
 			responseJSON(request, response);
 
 		} catch (UnsupportedEncodingException e) {
-			System.out.println("request 인코딩 에러");
+			LogUtil.error("[BoarAjaxCommand] [setCharacterEncoding] " + e.getMessage());
 			e.printStackTrace();
 		} // end try
 	} // end execute()
@@ -97,40 +106,19 @@ public class BoarAjaxCommand implements Command, Board_Command {
 		return result;
 	}
 
-	private String queryToCategory(String category) {
-		switch (category) {
-		case "empathize":
-			return TestQuery.SELECT_POST_BY_EMAPTHIZE_PAGE;
-		case "viewcnt":
-			return TestQuery.SELECT_POST_BY_VIEWCNT_PAGE;
-		default:
-			return TestQuery.SELECT_POST_BY_CATEGORY_PAGE;
-		}
-	}
-
-	private String queryToSearch(String category) {
-		switch (category) {
-		case "empathize":
-			return TestQuery.SELECT_POST_BY_EMPATHIZE_ALL;
-		case "viewcnt":
-			return TestQuery.SELECT_POST_BY_VIEWCNT_ALL;
-		default:
-			return TestQuery.SELECT_POST_BY_CATEGORY_ALL;
-		}
-	}
 
 	private boolean inspectCategory(String category) {
-		if (category.equals("empathize") || category.equals("viewcnt")) {
+		if (category.toLowerCase().equals("empathize") || category.toLowerCase().equals("viewcnt")) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	private ArrayList<JSONListDTO> contentToText(ArrayList<LastDTO> list) {
+	private ArrayList<JSONListDTO> contentToText(ArrayList<BoardListDTO> list) {
 		ArrayList<JSONListDTO> result = new ArrayList<JSONListDTO>();
 		int index = 0;
-		for (LastDTO temp : list) {
+		for (BoardListDTO temp : list) {
 			Post_Contents content = new Post_Contents(temp.getRealFilePath());
 			if (index == 0) {
 				this.count = temp.getDataLength();
@@ -141,6 +129,7 @@ public class BoarAjaxCommand implements Command, Board_Command {
 			dto.setPostId(temp.getPostId());
 			dto.setTitle(temp.getTitle());
 			dto.setWriter(temp.getWriter());
+			dto.setNickName(temp.getNickName());
 			dto.setCategory(temp.getCategory());
 			dto.setRegdate(temp.getRegdate());
 			dto.setEmpathizeCnt(temp.getEmpathizeCnt());
@@ -230,13 +219,13 @@ public class BoarAjaxCommand implements Command, Board_Command {
 			response.getWriter().write(json);
 		} catch (Exception e) {
 			e.printStackTrace();
+			LogUtil.error("[BoarAjaxCommand] [responseJSON] " + e.getMessage());
 		} // end try
 
 	} // end responseJSON()
 
 	@Override
 	public void responseXML(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
 
 	}
 

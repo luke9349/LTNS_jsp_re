@@ -22,7 +22,7 @@ public class TestQuery {
 	"(SELECT ROWNUM AS NO, t.* FROM " + 
 	"(SELECT * FROM " + 
 	"(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + 
-	"(SELECT t1.*, t2.HIT FRO " + 
+	"(SELECT t1.*, t2.HIT FROM " + 
 	"(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + 
 	"(SELECT * FROM " + 
 	"(SELECT *  FROM (SELECT * FROM POST_TABLE), " + 
