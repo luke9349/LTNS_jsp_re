@@ -1,4 +1,4 @@
-package main.java.com.post.beans;
+package main.java.com.model.post;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-<%@page import="main.java.com.post.beans.WriteDTO"%>
+<%@page import="main.java.com.model.post.WriteDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.*" %>
@@ -7,6 +7,7 @@
 <% 
 	int currval = (Integer) request.getAttribute("fileOk"); 
 	int writecnt = (Integer) request.getAttribute("result");
+	String ctn =	request.getContextPath();
 
  %>
  
@@ -19,7 +20,7 @@
 <%}else{%>
 	<script>
 		alert("등록성공" + <%=currval%>);		
-		location.href ='list.do';
+		location.href = 'board_list.do';
 	</script>
 <%}%>
 

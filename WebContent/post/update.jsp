@@ -1,17 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="main.java.com.post.beans.WriteDTO"%>
-<%@page import="main.java.com.post.beans.FileWriteDTO"%>
+<%@page import="main.java.com.model.post.WriteDTO"%>
+<%@page import="main.java.com.model.post.FileWriteDTO"%>
 <%@page import="main.java.com.model.DTO"%>    
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@ page import="java.io.*" %>
 
 <%
+	request.setCharacterEncoding("utf-8");
 	WriteDTO[] arr = (WriteDTO[])request.getAttribute("update");	
 	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("file_view");
 
 	String ctx = request.getContextPath();
+	System.out.println(file_info[0].getFilename());
+	int post_id = arr[0].post_id;
+	
+
 %>
 
 
@@ -31,7 +36,6 @@
 
 
 <%
-	request.setCharacterEncoding("utf-8");
 	Date today = new Date();
 	SimpleDateFormat fomat = new SimpleDateFormat("[yyyy-mm-dd]");
 
@@ -43,6 +47,8 @@
 	String contents ="";
 	String filename = file_info[0].getFilename();
 	String saveDirectory = getServletContext().getRealPath("/") + "data" + File.separator + filename;
+	String urls = getServletContext().getRealPath("/") + "data" + File.separator;
+	
 	
 	BufferedReader br = null;
 	try{
@@ -69,31 +75,6 @@
 		}
 	}
 %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     
@@ -168,7 +149,7 @@ function chkSubmit(){
 <body>
 	<div class="container">
 	   <div>
-		<form name="frm" action="view.jsp" method="post" onsubmit="return chkSubmit()">
+		<form name="frm" action="updateOk.do?post_id=<%=post_id %>" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
 		        <tr >
 		       		<td class="text-center">
@@ -199,6 +180,7 @@ function chkSubmit(){
 		            </td>
 		        </tr>
 				</table>
+				<input type="hidden" name="urls" value="<%=urls %>"/>
 			</form>
 	  </div>
 	</div>

@@ -1,4 +1,4 @@
-package main.java.com.post.beans;
+package main.java.com.model.post;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +23,11 @@ public class FileWriteDAO implements DAO {
 	public static final String SQL_POST_CONTENT_VIEW = 
 			"SELECT * FROM FILE_TABLE ft WHERE FILE_ID =  ?";
 			
-
+	public static final String SQL_FILE_UPDATE = 
+			"UPDATE FILE_TABLE  SET FILENAME = ? WHERE file_id = ?";
+	
+	
+	
 	public FileWriteDAO() {
 
 		try {
@@ -127,6 +131,33 @@ public class FileWriteDAO implements DAO {
 		
 	}
 
+	
+	//파일업데이트 시키기 
+
+	public int File_Update(String file_name,int file_id) throws SQLException {
+			int cnt = 0;
+			try {
+				psmt = conn.prepareStatement(SQL_FILE_UPDATE);
+				System.out.println("sql문작동하나요?");
+				psmt.setString(1, file_name);
+				psmt.setInt(2, file_id);
+				cnt = psmt.executeUpdate();
+			}catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			
+			return cnt;
+		}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	public FileWriteDTO[] createFiles(ResultSet rs) throws SQLException {

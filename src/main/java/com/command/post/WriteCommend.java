@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
-import main.java.com.post.beans.FileWriteDAO;
-import main.java.com.post.beans.WriteDAO;
+import main.java.com.model.post.FileWriteDAO;
+import main.java.com.model.post.WriteDAO;
 
 public class WriteCommend implements Command {
 
@@ -70,8 +70,7 @@ public class WriteCommend implements Command {
 				pw = new PrintWriter(filePath);
 				pw.println("title" + title);
 				pw.println(content);
-				System.out.println("저장되었습니다sdfsf");
-				System.out.println("sdfj");
+				System.out.println("저장되었습니다");
 			} catch (IOException e) {
 				
 				System.out.println("저장 실패 : 파일에 데이터를 쓸 수 없습니다.");

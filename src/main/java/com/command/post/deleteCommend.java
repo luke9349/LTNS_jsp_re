@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
-import main.java.com.post.beans.WriteDAO;
+import main.java.com.model.post.WriteDAO;
 
 public class deleteCommend implements Command {
 

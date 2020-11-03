@@ -1,4 +1,4 @@
-package main.java.com.post.beans;
+package main.java.com.model.post;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,9 +26,11 @@ public class WriteDAO implements DAO {
 	public static final String SQL_WRITE_SEARCH_BY_UID =
 			"SELECT * FROM POST_TABLE pt WHERE POST_ID  = ?";
 	
+	public static final String SQL_WRITE_UPDATE_DATA = 
+			"UPDATE POST_TABLE SET title = ?, CATEGORY = ? WHERE post_id= ?";
 
 	
-	
+
 	public WriteDAO() {
 		
 		try {
@@ -163,8 +165,6 @@ public class WriteDAO implements DAO {
 	}
 	
 	
-	
-	
 	//글 삭제하기 
 	public int post_delete(int requestsdata) throws SQLException {
 		int cnt =0;
@@ -176,7 +176,6 @@ public class WriteDAO implements DAO {
 			cnt = psmt.executeUpdate();
 	
 		} finally {
-			System.out.println(requestsdata + "값얼마니?");
 			close();
 		}
 		
@@ -184,7 +183,7 @@ public class WriteDAO implements DAO {
 	}
 	
 	
-	//글 업데이트하기 
+	//글 업데이트하기 1.1 ( user_id 조회해서 정보 가져오기 ) 
 	public  WriteDTO[] _post_update(int post_id) throws SQLException {
 		int cnt = 0;
 		WriteDTO[] arr = null;
@@ -200,6 +199,26 @@ public class WriteDAO implements DAO {
 	}
 
 	
+	
+	//글 업데이트 하기 1.2 ( 수정 정보 저장하기 ) 
+
+		
+	public int post_Update(String title, String category,int post_id) throws SQLException {
+			int cnt = 0;
+			try {
+						
+				psmt = conn.prepareStatement(SQL_WRITE_UPDATE_DATA);
+				System.out.println("글 업데이트 쿼리 진입하나요??");
+				psmt.setString(1, title);
+				psmt.setString(2, category);
+				psmt.setInt(3, post_id);
+				cnt = psmt.executeUpdate();
+			} finally {
+				close();
+			}
+			
+			return cnt;
+		}
 	
 
 	

@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
-import main.java.com.post.beans.CommentDAO;
+import main.java.com.model.post.CommentDAO;
 
 
 public class comentCmd implements Command {

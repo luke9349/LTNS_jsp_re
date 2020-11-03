@@ -1,6 +1,6 @@
-<%@page import="main.java.com.post.beans.WriteDTO"%>
+<%@page import="main.java.com.model.post.WriteDTO"%>
 <%@page import="main.java.com.model.DTO"%>
-<%@page import="main.java.com.post.beans.FileWriteDTO"%>
+<%@page import="main.java.com.model.post.FileWriteDTO"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -23,10 +23,11 @@
 	int viewCnt = arr[0].getViewCnt();
 	String category = arr[0].getCategory();
 	int post_content = arr[0].getPost_contents();
-	int post_id = 302;
+	
+	int post_id = 336;
 	
 	String ctx = request.getContextPath();
-	
+	System.out.println(file_info[0].getFilename());
 	
 %>  
 
