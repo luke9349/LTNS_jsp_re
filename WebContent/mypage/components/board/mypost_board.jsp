@@ -3,6 +3,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page import="main.java.com.model.*" %>
+<%@page import="main.java.com.model.mainpage.*" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,7 +21,7 @@
 
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 <div>
-	<div><h2>공감한 게시글</h2></div> 
+	<div><h2>내가 작성한 글</h2></div> 
 	
 </div>
 <!-- div 이외 부분은 실행시 주석화 할 것! -->

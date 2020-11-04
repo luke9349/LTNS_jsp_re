@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.command.mainpage.Mainpage_Command;
+import main.java.com.command.mypage.Mypage_command;
 import main.java.com.command.post.WriteCommend;
 import main.java.com.command.post.comentCmd;
 import main.java.com.command.post.deleteCommend;
@@ -107,6 +108,13 @@ public class DoController extends HttpServlet {
 			cmd=new Mainpage_Command();
 			cmd.execute(request, response);
 			viewPage="mainpage.jsp";
+			break;
+			
+		case "/mypage/mypage.do":
+			System.out.println("두컨트롤러 확인");
+			cmd=new Mypage_command();
+			cmd.execute(request, response);
+			viewPage="mypage.jsp";
 			break;
 		}//end swithc
 		
