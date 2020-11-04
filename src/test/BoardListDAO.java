@@ -14,96 +14,65 @@ import main.java.com.util.DataUtil;
 import main.java.com.util.LogUtil;
 
 public class BoardListDAO {
-	
-	public final static String SELECT_POST_BY_CATEGORY_PAGE = "SELECT * FROM " +
-			"(SELECT ROWNUM AS NO, t.* FROM " + 
-			"(SELECT * FROM " + 
-			"(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + 
-			"(SELECT t1.*, t2.HIT FROM " + 
-			"(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + 
-			"(SELECT * FROM " + 
-			"(SELECT *  FROM (SELECT * FROM POST_TABLE WHERE CATEGORY = ?), " + 
-			"(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE WHERE CATEGORY = ?)) t1, " + 
-			"MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + 
-			"FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, " + 
-			"(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 " + 
-			"WHERE t1.POST_ID = t2.POST_ID(+)) t) " + 
-			"ORDER BY REGDATE DESC, VIEWCNT DESC, EMPATHIZE_CNT DESC, POST_ID DESC) t) " + 
-			"WHERE NO >= ? AND NO <= ?"; 
-			                             
-			public final static String SELECT_POST_BY_VIEWCNT_PAGE = "SELECT * FROM " + 
-			"(SELECT ROWNUM AS NO, t.* FROM " + 
-			"(SELECT * FROM " + 
-			"(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + 
-			"(SELECT t1.*, t2.HIT FROM " + 
-			"(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + 
-			"(SELECT * FROM " + 
-			"(SELECT *  FROM (SELECT * FROM POST_TABLE), " + 
-			"(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, " + 
-			"MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + 
-			"FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, " + 
-			"(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 " + 
-			"WHERE t1.POST_ID = t2.POST_ID(+)) t) " + 
-			"ORDER BY VIEWCNT DESC, REGDATE DESC, EMPATHIZE_CNT DESC, POST_ID DESC) t) " + 
-			"WHERE NO >= ? AND NO <= ?"; 
-			 
-			public final static String SELECT_POST_BY_EMAPTHIZE_PAGE = "SELECT * FROM " + 
-			"(SELECT ROWNUM AS NO, t.* FROM " + 
-			"(SELECT * FROM " + 
-			"(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + 
-			"(SELECT t1.*, t2.HIT FROM " + 
-			"(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + 
-			"(SELECT * FROM " + 
-			"(SELECT *  FROM (SELECT * FROM POST_TABLE), " + 
-			"(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, " + 
-			"MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + 
-			"FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, " + 
-			"(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 " + 
-			"WHERE t1.POST_ID = t2.POST_ID(+)) t) " + 
-			"ORDER BY EMPATHIZE_CNT DESC, REGDATE DESC, VIEWCNT DESC, POST_ID DESC) t) " + 
-			"WHERE NO >= ? AND NO <= ?"; 	
 
-			public final static String SELECT_POST_BY_CATEGORY_ALL ="SELECT * FROM " + 
-			"(SELECT * FROM " + 
-			"(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + 
-			"(SELECT t1.*, t2.HIT FROM " + 
-			"(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + 
-			"(SELECT * FROM " + 
-			"(SELECT *  FROM (SELECT * FROM POST_TABLE WHERE CATEGORY = ?), " + 
-			"(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE WHERE CATEGORY = ?)) t1, " + 
-			"MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + 
-			"FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, " + 
-			"(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 " + 
-			"WHERE t1.POST_ID = t2.POST_ID(+)) t) " + 
-			"ORDER BY REGDATE DESC, VIEWCNT DESC, EMPATHIZE_CNT DESC, POST_ID DESC)";   
+	public final static String SELECT_POST_BY_CATEGORY_PAGE = "SELECT * FROM " + "(SELECT ROWNUM AS NO, t.* FROM "
+			+ "(SELECT * FROM " + "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE WHERE CATEGORY = ?), "
+			+ "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE WHERE CATEGORY = ?)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY REGDATE DESC, VIEWCNT DESC, EMPATHIZE_CNT DESC, POST_ID DESC) t) "
+			+ "WHERE NO >= ? AND NO <= ?";
 
-			public final static String SELECT_POST_BY_VIEWCNT_ALL = "SELECT * FROM " +
-			"(SELECT * FROM " +
-			"(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " +
-			"(SELECT t1.*, t2.HIT FROM " +
-			"(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " +
-			"(SELECT * FROM " +
-			"(SELECT *  FROM (SELECT * FROM POST_TABLE), " +
-			"(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, " +
-			"MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " +
-			"FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, " +
-			"(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 " +
-			"WHERE t1.POST_ID = t2.POST_ID(+)) t) " +
-			"ORDER BY VIEWCNT DESC, REGDATE DESC, EMPATHIZE_CNT DESC, POST_ID DESC)";
-		    
-			public final static String SELECT_POST_BY_EMPATHIZE_ALL = "SELECT * FROM " +
-			"(SELECT * FROM " +
-			"(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " +
-			"(SELECT t1.*, t2.HIT FROM " +
-			"(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " +
-			"(SELECT * FROM " +
-			"(SELECT *  FROM (SELECT * FROM POST_TABLE), " +
-			"(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, " +
-			"MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " +
-			"FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, " +
-			"(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 " +
-			"WHERE t1.POST_ID = t2.POST_ID(+)) t) " +
-			"ORDER BY EMPATHIZE_CNT DESC, REGDATE DESC, VIEWCNT DESC, POST_ID DESC)";
+	public final static String SELECT_POST_BY_VIEWCNT_PAGE = "SELECT * FROM " + "(SELECT ROWNUM AS NO, t.* FROM "
+			+ "(SELECT * FROM " + "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE), " + "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY VIEWCNT DESC, REGDATE DESC, EMPATHIZE_CNT DESC, POST_ID DESC) t) "
+			+ "WHERE NO >= ? AND NO <= ?";
+
+	public final static String SELECT_POST_BY_EMAPTHIZE_PAGE = "SELECT * FROM " + "(SELECT ROWNUM AS NO, t.* FROM "
+			+ "(SELECT * FROM " + "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE), " + "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY EMPATHIZE_CNT DESC, REGDATE DESC, VIEWCNT DESC, POST_ID DESC) t) "
+			+ "WHERE NO >= ? AND NO <= ?";
+
+	public final static String SELECT_POST_BY_CATEGORY_ALL = "SELECT * FROM " + "(SELECT * FROM "
+			+ "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE WHERE CATEGORY = ?), "
+			+ "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE WHERE CATEGORY = ?)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY REGDATE DESC, VIEWCNT DESC, EMPATHIZE_CNT DESC, POST_ID DESC)";
+
+	public final static String SELECT_POST_BY_VIEWCNT_ALL = "SELECT * FROM " + "(SELECT * FROM "
+			+ "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE), " + "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY VIEWCNT DESC, REGDATE DESC, EMPATHIZE_CNT DESC, POST_ID DESC)";
+
+	public final static String SELECT_POST_BY_EMPATHIZE_ALL = "SELECT * FROM " + "(SELECT * FROM "
+			+ "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE), " + "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY EMPATHIZE_CNT DESC, REGDATE DESC, VIEWCNT DESC, POST_ID DESC)";
 
 	Connection conn = null;
 	PreparedStatement psmt = null;
@@ -111,9 +80,17 @@ public class BoardListDAO {
 	ResultSet rs = null;
 	String contextPath = null;
 
-	public ArrayList<BoardListDTO> getCategoryList(String category, int page) {
-		int startNo = (page - 1) * 10 + 1;
-		int endNo = page * 10;
+	public ArrayList<BoardListDTO> getCategoryList(String category, String type, int page) {
+		int startNo = 1;
+		int endNo = 1;
+
+		if (type.equals("list")) {
+			startNo = (page - 1) * 10 + 1;
+			endNo = page * 10;
+		} else {
+			startNo = (page - 1) * 8 + 1;
+			endNo = page * 8;
+		}
 
 		ArrayList<BoardListDTO> list = null;
 
@@ -161,15 +138,22 @@ public class BoardListDAO {
 
 	} // end getCategoryAllList()
 
-	public ArrayList<BoardListDTO> getList(String category, int page) {
-		int startNo = (page - 1) * 10 + 1;
-		int endNo = page * 10;
-		
+	public ArrayList<BoardListDTO> getList(String category, String type, int page) {
 		String SQL = null;
-		if(category.toLowerCase().equals("viewcnt"))
+		if (category.toLowerCase().equals("viewcnt"))
 			SQL = SELECT_POST_BY_VIEWCNT_PAGE;
-		else 
+		else
 			SQL = SELECT_POST_BY_EMAPTHIZE_PAGE;
+		
+		int startNo = 1;
+		int endNo = 1;
+		if (type.equals("list")) {
+			startNo = (page - 1) * 10 + 1;
+			endNo = page * 10;
+		} else {
+			startNo = (page - 1) * 8 + 1;
+			endNo = page * 8;
+		}
 
 		ArrayList<BoardListDTO> list = null;
 
@@ -195,11 +179,11 @@ public class BoardListDAO {
 	public ArrayList<BoardListDTO> getAllList(String category) {
 
 		ArrayList<BoardListDTO> list = null;
-		
+
 		String SQL = null;
-		if(category.toLowerCase().equals("viewcnt"))
+		if (category.toLowerCase().equals("viewcnt"))
 			SQL = SELECT_POST_BY_VIEWCNT_ALL;
-		else 
+		else
 			SQL = SELECT_POST_BY_EMAPTHIZE_PAGE;
 
 		try {
@@ -251,8 +235,6 @@ public class BoardListDAO {
 				dto.setEmpathizeCnt(rs.getLong("EMPATHIZE_CNT"));
 				dto.setViewcnt(rs.getLong("VIEWCNT"));
 				dto.setDataLength(rs.getLong("DATALENGTH"));
-
-				System.out.println(dto);
 
 				list.add(dto);
 			} // end while

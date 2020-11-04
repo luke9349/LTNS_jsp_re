@@ -26,8 +26,8 @@
 	int viewCnt = arr[0].getViewCnt();
 	String category = arr[0].getCategory();
 	int post_content = arr[0].getPost_contents();
-	int post_id = 336;
-	
+	int post_id = Integer.parseInt(request.getParameter("post_id"));
+
 	String ctx = request.getContextPath();
 	System.out.println(file_info[0].getFilename());
 	request.setCharacterEncoding("utf-8");
@@ -93,12 +93,18 @@
  <link rel="stylesheet" type="text/css" href="../mainpage/CSS/footer/footer.css">
  <link rel="stylesheet" type="text/css" href="../mainpage/CSS/header/header.css">
 
+<!-- javascript link -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" src="JS/view.js"></script>
+
 <!-- bootstrep -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
+
+
 function deletePost(uid){
 	// 삭제 여부, 다시 확인하고 진행하기
 	var r = confirm("삭제 하시겠습니까?");
@@ -125,14 +131,23 @@ function deletePost(uid){
 	<hr>
 	<!-- 작성자 시간 조회수 추천수 -->
 	<div class="d-block">
-		<h5>[<%=name %>] [<%=date %>] [<%=viewCnt %>] [<%=post_content %>]</h5> 
+		<table>
+		<tr>
+		<th>[<%=name %>] </th> <th>[<%=date %>]</th> <th>[<%=viewCnt %>]</th> <th>[<%=post_content %>]</th>
+		</tr>
+		</table> 
 	</div>
 	<hr>
 	<!-- 내용 -->
 	<div class="centents">
 		<h5><%=contents %> </h5> 
 		<div class="text-center"> <br>
-		<input type="button" value="추천" class="text-center" onclick=""> <br>
+		<!-- 추천버튼 -->
+		
+		<input id="rec_btn" type="button" value="추천하기" class="text-center btn-lg"> <br>
+		
+		
+		
 		</div>
 	</div>
 	<hr>

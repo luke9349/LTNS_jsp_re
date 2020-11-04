@@ -4,10 +4,11 @@
 <%@ page import="java.io.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+
+
 <% 
 	int currval = (Integer) request.getAttribute("fileOk"); 
 	int writecnt = (Integer) request.getAttribute("result");
-	String ctn =	request.getContextPath();
 
  %>
  
@@ -20,7 +21,7 @@
 <%}else{%>
 	<script>
 		alert("등록성공" + <%=currval%>);		
-		location.href = 'board_list.do';
+		location.href = "<%=request.getContextPath() %>/board/board_list.do"
 	</script>
 <%}%>
 

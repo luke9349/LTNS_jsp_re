@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.zz {
+	padding: 50px;
+	max-height: 100vh;
+	overflow-y: auto; 
+}
+
 .cards {
 	display: block;
 }

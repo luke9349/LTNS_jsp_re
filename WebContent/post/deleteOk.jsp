@@ -16,6 +16,6 @@
 <% } else { %>
 	<script>
 		alert("삭제 성공");
-		location.href = "write.do";
+		location.href = "<%=request.getContextPath() %>/board/board_list.do"
 	</script>
 <% } %>
