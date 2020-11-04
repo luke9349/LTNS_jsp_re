@@ -1,38 +1,8 @@
 
-	function radioCheckY(provisionY){
-		
-		
-		$("#provisionY").prop("checked",true);
-		$("#provisionN").prop("checked", false);
-		
-		/*$("input:radio[name='NAME']:radio[value='VALUE']").attr("checked",true);
-		$("input:radio[name='NAME']").removeAttr("checked");*/
-
-
-		
-		
-		
-	}
-	
-	function radioCheckN(provisionN){
-		
-		
-		$("#provisionN").attr("checked",true);
-		$("#provisionY").attr("checked", false);
-		
-		/*$("input:radio[name='NAME']:radio[value='VALUE']").attr("checked",true);
-		$("input:radio[name='NAME']").removeAttr("checked");*/
-
-
-		
-		
-		
-	}
-
 	
 	
-	
-	
+
+
 	function formCheck(signup) {
 		
 		
@@ -41,9 +11,10 @@
 		var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/); 
 		
 		
+		console.log($("#provisionYn").val());
 		
 		//약관동의 확인
-		if($("provisionN").checked == true ){ alert("약관동의 확인"); $("#radio").focus(); return false; }
+		if($("#provisionYn").val() == "Y" || $("#provisionYn").val() == ""){ alert("약관동의 확인"); return false;}
 		
 		//아이디 공백 확인 
 		if($("#id").val() == ""){

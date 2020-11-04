@@ -19,7 +19,7 @@
 		<div id="header">
 		<h1>
 			<a id="login_logo" href="loginmain.jsp">
-				<img alt="Login_logo" src="../board/favicon.ico">
+				<img alt="Login_logo" src="../images/favicon.ico">
 			</a>
 		</h1>
 		</div>
@@ -43,19 +43,20 @@
 										
 1.  사이트는 무료로 제공되는 서비스와 관련하여 회원에게 어떠한 손해가 발생하더라도  사이트가 고의로 행한 범죄행위를 제외하고 이에 대하여 책임을 부담하지 아니합니다.
 제 15 조 (면책조항)
-1.  사이트는 회원이나 제3자에 의해 표출된 의견을 승인하거나 반대하거나 수정하지 않습니다.  사이트는 어떠한 경우라도 회원이 서비스에 담긴 정보에 의존해 얻은 이득이나 입은 손해에 대해 책임이 없습니다. 금전적 거래등과 관련하여 어떠한 책임도 부담하지 아니하고, 회원이 서비스의 이용과 관련하여 기대하는 이익에 관하여 책임을 부담하지 않습니다.
+2.  사이트는 회원이나 제3자에 의해 표출된 의견을 승인하거나 반대하거나 수정하지 않습니다.  사이트는 어떠한 경우라도 회원이 서비스에 담긴 정보에 의존해 얻은 이득이나 입은 손해에 대해 책임이 없습니다. 금전적 거래등과 관련하여 어떠한 책임도 부담하지 아니하고, 회원이 서비스의 이용과 관련하여 기대하는 이익에 관하여 책임을 부담하지 않습니다.
 제 16 조 (재판관할)
-1.  사이트와 이용자 간에 발생한 서비스 이용에 관한 분쟁에 대하여는 대한민국 법을 적용하며, 본 분쟁으로 인한 소는 대한민국의 법원에 제기합니다.
+3.  사이트와 이용자 간에 발생한 서비스 이용에 관한 분쟁에 대하여는 대한민국 법을 적용하며, 본 분쟁으로 인한 소는 대한민국의 법원에 제기합니다.
                         </textarea>
                         <div class="radio" id="radio">
                             <label>
-                                <input type="radio" class="provisionYn" id="provisionY" name="provisionYn" value="Y" autofocus="autofocus" checked onclick="radioCheckY();">
-                              			  동의합니다.
-                            </label>
-                            
-                             <label>
-                                <input type="radio"  class="provisionYn" id="provisionN" name="provisionYn" value="N"  checked onclick="radioCheckN();">
-                          		      동의하지 않습니다.
+                                <input type="radio"  id="provisionYn" name="provisionYn" value="Y" >
+                              			  동의합니다. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                             
+                             </label>
+                             
+                          <label>
+                                <input type="radio"  id="provisionYn" name="provisionYn" value="N">
+                          		      	동의하지 않습니다.
                             </label>
                         </div>
                        
