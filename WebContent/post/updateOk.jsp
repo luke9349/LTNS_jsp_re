@@ -4,6 +4,8 @@
     
  <%
 	int fileUpdateOk = (Integer) request.getAttribute("fileUpdateOk"); 
+	int post_id = Integer.parseInt(request.getParameter("post_id"));
+
  %>   
  
     
@@ -15,6 +17,6 @@
 <%}else{%>
 	<script>
 		alert("수정성공");		
-		location.href ='view.do';
+		location.href ='view.do?post_id=<%=post_id%>';
 	</script>
 <%}%>   
