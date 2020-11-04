@@ -101,7 +101,7 @@ DELETE FROM comment_table;
 /*공감-----------------------------------------------------------------------------*/
 /*insert sample empathize*/
 INSERT INTO empathize_table(post_id,mm_id)
-VALUES (post_id를넣어주세요, mm_id를넣어주세요);
+VALUES (3, 2);
 
 
 
@@ -169,3 +169,17 @@ SELECT file_id, filekind, filename, real_filename
 FROM file_table
 WHERE file_id=?
 ;
+
+
+
+INSERT INTO empathize_table(post_id,mm_id)
+VALUES (3, 2);
+
+
+
+SELECT * FROM tot_post_view;
+
+SELECT * FROM FILE_TABLE ft ;
+SELECT * FROM POST_TABLE pt ;
+DELETE FILE_TABLE WHERE FILE_ID = 3;
+SELECT * FROM FILE_TABLE ft WHERE FILE_ID =4;

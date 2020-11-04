@@ -172,22 +172,7 @@ public class WriteDAO implements DAO {
 	}
 	
 	
-	//글 삭제하기 
-	public int post_delete(int requestsdata) throws SQLException {
-		int cnt =0;
-		
-		try {
-			String sql ="DELETE FROM POST_TABLE pt WHERE post_id = ?";
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, requestsdata);
-			cnt = psmt.executeUpdate();
 	
-		} finally {
-			close();
-		}
-		
-		return cnt;
-	}
 	
 	
 	//글 업데이트하기 1.1 ( user_id 조회해서 정보 가져오기 ) 

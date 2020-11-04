@@ -110,9 +110,18 @@ function deletePost(uid){
 	var r = confirm("삭제 하시겠습니까?");
 	
 	if(r){
-		location.href= 'deleteOk.do?post_id='+uid+'';
+		location.href= 'deleteOk.do?post_content='+uid+'';
 	}
 	
+}
+
+function back(){
+	// 삭제 여부, 다시 확인하고 진행하기
+	var r = confirm("취소 하시겠습니까?");
+	
+	if(r){
+		location.href= "<%=ctx%>/board/board_list.do";
+	}
 }
 
 </script>
@@ -152,7 +161,8 @@ function deletePost(uid){
 	</div>
 	<hr>
 	<div class="text-right">
-	<button type="button" class="fun-btn btn-sm font-weight-bold"  onclick="deletePost(<%=post_id%>)">삭제</button>
+	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="취소" onclick='back()'>
+	<button type="button" class="fun-btn btn-sm font-weight-bold"  onclick="deletePost(<%=post_content%>)">삭제</button>
 	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="수정" onclick="location.href='update.do?post_id=<%=post_id%>'">
 	
 	</div>
