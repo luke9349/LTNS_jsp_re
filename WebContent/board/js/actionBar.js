@@ -17,6 +17,15 @@ const handleSearchSubmit = (e) => {
   location.href = `board_list.do?${url}`;
 };
 
+const handleClickSubmit = () => {
+  searchForm.submit();
+};
+
+const handleClickSearch = () => {
+  $('#modalForm').modal('show');
+  search.focus();
+};
+
 const loadedSearchType = () => {
   const { searchType } = params;
   if (searchType) {
@@ -50,6 +59,8 @@ export const initActionbar = (initialParams) => {
   params = initialParams;
   handledType();
   window.addEventListener('load', loadedSearchType);
+  $('#searchBtn').on('click', handleClickSearch);
+  $('#searchSubmitBtn').on('click', handleClickSubmit);
   searchForm.on('submit', handleSearchSubmit);
   $('#searchType').on('change', handleInputChange);
 };

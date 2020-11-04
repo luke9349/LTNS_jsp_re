@@ -12,14 +12,14 @@ import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class LogUtil {
 
 	public static void error(String message) {
-		
-		// String savePath = "/LTNS_jsp_re/src/main/java/com/log/error";
-		String savePath = "C:\\Users\\admin\\Desktop\\Park\\LTNS_jsp_re\\src\\main\\java\\com\\log\\error";
 
+		File workFile = new File(".");
+		String workSpace = workFile.getAbsolutePath().substring(0, workFile.getAbsolutePath().lastIndexOf("eclipse"));
+		String project = "LTNS_jsp_re";
+		String savePath = workSpace + project + "/src/main/java/com/log/error";
 		String fileName = "error.txt";
 
 		File file = new File(savePath, fileName);
@@ -38,7 +38,6 @@ public class LogUtil {
 			regDate.append(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(today));
 			regDate.append("]");
 
-			// log.append("\r\n ");
 			log.append(regDate);
 			log.append(" ");
 			log.append(message);
@@ -59,13 +58,5 @@ public class LogUtil {
 			e.printStackTrace();
 		}
 	}
-
-//	public static void main(String[] args) {
-//		try {
-//			Integer.parseInt("a");
-//		} catch (Exception e) {
-//			LogUtil.error(e.getMessage());
-//		}
-//	}
 
 }

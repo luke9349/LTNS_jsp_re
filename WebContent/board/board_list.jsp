@@ -89,6 +89,16 @@
 	</c:if>
 </main>
 <jsp:include page="../modal/component/modal.jsp" />
+${messageType }
+<c:if test="${messageType != null &&  messageContent != null}">
+	<script>
+		showModal("${messageType}", "${messageContent}");
+	</script>
+	<%
+		session.removeAttribute("messageType");
+		session.removeAttribute("messageContent");
+	%>
+</c:if>
 <jsp:include page="../loading/component/loading.jsp" />
 <jsp:include page="../footer/component/footer.jsp" />
 </body>

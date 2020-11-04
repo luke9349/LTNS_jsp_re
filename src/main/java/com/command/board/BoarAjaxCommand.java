@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
@@ -31,22 +30,36 @@ public class BoarAjaxCommand implements Command, Board_Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		try {
-			request.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("UTF-8");	
+
+			String[] categorys = { "NOTICE", "MOVIE", "BOOK", "GAME", "SPORTS", "VIEWCNT", "EMPATHIZE" };
+			String[] types = { "list", "album", "post" };
+			String[] searchTypes = { "titleAndContent", "title", "content" };
 
 			String category = "NOTICE";
 			String type = "list";
 			String searchType = null;
 			String search = null;
 			int page = 1;
-			
-			System.out.println("asfjklajgfklasjhklasjklf: " + request.getParameter("page"));
 
-			if (request.getParameter("root") != null)
+			if (request.getParameter("root") != null) {
 				category = request.getParameter("root");
-			if (request.getParameter("type") != null)
+				if (!inspectParameter(categorys, category))
+					throw new Exception("This value is not valid: " + category);
+			}
+
+			if (request.getParameter("type") != null) {
 				type = request.getParameter("type");
-			if (request.getParameter("searchType") != null)
+				if (!inspectParameter(types, type))
+					throw new Exception("This value is not valid: " + category);
+			}
+
+			if (request.getParameter("searchType") != null) {
 				searchType = request.getParameter("searchType");
+				if (!inspectParameter(searchTypes, searchType))
+					throw new Exception("This value is not valid: " + category);
+			}
+
 			if (request.getParameter("search") != null)
 				search = URLDecoder.decode(request.getParameter("search"), "UTF-8");
 			if (request.getParameter("page") != null) {
@@ -55,9 +68,6 @@ public class BoarAjaxCommand implements Command, Board_Command {
 				} catch (Exception e) {
 					e.printStackTrace();
 					LogUtil.error("[BoarAjaxCommand] [page] " + e.getMessage());
-					HttpSession ssession = request.getSession();
-					ssession.setAttribute("messageType", "오류 메시지");
-					ssession.setAttribute("messageContent", "잘못된 접근입니다.");
 					return;
 				}
 			}
@@ -90,8 +100,22 @@ public class BoarAjaxCommand implements Command, Board_Command {
 		} catch (UnsupportedEncodingException e) {
 			LogUtil.error("[BoarAjaxCommand] [setCharacterEncoding] " + e.getMessage());
 			e.printStackTrace();
+			return;
+		} catch (Exception e) {
+			LogUtil.error("[BoarAjaxCommand] [params Error] " + e.getMessage());
+			e.printStackTrace();
+			return;
 		} // end try
 	} // end execute()
+
+	private boolean inspectParameter(String[] params, String param) {
+		for (String string : params) {
+			if (string.equals(param)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private boolean inspectSearch(String searchType, String search) {
 		boolean result = false;

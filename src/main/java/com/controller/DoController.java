@@ -51,9 +51,17 @@ public class DoController extends HttpServlet {
 				// 컨트롤러는 아래 두가지를 결정해야 한다. 
 		Command cmd = null; // 어떠한 로직을 수행할지 결정 
 		String viewPage = null; // 어떠한 페이지를 보여줄지 결정 
-			
 		
 		switch (com) {
+		
+//		case "/index.do":
+//			viewPage = "index.jsp";
+//			break;
+			
+		case "/board/board_list.do":
+			viewPage = "board_list.jsp";
+			System.out.println(viewPage);
+			break;
 			
 		case "/post/write.do":
 			viewPage = "write.jsp";
@@ -73,9 +81,7 @@ public class DoController extends HttpServlet {
 			break;
 			
 
-		case "/board/board_list.do":
-			viewPage = "board_list.jsp";
-			break;
+		
 
 		case "/post/deleteOk.do":
 			cmd = new deleteCommend();
@@ -112,9 +118,9 @@ public class DoController extends HttpServlet {
 			
 		case "/mypage/mypage.do":
 			System.out.println("두컨트롤러 확인");
-			cmd=new Mypage_command();
-			cmd.execute(request, response);
-			viewPage="mypage.jsp";
+			 cmd=new Mypage_command();
+			 cmd.execute(request, response);
+			 viewPage="mypage.jsp";
 			break;
 		}//end swithc
 		
