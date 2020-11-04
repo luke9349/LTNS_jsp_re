@@ -12,11 +12,11 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import main.java.com.command.Command;
 import main.java.com.model.Post_Contents;
+import main.java.com.model.board.AjaxBoardListJSON;
+import main.java.com.model.board.BoardListDAO;
+import main.java.com.model.board.BoardListDTO;
+import main.java.com.model.board.JSONListDTO;
 import main.java.com.util.LogUtil;
-import test.AjaxBoardListJSON;
-import test.BoardListDAO;
-import test.BoardListDTO;
-import test.JSONListDTO;
 
 public class BoarAjaxCommand implements Command, Board_Command {
 
@@ -51,13 +51,13 @@ public class BoarAjaxCommand implements Command, Board_Command {
 			if (request.getParameter("type") != null) {
 				type = request.getParameter("type");
 				if (!inspectParameter(types, type))
-					throw new Exception("This value is not valid: " + category);
+					throw new Exception("This value is not valid: " + type);
 			}
 
 			if (request.getParameter("searchType") != null) {
 				searchType = request.getParameter("searchType");
 				if (!inspectParameter(searchTypes, searchType))
-					throw new Exception("This value is not valid: " + category);
+					throw new Exception("This value is not valid: " + searchType);
 			}
 
 			if (request.getParameter("search") != null)
@@ -148,6 +148,7 @@ public class BoarAjaxCommand implements Command, Board_Command {
 			dto.setPostId(temp.getPostId());
 			dto.setTitle(temp.getTitle());
 			dto.setWriter(temp.getWriter());
+			dto.setWriterNum(temp.getWriterNum());
 			dto.setNickName(temp.getNickName());
 			dto.setCategory(temp.getCategory());
 			dto.setRegdate(temp.getRegdate());

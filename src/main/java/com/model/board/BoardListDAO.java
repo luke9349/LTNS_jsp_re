@@ -1,4 +1,4 @@
-package test;
+package main.java.com.model.board;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -213,6 +213,7 @@ public class BoardListDAO {
 				dto.setPostId(rs.getLong("POST_ID"));
 				dto.setTitle(rs.getString("TITLE"));
 				dto.setWriter(rs.getString("ID"));
+				dto.setWriterNum(rs.getLong("Writer"));
 				dto.setNickName(rs.getString("NICKNAME"));
 				dto.setCategory(rs.getString("CATEGORY"));
 

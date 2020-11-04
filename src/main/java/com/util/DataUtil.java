@@ -1,6 +1,7 @@
 package main.java.com.util;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -21,6 +22,7 @@ public class DataUtil {
 			return dataSource.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LogUtil.error(e.getMessage());
 		}
 		return null;
 	}
@@ -33,6 +35,7 @@ public class DataUtil {
 				conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LogUtil.error(e.getMessage());
 		}
 	}
 
@@ -44,6 +47,7 @@ public class DataUtil {
 				conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LogUtil.error(e.getMessage());
 		}
 	}
 
@@ -55,6 +59,7 @@ public class DataUtil {
 				pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LogUtil.error(e.getMessage());
 		}
 	}
 
@@ -68,6 +73,7 @@ public class DataUtil {
 				conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LogUtil.error(e.getMessage());
 		}
 	}
 
@@ -81,6 +87,7 @@ public class DataUtil {
 				conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LogUtil.error(e.getMessage());
 		}
 	}
 
@@ -96,6 +103,7 @@ public class DataUtil {
 				conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LogUtil.error(e.getMessage());
 		}
 	}
 

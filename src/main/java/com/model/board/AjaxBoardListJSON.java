@@ -1,10 +1,10 @@
-package test;
+package main.java.com.model.board;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import test.JSONListDTO;
+import main.java.com.model.board.JSONListDTO;
 
 public class AjaxBoardListJSON {
 	private long count;

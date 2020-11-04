@@ -1,9 +1,10 @@
-package test;
+package main.java.com.model.board;
 
 public class BoardListDTO {
 	private long postId; // 게시글 고유 번호
 	private String title; // 게시글 제목
 	private String writer; // 작성자
+	private long writerNum; // 작성자
 	private String nickName; // 닉네임
 	private String category; // 카테고리
 	private String regdate; // 작성일
@@ -34,6 +35,14 @@ public class BoardListDTO {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+
+	public long getWriterNum() {
+		return writerNum;
+	}
+
+	public void setWriterNum(long writerNum) {
+		this.writerNum = writerNum;
 	}
 
 	public String getNickName() {
@@ -94,9 +103,10 @@ public class BoardListDTO {
 
 	@Override
 	public String toString() {
-		return "BoardListDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", nickName=" + nickName
-				+ ", category=" + category + ", regdate=" + regdate + ", realFilePath=" + realFilePath
-				+ ", empathizeCnt=" + empathizeCnt + ", viewcnt=" + viewcnt + ", dataLength=" + dataLength + "]";
+		return "BoardListDTO [postId=" + postId + ", title=" + title + ", writer=" + writer + ", writerNum=" + writerNum
+				+ ", nickName=" + nickName + ", category=" + category + ", regdate=" + regdate + ", realFilePath="
+				+ realFilePath + ", empathizeCnt=" + empathizeCnt + ", viewcnt=" + viewcnt + ", dataLength="
+				+ dataLength + "]";
 	}
 
 }
