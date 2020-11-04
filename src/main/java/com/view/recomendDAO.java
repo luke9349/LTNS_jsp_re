@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 import main.java.com.model.DB;
 
-public class tableViewDAO {
+public class recomendDAO {
 
 	
 	Connection conn = null;
@@ -22,8 +22,15 @@ public class tableViewDAO {
 			"INSERT INTO empathize_table(post_id,mm_id) "
 			+"VALUES (?, ?)";
 	
+	public static final String SQL_DELETE_EMPATHIZE = 
+			"DELETE EMPATHIZE_TABLE WHERE post_id = ? AND mm_id =?";
 	
-	public tableViewDAO() {
+	public static final String SQL_SELECT_EMPATHIZE = 
+			"SELECT * FROM EMPATHIZE_TABLE et WHERE post_id =? AND MM_ID =? ";
+
+	
+	
+	public recomendDAO() {
 
 		try {
 			Class.forName(DB.DRIVER);
@@ -45,6 +52,25 @@ public class tableViewDAO {
 	} // end close()
 	
 
+	public int empathize_select(int post_id, int mm_id) {
+		int cnt = 0;
+		
+		try {
+			psmt = conn.prepareStatement(SQL_SELECT_EMPATHIZE);
+			psmt.setInt(1, post_id);
+			psmt.setInt(2, mm_id);
+			cnt = psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return cnt ;
+	}
+	
+	
+	
+	
 	
 	
 	public int empathize_insert(int post_id, int mm_id) {
@@ -54,7 +80,6 @@ public class tableViewDAO {
 			psmt = conn.prepareStatement(SQL_INSERT_EMPATHIZE);
 			psmt.setInt(1, post_id);
 			psmt.setInt(2, mm_id);
-			
 			cnt = psmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -63,6 +88,26 @@ public class tableViewDAO {
 		
 		return cnt ;
 	}
+	
+	public int empathize_delete(int post_id, int mm_id) {
+		int cnt = 0;
+		try {
+			psmt = conn.prepareStatement(SQL_DELETE_EMPATHIZE);
+			psmt.setInt(1, post_id);
+			psmt.setInt(2, mm_id);
+			cnt = psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return cnt ;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

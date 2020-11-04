@@ -19,6 +19,8 @@
 	String ctx = request.getContextPath();
 	System.out.println(file_info[0].getFilename());
 	int post_id = arr[0].post_id;
+	int streinger = Integer.parseInt(request.getParameter("writer"));
+	int rec_chk = Integer.parseInt(request.getParameter("rec_chk"));
 	
 
 %>
@@ -193,6 +195,8 @@ function chkSubmit(){
 		        </tr>
 				</table>
 				<input type="hidden" name="urls" value="<%=urls %>"/>
+				<input type="hidden" name="streinger" value="<%=streinger %>"/>
+				<input type="hidden" name="rec_chk" value="<%=rec_chk %>"/>
 			</form>
 	  </div>
 	</div>
