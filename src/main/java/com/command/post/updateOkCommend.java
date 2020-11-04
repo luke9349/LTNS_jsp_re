@@ -38,7 +38,6 @@ public class updateOkCommend implements Command {
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
 		
 		
-		
 		//정보들을 가지고옴 
 		String title = request.getParameter("title"); // 요청에서, title, content라는 name을 가진 파라미터 리턴
 		String content = request.getParameter("content");

@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
 
+#rec_btn span{
+	background-color: black;
+}
+
+
 
 
 /* Input style */

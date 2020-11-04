@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
-import main.java.com.model.DTO;
 import main.java.com.model.post.FileWriteDAO;
 import main.java.com.model.post.FileWriteDTO;
 import main.java.com.model.post.WriteDAO;
 import main.java.com.model.post.WriteDTO;
+import main.java.com.view.MemberDAO;
+import main.java.com.view.MemberDTO;
+import main.java.com.view.TOT_Post_DAO;
+import main.java.com.view.TOT_Post_DTO;
 
 public class ViewCommend implements Command {
 
@@ -25,10 +28,8 @@ public class ViewCommend implements Command {
 		//post_id를 통한 글보기 
 		//int post_id = Integer.parseInt(request.getParameter("post_id"));
 		//int writer_id = Integer.parseInt(request.getParameter("writer"));
-		int writer =2;
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
-
-		//int post_id = 336;
+		int writer = 2;
 		
 		if(post_id != 0) {
 			try {
@@ -56,9 +57,36 @@ public class ViewCommend implements Command {
 		}// end if
 		
 		
+		//member에서 유저 정보 가져오기 
 		
-	
+		if(writer != 0) {
+			MemberDTO[] memberarr = null;
+			MemberDAO memberdao = new MemberDAO();
+			
+			try {
+				memberarr = memberdao.member_Select(writer);
+				request.setAttribute("member", memberarr);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		
+		
+		
+		//공감수 가져오기 
+		
+		if (writer != 0 || post_id != 0) {
+			TOT_Post_DTO[] tdto = null;
+			TOT_Post_DAO tdao = new TOT_Post_DAO();
+			try {
+				tdto = tdao.tot_table_select(post_id);
+				request.setAttribute("tot", tdto);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		
 		

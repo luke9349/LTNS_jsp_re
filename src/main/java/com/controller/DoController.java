@@ -15,6 +15,7 @@ import main.java.com.command.mypage.Mypage_command;
 import main.java.com.command.post.WriteCommend;
 import main.java.com.command.post.comentCmd;
 import main.java.com.command.post.deleteCommend;
+import main.java.com.command.post.recomendCommend;
 import main.java.com.command.post.updateCommend;
 import main.java.com.command.post.updateOkCommend;
 import main.java.com.command.post.ViewCommend;
@@ -93,9 +94,14 @@ public class DoController extends HttpServlet {
 			cmd = new updateOkCommend();
 			cmd.execute(request, response);
 			viewPage = "updateOk.jsp";
-			break;	
+			break;
 			
-			
+		case "/post/recomendOk.do":	
+			cmd = new recomendCommend();
+			cmd.execute(request, response);
+			viewPage = "recomendOk.jsp";
+			break;
+				
 		case "/post/coment.do":
 			cmd = new comentCmd();
 			cmd.execute(request, response);
