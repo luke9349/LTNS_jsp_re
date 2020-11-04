@@ -1,4 +1,5 @@
 package test;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -89,7 +90,9 @@ public class TestDataBase {
 				String filePath = directory.getPath() + File.separator + i + ".tex";
 				File file = new File(filePath);
 				PrintWriter pw = new PrintWriter(file);
-				pw.println(i);
+				pw.println("title " + i);
+				pw.println("<p>" + i + "</p>");
+				pw.println("aljfsklahsfhajhjfhajkhgjkahjshjej");
 				pw.flush();
 				pw.close();
 				psmt.setString(2, file.getPath());
