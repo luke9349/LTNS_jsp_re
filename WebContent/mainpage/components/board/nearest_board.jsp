@@ -4,6 +4,8 @@
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page import="main.java.com.model.*" %>
+<%@page import="main.java.com.model.mainpage.*" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,14 +15,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LTNS_jsp</title>
+<title>최신순게시판</title>
 </head>
 <body>
 
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
+
 <div id="nearest_board">
-	<c:forEach var="i" begin="1" end="5" step="1">
-		<jsp:include page="./card/card_post.jsp"><jsp:param name="i" value="${i }"/></jsp:include>
+		<%
+			System.out.println("최신순:"+request.getAttribute("newarest_board"));
+			DTO[] dtos=((DTO[])request.getAttribute("newarest_board"));
+			
+			for(DTO v: dtos){
+				System.out.println("최신 dto닉넴 확인:"+((Post_DTO)v).getNickname());
+				
+			}
+		%>
+	<c:forEach var="dto" items="${empath_board }">
+		<jsp:include page="./card/card_post.jsp" >
+			<jsp:param name="title" value="${dto.post_contents.title }"/>
+			<jsp:param name="writer" value="${dto.nickname }"/>
+			<jsp:param name="regdate" value="${dto.regdate }"/>
+			<jsp:param name="contents" value="${dto.post_contents.contentsText }"/>
+			<jsp:param name="thumbnailPath" value="${dto.post_contents.thumbnailPath }"/>
+		</jsp:include>
 		<hr>
 	</c:forEach>
 	<!-- 방안1.프론트 단에서 처리 :  response된 데이터를, ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (비추) -->

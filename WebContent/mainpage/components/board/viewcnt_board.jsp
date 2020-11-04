@@ -23,10 +23,22 @@
 <div id="viewcnt_board" class="sm_board card">
 	<div class="board">
 		<h3><a href="">인기 게시판</a></h3>
+				<%
+				System.out.println("뷰카운트:"+request.getAttribute("viewcnt_board"));
+				DTO[] dtos=((DTO[])request.getAttribute("viewcnt_board"));
 				
-				<c:forEach var="i" begin="0" end="5" step="1">
+				for(DTO v: dtos){
+					System.out.println("뷰카운트 dto닉넴 확인:"+((Post_DTO)v).getNickname());
+					
+				}
+				%>
+				<c:forEach var="dto" items="${viewcnt_board }">
 					<hr>
-					<jsp:include page="./card/sm_card_list.jsp" ><jsp:param name="i" value="${i }"/></jsp:include>
+					<jsp:include page="./card/sm_card_list.jsp" >
+						<jsp:param name="title" value="${dto.post_contents.title }"/>
+						<jsp:param name="writer" value="${dto.nickname }"/>
+						<jsp:param name="regdate" value="${dto.regdate }"/>
+					</jsp:include>
 				</c:forEach>
 				<!-- 방안1.프론트 단에서 처리 :  response된 데이터를, ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (비추) -->
 				<!-- 방안2.백 단에서 처리 :  ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (for문 사용해야하나?) 

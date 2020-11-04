@@ -9,8 +9,7 @@ import main.java.com.model.Post_Contents;
 
 public class Mainpage_DAO implements DAO {
 	/*--공감 순으로 뷰를 정렬하여,포스트 3개  가져오기--*/
-	public final static String SELECT_3_POSTS_BY_EMPATHIZE_CNT="SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
-			" " + 
+	public final static String SELECT_3_POSTS_BY_EMPATHIZE_CNT="SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " +  
 			"FROM tot_post_view V " + 
 			"LEFT OUTER JOIN post_table P " + 
 			"ON V.post_id=P.post_id " + 
@@ -67,6 +66,7 @@ public class Mainpage_DAO implements DAO {
 	//객체 생성시, DB Connection 생성
 	public Mainpage_DAO() {
 		try {
+			System.out.println("DAO 생성");
 			Class.forName(DB.DRIVER);
 			conn=DriverManager.getConnection(DB.URL,DB.USERID,DB.USERPW);
 			System.out.println("DAO 생성, DB 연결");

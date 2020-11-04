@@ -25,7 +25,7 @@ function parseJSON(jsonObj){
 	var data=jsonObj.data;
 	for(var i=0;i<3;i++){
 		//게시글을 카운트 i=다음 인덱스가 된다!
-		var temp_title=data[i].title;
+		var temp_title=data[i].post_contents.title;
 		var temp_picture="글의 첫번째 사진 태그";
 		var temp_writer=data[i].nickname;
 		var temp_regdate=data[i].regdate;

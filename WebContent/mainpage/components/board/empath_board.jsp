@@ -3,6 +3,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page import="main.java.com.model.*" %>
+<%@page import="main.java.com.model.mainpage.*" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,9 +23,23 @@
 <div id="empath_board" class="sm_board card">
 	<div class="board">
 		<h3><a href="">공감 게시판</a></h3>
-		<c:forEach var="i" begin="1" end="3" step="1">
+		<%
+			System.out.println("공감:"+request.getAttribute("empath_board"));
+			DTO[] dtos=((DTO[])request.getAttribute("empath_board"));
+			
+			for(DTO v: dtos){
+				System.out.println("공감 dto닉넴 확인:"+((Post_DTO)v).getNickname());
+				
+			}
+		%>
+		<c:forEach var="dto" items="${empath_board }">
 			<hr>
-			<jsp:include page="./card/sm_card_post.jsp" />
+			<jsp:include page="./card/sm_card_post.jsp" >
+				<jsp:param name="title" value="${dto.post_contents.title }"/>
+				<jsp:param name="writer" value="${dto.nickname }"/>
+				<jsp:param name="regdate" value="${dto.regdate }"/>
+				<jsp:param name="contents" value="${dto.post_contents.contentsText }"/>
+			</jsp:include>
 		</c:forEach>
 		<!-- 방안1.프론트 단에서 처리 :  response된 데이터를, ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (비추) -->
 		<!-- 방안2.백 단에서 처리 :  ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (for문 사용해야하나?) 

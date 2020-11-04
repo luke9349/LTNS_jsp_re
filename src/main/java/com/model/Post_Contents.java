@@ -9,11 +9,10 @@ import java.io.InputStreamReader;
 
 
 public class Post_Contents {
-	private String title;
-	private String contentsText;
-	private String thumbnailPath;
+	private String title; //글 제목
+	private String contentsText; //글 내용 text만
+	private String thumbnailPath; //글 사진주소
 	
-	private String contents;
 	
 	public Post_Contents(String filePath){
 		File file=new File(filePath);
@@ -45,7 +44,7 @@ public class Post_Contents {
 					}
 				}
 				//replaceAll("<img.*","").replaceAll("\" title=.*\">","") 이미지 태그 제거용
-				afterStr=beforeStr.replaceAll("<img.*","").replaceAll(" title=.*\"clear:both;\">","").replaceAll("<br.*>", "\n").replaceAll("<[^>]*>", "").replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&nbsp;"," ");
+				afterStr=beforeStr.replaceAll("<img.*","").replaceAll(" title=.*\"clear:both;\">","").replaceAll("<br.*>", "\n").replaceAll("<[^>]*>", "").replaceAll("&nbsp;"," ");
 				_contentsText.append(afterStr);
 			}//end while
 			br.close();

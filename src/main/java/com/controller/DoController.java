@@ -103,6 +103,7 @@ public class DoController extends HttpServlet {
 			
 		
 		case "/mainpage/mainpage.do":
+			System.out.println("두컨트롤러 확인");
 			cmd=new Mainpage_Command();
 			cmd.execute(request, response);
 			viewPage="mainpage.jsp";

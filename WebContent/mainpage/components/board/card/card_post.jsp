@@ -5,15 +5,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!-- div 이외 부분은 실행시 주석화 할 것! -->
+<!-- -->
+<c:set var="title" value='<%=request.getParameter("title") %>'/>
+<c:set var="writer" value='<%=request.getParameter("writer") %>'/>
+<c:set var="regdate" value='<%=request.getParameter("regdate") %>'/>
+<c:set var="contents" value='<%=request.getParameter("contents") %>'/>
+<c:set var="thumbnailPath" value='<%=request.getParameter("thumbnailPath") %>'/>
 <c:set var="i" value='<%=request.getParameter("i") %>'/>
 <a id="whole_${i }" class="card_post article" href="#">
 	<div class="card_post-main">
-		<p class="card_post-title title">제목</p>
-		<div class="sm_card_list-metadata"><p class="card_post-writer small">작성자</p><time class="card_post-regdate small">2020-12-25 22:30</time></div>
-		<p class="card_post-contents small">내용askljdhkadfjhga;;iasdngfv;laksdfoaiedghja;oisdaso;dfkjasdlfj</p>
+		<p class="card_post-title title">${param.title }</p>
+		<div class="sm_card_list-metadata"><p class="card_post-writer small">${param.writer }</p><time class="card_post-regdate small">${param.regdate }</time></div>
+		<p class="card_post-contents small">${param.contents }</p>
 	</div>
-	<div class="card_post-picture">사진</div>
+	<div class="card_post-picture"><img src="${param.thumbnailPath }"/></div>
 </a>
-<!-- div 이외 부분은 실행시 주석화 할 것! -->
+<!--  -->
 
