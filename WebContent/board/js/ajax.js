@@ -143,7 +143,6 @@ export const createQuery = () => {
 export const getDate = (initialParams) => {
   params = initialParams;
   query = createQuery();
-console.log(query);
   contextPath = getContextPath();
   requestAjax();
 };

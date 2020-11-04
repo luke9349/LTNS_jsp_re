@@ -6,11 +6,22 @@ const initialParams = {
   search: null,
 };
 
+const inspectQuery = {
+  root: ['NOTICE', 'MOVIE', 'BOOK', 'GAME', 'VIEWCNT', 'EMPATHIZE'],
+  type: ['list', 'album', 'post'],
+  searchType: ['titleAndContent', 'content', 'title'],
+}
+
 let params = initialParams;
+
+const checkQuery = (searchParams) => {
+	param
+}
 
 const handleParams = () => {
   const search = new URLSearchParams(location.search);
   const searchParams = Object.fromEntries(search);
+  checkQuery(searchParams);
   if (searchParams.root) params.root = searchParams.root;
   if (searchParams.type) params.type = searchParams.type;
   if (searchParams.page) params.page = searchParams.page;
