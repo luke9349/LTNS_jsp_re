@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+.wrap{
+		position: absolute;
+		height: 300px;
+		width: 400px;
+		margin: -150px 0px 0px -200px;
+		top: 50%;
+		left: 50%;
+		padding: 5px;
+	}
+
+
+	
+	
+
