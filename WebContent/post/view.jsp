@@ -133,7 +133,7 @@ function deletePost(uid){
 	<div class="d-block">
 		<table>
 		<tr>
-		<th>[<%=name %>] </th> [<%=date %>] [<%=viewCnt %>] [<%=post_content %>]</h5>
+		<th>[<%=name %>] </th> <th>[<%=date %>]</th> <th>[<%=viewCnt %>]</th> <th>[<%=post_content %>]</th>
 		</tr>
 		</table> 
 	</div>
