@@ -38,6 +38,8 @@ public class BoarAjaxCommand implements Command, Board_Command {
 			String searchType = null;
 			String search = null;
 			int page = 1;
+			
+			System.out.println("asfjklajgfklasjhklasjklf: " + request.getParameter("page"));
 
 			if (request.getParameter("root") != null)
 				category = request.getParameter("root");

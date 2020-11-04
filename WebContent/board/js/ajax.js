@@ -108,7 +108,8 @@ const requestAjax = () => {
       if (params.type !== 'post') initPagination(params, json.count);
       $('#loading').addClass('hide');
       $('#main').removeClass('hide');
-    }).catch(e => history.back());
+    }).catch(e => console.log(e));
+// location.href='board_list.do'
 // location.href='board_list.do'
 };
 
@@ -142,6 +143,7 @@ export const createQuery = () => {
 export const getDate = (initialParams) => {
   params = initialParams;
   query = createQuery();
+console.log(query);
   contextPath = getContextPath();
   requestAjax();
 };
