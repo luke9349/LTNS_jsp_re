@@ -108,9 +108,8 @@ const requestAjax = () => {
       if (params.type !== 'post') initPagination(params, json.count);
       $('#loading').addClass('hide');
       $('#main').removeClass('hide');
-    }).catch(e => console.log(e));
-// location.href='board_list.do'
-// location.href='board_list.do'
+    })
+    .catch((e) => console.log(e));
 };
 
 export const getContextPath = () => {
