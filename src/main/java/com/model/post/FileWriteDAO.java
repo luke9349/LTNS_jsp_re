@@ -26,10 +26,12 @@ public class FileWriteDAO implements DAO {
 	public static final String SQL_FILE_UPDATE = 
 			"UPDATE FILE_TABLE  SET FILENAME = ? WHERE file_id = ?";
 	
+	public static final String SQL_FILE_DELETE = 
+			"DELETE FILE_TABLE WHERE FILE_ID = ?";
+	
 	
 	
 	public FileWriteDAO() {
-
 		try {
 			Class.forName(DB.DRIVER);
 			conn = DriverManager.getConnection(DB.URL, DB.USERID, DB.USERPW);
@@ -152,6 +154,21 @@ public class FileWriteDAO implements DAO {
 		}
 	
 	
+	//파일 삭제하기 
+	
+	 public int file_delete(int post_content) throws SQLException {
+				int cnt =0;
+				
+				try {
+					psmt = conn.prepareStatement(SQL_FILE_DELETE);
+					psmt.setInt(1, post_content);
+					cnt = psmt.executeUpdate();
+				} finally {
+					close();
+				}
+				
+				return cnt;
+	 }
 	
 	
 	

@@ -6,19 +6,26 @@
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link href="loginmainstyle.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
 <title>로그인화면</title>
 </head>
+
 <body id="login_main">
-	<div id="wrap">
+	<div class="wrap text-center">
 		<div id="header">
 		<h1>
-			<a id="login_logo" href="loginmain.jsp">LTNS</a>
+			<a id="login_logo" href="loginmain.jsp">
+				<img alt="Login_logo" src="../board/favicon.ico">
+			</a>
 		</h1>
 		</div>
+		
 		<div id="container">
-			<div id="content">
+			<div class="content">
 				
 				<form action="">
 					<fieldset class="login_form"> 
@@ -52,7 +59,10 @@
 						<a target="_blank" id="pwinquiry" href="find-password.jsp"> 비밀번호 찾기</a>
 						<span class="bar" aria-hidden="true" > | </span>
 						
-						<a target="_blank" id="signup" href="sign-up.jsp"> 회원가입</a>
+						<a target="_blank" id="signup" href="privacy.jsp"> 회원가입</a>
+						<span class="bar" aria-hidden="true" > | </span>
+						
+						<a target="_blank" id="signup" href=""> 게스트로그인</a>
 						
 							
 					</div>
