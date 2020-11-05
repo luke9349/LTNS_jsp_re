@@ -358,4 +358,18 @@ public class Mypage_DAO implements DAO {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+
+		@Override
+		public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+
+		@Override
+		public int insertBySQL_withDTO(String sql, DTO... dtos) throws SQLException {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 }

@@ -45,7 +45,10 @@
 				<!-- 방안2.백 단에서 처리 :  ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (for문 사용해야하나?) 
 				include 되야할 것에 변수를 어떻게 넘길까?-->
 			
-		
+		<nav class="mt-5" aria-label="pagination">
+		  <ul class="pagination" id="pagination">
+		  </ul>
+		</nav>
 	</div>
 </div>
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
