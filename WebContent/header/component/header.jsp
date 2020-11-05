@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <header>
 	<div id="login">
      	<a class="nav__login btn btn-primary mr-2">로그인</a>
-       	<a class="btn btn-secondary">로그아웃</a>
+       	<a id ="btn_login" class="btn btn-secondary">로그아웃</a>
 	</div>
 	<div>
 		<a class="navbar-brand" href="../mainpage/mainpage.do">
@@ -43,3 +44,26 @@
 	    </div>
 	</nav>
 </header>
+
+<script>
+	var btns =  document.getElementById("btn_login")
+	var cnt = 0;
+	btns.onclick = function(){
+		alert("로그아웃");
+		cnt =1;
+		if(cnt =1){
+		<%
+		
+        session.removeAttribute("login");
+        session.removeAttribute("writer");
+        session.removeAttribute("grade");
+        session.removeAttribute("rec_chk_write");
+        System.out.println("진입합니까??");
+        %>
+		}
+    	location.href = "<%=request.getContextPath() %>/membermanage/loginmain.jsp";
+    	
+    }	
+	
+
+</script>

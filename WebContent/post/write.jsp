@@ -11,11 +11,6 @@
 	
 	String writer = request.getParameter("writer");
 	
-	String sessionId = session.getId();
-	int sessionInterval = session.getMaxInactiveInterval();
-
-	session.setAttribute("writer", 1);
-	session.setAttribute("rec_chk_write", 0);
 	
 	
 	
@@ -98,11 +93,12 @@ function chkSubmit(){
 </script>
 
 
-<body>
+<body class="container">
+
 	<!--  헤더  -->
 		<jsp:include page="../header/component/header.jsp" />
 	<jsp:include page="CSS/ltns.html"/>
-	<div class="container col-12">
+	<div class=" col-12">
 	   <form name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
 		        <tr class="tableheader">

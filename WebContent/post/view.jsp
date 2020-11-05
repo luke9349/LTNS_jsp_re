@@ -159,11 +159,11 @@ function recommend(){
 	   
 
 </script>
-<body>
+<body class="container">
 	<!--  헤더  -->
 	<jsp:include page="../header/component/header.jsp" />
 
-<div class="container col-12 mt-2">
+ <div class="col-12 mt-2">
 	<!-- 제목 카테고리  -->
 	<div class="top title">
 		<h3>[<%=category %>]  &nbsp; [<%=title %>]</h3> 
