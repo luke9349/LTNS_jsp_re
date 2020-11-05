@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import main.java.com.command.Command;
 import main.java.com.model.post.FileWriteDAO;
@@ -25,12 +26,12 @@ public class ViewCommend implements Command {
 		FileWriteDTO[] file = null;
 		FileWriteDAO filedao = new FileWriteDAO();
 		int post_contents ;
-		//post_id를 통한 글보기 
-		//int post_id = Integer.parseInt(request.getParameter("post_id"));
-		//int writer_id = Integer.parseInt(request.getParameter("writer"));
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
-		int writer = 2;
 		
+		HttpSession session =  request.getSession();
+	    int writer =  (int) session.getAttribute("writer");
+				
+				
 		if(post_id != 0) {
 			try {
 				arr =  dao.wr_view(post_id);

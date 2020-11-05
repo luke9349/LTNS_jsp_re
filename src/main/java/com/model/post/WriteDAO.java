@@ -75,7 +75,7 @@ public class WriteDAO implements DAO {
 		int cnt =0;
 		
 		String title = dto.getTitle(); //제목 
-		String writer = dto.getWriter(); // 글쓴이
+		int writer = dto.getWriter(); // 글쓴이
 		String category = dto.getCategory(); // 카테고리 
 		int currvaldata = currval;
 		
@@ -83,14 +83,14 @@ public class WriteDAO implements DAO {
 		return cnt;
 	}
 	
-	public int wr_insert(String title, String category, String writer ,int currvaldata) throws SQLException {
+	public int wr_insert(String title, String category, int writer ,int currvaldata) throws SQLException {
 		int cnt = 0;
 	
 		
 		try {
 			psmt = conn.prepareStatement(SQL_WRITE_INSERT);
 			psmt.setString(1, title);
-			psmt.setString(2, writer);
+			psmt.setInt(2, writer);
 			psmt.setString(3, category);
 			psmt.setInt(4, currvaldata);
 			cnt = psmt.executeUpdate();
@@ -109,7 +109,7 @@ public class WriteDAO implements DAO {
 
 			int post_id = rs.getInt("post_id"); // 게시글 고유번호 
 			String title = rs.getString("title"); //제목 
-			String writer = rs.getString("writer"); //제목 
+			int writer = rs.getInt("writer"); //제목 
 			String category = rs.getString("category"); //제목 
 			//sysdate
 			Date d = rs.getDate("regdate");

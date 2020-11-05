@@ -111,7 +111,10 @@ public class updateOkCommend implements Command {
 
 				realPath = saveDirectory + File.separator + fName  ; // 파일경로
 				// out.println(saveDirectory+"세이브디렉토리 <br>"+fName +"파일이름 <br>"+filePath+"파일패스");
-
+				System.out.println(realPath + " 리얼패수");
+				System.out.println(saveDirectory + " 세이브 디렉토리");
+				
+				
 				// 내용저장객체 생성
 				pw = new PrintWriter(realPath);
 				pw.println("title" + title);
@@ -140,7 +143,7 @@ public class updateOkCommend implements Command {
 				System.out.println(post_contents);
 				System.out.println(fName);
 				FileWriteDAO fileupdate = new FileWriteDAO();
-				file_quert_cnt = fileupdate.File_Update(fName, post_contents);
+				file_quert_cnt = fileupdate.File_Update(fName, realPath, post_contents);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

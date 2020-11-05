@@ -15,12 +15,13 @@
 	request.setCharacterEncoding("utf-8");
 	WriteDTO[] arr = (WriteDTO[])request.getAttribute("update");	
 	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("file_view");
-
+	
 	String ctx = request.getContextPath();
-	System.out.println(file_info[0].getFilename());
-	int post_id = arr[0].post_id;
-	int streinger = Integer.parseInt(request.getParameter("writer"));
-	int rec_chk = Integer.parseInt(request.getParameter("rec_chk"));
+	
+	int post_id = Integer.parseInt(request.getParameter("post_id"));
+	int writer =  (int) session.getAttribute("writer");
+	String grade =  (String)session.getAttribute("grade");
+	
 	
 
 %>
@@ -169,11 +170,11 @@ function chkSubmit(){
 		        <tr >
 		       		<td class="text-center" style="width:5%;">
 		       		<select name="category" class='selector'>
-		       		<option value="NOTICE" selected="selected"> 공지사항 </option>
-		       		<option value="MOVIE"> 영화 게시판 </option>
+		       		<option value="NOTICE" > 공지사항 </option>
+		       		<option value="MOVIE" selected="selected" > 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
 		       		<option value="BOOK">도서 게시판  </option>
-		       		<option value="SPORT"> 운동 게시판 </option>	
+		       		<option value="SPORTS"> 운동 게시판 </option>	
 		       		</select>
 		       		</td>     
 		            <td>
@@ -195,8 +196,8 @@ function chkSubmit(){
 		        </tr>
 				</table>
 				<input type="hidden" name="urls" value="<%=urls %>"/>
-				<input type="hidden" name="streinger" value="<%=streinger %>"/>
-				<input type="hidden" name="rec_chk" value="<%=rec_chk %>"/>
+				<input type="hidden" name="streinger" value="<%=writer %>"/>
+			
 			</form>
 	  </div>
 	</div>

@@ -2,6 +2,7 @@ package main.java.com.command.post;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import main.java.com.command.Command;
 import main.java.com.view.recomendDAO;
@@ -15,11 +16,12 @@ public class recomendCommend implements Command{
 		int cnt =0;
 		
 		
-		
+		HttpSession session =  request.getSession();
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
-		int mm_id = Integer.parseInt(request.getParameter("writer"));
-		int rec_chkes = Integer.parseInt(request.getParameter("rec_chk"));
-		System.out.println(rec_chkes);
+		int rec_chkes =  (int) session.getAttribute("rec_chk_chks"); // 1 공감 ++ , 0 공감 -- 
+		int mm_id =  (int) session.getAttribute("writer");
+		
+		
 			// 추천받았을때 값증가
 		
 		recomendDAO dao = new recomendDAO();
@@ -31,7 +33,7 @@ public class recomendCommend implements Command{
 		}else if (rec_chkes == 0) {
 				cnt = dao.empathize_delete(post_id, mm_id);
 				request.setAttribute("rec", cnt);
-			}	
+		}	
 	
 			
 			

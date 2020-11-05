@@ -9,14 +9,12 @@ VALUES (1,'sampleid','sample_pwd1','샘플닉네임','sampleemail@sample.com','M
 
 --AI 활용
 INSERT INTO mm_table(mm_id,id,password,nickname,email,grade)
-VALUES (SEQ_mm_table_mm_id.NEXTVAL,'sampleid23','123123','샘플닉네임23','sample23email@sample.com','MEMBER');
+VALUES (SEQ_mm_table_mm_id.NEXTVAL,'sadmin','asd','admin','sample23email@samplse.com','admin');
 
 --최신 AI 값
 SELECT SEQ_mm_table_mm_id.CURRVAL FROM DUAL;
 
 /*확인*/
-SELECT * FROM mm_table;
-
 
 DELETE FROM mm_table;
 
@@ -181,16 +179,31 @@ VALUES (6, 2);
 SELECT * FROM EMPATHIZE_TABLE et ;
 
 
-DELETE EMPATHIZE_TABLE WHERE post_id = 6 AND mm_id =2;
+DELETE EMPATHIZE_TABLE WHERE post_id = 60;
 
 SELECT * FROM MM_TABLE mt ;
 
-SELECT * FROM tot_post_view WHERE post_id =6;
+SELECT * FROM tot_post_view WHERE post_id =60;
 
+SELECT * FROM tot_post_view;
 
 
 
 SELECT * FROM FILE_TABLE ft ;
 SELECT * FROM POST_TABLE pt ;
+SELECT * FROM mm_table;
+
+
+
+
+DELETE FROM POST_TABLE pt ;
+DELETE FROM FILE_TABLE ft ;
+
+
+
+
 DELETE FILE_TABLE WHERE FILE_ID = 3;
 SELECT * FROM FILE_TABLE ft WHERE FILE_ID =4;
+
+UPDATE FILE_TABLE  SET FILENAME = 'test.tste' , REAL_FILENAME  = 'te.tst' WHERE file_id = 79;
+

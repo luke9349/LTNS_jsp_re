@@ -24,8 +24,8 @@ public class FileWriteDAO implements DAO {
 			"SELECT * FROM FILE_TABLE ft WHERE FILE_ID =  ?";
 			
 	public static final String SQL_FILE_UPDATE = 
-			"UPDATE FILE_TABLE  SET FILENAME = ? WHERE file_id = ?";
-	
+			"UPDATE FILE_TABLE  SET FILENAME = ? , REAL_FILENAME  = ? WHERE file_id = ?";
+
 	public static final String SQL_FILE_DELETE = 
 			"DELETE FILE_TABLE WHERE FILE_ID = ?";
 	
@@ -135,13 +135,14 @@ public class FileWriteDAO implements DAO {
 
 	
 	//파일업데이트 시키기 
-	public int File_Update(String file_name,int file_id) throws SQLException {
+	public int File_Update(String file_name, String file_real_path, int file_id) throws SQLException {
 			int cnt = 0;
 			try {
 				psmt = conn.prepareStatement(SQL_FILE_UPDATE);
 				System.out.println("sql문작동하나요?");
 				psmt.setString(1, file_name);
-				psmt.setInt(2, file_id);
+				psmt.setString(2, file_real_path);
+				psmt.setInt(3, file_id);
 				cnt = psmt.executeUpdate();
 			}catch (Exception e) {
 				e.printStackTrace();
