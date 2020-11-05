@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import main.java.com.model.DAO;
 import main.java.com.model.DB;
 import main.java.com.model.DTO;
+import main.java.com.util.DataUtil;
 
 public class File_DAO implements DAO {
 
@@ -28,8 +29,8 @@ public class File_DAO implements DAO {
 	//객체 생성시, DB Connection 생성
 	public File_DAO() {
 		try {
-			Class.forName(DB.DRIVER);
-			conn=DriverManager.getConnection(DB.URL,DB.USERID,DB.USERPW);
+			System.out.println("DAO 생성");
+			conn=DataUtil.getConnection();
 			System.out.println("DAO 생성, DB 연결");
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -144,6 +145,62 @@ public class File_DAO implements DAO {
 
 	@Override
 	public DTO[] selectBySQL(String sql, int... integerParamForPstmt) throws SQLException {
+		return null;
+	}
+
+
+	@Override
+	public DTO mkDTO(ResultSet rs, int signal) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public DTO[] mkDTOs(ResultSet rs, int signal) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public DTO[] withSignal(DTO[] _arr, int signal) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal, int integerParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal, int... integerParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal, String stringParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal, String... stringParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

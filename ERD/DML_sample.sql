@@ -169,3 +169,72 @@ SELECT file_id, filekind, filename, real_filename
 FROM file_table
 WHERE file_id=?
 ;
+
+
+/*-----------------------------------마이페이지 관련-----------------------------------*/
+/*--내가 작성한 글을 최신순으로, 포스트 5개  가져오기--*/
+SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt
+FROM tot_post_view V 
+LEFT OUTER JOIN post_table P
+ON V.post_id=P.post_id
+LEFT OUTER JOIN mm_table M
+ON P.writer=M.mm_id
+LEFT OUTER JOIN file_table F
+ON P.post_contents=F.file_id
+WHERE M.mm_id=? AND ROWNUM <= 5
+ORDER BY P.regdate DESC
+;
+
+--count 가져오기(pagination 위함)
+SELECT COUNT(*) AS post_cnt 
+FROM post_table
+WHERE writer=?
+GROUP BY writer
+;
+
+/*--내가 작성한 댓글을 최신순으로, 댓글 5개  가져오기--*/
+--comment_id, post_id, regdate, contents
+SELECT  comment_id, post_id, regdate, comment_contents
+FROM comment_table
+WHERE writer=? AND ROWNUM <=5
+ORDER BY regdate
+;
+
+--count 가져오기(pagination 위함)
+SELECT COUNT(*) AS comment_cnt 
+FROM comment_table
+WHERE writer=?
+GROUP BY writer
+;
+
+/*--내가 공감한 게시글을 최신순으로, 포스트 5개 가져오기--*/
+--post_id, post_title, writer, regdate
+SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt
+FROM empathize_table E
+LEFT OUTER JOIN mm_table M
+ON E.mm_id=M.mm_id
+LEFT OUTER JOIN post_table P
+ON M.mm_id=P.writer
+LEFT OUTER JOIN file_table F
+ON P.post_contents=F.file_id
+WHERE E.mm_id=1 AND ROWNUM <= 1+4
+;
+
+--count 가져오기(pagination 위함)
+SELECT COUNT(*) AS empathize_post_cnt
+FROM empathize_table E
+WHERE mm_id=?
+GROUP BY mm_id
+;
+
+--post_id, post_title, writer, regdate
+SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt
+FROM empathize_table E
+LEFT OUTER JOIN mm_table M
+ON E.mm_id=M.mm_id
+LEFT OUTER JOIN post_table P
+ON M.mm_id=P.writer
+LEFT OUTER JOIN file_table F
+ON P.post_contents=F.file_id
+WHERE E.mm_id=1 AND ROWNUM >= 1 AND ROWNUM <= 1+4
+;

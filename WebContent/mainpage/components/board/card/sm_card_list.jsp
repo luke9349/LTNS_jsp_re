@@ -8,16 +8,16 @@
 
 <!--  -->
 <% 
-	String str=request.getParameter("title");
+	String str=request.getParameter("viewCnt");
 	System.out.println("sm_card_list : "+str);
 %>
 <c:set var="post_id" value='<%=request.getParameter("post_id") %>'/>
 <c:set var="title" value='<%=request.getParameter("title") %>'/>
-<c:set var="writer" value='<%=request.getParameter("writer") %>'/>
 <c:set var="regdate" value='<%=request.getParameter("regdate") %>'/>
+<c:set var="viewCnt" value='<%=request.getParameter("viewCnt") %>'/>
 
 <a class="sm_card_list list" href="../post/view.do?post_id=${post_id }">
 	<p class="sm_card_list-title title">${param.title }</p>
-	<div class="sm_card_list-metadata"><p class="sm_card_list-writer small">${param.writer }</p><time class="sm_card_list-regdate small">${param.regdate }</time></div>
+	<div class="sm_card_list-metadata"><time class="sm_card_list-regdate small">${param.regdate }</time><p class="sm_card_list-writer small">조회수 : ${param.viewCnt }</p></div>
 </a>
 <!-- -->
