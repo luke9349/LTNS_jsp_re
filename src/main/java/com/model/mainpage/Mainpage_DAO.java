@@ -6,6 +6,7 @@ import main.java.com.model.DAO;
 import main.java.com.model.DB;
 import main.java.com.model.DTO;
 import main.java.com.model.Post_Contents;
+import main.java.com.util.DataUtil;
 
 public class Mainpage_DAO implements DAO {
 	/*--공감 순으로 뷰를 정렬하여,포스트 3개  가져오기--*/
@@ -67,8 +68,7 @@ public class Mainpage_DAO implements DAO {
 	public Mainpage_DAO() {
 		try {
 			System.out.println("DAO 생성");
-			Class.forName(DB.DRIVER);
-			conn=DriverManager.getConnection(DB.URL,DB.USERID,DB.USERPW);
+			conn=DataUtil.getConnection();
 			System.out.println("DAO 생성, DB 연결");
 		}catch (Exception e) {
 			e.printStackTrace();

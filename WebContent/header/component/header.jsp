@@ -6,7 +6,7 @@
        	<a class="btn btn-secondary">로그아웃</a>
 	</div>
 	<div>
-		<a class="navbar-brand" href="/<%=request.getContextPath() %>/index.do">
+		<a class="navbar-brand" href="../mainpage/mainpage.do">
 	    	<img src="../images/logo.png" alt="logo" class="navbar__logo"/>
 	    </a>
 	</div>
@@ -38,12 +38,6 @@
 	         	</li>
 	         	<li class="nav-item">
 	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=GAME">게임게시판</a>
-	         	</li>
-	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=EMPATHIZE">공감게시판</a>
-	         	</li>
-	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=VIEWCNT">조회수게시판</a>
 	         	</li>
 	       	</ul>
 	    </div>

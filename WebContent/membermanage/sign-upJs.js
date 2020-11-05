@@ -1,49 +1,21 @@
 
-	function radioCheckY(provisionY){
-		
-		
-		$("#provisionY").prop("checked",true);
-		$("#provisionN").prop("checked", false);
-		
-		/*$("input:radio[name='NAME']:radio[value='VALUE']").attr("checked",true);
-		$("input:radio[name='NAME']").removeAttr("checked");*/
-
-
-		
-		
-		
-	}
-	
-	function radioCheckN(provisionN){
-		
-		
-		$("#provisionN").attr("checked",true);
-		$("#provisionY").attr("checked", false);
-		
-		/*$("input:radio[name='NAME']:radio[value='VALUE']").attr("checked",true);
-		$("input:radio[name='NAME']").removeAttr("checked");*/
-
-
-		
-		
-		
-	}
-
 	
 	
-	
-	
+
+
 	function formCheck(signup) {
 		
 		
 		var getemail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/); 
 		var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/); 
 		var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/); 
+		var privacyCheck = $(":input:radio[name=provisionYn]:checked").val();
+
 		
 		
 		
 		//약관동의 확인
-		if($("provisionN").checked == true ){ alert("약관동의 확인"); $("#radio").focus(); return false; }
+		if(privacyCheck == "N" || $("#provisionYn").val() == ""){ alert("약관동의 확인"); return false;}
 		
 		//아이디 공백 확인 
 		if($("#id").val() == ""){
