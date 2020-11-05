@@ -20,7 +20,7 @@
 <body>
 
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
-<div id="mypost_board" class="sm_board card">
+<div id="myempath_board" class="card">
 	<div class="board">
 		<h3><a href="#">공감한 글 게시판</a></h3>
 				<%
@@ -31,10 +31,11 @@
 					System.out.println("내가쓴글게시판 dto닉넴 확인:"+((Post_DTO)v).getNickname());
 					
 				}
+				//내용 작성자 작성일 ()
 				%>
 				<c:forEach var="dto" items="${mypost_board }">
 					<hr>
-					<jsp:include page="./card/sm_card_list.jsp" >
+					<jsp:include page="./card/sm_card_list3.jsp" >
 						<jsp:param name="post_id" value="${dto.post_id }"/>
 						<jsp:param name="title" value="${dto.post_contents.title }"/>
 						<jsp:param name="regdate" value="${dto.regdate }"/>
