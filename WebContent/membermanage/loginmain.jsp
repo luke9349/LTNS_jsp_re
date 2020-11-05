@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.css">
-<link href="loginmainstyle.css" rel="stylesheet" type="text/css">
+<link href="CSS/loginmainstyle.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,7 +19,7 @@
 		<div id="header">
 		<h1>
 			<a id="login_logo" href="loginmain.jsp">
-				<img alt="Login_logo" src="../board/favicon.ico">
+				<img alt="Login_logo" src="../images/favicon.ico">
 			</a>
 		</h1>
 		</div>
@@ -53,16 +53,16 @@
 				</form>
 				<div class="position_a">
 					<div class="find_info">
-						<a target="_blank" id="idinquiry" href="find-id.jsp"> 아이디 찾기</a>
+						<a  id="idinquiry" href="find-id.jsp"> 아이디 찾기</a>
 						<span class="bar" aria-hidden="true" > | </span>
 						
-						<a target="_blank" id="pwinquiry" href="find-password.jsp"> 비밀번호 찾기</a>
+						<a  id="pwinquiry" href="find-password.jsp"> 비밀번호 찾기</a>
 						<span class="bar" aria-hidden="true" > | </span>
 						
-						<a target="_blank" id="signup" href=""> 회원가입</a>
+						<a  id="signup" href="sign-up.jsp"> 회원가입</a>
 						<span class="bar" aria-hidden="true" > | </span>
 						
-						<a target="_blank" id="signup" href=""> 게스트로그인</a>
+						<a  id="signup" href=""> 게스트로그인</a>
 						
 							
 					</div>
