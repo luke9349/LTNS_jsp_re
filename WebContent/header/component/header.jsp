@@ -6,7 +6,7 @@
        	<a class="btn btn-secondary">로그아웃</a>
 	</div>
 	<div>
-		<a class="navbar-brand" href="/<%=request.getContextPath() %>/mainpage.do">
+		<a class="navbar-brand" href="../mainpage/mainpage.do">
 	    	<img src="../images/logo.png" alt="logo" class="navbar__logo"/>
 	    </a>
 	</div>
