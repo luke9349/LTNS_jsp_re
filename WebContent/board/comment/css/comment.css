@@ -1,0 +1,45 @@
+.alert {
+	margin-bottom: 0.25rem;
+}
+
+.alertBox {
+	display: flex;
+	justify-content: space-between;
+}
+
+.alert:hover {
+	background-color: #28a745;
+	color: #f8f9fa;
+}
+
+.inserBtn:active {
+	color: #dc3545;
+	transform: scale(0.98);
+	opacity: 0.8;
+}
+
+.inserBtn:hover {
+	color: #fd7e14;
+}
+
+.trashBtn:active {
+	color: #fd7e14;
+	transform: scale(0.98);
+	opacity: 0.8;
+}
+
+.trashBtn:hover {
+	color: #dc3545;
+}
+
+#downArrow {
+	transition: transform 0.5s ease-in-out;
+}
+
+#downArrow.active {
+	transform: rotate(180deg);
+}
+
+.hide {
+	display: none;
+}
