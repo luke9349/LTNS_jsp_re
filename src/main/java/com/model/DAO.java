@@ -58,5 +58,18 @@ public interface DAO {
 	// 0-2-2-1. sql => ResultSet : String 매개변수들을 받는 sql문으로 가져오기
 	public DTO[] selectBySQL_withSignal(String sql, int signal, String ...stringParamForPstmt) throws SQLException;
 
+
+	/*---------------------insert---------------------*/
+	// insert : DTO => DB 
+	public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException;
+
+	// insert : DTOs => DB 
+	public int insertBySQL_withDTO(String sql, DTO ...dtos) throws SQLException;
 	
+	/*---------------------delete---------------------*/
+	
+	
+	/*---------------------update---------------------*/
+	
+
 }

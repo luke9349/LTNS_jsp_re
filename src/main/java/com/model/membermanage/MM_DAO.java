@@ -159,7 +159,58 @@ public class MM_DAO implements DAO {
 			return arr;
 		}
 
+		
+		
+		// insert : DTO => DB 
+		@Override
+		public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException{
+			int cnt=0;
+			MM_DTO mm_dto=(MM_DTO)dto;
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, mm_dto.getMm_id());
+				pstmt.setString(2, mm_dto.getId());
+				pstmt.setString(3, mm_dto.getPassword());
+				pstmt.setString(4, mm_dto.getNickname());
+				pstmt.setString(5, mm_dto.getEmail());
+				pstmt.setString(6, mm_dto.getGrade());
+				cnt=pstmt.executeUpdate();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}finally {
+				close();
+			}
+			return cnt;
+		}//end insert dto
 
+		
+		// insert : DTOs => DB 
+		@Override
+		public int insertBySQL_withDTO(String sql, DTO ...dtos) throws SQLException{
+			int cnt=0;
+			try {
+				for(DTO dto:dtos) {
+					MM_DTO mm_dto=(MM_DTO)dto;
+					pstmt=conn.prepareStatement(sql);
+					pstmt.setInt(1, mm_dto.getMm_id());
+					pstmt.setString(2, mm_dto.getId());
+					pstmt.setString(3, mm_dto.getPassword());
+					pstmt.setString(4, mm_dto.getNickname());
+					pstmt.setString(5, mm_dto.getEmail());
+					pstmt.setString(6, mm_dto.getGrade());					
+				}
+				cnt=pstmt.executeUpdate();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}finally {
+				close();
+			}
+			return cnt;
+		}//end insert dtos
+		
+		
+		
+		
 		@Override
 		public DTO[] selectBySQL(String sql, int... integerParamForPstmt) throws SQLException {
 			return null;
