@@ -72,21 +72,23 @@
 <c:if test="${type eq 'post'}">
 	<link rel="stylesheet" href="./css/post.css"/>
 </c:if>
-<script async defer type="module" src="./js/boardMain.js"></script>
-<script async defer src="../header/js/header.js"></script>
-<script async defer src="../modal/js/modal.js"></script>
+<script defer type="module" src="./js/boardMain.js"></script>
+<script defer src="../header/js/header.js"></script>
+<script defer src="../modal/js/modal.js"></script>
 </head>
 <body class="container">
 <jsp:include page="../header/component/header.jsp" />
-<main id="main" class="my-2 hide">
+<main id="main" class="my-2">
 	<div class="board__title">#<%=topic %></div>
 	<jsp:include page="./components/actionBar.jsp">
 		<jsp:param value="${root }" name="root"/>
 	</jsp:include>
+	<article class="hide" id="listContent">
 	<jsp:include page="${componentPath }" />
 	<c:if test="${type ne post}">
 		<jsp:include page="./components/pagination.jsp" />
 	</c:if>
+	</article>
 </main>
 <jsp:include page="../modal/component/modal.jsp" />
 ${messageType }

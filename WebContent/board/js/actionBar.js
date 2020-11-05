@@ -1,4 +1,3 @@
-const btns = document.querySelectorAll('.actionBtn');
 const searchForm = $('#searchForm');
 let params = null;
 
@@ -39,6 +38,7 @@ const loadedSearchType = () => {
 };
 
 const handledType = () => {
+const btns = document.querySelectorAll('.actionBtn');
   switch (params.type) {
     case 'list':
       btns[0].classList.add('text-primary');

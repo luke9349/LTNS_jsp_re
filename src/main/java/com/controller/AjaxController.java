@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.command.board.BoarAjaxCommand;
+import main.java.com.command.board.CommentAjaxCommand;
 import main.java.com.command.mainpage.Mainpage_Add_NearestBoard_Command_By_AJAX;
 
 @WebServlet("*.ajax")
@@ -43,13 +44,21 @@ public class AjaxController extends HttpServlet {
 		Command command = null;
 
 		switch (type) {
+		case "/mainpage/mainpage.ajax":
+			new Mainpage_Add_NearestBoard_Command_By_AJAX().execute(request, response);
+			break;
 		case "/board/board_list.ajax":
 			command = new BoarAjaxCommand();
 			command.execute(request, response);
 			return;
-		case "/mainpage/mainpage.ajax":
-			new Mainpage_Add_NearestBoard_Command_By_AJAX().execute(request, response);
-			break;
+		case "/board/comment/commentInsert.ajax":
+			command = new CommentAjaxCommand();
+			command.execute(request, response);
+			return;
+		case "/board/comment/commentLoad.ajax":
+			command = new CommentAjaxCommand();
+			command.execute(request, response);
+			return;
 		} // end switch
 	} // end actionAjax
 

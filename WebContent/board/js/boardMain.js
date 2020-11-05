@@ -9,5 +9,7 @@ showModal();
 const params = initParams();
 
 initActionbar(params);
+
 getDate(params);
 if (params.type === 'post') initAjaxScroll(params);
+

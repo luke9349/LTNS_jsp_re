@@ -27,9 +27,12 @@
     ></script>
 <title>Insert title here</title>
 <link rel="stylesheet" href="./css/comment.css" />
-<script async defer src="./js/comment.js"></script>
+<script defer src="./js/comment.js"></script>
 </head>
 <body>
 	<jsp:include page="./component/comment.jsp" />
+	<script>
+		// commenInit('${writer}', '${param.post_id}');
+	</script>
 </body>
 </html>

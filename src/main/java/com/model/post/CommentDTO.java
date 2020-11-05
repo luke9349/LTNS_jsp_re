@@ -2,77 +2,74 @@ package main.java.com.model.post;
 
 public class CommentDTO {
 
-	
-	
-	public int comment_id;
-	public String comment_contents;
-	public int writer ;
-	public int post_id;
-	public String regdate;
-	
-	public CommentDTO() {
-		// TODO Auto-generated constructor stub
+	private long commentId;
+	private String commentContents;
+	private long writerId;
+	private String writer;
+	private String nickName;
+	private long postId;
+	private String regdate;
+
+	public long getCommentId() {
+		return commentId;
 	}
 
-	public CommentDTO(int comment_id, String comment_contents, int writer, int post_id) {
-		super();
-		this.comment_id = comment_id;
-		this.comment_contents = comment_contents;
-		this.writer = writer;
-		this.post_id = post_id;
+	public void setCommentId(long commentId) {
+		this.commentId = commentId;
 	}
 
-	public int getComment_id() {
-		return comment_id;
+	public String getCommentContents() {
+		return commentContents;
 	}
 
-	public void setComment_id(int comment_id) {
-		this.comment_id = comment_id;
+	public void setCommentContents(String commentContents) {
+		this.commentContents = commentContents;
 	}
 
-	public String getComment_contents() {
-		return comment_contents;
+	public long getWriterId() {
+		return writerId;
 	}
 
-	public void setComment_contents(String comment_contents) {
-		this.comment_contents = comment_contents;
+	public void setWriterId(long writerId) {
+		this.writerId = writerId;
 	}
 
-	public int getWriter() {
+	public String getWriter() {
 		return writer;
 	}
 
-	public void setWriter(int writer) {
+	public void setWriter(String writer) {
 		this.writer = writer;
 	}
 
-	public int getPost_id() {
-		return post_id;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setPost_id(int post_id) {
-		this.post_id = post_id;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
-	
-	public String getRegDate() {
-		//System.out.println("getRegdate() 호출");
+
+	public long getPostId() {
+		return postId;
+	}
+
+	public void setPostId(long postId) {
+		this.postId = postId;
+	}
+
+	public String getRegdate() {
 		return regdate;
 	}
 
-	public void setRegDate(String regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 
 	@Override
 	public String toString() {
-		return "CommentDTO [comment_id=" + comment_id + ", comment_contents=" + comment_contents + ", writer=" + writer
-				+ ", post_id=" + post_id + ", regdate=" + regdate + "]";
+		return "CommentDTO [commentId=" + commentId + ", commentContents=" + commentContents + ", writerId=" + writerId
+				+ ", writer=" + writer + ", nickName=" + nickName + ", postId=" + postId + ", regdate=" + regdate + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
