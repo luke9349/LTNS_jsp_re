@@ -3,7 +3,7 @@ let params = null;
 let maxPagination = null;
 
 
-//태그 생성
+//태그 정의
 const createPaginationIcon = (className) => {
   const i = document.createElement('i');
   i.className = className;
@@ -26,7 +26,7 @@ const createPaginationList = (className) => {
 };
 
 
-//구조 구현
+//구조 구현 handledPagination
 const handledPagination = () => {
   if (params.type === 'post') return;
   let { root, type, page, searchType, search } = params;
