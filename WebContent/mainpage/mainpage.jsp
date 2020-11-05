@@ -30,7 +30,7 @@
 	<link href="./CSS/footer/footer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="container">
-	<jsp:include page="./components/header/header.jsp" />
+	<jsp:include page="../header/component/header.jsp" />
 	<main class="my-2">
 		<jsp:include page="./components/board/viewcnt_board.jsp"/>
 		<jsp:include page="./components/board/empath_board.jsp"/>
