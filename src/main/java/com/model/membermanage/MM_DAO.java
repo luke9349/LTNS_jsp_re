@@ -19,7 +19,7 @@ public class MM_DAO implements DAO {
 			"FROM mm_table " + 
 			"WHERE mm_id=?";
 	public static final String INSERT_MM_BY_DTO="INSERT INTO mm_table(mm_id,id,password,nickname,email,grade) " + 
-			"VALUES (?,?,?,?,?,?)";
+			"VALUES (SEQ_mm_table_mm_id.NEXTVAL,?,?,?,?,?)";
 	
 	//DB 연결에 필요한 변수들
 		Connection conn;
@@ -164,18 +164,18 @@ public class MM_DAO implements DAO {
 		
 		
 		// insert : DTO => DB ★☆회원가입때 디비에 집어넣을때 필요
+		// mm_id는 ai로 올라가므로, 집어넣지 않는다!
 		@Override
 		public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException{
 			int cnt=0;
 			MM_DTO mm_dto=(MM_DTO)dto;
 			try {
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setInt(1, mm_dto.getMm_id());
-				pstmt.setString(2, mm_dto.getId());
-				pstmt.setString(3, mm_dto.getPassword());
-				pstmt.setString(4, mm_dto.getNickname());
-				pstmt.setString(5, mm_dto.getEmail());
-				pstmt.setString(6, mm_dto.getGrade());
+				pstmt.setString(1, mm_dto.getId());
+				pstmt.setString(2, mm_dto.getPassword());
+				pstmt.setString(3, mm_dto.getNickname());
+				pstmt.setString(4, mm_dto.getEmail());
+				pstmt.setString(5, mm_dto.getGrade());
 				cnt=pstmt.executeUpdate();
 			}catch(SQLException e){
 				e.printStackTrace();
@@ -194,12 +194,11 @@ public class MM_DAO implements DAO {
 				for(DTO dto:dtos) {
 					MM_DTO mm_dto=(MM_DTO)dto;
 					pstmt=conn.prepareStatement(sql);
-					pstmt.setInt(1, mm_dto.getMm_id());
-					pstmt.setString(2, mm_dto.getId());
-					pstmt.setString(3, mm_dto.getPassword());
-					pstmt.setString(4, mm_dto.getNickname());
-					pstmt.setString(5, mm_dto.getEmail());
-					pstmt.setString(6, mm_dto.getGrade());					
+					pstmt.setString(1, mm_dto.getId());
+					pstmt.setString(2, mm_dto.getPassword());
+					pstmt.setString(3, mm_dto.getNickname());
+					pstmt.setString(4, mm_dto.getEmail());
+					pstmt.setString(5, mm_dto.getGrade());					
 				}
 				cnt=pstmt.executeUpdate();
 			}catch(SQLException e){

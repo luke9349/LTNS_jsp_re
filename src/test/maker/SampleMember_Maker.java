@@ -1,9 +1,11 @@
 package test.maker;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 import main.java.com.model.membermanage.MM_DAO;
+import main.java.com.model.membermanage.MM_DTO;
 
 public class SampleMember_Maker {
 	
@@ -82,7 +84,12 @@ public class SampleMember_Maker {
 		
 		for(int i=0;i<memCnt;i++) {
 			//dao로 샘플멤버 집어넣기 해야함!
-			new MM_DAO().insertBySQL_withDTO(sql, dto)
+			try {
+				new MM_DAO_tester().insertBySQL_withDTO(MM_DAO_tester.INSERT_MM_BY_DTO, new MM_DTO(idArr[i],passwordArr[i],nicknameArr[i],emailArr[i],"MEMBER"));
+			} catch (SQLException e) {
+				System.out.println(i+"번째 오류");
+				e.printStackTrace();
+			}
 		}
 		
 	}

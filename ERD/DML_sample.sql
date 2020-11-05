@@ -8,7 +8,7 @@ INSERT INTO mm_table(mm_id,id,password,nickname,email,grade)
 VALUES (1,'sampleid','sample_pwd1','샘플닉네임','sampleemail@sample.com','MEMBER');
 
 INSERT INTO mm_table(mm_id,id,password,nickname,email,grade)
-VALUES (?,?,?,?,?,?);
+VALUES (SEQ_mm_table_mm_id.NEXTVAL,?,?,?,?,?);
 
 
 --AI 활용

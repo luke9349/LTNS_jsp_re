@@ -21,6 +21,15 @@ public class MM_DTO implements DTO {
 		this.grade = grade;
 	}
 	
+	//insert용도
+	public MM_DTO(String id, String password, String nickname, String email, String grade) {
+		this.id = id;
+		this.password = password;
+		this.nickname = nickname;
+		this.email = email;
+		this.grade = grade;
+	}
+	
 	public int getMm_id() {return mm_id;}
 	public void setMm_id(int mm_id) {this.mm_id = mm_id;}
 	public String getId() {return id;}
