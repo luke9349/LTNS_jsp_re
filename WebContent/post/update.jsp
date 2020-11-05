@@ -161,7 +161,7 @@ function chkSubmit(){
 <body>
 
 	<!--  헤더  -->
-	<jsp:include page="../mainpage/components/header/header.jsp" />
+	<jsp:include page="../header/component/header.jsp" />
 
 	<div class="container col-12">
 	   <div>

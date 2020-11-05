@@ -100,7 +100,7 @@ function chkSubmit(){
 
 <body>
 	<!--  헤더  -->
-	<jsp:include page="../mainpage/components/header/header.jsp" />
+		<jsp:include page="../header/component/header.jsp" />
 	<jsp:include page="CSS/ltns.html"/>
 	<div class="container col-12">
 	   <form name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
