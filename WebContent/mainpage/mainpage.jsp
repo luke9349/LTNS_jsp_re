@@ -26,7 +26,7 @@
 	<link href="./CSS/board/card/sm_card_album.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/board/card/sm_card_list.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/board/card/sm_card_post.css" rel="stylesheet" type="text/css">
-	<link href="./CSS/header/header.css" rel="stylesheet" type="text/css">
+	<link href="../header/css/header.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/footer/footer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="container">
