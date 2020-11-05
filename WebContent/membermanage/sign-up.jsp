@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
-<script src="JS/sign-upJs.js"></script>
+
 
 
 <title>회원가입</title>
@@ -66,31 +66,44 @@
 					</thead>
 					
 					<tbody>
+						
 						<tr>
+							
 							<td style="width: 110px;"><h5>아아디</h5></td>
-							<td><input class="form-control" type="text" id="id" name="id" maxlength="20" /> </td>
+							<td><input class="form-control" type="text" id="id" name="id" maxlength="20" />
+								<span class="error d-none" id="iderror" >  </span>	 
+							
+							</td>
 							<td style="width: 110px;"><button class="btn btn-primary" onclick="" type="button">중복</button> </td>
+							
 						</tr>
 						
 						<tr> 
 							<td style="width: 110px;"><h5>비밀번호</h5></td>
-							<td colspan="2"><input class="form-control" type="password" id="pw" name="pw" maxlength="20"> </td>
+							<td colspan="2"><input class="form-control" type="password" id="pw" name="pw" maxlength="20"/> 
+							</td>
 						</tr>
 						
 						<tr> 
 							<td style="width: 110px;"><h5>비밀번호 확인</h5></td>
-							<td colspan="2"><input class="form-control" type="password" id="pwck" name="pwck" maxlength="20"> </td>
+							<td colspan="2"><input class="form-control" type="password" id="pwck" name="pwck" maxlength="20"/> 
+								<span class="error d-none" id="pwerror" >  </span>
+							</td>
 						</tr>
 						
 						<tr> 
 							<td style="width: 110px;"><h5>닉네임</h5></td>
-							<td ><input class="form-control" type="text" id="nik" name="nik" maxlength="20"> </td>
+							<td ><input class="form-control" type="text" id="nik" name="nik" maxlength="20"/> 
+								<span class="error d-none" id="nikerror" >  </span>
+							</td>
 							<td style="width: 110px;"><button class="btn btn-primary" onclick="" type="button">중복</button> </td>
 						</tr>
 						
 						<tr> 
 							<td style="width: 110px;"><h5>이메일</h5></td>
-							<td><input class="form-control" type="email" id="email" name="email" maxlength="20"> </td>
+							<td><input class="form-control" type="email" id="email" name="email" maxlength="20"/>
+								<span class="error d-none" id="emailerror" >  </span> 	
+							</td>
 							<td style="width: 130px;"><button class="btn btn-primary" onclick="" type="button">인증번호</button> </td>
 						</tr>
 					</tbody>
@@ -106,6 +119,6 @@
 
 	
 	</div>
-	
+<script src="JS/sign-upJs.js"></script>	
 </body>
 </html>
