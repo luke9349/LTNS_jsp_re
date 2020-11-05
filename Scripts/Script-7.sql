@@ -25,6 +25,8 @@ DELETE FROM mm_table;
 SELECT * FROM USER_SEQUENCES;
 
 
+
+
 /*파일-----------------------------------------------------------------------------*/
 /*insert sample file */
 /*
@@ -173,11 +175,20 @@ WHERE file_id=?
 
 
 INSERT INTO empathize_table(post_id,mm_id)
-VALUES (3, 2);
+VALUES (6, 2);
+
+
+SELECT * FROM EMPATHIZE_TABLE et ;
+
+
+DELETE EMPATHIZE_TABLE WHERE post_id = 6 AND mm_id =2;
+
+SELECT * FROM MM_TABLE mt ;
+
+SELECT * FROM tot_post_view WHERE post_id =6;
 
 
 
-SELECT * FROM tot_post_view;
 
 SELECT * FROM FILE_TABLE ft ;
 SELECT * FROM POST_TABLE pt ;

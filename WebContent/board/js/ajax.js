@@ -21,7 +21,7 @@ const createList = (json) => {
   $('#jsonList').html(table);
 };
 
-const createAlbum = (json) => {
+const createcards = (json) => {
   if (json.data === null) return;
   let post = '';
   json.data.forEach((item) => {
@@ -51,70 +51,52 @@ const createAlbum = (json) => {
     post += `</div>`;
     post += `</div>`;
   });
-  $('#jsonAlbum').html(post);
-};
 
-const createPost = (json) => {
-  if (json.data === null) return;
-  let post = '';
-  json.data.forEach((item) => {
-    const img = item.thumbnailPath
-      ? item.thumbnailPath
-      : '../images/default_image.png';
-    post += `<div class="card-wrapper" onclick=location.href="${contextPath}/post/view.do?${query}&post_id=${item.postId}">`;
-    post += `<div class="card">`;
-    post += `<div class="card-body">`;
-    post += `<h5 class="card-title">${item.title}</h5>`;
-    post += `<div class="card-user">${item.nickName}</div>`;
-    post += `<div class="card-text">${item.contentsText}</div>`;
-    post += `<div class="info__boardDate">${item.regdate}</div>`;
-    post += `<span class="info__boardViews">`;
-    post += `<i class="far fa-eye"></i>`;
-    post += `<span>${item.viewcnt}</span>`;
-    post += `</span>`;
-    post += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
-    post += `<span class="info__boardHits">`;
-    post += `<i class="far fa-thumbs-up"></i>`;
-    post += `<span>${item.empathizeCnt}</span>`;
-    post += `</span>`;
-    post += `</div>`;
-    post += `<div class="card-img-top">`;
-    post += `<img src=${img} alt="userImage">`;
-    post += `</div>`;
-    post += `</div>`;
-    post += `</div>`;
-  });
-  $('#jsonPost').html(post);
+if(params.type === 'post') $('#jsonPost').html(post);
+else $('#jsonAlbum').html(post);
 };
 
 const requestAjax = () => {
+  $('#loading').removeClass('hide');
+//setTimeout(() => {
+
+
   fetch(url + query)
     .then((response) => response.json())
     .then((json) => {
-      $('#loading').removeClass('hide');
       let { type } = params;
       type = type.toLowerCase();
       switch (type) {
         case 'list':
-          createList(json, params);
+          createList(json);
           break;
         case 'album':
-          createAlbum(json, params);
+          createcards(json);
           break;
         case 'post':
-          createPost(json, params);
+          createcards(json);
           break;
       }
       if (params.type !== 'post') initPagination(params, json.count);
       $('#loading').addClass('hide');
       $('#main').removeClass('hide');
-    }).catch(e => console.log(e));
-// location.href='board_list.do'
-// location.href='board_list.do'
+    })
+    .catch((e) => {
+      sessionStorage.setItem('messageType', '오류 메시지');
+      sessionStorage.setItem('messageContent', '접근할수 없습니다.');
+      sessionStorage.setItem('error', e.message);
+      history.back();
+    });
+
+
+
+	//}, 10000);
+	
+	
+	
 };
 
 export const getContextPath = () => {
-  //let contextPath = null;
   const hostIndex = location.href.indexOf(location.host) + location.host.length;
   return location.href.substring(
     hostIndex,
@@ -143,7 +125,6 @@ export const createQuery = () => {
 export const getDate = (initialParams) => {
   params = initialParams;
   query = createQuery();
-console.log(query);
   contextPath = getContextPath();
   requestAjax();
 };

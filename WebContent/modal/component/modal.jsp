@@ -3,7 +3,7 @@
 <div class="modal" id="modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" id="messageModal">
         <h5 class="modal-title" id="modalTitle">Modal title</h5>
         <button
           type="button"

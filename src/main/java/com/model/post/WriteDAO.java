@@ -93,8 +93,6 @@ public class WriteDAO implements DAO {
 			psmt.setString(2, writer);
 			psmt.setString(3, category);
 			psmt.setInt(4, currvaldata);
-			
-			
 			cnt = psmt.executeUpdate();
 		} finally {
 			close();

@@ -1,4 +1,4 @@
-package test;
+package main.java.com.model.board;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -36,7 +36,7 @@ public class BoardListDAO {
 			+ "ORDER BY VIEWCNT DESC, REGDATE DESC, EMPATHIZE_CNT DESC, POST_ID DESC) t) "
 			+ "WHERE NO >= ? AND NO <= ?";
 
-	public final static String SELECT_POST_BY_EMAPTHIZE_PAGE = "SELECT * FROM " + "(SELECT ROWNUM AS NO, t.* FROM "
+	public final static String SELECT_POST_BY_EMPATHIZE_PAGE = "SELECT * FROM " + "(SELECT ROWNUM AS NO, t.* FROM "
 			+ "(SELECT * FROM " + "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
 			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
 			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE), " + "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, "
@@ -143,7 +143,7 @@ public class BoardListDAO {
 		if (category.toLowerCase().equals("viewcnt"))
 			SQL = SELECT_POST_BY_VIEWCNT_PAGE;
 		else
-			SQL = SELECT_POST_BY_EMAPTHIZE_PAGE;
+			SQL = SELECT_POST_BY_EMPATHIZE_PAGE;
 		
 		int startNo = 1;
 		int endNo = 1;
@@ -184,7 +184,7 @@ public class BoardListDAO {
 		if (category.toLowerCase().equals("viewcnt"))
 			SQL = SELECT_POST_BY_VIEWCNT_ALL;
 		else
-			SQL = SELECT_POST_BY_EMAPTHIZE_PAGE;
+			SQL = SELECT_POST_BY_EMPATHIZE_ALL;
 
 		try {
 			conn = DataUtil.getConnection();
@@ -213,6 +213,7 @@ public class BoardListDAO {
 				dto.setPostId(rs.getLong("POST_ID"));
 				dto.setTitle(rs.getString("TITLE"));
 				dto.setWriter(rs.getString("ID"));
+				dto.setWriterNum(rs.getLong("Writer"));
 				dto.setNickName(rs.getString("NICKNAME"));
 				dto.setCategory(rs.getString("CATEGORY"));
 
