@@ -13,6 +13,7 @@ import main.java.com.model.DB;
 import main.java.com.model.DTO;
 import main.java.com.model.Post_Contents;
 import main.java.com.model.mainpage.Post_DTO;
+import main.java.com.util.DataUtil;
 
 public class Mypage_DAO implements DAO {
 
@@ -101,8 +102,7 @@ public class Mypage_DAO implements DAO {
 		public Mypage_DAO() {
 			try {
 				System.out.println("DAO 생성");
-				Class.forName(DB.DRIVER);
-				conn=DriverManager.getConnection(DB.URL,DB.USERID,DB.USERPW);
+				conn=DataUtil.getConnection();
 				System.out.println("DAO 생성, DB 연결");
 			}catch (Exception e) {
 				e.printStackTrace();
