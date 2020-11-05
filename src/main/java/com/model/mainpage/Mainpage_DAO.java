@@ -214,5 +214,53 @@ public class Mainpage_DAO implements DAO {
 	public DTO[] selectBySQL(String sql, int... integerParamForPstmt) throws SQLException {
 		return null;
 	}
+
+
+	@Override
+	public DTO mkDTO(ResultSet rs, int signal) throws SQLException {
+		return null;
+	}
+
+
+	@Override
+	public DTO[] mkDTOs(ResultSet rs, int signal) throws SQLException {
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal) throws SQLException {
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal, int integerParamForPstmt) throws SQLException {
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal, int... integerParamForPstmt) throws SQLException {
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal, String stringParamForPstmt) throws SQLException {
+		return null;
+	}
+
+
+	@Override
+	public DTO[] selectBySQL_withSignal(String sql, int signal, String... stringParamForPstmt) throws SQLException {
+		return null;
+	}
+
+
+	@Override
+	public DTO[] withSignal(DTO[] _arr, int signal) throws SQLException {
+		return null;
+	}
 	
 }

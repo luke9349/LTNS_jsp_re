@@ -29,7 +29,7 @@
 	<link href="./CSS/header/header.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/footer/footer.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class="container">
 		<jsp:include page="./components/header/header.jsp" />
 	<main class="my-2">
 		<jsp:include page="./components/board/mypost_board.jsp"/>
