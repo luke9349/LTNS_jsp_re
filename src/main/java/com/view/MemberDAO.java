@@ -21,7 +21,14 @@ public class MemberDAO {
 	
 	public static final String SQL_SELECT_USER_ID = 
 			"SELECT * FROM MM_TABLE mt WHERE MM_id = ?";
+	
+	public static final String SQL_LOGIN_CHK = 
+			"SELECT * FROM MM_TABLE WHERE id = ? AND PASSWORD = ? ";
 
+	public static final String SQL_ID_INFO_SELECT =
+			"SELECT * FROM MM_TABLE mt WHERE id = ? ";
+	
+	
 	public MemberDAO() {
 
 		try {
@@ -66,6 +73,55 @@ public class MemberDAO {
 		
 	}
 	
+	//id 정보 출력 
+	
+	public MemberDTO[] member_INFO_Select(String id) throws SQLException {
+		int cnt = 0;
+		MemberDTO[] arr = null;
+		
+		try {
+			psmt = conn.prepareStatement(SQL_ID_INFO_SELECT);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			arr = createMember(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		
+		return arr;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//멤버 id검색
+	public int login_member(String id, String pw) throws SQLException {
+		int cnt = 0;
+		
+		try {
+			psmt = conn.prepareStatement(SQL_LOGIN_CHK);
+			psmt.setString(1, id);
+			psmt.setString(2, pw);
+			cnt = psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		
+		return cnt;
+	}
 	
 	
 	

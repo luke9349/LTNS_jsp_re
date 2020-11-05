@@ -5,11 +5,11 @@
  * */
 /*insert sample MEMBER*/
 INSERT INTO mm_table(mm_id,id,password,nickname,email,grade)
-VALUES (1,'sampleid','sample_pwd1','샘플닉네임','sampleemail@sample.com','MEMBER');
+VALUES (1,'a','sample_pwd1','샘플닉네임','sampleemail@sample.com','MEMBER');
 
 --AI 활용
 INSERT INTO mm_table(mm_id,id,password,nickname,email,grade)
-VALUES (SEQ_mm_table_mm_id.NEXTVAL,'sadmin','asd','admin','sample23email@samplse.com','admin');
+VALUES (SEQ_mm_table_mm_id.NEXTVAL,'a','b','ab','sample23email@ab.com','as');
 
 --최신 AI 값
 SELECT SEQ_mm_table_mm_id.CURRVAL FROM DUAL;
@@ -187,6 +187,10 @@ SELECT * FROM tot_post_view WHERE post_id =60;
 
 SELECT * FROM tot_post_view;
 
+
+SELECT * FROM MM_TABLE WHERE id = 'sampleid23' AND PASSWORD = '123123';
+
+SELECT * FROM MM_TABLE mt WHERE id = 'sampleid23'; 
 
 
 SELECT * FROM FILE_TABLE ft ;

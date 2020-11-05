@@ -158,12 +158,12 @@ function chkSubmit(){
  
 </script>
 
-<body>
+<body class="container">
 
 	<!--  헤더  -->
 	<jsp:include page="../header/component/header.jsp" />
 
-	<div class="container col-12">
+	<div class="col-12">
 	   <div>
 		<form name="frm" action="updateOk.do?post_id=<%=post_id %>" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
