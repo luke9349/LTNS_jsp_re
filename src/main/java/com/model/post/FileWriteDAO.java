@@ -135,7 +135,6 @@ public class FileWriteDAO implements DAO {
 
 	
 	//파일업데이트 시키기 
-
 	public int File_Update(String file_name,int file_id) throws SQLException {
 			int cnt = 0;
 			try {
@@ -187,9 +186,6 @@ public class FileWriteDAO implements DAO {
 			String readl_filename = rs.getString("real_filename");
 			String filename = rs.getString("filename");
 			FileWriteDTO filedto = new FileWriteDTO(file_id, filekind, readl_filename, filename);
-		
-			
-			
 			FileWriteDTO dtos = new FileWriteDTO(file_id, filekind, readl_filename, filename);
 			Filelist.add(filedto);
 			

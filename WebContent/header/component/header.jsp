@@ -6,7 +6,7 @@
        	<a class="btn btn-secondary">로그아웃</a>
 	</div>
 	<div>
-		<a class="navbar-brand" href="#">
+		<a class="navbar-brand" href="/<%=request.getContextPath() %>/index.do">
 	    	<img src="../images/logo.png" alt="logo" class="navbar__logo"/>
 	    </a>
 	</div>
@@ -25,25 +25,25 @@
 	     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	     	<ul class="navbar-nav mr-auto">
 	        	<li class="nav-item">
-	          		<a class="nav-link" href="<%=request.getContextPath() %>/board_list.do?root=NOTICE">공지사항</a>
+	          		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=NOTICE">공지사항</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board_list.do?root=MOVIE">영화게시판</a>
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=MOVIE">영화게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board_list.do?root=BOOK">도서게시판</a>
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=BOOK">도서게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board_list.do?root=SPORTS">운동게시판</a>
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=SPORTS">운동게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board_list.do?root=GAME">게임게시판</a>
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=GAME">게임게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board_list.do?root=EMPATHIZE">공감게시판</a>
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=EMPATHIZE">공감게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board_list.do?root=VIEWCNT">조회수게시판</a>
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=VIEWCNT">조회수게시판</a>
 	         	</li>
 	       	</ul>
 	    </div>

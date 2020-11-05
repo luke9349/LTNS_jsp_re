@@ -17,7 +17,6 @@
 	
 	System.out.println(url);
 %> 
-<a href="<%=request.getContextPath() %>/post/write.do" class="btn btn-primary">글쓰기</a>
 <div class="actionBar py-3">
   <div class="actionBtns">
     <a class="actionBtn btn" href="board_list.do?type=list<%=url%>">
@@ -31,20 +30,56 @@
     </a>
   </div>
   <div class="actionbar__wrapper">
-  <form class="form-inline" id="searchForm" name="searchForm" method="get">
-    <div class="input-group flex-nowrap">
-      <div class="input-group-prepend">
-        <select name="searchType" id="searchType">
-          <option value="title" selected>제목</option>
-          <option value="content">내용</option>
-          <option value="titleAndContent" selected>제목 + 내용</option>
-        </select>
+    <button class="btn btn-outline-primary" id="searchBtn">
+      <i class="fas fa-search"></i>
+      검색
+    </button>
+    <a
+      href="<%=request.getContextPath() %>/post/write.do"
+      class="btn btn-outline-primary"
+      ><i class="fas fa-pencil-alt"></i>글쓰기</a
+    >
+  </div>
+</div>
+<div class="modal" id="modalForm" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-search"></i> 검색</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <input type="text" id="search" name="search" />
-      <div class="input-group-append">
-        <input class="btn btn-primary" type="submit" value="검색" />
+      <div class="modal-body">
+        <form id="searchForm" name="searchForm" method="get">
+          <select class="form-control" name="searchType" id="searchType">
+            <option value="title" selected>제목</option>
+            <option value="content">내용</option>
+            <option value="titleAndContent" selected>제목 + 내용</option>
+          </select>
+          <input
+            class="form-control mt-3"
+            type="search"
+            id="search"
+            name="search"
+          />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          취소
+        </button>
+        <button class="btn btn-primary" id="searchSubmitBtn">검색</button>
       </div>
     </div>
-  </form>
   </div>
-  </div>
+</div>

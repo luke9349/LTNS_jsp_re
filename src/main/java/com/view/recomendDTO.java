@@ -1,6 +1,6 @@
 package main.java.com.view;
 
-public class tableViewDTO {
+public class recomendDTO {
 
 	
 	private int post_id;
@@ -8,7 +8,7 @@ public class tableViewDTO {
 	private int empathize_cnt;
 	private int view_cnt;
 	
-	public tableViewDTO(int post_id, String regdate, int empathize_cnt, int view_cnt) {
+	public recomendDTO(int post_id, String regdate, int empathize_cnt, int view_cnt) {
 		super();
 		this.post_id = post_id;
 		this.regdate = regdate;

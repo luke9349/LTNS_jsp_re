@@ -1,4 +1,5 @@
-package main.java.com.util;
+package test;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,6 +26,25 @@ public class DataUtil {
 			LogUtil.error(e.getMessage());
 		}
 		return null;
+	}
+
+	public static Connection getLocalConnection() {
+
+		Connection conn = null;
+		
+		try {
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			String user = "ltns";
+			String password = "ltns";
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection(url, user, password);
+			return conn;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			LogUtil.error(e.getMessage());
+		}
+		return conn;
 	}
 
 	public static void resourceClose(PreparedStatement pstmt, Connection conn) {

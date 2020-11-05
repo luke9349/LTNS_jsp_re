@@ -1,6 +1,8 @@
+<%@page import="main.java.com.view.TOT_Post_DTO"%>
 <%@page import="main.java.com.model.post.WriteDTO"%>
 <%@page import="main.java.com.model.DTO"%>
 <%@page import="main.java.com.model.post.FileWriteDTO"%>
+<%@page import="main.java.com.view.MemberDTO"%>
 <%@page import="java.io.FileReader"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -8,26 +10,31 @@
 <%@ page import="java.io.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%	//dao를 사용한 트랜잭션
-	
+<%	
+	//dao를 사용한 트랜잭션
 	WriteDTO[] arr = (WriteDTO[])request.getAttribute("views");
 	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("contents_view");
-	
+	MemberDTO[] member_info = (MemberDTO[])request.getAttribute("member");
+	TOT_Post_DTO[] tot_info = (TOT_Post_DTO[])request.getAttribute("tot");
 	
 	//정보 읽어오기 
 	String title = arr[0].getTitle();
 	String name = arr[0].getWriter(); 
 	String date = arr[0].getRegDate();
-	int viewCnt = arr[0].getViewCnt();
 	String category = arr[0].getCategory();
+	String nickname = member_info[0].getNickname();
+
+	int viewCnt = arr[0].getViewCnt();
 	int post_content = arr[0].getPost_contents();
 	int post_id = Integer.parseInt(request.getParameter("post_id"));
-
+	int mm_id = member_info[0].getMm_id();
+	int streinger = Integer.parseInt(request.getParameter("writer"));
+	int rec_chk = Integer.parseInt(request.getParameter("rec_chk"));
+	int emp_cnt = tot_info[0].getEmpathize_cnt();
+	
 	String ctx = request.getContextPath();
 	System.out.println(file_info[0].getFilename());
 	request.setCharacterEncoding("utf-8");
@@ -49,10 +56,9 @@
 
 	
 	while((line = br.readLine())!=null){
-		if(line.equals("title")){
-			 titles += line;
-		}else{
+		if(!line.equals("title")){
 			contents +=line;
+			//titles += line;
 		}
 	}
 	
@@ -69,19 +75,6 @@
 %>
 
     
-<%
-	if( arr == null || arr.length ==0){
-%>
-	<script>
-		alert("해당정보가 삭제되거나 없습니다");
-		history.back();
-	</script>
-<%
-	return;
-	}
-
-%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,6 +89,11 @@
 <!-- javascript link -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript" src="JS/view.js"></script>
+
+
+
+<!-- fontasome -->
+<script src="https://kit.fontawesome.com/5ccafa9b7a.js" crossorigin="anonymous"></script> 
 
 <!-- bootstrep -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -124,13 +122,35 @@ function back(){
 	}
 }
 
-</script>
 
+	
+	
+	
+function recommend(){
+    
+	var rec_btn = document.getElementById("rec_btn");
+	var chkdata = <%=rec_chk %>
+
+	if (chkdata == 0) {
+		alert("추천완료" + chkdata);
+		toggles = false;
+		location.href= 'recomendOk.do?post_id=<%=post_id%>&writer=<%=streinger%>&rec_chk=1'
+	} else if(chkdata == 1) {
+	   var r = confirm("추천을 취소하시겠습니까?");
+	   if(r){
+		  alert("추천이 취소되었습니다");
+		  location.href= 'recomendOk.do?post_id=<%=post_id%>&writer=<%=streinger%>&rec_chk=0'
+	   }//end confirm
+	
+	}// end toggles
+	   
+}
+	   
+
+</script>
 <body>
 	<!--  헤더  -->
 	<jsp:include page="../mainpage/components/header/header.jsp" />
-
-
 
 <div class="container col-12 mt-2">
 	<!-- 제목 카테고리  -->
@@ -142,7 +162,7 @@ function back(){
 	<div class="d-block">
 		<table>
 		<tr>
-		<th>[<%=name %>] </th> <th>[<%=date %>]</th> <th>[<%=viewCnt %>]</th> <th>[<%=post_content %>]</th>
+		<th>[<%=name %>] </th> <th>[<%=date %>]</th> <th>[<%=nickname %>]</th> <th>[<%=viewCnt %>]</th> <th>[<%=post_content %>]</th>  <th>[<%=emp_cnt %>]</th>
 		</tr>
 		</table> 
 	</div>
@@ -153,18 +173,21 @@ function back(){
 		<div class="text-center"> <br>
 		<!-- 추천버튼 -->
 		
-		<input id="rec_btn" type="button" value="추천하기" class="text-center btn-lg"> <br>
-		
-		
+		<button id="rec_btn" type="button" class="text-center btn-sm bg-success text-white" onclick="recommend()">
+		<i class="fas fa-heart"></i>
+		</button>
 		
 		</div>
 	</div>
 	<hr>
 	<div class="text-right">
 	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="취소" onclick='back()'>
-	<button type="button" class="fun-btn btn-sm font-weight-bold"  onclick="deletePost(<%=post_content%>)">삭제</button>
-	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="수정" onclick="location.href='update.do?post_id=<%=post_id%>'">
 	
+	<!-- 수정삭제  -->
+	<%if(mm_id == streinger){ %>
+	<button type="button" class="fun-btn btn-sm font-weight-bold"  onclick="deletePost(<%=post_content%>)">삭제</button>
+	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="수정" onclick="location.href='update.do?post_id=<%=post_id%>&writer=<%=streinger%>&rec_chk=<%=rec_chk%>'">
+	<%} %>
 	</div>
 	<hr>
 </div> 
