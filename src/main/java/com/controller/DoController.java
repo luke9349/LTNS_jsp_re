@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.command.mainpage.Mainpage_Command;
+import main.java.com.command.membermanage.loginOk_Cmd;
 import main.java.com.command.mypage.Mypage_command;
 import main.java.com.command.post.WriteCommend;
 import main.java.com.command.post.comentCmd;
@@ -128,6 +129,13 @@ public class DoController extends HttpServlet {
 			 cmd.execute(request, response);
 			 viewPage="mypage.jsp";
 			break;
+			
+		case "/membermanage/loginOk.do":
+			cmd = new loginOk_Cmd();
+			cmd.execute(request, response);
+			viewPage= "loginOk.jsp";
+			break;
+			
 		}//end swithc
 		
 		if(viewPage != null) {

@@ -5,77 +5,57 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.css">
+
+<!-- css  -->
 <link href="CSS/loginmainstyle.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
+
+<!-- boot -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<!-- js -->
+<script src="JS/login.js"></script>
+
 <title>로그인화면</title>
 </head>
 
-<body id="login_main">
-	<div class="wrap text-center">
-		<div id="header">
-		<h1>
-			<a id="login_logo" href="loginmain.jsp">
-				<img alt="Login_logo" src="../images/favicon.ico">
-			</a>
-		</h1>
-		</div>
+<body class="container ">
+
+	<!-- 로고  -->
+	<div class="text-center col-12 ">
+			<a id="login_logo" href="loginmain.jsp"> <img alt="Login_logo" src="../images/favicon.ico"></a>
+	<!-- container  -->
 		
-		<div id="container">
-			<div class="content">
-				
-				<form action="">
-					<fieldset class="login_form"> 
-						<div class="id_area">
-							<div class="input_row" id="id_area">
-								<span class="input_box">
-									
-									<input type="text" id="id" name="id" class="int" maxlength="41" placeholder="아이디" value>	
-								</span>
-							</div>
-							<div class="error" id="err_empty_id" style="display: none">
-								아이디를 입력해주세요
-							</div>
-						</div>
-						<div class="pw_area">
-							<div class="input_row" id="pw_area">
-								<span class="input_box">
-									<input type="password" id="pw" name="pw" placeholder="비밀번호" class="int" maxlength="16">
-								</span>
-								
-							</div>
-						<input type="submit" title="로그인" alt="로그인" value="로그인" class="btn_global" id="log_login">
-						</div>
-					</fieldset>
-				</form>
-				<div class="position_a">
-					<div class="find_info">
-						<a  id="idinquiry" href="find-id.jsp"> 아이디 찾기</a>
-						<span class="bar" aria-hidden="true" > | </span>
-						
-						<a  id="pwinquiry" href="find-password.jsp"> 비밀번호 찾기</a>
-						<span class="bar" aria-hidden="true" > | </span>
-						
-						<a  id="signup" href="sign-up.jsp"> 회원가입</a>
-						<span class="bar" aria-hidden="true" > | </span>
-						
-						<a  id="signup" href=""> 게스트로그인</a>
-						
-							
-					</div>
-				</div>
+		<div>
+			<form name="frm" action="loginOk.do" method="POST">
+			<div class="id_area ">
+			<input class="col-12 col-sm-5" type="text" name="id" placeholder="아이디">
+			</div>
+			
+			<div class="id_area ">
+			<input class="col-12 col-sm-5" type="password" name="password" placeholder="비밀번호">
+			</div>
+			
+			<div class="id_area ">
+			<input id="submitbtn" class="col-12 col-sm-5 bg-success text-white btn-lg font-weight-bold " type="submit" value="로그인">
+			</div>
+			</form>
+		
+		</div> <!-- id, pw , 로그인 btn  라인  -->
+
+		<!-- 찾기 라인  -->
+			<div class="id_area ">
+			<span class="spans col-6 col-sm-2 "><a class="finds" href="find-id.jsp"> 아이디 찾기</a> </span> 
+			<span class="spans col-6 col-sm-2 "><a class="finds" href="find-id.jsp"> 비밀번호 찾기</a> </span> 
+			<span class="spans col-6 col-sm-2 "><a class="finds" href="find-id.jsp"> 회원 가입 </a> </span> 
+			<span class="spans col-6 col-sm-2 "><a class="finds" href="find-id.jsp"> 비밀 입장하기 </a> </span> 
+			
 			</div>
 		
-		
 		</div>
-		<div id="footer">
-			
-		
-		</div>
-		
-	</div>
-</body>
+	</body>
 </html>
