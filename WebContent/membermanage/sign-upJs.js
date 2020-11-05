@@ -9,12 +9,14 @@
 		var getemail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/); 
 		var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/); 
 		var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/); 
+		var st = $(":input:radio[name=provisionYn]:checked").val();
+
 		
 		
-		console.log($("#provisionYn").val());
+		console.log(st);
 		
 		//약관동의 확인
-		if($("#provisionYn").val() == "Y" || $("#provisionYn").val() == ""){ alert("약관동의 확인"); return false;}
+		if(st == "N" || $("#provisionYn").val() == ""){ alert("약관동의 확인"); return false;}
 		
 		//아이디 공백 확인 
 		if($("#id").val() == ""){

@@ -59,7 +59,7 @@
 						<a target="_blank" id="pwinquiry" href="find-password.jsp"> 비밀번호 찾기</a>
 						<span class="bar" aria-hidden="true" > | </span>
 						
-						<a target="_blank" id="signup" href="privacy.jsp"> 회원가입</a>
+						<a target="_blank" id="signup" href=""> 회원가입</a>
 						<span class="bar" aria-hidden="true" > | </span>
 						
 						<a target="_blank" id="signup" href=""> 게스트로그인</a>
