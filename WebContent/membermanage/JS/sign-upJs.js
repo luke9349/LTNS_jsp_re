@@ -18,7 +18,7 @@
 		if(privacyCheck == "N" || $("#provisionYn").val() == ""){ alert("약관동의 확인"); return false;}
 		
 		//아이디 공백 확인 
-		if($("#id").val() == ""){
+		if($("#id").val() == ""){ 
 			 alert("아이디 입력바람");
 			 $("#id").focus(); 
 			return false; 
