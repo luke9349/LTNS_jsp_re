@@ -100,7 +100,7 @@ function chkSubmit(){
 
 <body>
 	<!--  헤더  -->
-	<jsp:include page="../mainpage/components/header/header.jsp" />
+		<jsp:include page="../header/component/header.jsp" />
 	<jsp:include page="CSS/ltns.html"/>
 	<div class="container col-12">
 	   <form name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
@@ -108,7 +108,7 @@ function chkSubmit(){
 		        <tr class="tableheader">
 		      		<td class="text-center" style="width:5%;">
 		      		<select class='selector' name="category">
-		 			
+		 		
 		 			<option value="NOTICE" > 공지사항 </option>
 		       		<option value="MOVIE" selected="selected" > 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
