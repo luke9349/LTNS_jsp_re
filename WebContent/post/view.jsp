@@ -22,17 +22,22 @@
 	
 	//정보 읽어오기 
 	String title = arr[0].getTitle();
-	String name = arr[0].getWriter(); 
 	String date = arr[0].getRegDate();
 	String category = arr[0].getCategory();
 	String nickname = member_info[0].getNickname();
-
+	int wirters = arr[0].getWriter();
+	
+	
 	int viewCnt = arr[0].getViewCnt();
 	int post_content = arr[0].getPost_contents();
 	int post_id = Integer.parseInt(request.getParameter("post_id"));
-	int mm_id = member_info[0].getMm_id();
-	int streinger = Integer.parseInt(request.getParameter("writer"));
-	int rec_chk = Integer.parseInt(request.getParameter("rec_chk"));
+	
+	int streinger =  (int) session.getAttribute("writer");
+	int rec_chk_write =  (int) session.getAttribute("rec_chk_write"); // 0
+	
+	
+	
+	
 	int emp_cnt = tot_info[0].getEmpathize_cnt();
 	
 	String ctx = request.getContextPath();
@@ -129,17 +134,23 @@ function back(){
 function recommend(){
     
 	var rec_btn = document.getElementById("rec_btn");
-	var chkdata = <%=rec_chk %>
 
-	if (chkdata == 0) {
-		alert("추천완료" + chkdata);
-		toggles = false;
-		location.href= 'recomendOk.do?post_id=<%=post_id%>&writer=<%=streinger%>&rec_chk=1'
-	} else if(chkdata == 1) {
+	if (<%=rec_chk_write%> == 0) {
+		alert("추천완료");
+		<%session.setAttribute("rec_chk_chks", 1);%>
+		location.href= 'recomendOk.do?post_id=<%=post_id%>'
+
+	} else if(<%=rec_chk_write%> == 1) {
 	   var r = confirm("추천을 취소하시겠습니까?");
 	   if(r){
 		  alert("추천이 취소되었습니다");
-		  location.href= 'recomendOk.do?post_id=<%=post_id%>&writer=<%=streinger%>&rec_chk=0'
+		  <%
+		  	if(rec_chk_write ==1){
+			  	session.setAttribute("rec_chk_chks", 0);
+			  }
+		  %>
+		  location.href= 'recomendOk.do?post_id=<%=post_id%>'
+		
 	   }//end confirm
 	
 	}// end toggles
@@ -162,7 +173,7 @@ function recommend(){
 	<div class="d-block">
 		<table>
 		<tr>
-		<th>[<%=name %>] </th> <th>[<%=date %>]</th> <th>[<%=nickname %>]</th> <th>[<%=viewCnt %>]</th> <th>[<%=post_content %>]</th>  <th>[<%=emp_cnt %>]</th>
+		<th> </th> <th>[<%=date %>]</th> <th>[<%=nickname %>]</th> <th>[<%=viewCnt %>]</th> <th>[<%=post_content %>]</th>  <th>[<%=emp_cnt %>]</th>
 		</tr>
 		</table> 
 	</div>
@@ -184,9 +195,9 @@ function recommend(){
 	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="취소" onclick='back()'>
 	
 	<!-- 수정삭제  -->
-	<%if(mm_id == streinger){ %>
+	<%if(wirters == streinger){ %>
 	<button type="button" class="fun-btn btn-sm font-weight-bold"  onclick="deletePost(<%=post_content%>)">삭제</button>
-	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="수정" onclick="location.href='update.do?post_id=<%=post_id%>&writer=<%=streinger%>&rec_chk=<%=rec_chk%>'">
+	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="수정" onclick="location.href='update.do?post_id=<%=post_id%>'">
 	<%} %>
 	</div>
 	<hr>

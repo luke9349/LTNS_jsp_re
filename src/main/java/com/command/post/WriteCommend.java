@@ -11,6 +11,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import main.java.com.command.Command;
 import main.java.com.model.post.FileWriteDAO;
@@ -35,7 +36,10 @@ public class WriteCommend implements Command {
 		String content = request.getParameter("content");
 		String saveDirectory = request.getServletContext().getRealPath("/") + "data";
         String category = request.getParameter("category");
-        String wrtier = request.getParameter("writer");
+       // String wrtier = request.getParameter("writer");
+       HttpSession session =  request.getSession();
+       int writer =  (int) session.getAttribute("writer");
+        
 		
 		
 		Date d = new Date();
@@ -105,7 +109,7 @@ public class WriteCommend implements Command {
 		WriteDAO dao = new WriteDAO();
 		if( title != null && title.trim().length() > 0) {
 			try {
-				cnt = dao.wr_insert(title, category, wrtier, file_quert_cnt);
+				cnt = dao.wr_insert(title, category, writer, file_quert_cnt);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

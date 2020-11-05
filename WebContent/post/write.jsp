@@ -11,6 +11,15 @@
 	
 	String writer = request.getParameter("writer");
 	
+	String sessionId = session.getId();
+	int sessionInterval = session.getMaxInactiveInterval();
+
+	session.setAttribute("writer", 1);
+	session.setAttribute("rec_chk_write", 0);
+	
+	
+	
+	
 %>   
 
     
@@ -89,7 +98,6 @@ function chkSubmit(){
 </script>
 
 
-
 <body>
 	<!--  헤더  -->
 	<jsp:include page="../mainpage/components/header/header.jsp" />
@@ -99,12 +107,13 @@ function chkSubmit(){
 			<table class="table">
 		        <tr class="tableheader">
 		      		<td class="text-center" style="width:5%;">
-		       		<select class='selector' name="category">
-		 			<option value="NOTICE" selected="selected"> 공지사항 </option>
-		       		<option value="MOVIE"> 영화 게시판 </option>
+		      		<select class='selector' name="category">
+		 			
+		 			<option value="NOTICE" > 공지사항 </option>
+		       		<option value="MOVIE" selected="selected" > 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
 		       		<option value="BOOK">도서 게시판  </option>
-		       		<option value="SPORT"> 운동 게시판 </option>	
+		       		<option value="SPORTS"> 운동 게시판 </option>	
 		       		</select>
 		       		</td>     
 		            <td>

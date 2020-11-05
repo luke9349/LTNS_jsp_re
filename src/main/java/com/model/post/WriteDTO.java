@@ -10,13 +10,13 @@ public class WriteDTO implements DTO{
 	*/
 	
 		// 게시글 
-		public int post_id ; // 게시글 고유번호 
-		public String title ; //제목 
-		public String writer;
-		public String category ; // 카테고리 
-		public String regdate ; // 날짜
-		public int post_contents;
-		public int viewCnt ; // 조회수 
+		private int post_id ; // 게시글 고유번호 
+		private String title ; //제목 
+		private int writer;
+		private String category ; // 카테고리 
+		private String regdate ; // 날짜
+		private int post_contents;
+		private int viewCnt ; // 조회수 
 		
 	
 		
@@ -29,7 +29,7 @@ public class WriteDTO implements DTO{
 		
 		
 
-		public WriteDTO(int post_id, String title, String writer, String category, int post_contents,
+		public WriteDTO(int post_id, String title, int writer, String category, int post_contents,
 				int viewCnt) {
 			super();
 			this.post_id = post_id;
@@ -66,12 +66,12 @@ public class WriteDTO implements DTO{
 		}
 
 
-		public String getWriter() {
+		public int getWriter() {
 			return writer;
 		}
 
 
-		public void setWriter(String writer) {
+		public void setWriter(int writer) {
 			this.writer = writer;
 		}
 
