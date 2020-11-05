@@ -101,7 +101,7 @@ public class MM_DAO implements DAO {
 		
 		
 		
-		//String 매개변수를 받는 sql문으로 가져오기
+		//String 매개변수를 받는 sql문으로 가져오기 ☆★아이디나 닉네임 이메일 중복 검증에 필요
 		@Override
 		public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException {
 			DTO [] arr=null;
@@ -161,7 +161,7 @@ public class MM_DAO implements DAO {
 
 		
 		
-		// insert : DTO => DB 
+		// insert : DTO => DB ★☆회원가입때 디비에 집어넣을때 필요
 		@Override
 		public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException{
 			int cnt=0;
