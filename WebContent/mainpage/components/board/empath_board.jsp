@@ -22,7 +22,7 @@
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 <div id="empath_board" class="sm_board card">
 	<div class="board">
-		<h3><a href="">공감 게시판</a></h3>
+		<h3><a href="../board/board_list.do?root=EMPATHIZE">공감 게시판</a></h3>
 		<%
 			System.out.println("공감:"+request.getAttribute("empath_board"));
 			DTO[] dtos=((DTO[])request.getAttribute("empath_board"));

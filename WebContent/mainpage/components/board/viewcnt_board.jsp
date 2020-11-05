@@ -22,7 +22,7 @@
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 <div id="viewcnt_board" class="sm_board card">
 	<div class="board">
-		<h3><a href="">인기 게시판</a></h3>
+		<h3><a href="../board/board_list.do?root=VIEWCNT">인기 게시판</a></h3>
 				<%
 				System.out.println("뷰카운트:"+request.getAttribute("viewcnt_board"));
 				DTO[] dtos=((DTO[])request.getAttribute("viewcnt_board"));

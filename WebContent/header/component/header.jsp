@@ -39,12 +39,6 @@
 	         	<li class="nav-item">
 	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=GAME">게임게시판</a>
 	         	</li>
-	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=EMPATHIZE">공감게시판</a>
-	         	</li>
-	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=VIEWCNT">조회수게시판</a>
-	         	</li>
 	       	</ul>
 	    </div>
 	</nav>
