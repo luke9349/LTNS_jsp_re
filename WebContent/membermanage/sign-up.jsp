@@ -91,7 +91,7 @@
 						<tr> 
 							<td style="width: 110px;"><h5>이메일</h5></td>
 							<td><input class="form-control" type="email" id="email" name="email" maxlength="20"> </td>
-							<td style="width: 110px;"><button class="btn btn-primary" onclick="" type="button">요청</button> </td>
+							<td style="width: 130px;"><button class="btn btn-primary" onclick="" type="button">인증번호</button> </td>
 						</tr>
 					</tbody>
 				
