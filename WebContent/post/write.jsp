@@ -108,7 +108,7 @@ function chkSubmit(){
 		        <tr class="tableheader">
 		      		<td class="text-center" style="width:5%;">
 		      		<select class='selector' name="category">
-		 			
+		 		
 		 			<option value="NOTICE" > 공지사항 </option>
 		       		<option value="MOVIE" selected="selected" > 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
