@@ -1,10 +1,10 @@
 
 /* Drop Triggers */
 
-DROP TRIGGER TRI_comment_table_comment_id;
-DROP TRIGGER TRI_file_table_file_id;
-DROP TRIGGER TRI_mm_table_mm_id;
-DROP TRIGGER TRI_post_table_post_id;
+--DROP TRIGGER TRI_comment_table_comment_id;
+--DROP TRIGGER TRI_file_table_file_id;
+--DROP TRIGGER TRI_mm_table_mm_id;
+--DROP TRIGGER TRI_post_table_post_id;
 
 
 

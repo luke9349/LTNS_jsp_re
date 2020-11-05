@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import main.java.com.model.DAO;
 import main.java.com.model.DB;
 import main.java.com.model.DTO;
+import main.java.com.model.membermanage.MM_DTO;
 
 public class MM_DAO implements DAO {
 	
@@ -218,6 +219,20 @@ public class MM_DAO implements DAO {
 		public DTO[] selectBySQL_withSignal(String sql, int signal, String... stringParamForPstmt) throws SQLException {
 			// TODO Auto-generated method stub
 			return null;
+		}
+
+
+		@Override
+		public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+
+		@Override
+		public int insertBySQL_withDTO(String sql, DTO... dtos) throws SQLException {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 
 }

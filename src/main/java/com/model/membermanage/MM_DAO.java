@@ -18,7 +18,9 @@ public class MM_DAO implements DAO {
 	public static final String SELECT_MM_BY_MM_ID="SELECT	 mm_id, id, password, nickname, email, grade " + 
 			"FROM mm_table " + 
 			"WHERE mm_id=?";
-
+	public static final String INSERT_MM_BY_DTO="INSERT INTO mm_table(mm_id,id,password,nickname,email,grade) " + 
+			"VALUES (?,?,?,?,?,?)";
+	
 	//DB 연결에 필요한 변수들
 		Connection conn;
 		PreparedStatement pstmt;
