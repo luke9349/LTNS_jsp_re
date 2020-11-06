@@ -53,12 +53,15 @@ public class CommentLoadCommand implements Command, Board_Command {
 		}
 
 		long count = new CommentDAO().getAllCommentByPostId(postId).size();
-		ArrayList<CommentDTO> list = new CommentDAO().getPageCommentListByPostId(postId, page);
+		ArrayList<CommentDTO> list = new ArrayList<CommentDTO>();
+		for (int i = 1; i <= page; i++) {
+			list.addAll(new CommentDAO().getPageCommentListByPostId(postId, i));
+		}
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		responseJSON(request, response);
 
-	}
+	} // end excute()
 
 	@Override
 	public void responseJSON(HttpServletRequest request, HttpServletResponse response) {

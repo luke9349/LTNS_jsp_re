@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
@@ -22,11 +19,10 @@ import main.java.com.model.board.CommentDTO;
 import main.java.com.model.board.CommentInsertModel;
 import main.java.com.util.LogUtil;
 
-public class CommentWriteCommand implements Command, Board_Command {
+public class CommentNextCommand implements Command, Board_Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-
 		CommentInsertModel model = null;
 
 		try {
@@ -36,9 +32,7 @@ public class CommentWriteCommand implements Command, Board_Command {
 			while ((str = reader.readLine()) != null) {
 				json.append(str + "\n");
 			}
-			System.out.println(json.toString());
 			model = new ObjectMapper().readValue(json.toString(), CommentInsertModel.class);
-			System.out.println(model);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());
@@ -47,47 +41,22 @@ public class CommentWriteCommand implements Command, Board_Command {
 			LogUtil.error(e.getMessage());
 		}
 
-		String content = model.getComment();
-		int userId = -1;
 		int postId = -1;
 		int page = -1;
+
 		try {
-			userId = Integer.parseInt(model.getUserId());
 			postId = Integer.parseInt(model.getPostId());
 			page = Integer.parseInt(model.getPage());
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());
 		}
 
-		if (content == null || content.equals("")) {
-			request.getSession().setAttribute("messageType", "오류 메시지");
-			request.getSession().setAttribute("messageContent", "내용을 모두 채워주세요.");
-			return;
-		}
-
-		if (userId == -1 || postId == -1 || page == -1) {
-			request.getSession().setAttribute("messageType", "오류 메시지");
-			request.getSession().setAttribute("messageContent", "요청 오류");
-			return;
-		}
-
-		int create = new CommentDAO().createComment(content, userId, postId);
-		if (create == -1) {
-			request.getSession().setAttribute("messageType", "오류 메시지");
-			request.getSession().setAttribute("messageContent", "데이터 베이스 오류");
-			return;
-		}
-
 		long count = new CommentDAO().getAllCommentByPostId(postId).size();
-		ArrayList<CommentDTO> list = new ArrayList<CommentDTO>();
-		for (int i = 1; i <= page; i++) {
-			list.addAll(new CommentDAO().getPageCommentListByPostId(postId, i));
-		}
+		ArrayList<CommentDTO> list = new CommentDAO().getPageCommentListByPostId(postId, page);
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		responseJSON(request, response);
-
 	} // end excute()
 
 	@Override

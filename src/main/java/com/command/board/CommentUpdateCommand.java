@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
@@ -22,11 +19,10 @@ import main.java.com.model.board.CommentDTO;
 import main.java.com.model.board.CommentInsertModel;
 import main.java.com.util.LogUtil;
 
-public class CommentWriteCommand implements Command, Board_Command {
+public class CommentUpdateCommand implements Command, Board_Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-
 		CommentInsertModel model = null;
 
 		try {
@@ -47,14 +43,18 @@ public class CommentWriteCommand implements Command, Board_Command {
 			LogUtil.error(e.getMessage());
 		}
 
+		System.out.println(model);
+
 		String content = model.getComment();
 		int userId = -1;
 		int postId = -1;
 		int page = -1;
+		int commentId = -1;
 		try {
 			userId = Integer.parseInt(model.getUserId());
 			postId = Integer.parseInt(model.getPostId());
 			page = Integer.parseInt(model.getPage());
+			commentId = Integer.parseInt(model.getCommentId());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());
@@ -72,7 +72,13 @@ public class CommentWriteCommand implements Command, Board_Command {
 			return;
 		}
 
-		int create = new CommentDAO().createComment(content, userId, postId);
+		if (commentId == -1) {
+			request.getSession().setAttribute("messageType", "오류 메시지");
+			request.getSession().setAttribute("messageContent", "코멘트가 존재하지 않습니다.");
+			return;
+		}
+
+		int create = new CommentDAO().updateCommentByCommentId(content, commentId);
 		if (create == -1) {
 			request.getSession().setAttribute("messageType", "오류 메시지");
 			request.getSession().setAttribute("messageContent", "데이터 베이스 오류");

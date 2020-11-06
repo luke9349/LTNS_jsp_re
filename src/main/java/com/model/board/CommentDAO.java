@@ -78,7 +78,7 @@ public class CommentDAO {
 		ArrayList<CommentDTO> list = null;
 		String sql = SELECT_COMMENT_BY_POSTID_PAGE;
 		int startNum = (page - 1) * 5 + 1;
-		int endNum = startNum * 5;
+		int endNum = page * 5;
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, postId);

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="comment">
+<div class="comment mb-5">
   <div class="comment__insertForm">
     <form id="commentInsert">
       <div class="card text-center">
@@ -35,7 +35,6 @@
     <div class="clearfix"></div>
   </div>
 
-  <div class="comment__list hide">
+  <div class="comment__list">
   </div>
-  	<div class="hide btn btn-outline-primary form-control view">댓글 더보기</div>
 </div>

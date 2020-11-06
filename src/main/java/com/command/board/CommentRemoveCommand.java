@@ -41,8 +41,6 @@ public class CommentRemoveCommand implements Command, Board_Command {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());
 		}
-		
-		System.out.println(model);
 
 		int commentId = -1;
 		int postId = -1;
@@ -82,11 +80,14 @@ public class CommentRemoveCommand implements Command, Board_Command {
 			return;
 		}
 		long count = new CommentDAO().getAllCommentByPostId(postId).size();
-		ArrayList<CommentDTO> list = new CommentDAO().getPageCommentListByPostId(postId, page);
+		ArrayList<CommentDTO> list = new ArrayList<CommentDTO>();
+		for (int i = 1; i <= page; i++) {
+			list.addAll(new CommentDAO().getPageCommentListByPostId(postId, i));
+		}
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		responseJSON(request, response);
-	}
+	} // end excute()
 
 	@Override
 	public void responseJSON(HttpServletRequest request, HttpServletResponse response) {

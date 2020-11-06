@@ -103,7 +103,7 @@
  <link rel="stylesheet" type="text/css" href="../mainpage/CSS/header/header.css">
 
 <!-- javascript link -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="JS/view.js"></script>
 
 
@@ -116,6 +116,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- comment -->
+<link rel="stylesheet" href="../board/comment/css/comment.css">
+<script src="../board/comment/js/comment.js"></script>
+
+<!-- modal -->
+<script src="../modal/js/modal.js"></script>
 
 
 
@@ -201,8 +208,22 @@ function recommend(){
 	</div>
 	<hr>
 </div> 
+	<jsp:include page="../board/comment/component/comment.jsp"></jsp:include>
+	<script>
+		// commenInit('', '${param.post_id}');
+		commenInit('${param.post_id}');
+	</script>
+	<jsp:include page="../modal/component/modal.jsp" />
+	<c:if test="${messageType != null &&  messageContent != null}">
+		<script>
+			showModal("${messageType}", "${messageContent}");
+		</script>
+		<%
+			session.removeAttribute("messageType");
+			session.removeAttribute("messageContent");
+		%>
+	</c:if>
 	<jsp:include page="../mainpage/components/footer/footer.jsp" />
-
 
 </body>
 </html>

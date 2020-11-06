@@ -108,7 +108,7 @@ public class SampleMember_Maker {
 		String[] passwordArr;
 		
 		//만들 샘플 멤버 갯수
-		int memCnt=100;
+		int memCnt=500;
 
 		SampleMember_Maker m = new SampleMember_Maker();
 		
