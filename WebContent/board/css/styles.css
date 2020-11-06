@@ -4,8 +4,6 @@
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
 	;
 
-@import './list.css';
-
 @import '../../header/css/header.css';
 
 @import '../../footer/css/footer.css';

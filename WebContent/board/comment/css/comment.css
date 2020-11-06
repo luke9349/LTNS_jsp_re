@@ -2,6 +2,13 @@
 	min-height: 10rem;
 }
 
+#zeroData {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+}
+
 .alert {
 	margin-bottom: 0.25rem;
 }

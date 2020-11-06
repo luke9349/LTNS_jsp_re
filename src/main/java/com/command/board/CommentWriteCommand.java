@@ -36,7 +36,9 @@ public class CommentWriteCommand implements Command, Board_Command {
 			while ((str = reader.readLine()) != null) {
 				json.append(str + "\n");
 			}
+			System.out.println(json.toString());
 			model = new ObjectMapper().readValue(json.toString(), CommentInsertModel.class);
+			System.out.println(model);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());
@@ -47,7 +49,7 @@ public class CommentWriteCommand implements Command, Board_Command {
 
 		System.out.println(model);
 
-		String content = model.getContent();
+		String content = model.getComment();
 		int userId = -1;
 		int postId = -1;
 		int page = -1;
@@ -79,8 +81,8 @@ public class CommentWriteCommand implements Command, Board_Command {
 			return;
 		}
 
-		int count = new CommentDAO().getAllCommentByPostId(postId).size();
-		ArrayList<CommentDTO> list = new CommentDAO().getAllCommentByPostId(postId);
+		long count = new CommentDAO().getAllCommentByPostId(postId).size();
+		ArrayList<CommentDTO> list = new CommentDAO().getPageCommentListByPostId(postId, page);
 		request.setAttribute("count", count);
 		request.setAttribute("list", list);
 		responseJSON(request, response);
@@ -89,7 +91,7 @@ public class CommentWriteCommand implements Command, Board_Command {
 
 	@Override
 	public void responseJSON(HttpServletRequest request, HttpServletResponse response) {
-		long count = (Integer) request.getAttribute("count");
+		long count = (long) request.getAttribute("count");
 		ArrayList<CommentDTO> list = (ArrayList<CommentDTO>) request.getAttribute("list");
 
 		AjaxCommentListJSON result = new AjaxCommentListJSON();
