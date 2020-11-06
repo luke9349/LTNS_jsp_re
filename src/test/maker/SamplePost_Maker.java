@@ -85,7 +85,7 @@ public class SamplePost_Maker {
 		String fName = sm.format(d) + "_sample.txt";
 		PrintWriter pw=null;
 		//
-		String saveDirectory ="WebContent/data";
+		String saveDirectory ="WebContent\\data";
 		File file = new File(saveDirectory);
 		try {
 			if (!file.exists()) { // 디렉토리가 없으면 만들어줌
