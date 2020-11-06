@@ -35,6 +35,7 @@ public class WriteCommend implements Command {
 		String title = request.getParameter("title"); // 요청에서, title, content라는 name을 가진 파라미터 리턴
 		String content = request.getParameter("content");
 		String saveDirectory = request.getServletContext().getRealPath("/") + "data";
+
         String category = request.getParameter("category");
        // String wrtier = request.getParameter("writer");
        HttpSession session =  request.getSession();
@@ -65,8 +66,8 @@ public class WriteCommend implements Command {
 				if (!file.exists()) { // 디렉토리가 없으면 만들어줌
 					file.mkdirs();
 				}
-				filePath = saveDirectory + File.separator + fName; // 파일경로
-
+				filePath = saveDirectory + file.separator + fName; // 파일경로
+				System.out.println("filePath 입니다" + filePath);
 				// 내용저장객체 생성
 				pw = new PrintWriter(filePath);
 				pw.println("title" + title);

@@ -195,7 +195,7 @@ SELECT * FROM MM_TABLE mt WHERE id = 'sampleid23';
 
 SELECT * FROM FILE_TABLE ft ;
 SELECT * FROM POST_TABLE pt ;
-SELECT * FROM mm_table;
+SELECT * FROM mm_table; 
 
 
 
