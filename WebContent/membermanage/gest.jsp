@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-</body>
-</html>
+    
+<%
+	session.setAttribute("writer", 9999999);
+	session.setAttribute("login",0);
+	session.setAttribute("grade", "gest");	
+	session.setAttribute("nickname", "gest");	
+%>
+
+
+<script>
+	alert("게스트 모드로 입장하셨습니다.");
+	location.href = "<%=request.getContextPath() %>/board/board_list.do"
+</script>

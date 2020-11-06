@@ -128,6 +128,10 @@ public class DoController extends HttpServlet {
 			cmd.execute(request, response);
 			viewPage= "loginOk.jsp";
 			break;
+		
+			
+			
+			
 			
 		}//end swithc
 		

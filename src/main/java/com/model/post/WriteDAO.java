@@ -116,8 +116,9 @@ public class WriteDAO implements DAO {
 			Time t = rs.getTime("regdate");
 			String regDate = "";
 			if( d != null) {
-				regDate = new SimpleDateFormat("yyyy-mm-dd").format(d) + " "
-						+ new SimpleDateFormat("hh:mm:ss").format(t);
+				int month = d.getMonth()+1;
+				regDate = new SimpleDateFormat(month+"月 dd日").format(d) + " "
+						+ new SimpleDateFormat("hh:mm").format(t);
 			}
 			int content = rs.getInt("post_contents"); //파일주소 
 			int viewCnt = rs.getInt("viewCnt");
@@ -298,6 +299,18 @@ public class WriteDAO implements DAO {
 	public DTO[] selectBySQL_withSignal(String sql, int signal, String... stringParamForPstmt) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertBySQL_withDTO(String sql, DTO... dtos) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

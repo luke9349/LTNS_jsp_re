@@ -18,26 +18,29 @@ public class recomendCommend implements Command{
 		
 		HttpSession session =  request.getSession();
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
-		int rec_chkes =  (int) session.getAttribute("rec_chk_chks"); // 1 공감 ++ , 0 공감 -- 
+		//int rec_chkes =  (int) session.getAttribute("rec_chk_chks"); // 1 공감 ++ , 0 공감 -- 
 		int mm_id =  (int) session.getAttribute("writer");
+		int cns = 9999;
 		
 		
-			// 추천받았을때 값증가
 		
-		recomendDAO dao = new recomendDAO();
 		
-		if (rec_chkes == 1) {
-				cnt = dao.empathize_insert(post_id, mm_id);
-				request.setAttribute("rec", cnt);
-			
-		}else if (rec_chkes == 0) {
-				cnt = dao.empathize_delete(post_id, mm_id);
-				request.setAttribute("rec", cnt);
-		}	
-	
-			
-			
+		//추천값 조회 
+		if(post_id != 0 && mm_id !=0) {
+			 recomendDAO dao = new recomendDAO();
+			 cns = dao.empathize_select(post_id, mm_id);
+		}
 		
+		
+		if(cns == 0) {
+			recomendDAO dao = new recomendDAO();
+			cnt = dao.empathize_insert(post_id, mm_id);
+			request.setAttribute("rec", cnt);
+		}else if(cns == 1) {
+			recomendDAO dao = new recomendDAO();
+			cnt = dao.empathize_delete(post_id, mm_id);
+			request.setAttribute("rec", cnt);
+		}
 		
 		
 		
@@ -45,10 +48,6 @@ public class recomendCommend implements Command{
 		
 	}
 
-	private void swicth(int rec_chkes) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 
 }
