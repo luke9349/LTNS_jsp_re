@@ -50,20 +50,7 @@
 	var cnt = 0;
 	btns.onclick = function(){
 		alert("로그아웃");
-		cnt =1;
-		if(cnt =1){
-		<%
-		
-        session.removeAttribute("login");
-        session.removeAttribute("writer");
-        session.removeAttribute("grade");
-        session.removeAttribute("rec_chk_write");
-        System.out.println("진입합니까??");
-        %>
-		}
-    	location.href = "<%=request.getContextPath() %>/membermanage/loginmain.jsp";
-    	
-    }	
+	}	
 	
 
 </script>

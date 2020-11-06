@@ -24,20 +24,32 @@
 	String title = arr[0].getTitle();
 	String date = arr[0].getRegDate();
 	String category = arr[0].getCategory();
-	String nickname = member_info[0].getNickname();
 	int wirters = arr[0].getWriter();
+	int rec_chk_write = 99;
+	int login_chk = (int)session.getAttribute("login");
+	String nickname ="";
 	
+	if(login_chk == 0){
+		nickname = (String)session.getAttribute("nickname");
+		 rec_chk_write =  99; // 0
+		
+	}else {
+		nickname = member_info[0].getNickname();	
+		rec_chk_write =  (int) session.getAttribute("rec_chk_write"); // 0
+			
+	}
 	
 	int viewCnt = arr[0].getViewCnt();
 	int post_content = arr[0].getPost_contents();
 	int post_id = Integer.parseInt(request.getParameter("post_id"));
-	
 	int streinger =  (int) session.getAttribute("writer");
-	int rec_chk_write =  (int) session.getAttribute("rec_chk_write"); // 0
 	
 	
 	
 	
+	
+	
+	//공감
 	int emp_cnt = tot_info[0].getEmpathize_cnt();
 	
 	String ctx = request.getContextPath();
@@ -59,14 +71,13 @@
 	br = new BufferedReader(new FileReader(saveDirectory));
 	String line = null;
 
+	titles = br.readLine();
 	
 	while((line = br.readLine())!=null){
-		if(!line.equals("title")){
-			contents +=line;
-			//titles += line;
+		if(!line.equals(titles)){
+			contents += line;
 		}
-	}
-	
+	}//end while
 	
 	}catch(Exception e){
 		e.printStackTrace();
@@ -105,9 +116,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
 <script>
-
-
 function deletePost(uid){
 	// 삭제 여부, 다시 확인하고 진행하기
 	var r = confirm("삭제 하시겠습니까?");
@@ -136,25 +148,9 @@ function recommend(){
 	var rec_btn = document.getElementById("rec_btn");
 
 	if (<%=rec_chk_write%> == 0) {
-		alert("추천완료");
-		<%session.setAttribute("rec_chk_chks", 1);%>
 		location.href= 'recomendOk.do?post_id=<%=post_id%>'
 
-	} else if(<%=rec_chk_write%> == 1) {
-	   var r = confirm("추천을 취소하시겠습니까?");
-	   if(r){
-		  alert("추천이 취소되었습니다");
-		  <%
-		  	if(rec_chk_write ==1){
-			  	session.setAttribute("rec_chk_chks", 0);
-			  }
-		  %>
-		  location.href= 'recomendOk.do?post_id=<%=post_id%>'
-		
-	   }//end confirm
-	
-	}// end toggles
-	   
+	}  
 }
 	   
 
@@ -163,36 +159,39 @@ function recommend(){
 	<!--  헤더  -->
 	<jsp:include page="../header/component/header.jsp" />
 
- <div class="col-12 mt-2">
-	<!-- 제목 카테고리  -->
-	<div class="top title">
-		<h3>[<%=category %>]  &nbsp; [<%=title %>]</h3> 
+ <div class="col-12 mt-4">
+	<!-- 카테고리 -->
+	<div class="top title ">
+		<h6 class ="text-info"><%=category %> 	</h6> <span class="d-block"> [<%=post_id %>] </span> 
+		
+		 <span class="text-right d-block"> 
+		 <i class="far fa-eye"> <%=viewCnt %></i>
+		 <!-- 좋아요 버튼 -->
+		 <%if(login_chk != 0){%> 
+	 	 <i id="rec_btn" onclick="recommend()" class="ml-2 fas fa-thumbs-up"> <%=emp_cnt %></i>
+		<%} %>
+	
+	 	 </span>
 	</div>
-	<hr>
+	<!-- 제목  -->
+	<div class="top title">
+		<h1 class="font-weight-bold text-lg"><%=title %></h1> 
+	</div> <br>
+	
+	
 	<!-- 작성자 시간 조회수 추천수 -->
 	<div class="d-block">
-		<table>
-		<tr>
-		<th> </th> <th>[<%=date %>]</th> <th>[<%=nickname %>]</th> <th>[<%=viewCnt %>]</th> <th>[<%=post_content %>]</th>  <th>[<%=emp_cnt %>]</th>
-		</tr>
-		</table> 
+	<span class="font-weight-bold"><%=nickname%></span> <span class="font-size-sm"> <%=date %> </span> 
 	</div>
 	<hr>
 	<!-- 내용 -->
 	<div class="centents">
 		<h5><%=contents %> </h5> 
-		<div class="text-center"> <br>
-		<!-- 추천버튼 -->
-		
-		<button id="rec_btn" type="button" class="text-center btn-sm bg-success text-white" onclick="recommend()">
-		<i class="fas fa-heart"></i>
-		</button>
-		
-		</div>
-	</div>
+		<div class="text-center"></div>
+	</div><br><br><br><br><br><br><br><br><br><br><br><br>
 	<hr>
 	<div class="text-right">
-	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="취소" onclick='back()'>
+	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="돌아가기" onclick='back()'>
 	
 	<!-- 수정삭제  -->
 	<%if(wirters == streinger){ %>

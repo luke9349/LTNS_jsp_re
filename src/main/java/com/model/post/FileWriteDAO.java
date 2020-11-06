@@ -329,4 +329,16 @@ public class FileWriteDAO implements DAO {
 		return null;
 	}
 
+	@Override
+	public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertBySQL_withDTO(String sql, DTO... dtos) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

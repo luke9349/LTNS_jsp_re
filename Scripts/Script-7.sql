@@ -170,22 +170,22 @@ FROM file_table
 WHERE file_id=?
 ;
 
-
+SELECT * FROM EMPATHIZE_TABLE et WHERE post_id =45 AND MM_ID =1; 
 
 INSERT INTO empathize_table(post_id,mm_id)
 VALUES (6, 2);
 
 
-SELECT * FROM EMPATHIZE_TABLE et ;
+
+SELECT * FROM EMPATHIZE_TABLE et WHERE post_id =43 AND MM_ID =1 ;
 
 
-DELETE EMPATHIZE_TABLE WHERE post_id = 60;
+DELETE EMPATHIZE_TABLE ;
 
 SELECT * FROM MM_TABLE mt ;
 
 SELECT * FROM tot_post_view WHERE post_id =60;
 
-SELECT * FROM tot_post_view;
 
 
 SELECT * FROM MM_TABLE WHERE id = 'sampleid23' AND PASSWORD = '123123';
@@ -195,7 +195,7 @@ SELECT * FROM MM_TABLE mt WHERE id = 'sampleid23';
 
 SELECT * FROM FILE_TABLE ft ;
 SELECT * FROM POST_TABLE pt ;
-SELECT * FROM mm_table;
+SELECT * FROM mm_table; 
 
 
 

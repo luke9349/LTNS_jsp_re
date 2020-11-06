@@ -62,14 +62,14 @@
 	br = new BufferedReader(new FileReader(saveDirectory));
 	String line = null;
 
+
+	titles = br.readLine();
 	
 	while((line = br.readLine())!=null){
-		if(line.equals("title")){
-			 titles += line;
-		}else{
-			contents +=line;
+		if(!line.equals(titles)){
+			contents += line;
 		}
-	}
+	}//end while
 	
 	
 	}catch(Exception e){
@@ -170,7 +170,10 @@ function chkSubmit(){
 		        <tr >
 		       		<td class="text-center" style="width:5%;">
 		       		<select name="category" class='selector'>
+		       		
+		       		<%if(grade.equals("admin")){ %>
 		       		<option value="NOTICE" > 공지사항 </option>
+					<%} %>
 		       		<option value="MOVIE" selected="selected" > 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
 		       		<option value="BOOK">도서 게시판  </option>

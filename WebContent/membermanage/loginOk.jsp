@@ -31,7 +31,6 @@
 	
 		<!-- 세션 생성  -->
 	<%
-	
 	String sessionId = session.getId();
 	int sessionInterval = session.getMaxInactiveInterval();
 	session.setAttribute("writer", arrs[0].getMm_id());

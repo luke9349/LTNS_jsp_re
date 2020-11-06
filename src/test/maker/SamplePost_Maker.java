@@ -85,7 +85,7 @@ public class SamplePost_Maker {
 		String fName = sm.format(d) + "_sample.txt";
 		PrintWriter pw=null;
 		//
-		String saveDirectory ="WebContent/data";
+		String saveDirectory ="WebContent\\data";
 		File file = new File(saveDirectory);
 		try {
 			if (!file.exists()) { // 디렉토리가 없으면 만들어줌
@@ -110,7 +110,7 @@ public class SamplePost_Maker {
 			}
 		}
 		
-		return new File_DTO(0, "POST", title, file.getAbsolutePath());
+		return new File_DTO(0, "POST", title, file.getAbsolutePath()+"\\"+fName);
 	}
 	
 	//2. 파일 테이블 삽입
@@ -175,8 +175,8 @@ public class SamplePost_Maker {
 	
 	public static void main(String[] args) {
 
-		new SamplePost_Maker().mkStringOrTagOrImg(100);
-		
+		new SamplePost_Maker().mkPosts(10);
+		System.out.println("전체 작업 완료!");
 	}
 
 }
