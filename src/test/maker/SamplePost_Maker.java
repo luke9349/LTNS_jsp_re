@@ -175,7 +175,7 @@ public class SamplePost_Maker {
 	
 	public static void main(String[] args) {
 
-		new SamplePost_Maker().mkStringOrTagOrImg(100);
+		new SamplePost_Maker().mkPosts(10);
 		
 	}
 

@@ -80,12 +80,13 @@ const hadleTextArea = (e) => {
 
 const handleCommentInsert = (e) => {
 	e.preventDefault();
-	const url = `commentInsert.ajax?`
+	const url = `commentWrite.ajax?`
 	const form = new FormData(document.getElementById('commentInsert'));
 	// form.append('uesrId', userId);
 	// form.append('postId', postId);
-	form.append('userId', 8);
-	form.append('postId', 1);
+	form.append('userId', 1);
+	form.append('postId', 9);
+	form.append('page', 1);
 	console.log(form);
 	fetch(url,{
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -94,12 +95,11 @@ const handleCommentInsert = (e) => {
         credentials: 'same-origin', // include, *same-origin, omit
         headers: {
             'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         redirect: 'follow', // manual, *follow, error
         referrer: 'no-referrer', // no-referrer, *client
         body: JSON.stringify(Object.fromEntries(form)), // body data type must match "Content-Type" header
-    })
+    }).then(response => response.json()).then(console.log)
 }
 
 //const commenInit = (uid, pid) => {
