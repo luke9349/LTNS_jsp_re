@@ -85,9 +85,9 @@ public class SamplePost_Maker {
 		String fName = sm.format(d) + "_sample.txt";
 		PrintWriter pw=null;
 		//
+		String saveDirectory ="WebContent/data";
+		File file = new File(saveDirectory);
 		try {
-			String saveDirectory ="WebContent/data";
-			File file = new File(saveDirectory);
 			if (!file.exists()) { // 디렉토리가 없으면 만들어줌
 				file.mkdirs();
 			}
@@ -110,7 +110,7 @@ public class SamplePost_Maker {
 			}
 		}
 		
-		return new File_DTO(0, "POST", title, filePath);
+		return new File_DTO(0, "POST", title, file.getAbsolutePath());
 	}
 	
 	//2. 파일 테이블 삽입

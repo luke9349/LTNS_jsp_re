@@ -18,10 +18,7 @@ public class Post_Contents {
 	
 	
 	public Post_Contents(String filePath){
-		Path relativePath = Paths.get("");
-		String path = relativePath.toAbsolutePath().toString();
-	    System.out.println("Working Directory = " + path);
-		filePath=path+filePath;
+		
 		File file=new File(filePath);
 		System.out.println(file.getAbsolutePath());
 		StringBuffer _contentsText = null;
