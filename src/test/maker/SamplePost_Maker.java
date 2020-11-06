@@ -110,7 +110,7 @@ public class SamplePost_Maker {
 			}
 		}
 		
-		return new File_DTO(0, "POST", title, file.getAbsolutePath());
+		return new File_DTO(0, "POST", title, filePath);
 	}
 	
 	//2. 파일 테이블 삽입
