@@ -57,14 +57,11 @@ public class SampleMember_Maker {
 		return passwordArr;
 	}
 	
-	public void mk100Members() {
+	public void mkMembers(int memCnt) {
 		HashSet<String> idSet;
 		HashSet<String> nicknameSet;
 		HashSet<String> emailSet;
 		String[] passwordArr;
-		
-		//만들 샘플 멤버 갯수
-		int memCnt=100;
 
 		SampleMember_Maker m = new SampleMember_Maker();
 		

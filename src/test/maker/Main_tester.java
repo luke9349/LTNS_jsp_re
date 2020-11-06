@@ -17,9 +17,12 @@ public class Main_tester {
 		}
 		
 		/*샘플 정회원 100명 생성*/
-		new SampleMember_Maker().mk100Members();
+		new SampleMember_Maker().mkMembers(100);
 
-		System.out.println("작업 완료!");
+		System.out.println("회원생성 작업 완료!");
+		
+		/*샘플 포스트 100개 생성*/
+		new SamplePost_Maker().mkStringOrTagOrImg(100);
 	}
 
 }

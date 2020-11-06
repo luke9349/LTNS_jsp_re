@@ -133,13 +133,11 @@ public class SamplePost_Maker {
 		new Post_DAO_tester().insertBySQL_withDTO(Post_DAO_tester.INSERT_NEW_POST, dtos);
 	}
 
-	
-	public static void main(String[] args) {
-
+	public void mkPosts(int memCnt) {
 		SamplePost_Maker spm=new SamplePost_Maker();
 		ArrayList<DTO> dtoList=new ArrayList<DTO>();
 		//만들 샘플 포스트 갯수
-		int memCnt=100;
+		
 		
 		try {
 			for(int i=0;i<memCnt;i++) {
@@ -173,6 +171,12 @@ public class SamplePost_Maker {
 			System.out.println("sql 문제");			
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+
+		new SamplePost_Maker().mkStringOrTagOrImg(100);
+		
 	}
 
 }
