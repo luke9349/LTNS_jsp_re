@@ -79,6 +79,14 @@ public class SampleMember_Maker {
 		String[] emailArr=new String[memCnt];
 		new ArrayList<String>(emailSet).toArray(emailArr);
 		
+		try {
+			new MM_DAO_tester().insertBySQL_withDTO(MM_DAO_tester.INSERT_MM_BY_DTO, new MM_DTO("a","a","admin","admin@LTNS.com","MEMBER"));
+			System.out.println("admin 생성 완료!");
+		} catch (SQLException e1) {
+			System.out.println("admin 생성 오류");
+			e1.printStackTrace();
+		}
+
 		for(int i=0;i<memCnt;i++) {
 			//dao로 샘플멤버 집어넣기 해야함!
 			try {
