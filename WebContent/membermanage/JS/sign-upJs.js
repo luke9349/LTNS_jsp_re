@@ -1,7 +1,7 @@
 	
 
 	
-	$("#id").focusout(function() {
+	$("#id").focusout(function() { //아이디 유효성
 		
 		var getidCheck= RegExp(/^[a-z0-9]{4,12}$/);
 		
@@ -10,14 +10,14 @@
 		if($("#id").val() == ""){ 
 			 $("#iderror").html("아이디형식에 맞게 입력해주세요1");
 			 
-			 return
+			 return;
 		}
 		
 		
 		//아이디 유효성검사 
 		if(!getidCheck.test($("#id").val())){  $("#iderror").html("아이디형식에 맞게 입력해주세요2"); return;} 
 		
-		if(getidCheck.test($("#id").val())){  $("#iderror").html("아이디 완벽함"); return;}
+		if(getidCheck.test($("#id").val())){  $("#iderror").html("아이디 완벽함"); return true;}
 		
 			
 		
@@ -25,23 +25,26 @@
 		
 	});
 	
-	$("#pw").focusout(function() {
+	$("#pw").focusout(function() {  //비밀번호 유효성 
 			
 		var getpwCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
 			
 			$("#pwerror").attr('class','error');
-			//아이디 공백 확인 
-			if($("#id").val() == ""){ 
-				 $("#iderror").html("아이디형식에 맞게 입력해주세요1");
+
+			
+			if($("#pw").val() == ""){ 
+				 $("#pwerror").html("비밀번호형식에 맞게 입력해주세요1 4 ~ 12 글자 ");
 				 
-				 return
+				 return;
 			}
 			
 			
-			//아이디 유효성검사 
-			if(!getidCheck.test($("#id").val())){  $("#iderror").html("아이디형식에 맞게 입력해주세요2"); return;} 
+			if(!getpwCheck.test($("#pw").val())){  $("#pwerror").html("비밀번호형식에 맞게 입력해주세요2 4 ~ 12 글자"); return;} 
 			
-			if(getidCheck.test($("#id").val())){  $("#iderror").html("아이디 완벽함"); return;}
+			
+			if($("#id").val() == $("#pw").val()){ $("#pwerror").html("아이디와비밀번호가 같습니다"); return; }
+			
+			if(getpwCheck.test($("#pw").val())){  $("#pwerror").html(""); return;}
 			
 				
 			
@@ -49,47 +52,67 @@
 			
 		});
 	
-	$("#nik").focusout(function() {
+	$("#pwck").focusout(function() {  //비밀번호 유효성 
+		
+		
+			
+			$("#pwerror").attr('class','error');
+
+			
+			 
+			if($("#pw").val() != $("#pwck").val()){$("#pwerror").html("비밀번호가 상이합니다"); return; }
+			
+			if($("#pw").val() == $("#pwck").val()){$("#pwerror").html("비밀번호완벽"); return; }
+			
+			
+			
+			
+				
+			
+			
+			
+		});
+	
+	$("#nik").focusout(function() { //닉네임 유효성
 		
 		var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/);
 		
 		$("#nikerror").attr('class','error');
-		//아이디 공백 확인 
-		if($("#id").val() == ""){ 
-			 $("#iderror").html("아이디형식에 맞게 입력해주세요1");
+		
+		if($("#nik").val() == ""){ 
+			 $("#nikerror").html("2 ~ 5 글자 한글,영어,숫자가능1");
 			 
-			 return
+			 return;
 		}
 		
 		
-		//아이디 유효성검사 
-		if(!getidCheck.test($("#id").val())){  $("#iderror").html("아이디형식에 맞게 입력해주세요2"); return;} 
+		 if(!getNik.test($("#nik").val())){  $("#nikerror").html("2 ~ 5 글자 한글,영어,숫자가능2"); return;} 
 		
-		if(getidCheck.test($("#id").val())){  $("#iderror").html("아이디 완벽함"); return;}
+		 if(getNik.test($("#nik").val())){  $("#nikerror").html("닉넴 완벽함"); return;}
 		
 			
-		
+
 		
 		
 	});
 	
-	$("#email").focusout(function() {
+	
+	$("#email").focusout(function() { //이메일 유효성
 		
 		var getemail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 		
 		$("#emailerror").attr('class','error');
-		//아이디 공백 확인 
-		if($("#id").val() == ""){ 
-			 $("#iderror").html("아이디형식에 맞게 입력해주세요1");
+		
+		if($("#email").val() == ""){ 
+			 $("#emailerror").html("이메일 형식맞게");
 			 
-			 return
+			 return;
 		}
 		
 		
-		//아이디 유효성검사 
-		if(!getidCheck.test($("#id").val())){  $("#iderror").html("아이디형식에 맞게 입력해주세요2"); return;} 
+		if(!getemail.test($("#email").val())){  $("#emailerror").html("이메일 형식맞게"); return;} 
 		
-		if(getidCheck.test($("#id").val())){  $("#iderror").html("아이디 완벽함"); return;}
+		if(getemail.test($("#email").val())){  $("#emailerror").html("이메일 완벽함"); return;}
 		
 			
 		
