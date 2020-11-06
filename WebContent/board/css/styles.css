@@ -33,6 +33,6 @@ main {
 	flex: 1;
 }
 
-main.hied {
+.hied {
 	display: none;
 }

@@ -58,8 +58,6 @@ else $('#jsonAlbum').html(post);
 
 const requestAjax = () => {
   $('#loading').removeClass('hide');
-//setTimeout(() => {
-
 
   fetch(url + query)
     .then((response) => response.json())
@@ -77,9 +75,9 @@ const requestAjax = () => {
           createcards(json);
           break;
       }
-      if (params.type !== 'post') initPagination(params, json.count);
+      if (type !== 'post') initPagination(params, json.count);
       $('#loading').addClass('hide');
-      $('#main').removeClass('hide');
+      $('#listContent').removeClass('hide');
     })
     .catch((e) => {
       sessionStorage.setItem('messageType', '오류 메시지');
@@ -87,13 +85,6 @@ const requestAjax = () => {
       sessionStorage.setItem('error', e.message);
       history.back();
     });
-
-
-
-	//}, 10000);
-	
-	
-	
 };
 
 export const getContextPath = () => {

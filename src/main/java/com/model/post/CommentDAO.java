@@ -1,117 +1,193 @@
 package main.java.com.model.post;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import main.java.com.model.DB;
+import main.java.com.util.DataUtil;
+import main.java.com.util.LogUtil;
 
 public class CommentDAO {
 
-	
 	Connection conn = null;
 	PreparedStatement psmt = null;
-	Statement stmt = null;
 	ResultSet rs = null;
-	
-	
-	public CommentDAO() {
-		
-		try {
-			Class.forName(DB.DRIVER);
-			conn = DriverManager.getConnection(DB.URL, DB.USERID, DB.USERPW);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public void close() throws SQLException {
-		if(rs != null) rs.close();
-		if(psmt != null) psmt.close();
-		if(stmt != null) stmt.close();
-		if(conn != null) conn.close();
-		
-	} // end close()
-	
-	
-	//글쓰기
-		public int cm_Insert(CommentDTO dto) throws SQLException {
-			int cnt = 0;
-			
-			String comentcentes = dto.getComment_contents();
-			// 추후 writer ,id 작성 
-			
-			cnt = this.cm_Insert(comentcentes);
-			return cnt;
-		}
-		
-		public int cm_Insert(String comentcentes) throws SQLException {
-			int cnt = 0;
-		
-			try {
-				String sql = "INSERT INTO comment_table"
-						+"(comment_id,comment_contents,writer,post_id,regdate) "
-						+"VALUES"
-						+"(SEQ_comment_table_comment_id.NEXTVAL,?,2,40,sysdate)";
-				psmt = conn.prepareStatement(sql);
-				psmt.setString(1, comentcentes);
-				
-				//writer는 받아와야함, id 는 받아와야함 
-				
-				cnt = psmt.executeUpdate();
-			}	finally {
-				close();
-			
-			}
-			
-			return cnt;
-		}
-		
-		
-		public CommentDTO[] createArray(ResultSet rs) throws SQLException {
-			ArrayList<CommentDTO> list = new ArrayList<CommentDTO>();
-			
-			while(rs.next()) {
 
-				int comment_id = rs.getInt("comment_id"); // 게시글 고유번호 
-				String comment_contents = rs.getString("comment_contents"); //제목 
-				int writer = rs.getInt("writer"); //제목 
-				int post_id = rs.getInt("post_id"); //제목 
-				Date d = rs.getDate("regdate");
-				Time t = rs.getTime("regdate");
-				String regdate = "";
-				if( d != null) {
-					regdate = new SimpleDateFormat("yyyy-mm-dd").format(d) + " "
-							+ new SimpleDateFormat("hh:mm:ss").format(t);
-				}
-			
-				CommentDTO dto = new CommentDTO(comment_id, comment_contents, writer,post_id);
-				dto.setRegDate(regdate);
+	final static String INSERT_COMMENT = "INSERT INTO COMMENT_TABLE (COMMENT_ID, COMMENT_CONTENTS, WRITER, POST_ID, REGDATE) VALUES (SEQ_comment_table_comment_id.NEXTVAL, ?, ?, ?, sysdate)";
+	final static String SELECT_COMMENT_BY_POSTID = "SELECT * FROM COMMENT_TABLE c"
+			+ "JOIN MM_TABLE m ON c.WRITER = m.MM_ID" + "WHERE POST_ID = ?";
+	final static String SELECT_COMMENT_BY_POSTID_ALL = "SELECT * FROM COMMENT_TABLE c"
+			+ " WHERE POST_ID = ?";
+	final static String SELECT_COMMENT_BY_POSTID_PAGE = "SELECT * FROM" + "(SELECT ROWNUM AS NO, t.* FROM"
+			+ " (SELECT * FROM COMMENT_TABLE c" + " JOIN MM_TABLE m ON c.WRITER = m.MM_ID " + " WHERE POST_ID = ?"
+			+ " ORDER BY REGDATE DESC, NICKNAME DESC, COMMENT_ID DESC, WRITER DESC) t)" + " WHERE NO >= ? AND NO <= ?";
+	final static String UPDATE_COMMENT_BY_COMMENTID = "UPDATE COMMENT_TABLE SET COMMENT_CONTENTS = ? WHERE COMMENT_ID = ?";
+	final static String DELETE_COMMENT_BY_COMMENTID = "DELETE FROM COMMENT_TABLE WHERE COMMENT_ID = ?";
+
+	public CommentDAO() {
+		this.conn = DataUtil.getConnection();
+	}
+
+	// create
+	public int createComment(String content, int writer, int postId) {
+
+		String sql = INSERT_COMMENT;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, content);
+			psmt.setInt(2, writer);
+			psmt.setInt(3, postId);
+			return psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.error(e.getMessage());
+		} finally {
+			DataUtil.resourceClose(psmt, conn);
+		} // end try
+
+		return -1;
+	} // end createComment()
+
+	// read
+	public ArrayList<CommentDTO> getCommentByPostId(int postId) {
+		ArrayList<CommentDTO> list = null;
+		String sql = SELECT_COMMENT_ONE_BY_POSTID;
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, postId);
+			rs = psmt.executeQuery();
+			list = createArray(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.error(e.getMessage());
+		} finally {
+			DataUtil.resourceClose(psmt, conn);
+		} // end try
+
+		return list;
+	} // end getCommentByPostId()
+
+	// read
+	public ArrayList<CommentDTO> getAllCommentListByPostId(int postId) {
+		ArrayList<CommentDTO> list = null;
+		String sql = SELECT_COMMENT_BY_POSTID;
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, postId);
+			rs = psmt.executeQuery();
+			list = createArray(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.error(e.getMessage());
+		} finally {
+			DataUtil.resourceClose(psmt, conn);
+		} // end try
+
+		return list;
+	} // end getAllCommentListByPostId()
+
+	// read
+	public ArrayList<CommentDTO> getPageCommentListByPostId(int postId, int page) {
+		ArrayList<CommentDTO> list = null;
+		String sql = SELECT_COMMENT_BY_POSTID_PAGE;
+		int startNum = (page - 1) * 5 + 1;
+		int endNum = startNum * 5;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, postId);
+			psmt.setInt(2, startNum);
+			psmt.setInt(3, endNum);
+			rs = psmt.executeQuery();
+			list = createArray(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.error(e.getMessage());
+		} finally {
+			DataUtil.resourceClose(psmt, conn);
+		} // end try
+
+		return list;
+	} // end getPageCommentListByPostId()
+
+	// update
+	public int updateCommentByCommentId(String content, int commentId) {
+		String sql = UPDATE_COMMENT_BY_COMMENTID;
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, content);
+			psmt.setInt(2, commentId);
+			return psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.error(e.getMessage());
+		} finally {
+			DataUtil.resourceClose(psmt, conn);
+		} // end try
+
+		return -1;
+	} // end updateCommentByCommentId()
+
+	// delete
+	public int deleteCommentByCommentId(int commentId) {
+		String sql = DELETE_COMMENT_BY_COMMENTID;
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, commentId);
+			return psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.error(e.getMessage());
+		} finally {
+			DataUtil.resourceClose(psmt, conn);
+		} // end try
+
+		return -1;
+	}
+
+	public ArrayList<CommentDTO> createArray(ResultSet rs) {
+		ArrayList<CommentDTO> list = new ArrayList<CommentDTO>();
+
+		try {
+			while (rs.next()) {
+				CommentDTO dto = new CommentDTO();
+				dto.setCommentId(rs.getLong("COMMENT_ID"));
+				dto.setCommentContents(rs.getString("COMMENT_CONTENTS"));
+				dto.setWriterId(rs.getLong("WRITER"));
+				dto.setWriter(rs.getString("ID"));
+				dto.setNickName(rs.getString("NICKNAME"));
+				dto.setPostId(rs.getLong("POST_ID"));
+
+				Date date = rs.getDate("REGDATE");
+				Time time = rs.getTime("REGDATE");
+
+				String strDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+				String strTime = new SimpleDateFormat("HH:mm").format(time);
+
+				String meridiem = "오전";
+				int integerTime = Integer.parseInt(strTime.substring(0, 2));
+				if (integerTime > 12) {
+					meridiem = "오후";
+					integerTime -= 12;
+				} // end if
+				String regDate = strDate + " (" + meridiem + ")" + integerTime + strTime.substring(2);
+				dto.setRegdate(regDate);
+
 				list.add(dto);
-				
-				
-				
-				
 			}
-			
-			int size = list.size();
-			if(size == 0 ) return null;
-			
-			CommentDTO arr[] = new CommentDTO[size];
-			list.toArray(arr);
-			return arr;
-		}
-		
-	
-	
-	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.error(e.getMessage());
+		} // end try
+		return list;
+	} // end createArray()
+
 }

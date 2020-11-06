@@ -1,10 +1,12 @@
-package main.java.com.model.board;
+package main.java.com.model.post;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AjaxBoardListJSON {
+import main.java.com.model.board.JSONListDTO;
+
+public class AjaxCommentListJSON {
 	private long count;
 	private String status;
 
@@ -37,7 +39,7 @@ public class AjaxBoardListJSON {
 
 	@Override
 	public String toString() {
-		return "AjaxBoardListJSON [count=" + count + ", status=" + status + ", list=" + list + "]";
+		return "AjaxCommentListJSON [count=" + count + ", status=" + status + ", list=" + list + "]";
 	}
 
 }

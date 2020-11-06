@@ -1,3 +1,7 @@
+.comment_area {
+	min-height: 10rem;
+}
+
 .alert {
 	margin-bottom: 0.25rem;
 }

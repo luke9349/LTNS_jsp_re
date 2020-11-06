@@ -30,7 +30,7 @@ public class BoarAjaxCommand implements Command, Board_Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		try {
-			request.setCharacterEncoding("UTF-8");	
+			request.setCharacterEncoding("UTF-8");
 
 			String[] categorys = { "NOTICE", "MOVIE", "BOOK", "GAME", "SPORTS", "VIEWCNT", "EMPATHIZE" };
 			String[] types = { "list", "album", "post" };
@@ -44,20 +44,33 @@ public class BoarAjaxCommand implements Command, Board_Command {
 
 			if (request.getParameter("root") != null) {
 				category = request.getParameter("root");
-				if (!inspectParameter(categorys, category))
-					throw new Exception("This value is not valid: " + category);
+				if (!inspectParameter(categorys, category)) {
+					Exception e = new Exception("This value is not valid: " + category);
+					LogUtil.error(e.getMessage());
+					e.printStackTrace();
+					throw e;
+				}
 			}
 
 			if (request.getParameter("type") != null) {
 				type = request.getParameter("type");
-				if (!inspectParameter(types, type))
-					throw new Exception("This value is not valid: " + type);
+				if (!inspectParameter(types, type)) {
+					Exception e = new Exception("This value is not valid: " + type);
+					LogUtil.error(e.getMessage());
+					e.printStackTrace();
+					throw e;
+				}
 			}
 
 			if (request.getParameter("searchType") != null) {
+				System.out.println(request.getParameter("searchType"));
 				searchType = request.getParameter("searchType");
-				if (!inspectParameter(searchTypes, searchType))
-					throw new Exception("This value is not valid: " + searchType);
+				if (!inspectParameter(searchTypes, searchType)) {
+					Exception e = new Exception("This value is not valid: " + searchType);
+					LogUtil.error(e.getMessage());
+					e.printStackTrace();
+					throw e;
+				}
 			}
 
 			if (request.getParameter("search") != null)
@@ -104,7 +117,6 @@ public class BoarAjaxCommand implements Command, Board_Command {
 		} catch (Exception e) {
 			LogUtil.error("[BoarAjaxCommand] [params Error] " + e.getMessage());
 			e.printStackTrace();
-			return;
 		} // end try
 	} // end execute()
 

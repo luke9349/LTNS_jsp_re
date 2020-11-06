@@ -1,4 +1,3 @@
-const pagination = document.getElementById('pagination');
 let params = null;
 let maxPagination = null;
 
@@ -25,6 +24,7 @@ const createPaginationList = (className) => {
 
 const handledPagination = () => {
   if (params.type === 'post') return;
+  const pagination = document.getElementById('pagination');
   let { root, type, page, searchType, search } = params;
   page = parseInt(page);
   let url = '';
@@ -71,7 +71,6 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   }
-
   for (let i = startPagination; i <= endPagination; i++) {
     let li = createPaginationList('page-item');
     if (i === page) li.classList.add('active');

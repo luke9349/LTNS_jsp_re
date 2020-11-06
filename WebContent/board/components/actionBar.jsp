@@ -14,8 +14,6 @@
 	}
 	if(request.getParameter("page") != null && !request.getParameter("page").equals(""))
 		url += "&page=" + request.getParameter("page");
-	
-	System.out.println(url);
 %> 
 <div class="actionBar py-3">
   <div class="actionBtns">
