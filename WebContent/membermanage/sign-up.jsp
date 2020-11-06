@@ -89,7 +89,7 @@
 						<tr> 
 							<td style="width: 110px;"><h5>비밀번호 확인</h5></td>
 							<td colspan="2"><input class="form-control" type="password" id="pwck" name="pwck" maxlength="20"/> 
-								<span class="error d-none" id="pwerror" >  </span>
+								<span class="error d-none" id="pwerror" > </span>
 							</td>
 						</tr>
 						
