@@ -1,4 +1,4 @@
-package main.java.com.model.post;
+package main.java.com.model.board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,10 +19,9 @@ public class CommentDAO {
 	ResultSet rs = null;
 
 	final static String INSERT_COMMENT = "INSERT INTO COMMENT_TABLE (COMMENT_ID, COMMENT_CONTENTS, WRITER, POST_ID, REGDATE) VALUES (SEQ_comment_table_comment_id.NEXTVAL, ?, ?, ?, sysdate)";
-	final static String SELECT_COMMENT_BY_POSTID = "SELECT * FROM COMMENT_TABLE c"
-			+ "JOIN MM_TABLE m ON c.WRITER = m.MM_ID" + "WHERE POST_ID = ?";
 	final static String SELECT_COMMENT_BY_POSTID_ALL = "SELECT * FROM COMMENT_TABLE c"
-			+ " WHERE POST_ID = ?";
+			+ " JOIN MM_TABLE m ON c.WRITER = m.MM_ID"
+			+" WHERE POST_ID = 9";
 	final static String SELECT_COMMENT_BY_POSTID_PAGE = "SELECT * FROM" + "(SELECT ROWNUM AS NO, t.* FROM"
 			+ " (SELECT * FROM COMMENT_TABLE c" + " JOIN MM_TABLE m ON c.WRITER = m.MM_ID " + " WHERE POST_ID = ?"
 			+ " ORDER BY REGDATE DESC, NICKNAME DESC, COMMENT_ID DESC, WRITER DESC) t)" + " WHERE NO >= ? AND NO <= ?";
@@ -37,6 +36,7 @@ public class CommentDAO {
 	public int createComment(String content, int writer, int postId) {
 
 		String sql = INSERT_COMMENT;
+		System.out.println(sql);
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, content);
@@ -49,14 +49,14 @@ public class CommentDAO {
 		} finally {
 			DataUtil.resourceClose(psmt, conn);
 		} // end try
-
 		return -1;
 	} // end createComment()
 
 	// read
-	public ArrayList<CommentDTO> getCommentByPostId(int postId) {
+	public ArrayList<CommentDTO> getAllCommentByPostId(int postId) {
+		System.out.println(postId);
 		ArrayList<CommentDTO> list = null;
-		String sql = SELECT_COMMENT_ONE_BY_POSTID;
+		String sql = SELECT_COMMENT_BY_POSTID_ALL;
 
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -71,27 +71,9 @@ public class CommentDAO {
 		} // end try
 
 		return list;
-	} // end getCommentByPostId()
+	} // end getAllCommentByPostId()
 
-	// read
-	public ArrayList<CommentDTO> getAllCommentListByPostId(int postId) {
-		ArrayList<CommentDTO> list = null;
-		String sql = SELECT_COMMENT_BY_POSTID;
-
-		try {
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, postId);
-			rs = psmt.executeQuery();
-			list = createArray(rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			LogUtil.error(e.getMessage());
-		} finally {
-			DataUtil.resourceClose(psmt, conn);
-		} // end try
-
-		return list;
-	} // end getAllCommentListByPostId()
+	
 
 	// read
 	public ArrayList<CommentDTO> getPageCommentListByPostId(int postId, int page) {
@@ -160,11 +142,17 @@ public class CommentDAO {
 			while (rs.next()) {
 				CommentDTO dto = new CommentDTO();
 				dto.setCommentId(rs.getLong("COMMENT_ID"));
+				System.out.println("귀찬1");
 				dto.setCommentContents(rs.getString("COMMENT_CONTENTS"));
+				System.out.println("귀찬2");
 				dto.setWriterId(rs.getLong("WRITER"));
+				System.out.println("귀찬3");
 				dto.setWriter(rs.getString("ID"));
+				System.out.println("귀찬4");
 				dto.setNickName(rs.getString("NICKNAME"));
+				System.out.println("귀찬5");
 				dto.setPostId(rs.getLong("POST_ID"));
+				System.out.println("귀찬6");
 
 				Date date = rs.getDate("REGDATE");
 				Time time = rs.getTime("REGDATE");

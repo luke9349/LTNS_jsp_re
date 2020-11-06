@@ -1,4 +1,4 @@
-package main.java.com.model.post;
+package main.java.com.model.board;
 
 public class CommentDTO {
 

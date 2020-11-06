@@ -1,17 +1,15 @@
-package main.java.com.model.post;
+package main.java.com.model.board;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import main.java.com.model.board.JSONListDTO;
 
 public class AjaxCommentListJSON {
 	private long count;
 	private String status;
 
 	@JsonProperty("data")
-	private List<JSONListDTO> list;
+	private List<CommentDTO> list;
 
 	public long getCount() {
 		return count;
@@ -29,11 +27,11 @@ public class AjaxCommentListJSON {
 		this.status = status;
 	}
 
-	public List<JSONListDTO> getList() {
+	public List<CommentDTO> getList() {
 		return list;
 	}
 
-	public void setList(List<JSONListDTO> list) {
+	public void setList(List<CommentDTO> list) {
 		this.list = list;
 	}
 

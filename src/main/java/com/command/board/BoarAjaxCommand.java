@@ -233,7 +233,6 @@ public class BoarAjaxCommand implements Command, Board_Command {
 
 	@Override
 	public void responseJSON(HttpServletRequest request, HttpServletResponse response) {
-		// 여기는 수정 피룡
 		ArrayList<JSONListDTO> list = (ArrayList<JSONListDTO>) request.getAttribute("list");
 
 		AjaxBoardListJSON result = new AjaxBoardListJSON();
