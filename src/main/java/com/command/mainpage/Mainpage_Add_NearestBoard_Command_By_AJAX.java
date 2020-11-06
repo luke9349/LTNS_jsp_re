@@ -25,7 +25,7 @@ public class Mainpage_Add_NearestBoard_Command_By_AJAX implements Command, By_AJ
 		if(reqType == null) reqType = "json";
 
 		// "xml" 혹은 "json" 으로 response 하기
-		switch(reqType) {
+//		switch(reqType) {
 //		
 //		case "xml":
 //			responseXML(request, response);  // jdom 사용하여 xml response
@@ -35,11 +35,11 @@ public class Mainpage_Add_NearestBoard_Command_By_AJAX implements Command, By_AJ
 //			responseJSON(request, response);  // org.json 사용
 //			break;
 //			
-		default:
+//		default:
 			responseJSON(request, response);  // org.json 사용
-			break;		
-		
-		} // end switch
+//			break;		
+//		
+//		} // end switch
 		
 	} // end execute()
 
@@ -68,6 +68,10 @@ public class Mainpage_Add_NearestBoard_Command_By_AJAX implements Command, By_AJ
 		try {
 			System.out.println("dhkdkdkdkkdk");
 			dtoArr = new Mainpage_DAO().selectBySQL(Mainpage_DAO.SELECT_NEXT_3_POSTS_BY_NEAREST, regdate);
+			System.out.println("dhkdkdkdkkdk2"+dtoArr);
+			for(DTO dto : dtoArr) {
+				System.out.println("dto:"+dto);
+			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

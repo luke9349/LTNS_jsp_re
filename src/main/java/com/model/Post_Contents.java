@@ -15,8 +15,9 @@ public class Post_Contents {
 	
 	
 	public Post_Contents(String filePath){
+		filePath="C:/ProjectWork/LTNS/LTNS_jsp/"+filePath;
 		File file=new File(filePath);
-		System.out.println(file);
+		System.out.println(file.getAbsolutePath());
 		StringBuffer _contentsText = null;
 		try {
 			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -44,7 +45,7 @@ public class Post_Contents {
 					}
 				}
 				//replaceAll("<img.*","").replaceAll("\" title=.*\">","") 이미지 태그 제거용
-				afterStr=beforeStr.replaceAll("<img.*","").replaceAll(" title=.*\"clear:both;\">","").replaceAll("<br.*>", "\n").replaceAll("<[^>]*>", "").replaceAll("&nbsp;"," ");
+				afterStr=beforeStr.replaceAll("<img.*","").replaceAll(" title=.*\"clear:both;\">","").replaceAll("<br.*>", " ").replaceAll("<[^>]*>", "").replaceAll("&nbsp;"," ");
 				_contentsText.append(afterStr);
 			}//end while
 			br.close();

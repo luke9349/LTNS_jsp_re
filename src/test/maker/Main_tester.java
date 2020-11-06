@@ -10,12 +10,16 @@ public class Main_tester {
 		try {
 			Master_DAO_tester m=new Master_DAO_tester();
 			m.refreshAll();
+//			m.deleteAll();
 			m.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
+		/*샘플 정회원 100명 생성*/
+		new SampleMember_Maker().mk100Members();
 
+		System.out.println("작업 완료!");
 	}
 
 }

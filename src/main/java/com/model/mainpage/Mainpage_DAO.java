@@ -54,7 +54,7 @@ public class Mainpage_DAO implements DAO {
 			"ON P.writer=M.mm_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE P.regdate<? AND rownum <=5 " + 
+			"WHERE P.regdate<=? AND rownum <=5 " + 
 			"ORDER BY P.regdate DESC";
 	
 	
@@ -148,9 +148,13 @@ public class Mainpage_DAO implements DAO {
 	public DTO[] selectBySQL(String sql) throws SQLException {
 		DTO [] arr=null;
 		try {
+			System.out.println("a");
 			pstmt=conn.prepareStatement(sql);
+			System.out.println("b");
 			rs=pstmt.executeQuery();
+			System.out.println("c");
 			arr=mkDTOs(rs);
+			System.out.println("d");
 			for(DTO dto : arr) {
 				System.out.println(((Post_DTO)dto).getNickname());
 			}
@@ -170,11 +174,14 @@ public class Mainpage_DAO implements DAO {
 		DTO [] arr=null;
 		try {
 			pstmt=conn.prepareStatement(sql);
-			
+			System.out.println(stringParamForPstmt);
 			pstmt.setString(1, stringParamForPstmt);
-			
 			rs=pstmt.executeQuery();
+			System.out.println("시벌");
 			arr=mkDTOs(rs);
+			for(DTO dto:arr) {
+				System.out.println("아"+dto);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

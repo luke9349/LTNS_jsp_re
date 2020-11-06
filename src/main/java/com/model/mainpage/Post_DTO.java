@@ -12,6 +12,7 @@ public class Post_DTO implements DTO {
 	private int mm_id; //작성자 mm_id(외래키)
 	private String category;  //카테고리
 	private String regdate;  //작성일
+	private int file_id; //문서 파일 아이디(외래키)
 
 	private Post_Contents post_contents; //실제 내용 객체
 	
@@ -38,6 +39,29 @@ public class Post_DTO implements DTO {
 		this.viewCnt = viewCnt;
 		this.empathCnt = empathCnt;
 	}
+
+	
+
+	public Post_DTO(String title, int mm_id, String category, int file_id) {
+		this.title = title;
+		this.mm_id = mm_id;
+		this.category = category;
+		this.file_id = file_id;
+		this.viewCnt=0;
+	}
+
+
+
+	public int getFile_id() {
+		return file_id;
+	}
+
+
+
+	public void setFile_id(int file_id) {
+		this.file_id = file_id;
+	}
+
 
 
 	/*getter setter*/

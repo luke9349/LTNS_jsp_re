@@ -10,7 +10,7 @@ import main.java.com.model.membermanage.MM_DTO;
 public class SampleMember_Maker {
 	
 	//id를 만들어준다
-	String idmaker() {
+	String mkId() {
 		String result="";
 		int whilelimit=(int)(Math.random()*8)+4;
 		
@@ -30,34 +30,34 @@ public class SampleMember_Maker {
 	}
 	
 	//원하는 갯수만큼 중복되지 않게 아이디를 만들어준다
-	HashSet<String> idsMaker(int i){
+	HashSet<String> mkIds(int i){
 		HashSet<String> idSet=new HashSet<String>();
 		while(idSet.size()<i) {
-			idSet.add(idmaker());
+			idSet.add(mkId());
 		}
 		return idSet;
 	}
 	
-	HashSet<String> emailsMaker(int i){
+	HashSet<String> mkEmails(int i){
 		HashSet<String> emailSet=new HashSet<String>();
 		String [] emaildotcom= {"@gmail.com","@naver.com","@daum.com"};
 		while(emailSet.size()<i) {
-			emailSet.add(idmaker()+emaildotcom[(int)(Math.random()*3)]);
-			System.out.println(idmaker()+emaildotcom[(int)(Math.random()*3)]);
+			emailSet.add(mkId()+emaildotcom[(int)(Math.random()*3)]);
+			System.out.println(mkId()+emaildotcom[(int)(Math.random()*3)]);
 		}
 		return emailSet;
 	}
 	
-	String[] passwordMaker(int i) {
+	String[] mkPassword(int i) {
 		String[] passwordArr=new String[i];
 		for(int j=0;j<i;j++) {
-			passwordArr[j]=idmaker();
+			passwordArr[j]=mkId();
 		}
 		
 		return passwordArr;
 	}
 	
-	public static void main(String[] args) {
+	public void mk100Members() {
 		HashSet<String> idSet;
 		HashSet<String> nicknameSet;
 		HashSet<String> emailSet;
@@ -68,10 +68,10 @@ public class SampleMember_Maker {
 
 		SampleMember_Maker m = new SampleMember_Maker();
 		
-		idSet=m.idsMaker(memCnt);
-		nicknameSet=m.idsMaker(memCnt);
-		emailSet=m.emailsMaker(memCnt);
-		passwordArr=m.passwordMaker(memCnt);
+		idSet=m.mkIds(memCnt);
+		nicknameSet=m.mkIds(memCnt);
+		emailSet=m.mkEmails(memCnt);
+		passwordArr=m.mkPassword(memCnt);
 		
 		String[] idArr=new String[memCnt];
 		new ArrayList<String>(idSet).toArray(idArr);
@@ -86,6 +86,56 @@ public class SampleMember_Maker {
 			//dao로 샘플멤버 집어넣기 해야함!
 			try {
 				new MM_DAO_tester().insertBySQL_withDTO(MM_DAO_tester.INSERT_MM_BY_DTO, new MM_DTO(idArr[i],passwordArr[i],nicknameArr[i],emailArr[i],"MEMBER"));
+				try {
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					System.out.println(i+"번째 오류");
+					e.printStackTrace();
+				}
+			} catch (SQLException e) {
+				System.out.println(i+"번째 오류");
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
+	//메인문
+	public static void main(String[] args) {
+		HashSet<String> idSet;
+		HashSet<String> nicknameSet;
+		HashSet<String> emailSet;
+		String[] passwordArr;
+		
+		//만들 샘플 멤버 갯수
+		int memCnt=100;
+
+		SampleMember_Maker m = new SampleMember_Maker();
+		
+		idSet=m.mkIds(memCnt);
+		nicknameSet=m.mkIds(memCnt);
+		emailSet=m.mkEmails(memCnt);
+		passwordArr=m.mkPassword(memCnt);
+		
+		String[] idArr=new String[memCnt];
+		new ArrayList<String>(idSet).toArray(idArr);
+		
+		String[] nicknameArr=new String[memCnt];
+		new ArrayList<String>(nicknameSet).toArray(nicknameArr);
+		
+		String[] emailArr=new String[memCnt];
+		new ArrayList<String>(emailSet).toArray(emailArr);
+		
+		for(int i=0;i<memCnt;i++) {
+			//dao로 샘플멤버 집어넣기 해야함!
+			try {
+				new MM_DAO_tester().insertBySQL_withDTO(MM_DAO_tester.INSERT_MM_BY_DTO, new MM_DTO(idArr[i],passwordArr[i],nicknameArr[i],emailArr[i],"MEMBER"));
+				try {
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			} catch (SQLException e) {
 				System.out.println(i+"번째 오류");
 				e.printStackTrace();

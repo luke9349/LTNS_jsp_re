@@ -21,6 +21,8 @@ public class MM_DAO_tester implements DAO {
 	public static final String INSERT_MM_BY_DTO = "INSERT INTO mm_table(mm_id,id,password,nickname,email,grade) "
 			+ "VALUES (SEQ_mm_table_mm_id.NEXTVAL,?,?,?,?,?)";
 
+	public static final String SELECT_ALL_MM_ID="SELECT mm_id FROM mm_table";
+	
 	// DB 연결에 필요한 변수들
 	Connection conn;
 	PreparedStatement pstmt;
@@ -30,10 +32,10 @@ public class MM_DAO_tester implements DAO {
 	// 객체 생성시, DB Connection 생성
 	public MM_DAO_tester() {
 				try {
-					System.out.println("DAO 생성");
+					System.out.println("MM_DAO_tester 생성 중..");
 					Class.forName(DB.DRIVER);
 					conn=DriverManager.getConnection(DB.URL,DB.USERID,DB.USERPW);
-					System.out.println("DAO 생성, DB 연결");
+					System.out.println("MM_DAO_tester 생성 성공!, DB 연결");
 				}catch (Exception e) {
 					e.printStackTrace();
 				}// end try
@@ -56,13 +58,8 @@ public class MM_DAO_tester implements DAO {
 	@Override
 	public DTO mkDTO(ResultSet rs) throws SQLException {
 		int mm_id = rs.getInt("mm_id");
-		String id = rs.getString("id");
-		String password = rs.getString("password");
-		String nickname = rs.getString("nickname");
-		String email = rs.getString("email");
-		String grade = rs.getString("grade");
 
-		DTO dto = new MM_DTO(mm_id, id, password, nickname, email, grade);
+		DTO dto = new MM_DTO(mm_id, "", "", "", "", "");
 		return dto;
 	}// end mkDTO
 

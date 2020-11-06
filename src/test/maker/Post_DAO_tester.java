@@ -10,27 +10,33 @@ import java.sql.Statement;
 import main.java.com.model.DAO;
 import main.java.com.model.DB;
 import main.java.com.model.DTO;
-import main.java.com.util.DataUtil;
+import main.java.com.model.mainpage.File_DTO;
+import main.java.com.model.mainpage.Post_DTO;
 
-public class Master_DAO_tester implements DAO {
+public class Post_DAO_tester implements DAO {
+	
+	//새 post 삽입 제목, (int)mm_id, 카테고리, (int)file_id 필요
+	public static final String INSERT_NEW_POST = "INSERT INTO post_table(post_id,title,writer,category,regdate,post_contents,viewCnt) " + 
+			"VALUES (SEQ_post_table_post_id.NEXTVAL,?,?,?,SYSTIMESTAMP,?,0)";
 
 	//DB 연결에 필요한 변수들
 	Connection conn;
 	PreparedStatement pstmt;
 	Statement stmt;
 	ResultSet rs;
-
+	
 	//객체 생성시, DB Connection 생성
-	public Master_DAO_tester() {
+	public Post_DAO_tester() {
 		try {
-			System.out.println("Master_DAO_tester 생성 중..");
+			System.out.println("File_DAO_tester 생성 중..");
 			Class.forName(DB.DRIVER);
 			conn=DriverManager.getConnection(DB.URL,DB.USERID,DB.USERPW);
-			System.out.println("Master_DAO_tester 생성 성공!, DB 연결");
+			System.out.println("File_DAO_tester 생성 성공!, DB 연결");
 		}catch (Exception e) {
 			e.printStackTrace();
 		}// end try
 	}// 생성자 end
+	
 	
 	//DB 자원 반납
 	@Override
@@ -42,69 +48,59 @@ public class Master_DAO_tester implements DAO {
 	}//end close()
 
 	
-	//db 테이블, 시퀀스, 뷰  전부 날리기
-	public void deleteAll() throws SQLException {
-		justExcuteBySQL(SQLMASTER_tester.DROP_COMMENT_AI_SQ);
-		justExcuteBySQL(SQLMASTER_tester.DROP_FILE_AI_SQ);
-		justExcuteBySQL(SQLMASTER_tester.DROP_MM_AI_SQ);
-		justExcuteBySQL(SQLMASTER_tester.DROP_POST_AI_SQ);
-		
-		justExcuteBySQL(SQLMASTER_tester.DROP_POST_VIEW);
-		justExcuteBySQL(SQLMASTER_tester.DROP_COMMENT_TABLE);
-		justExcuteBySQL(SQLMASTER_tester.DROP_EMPATHIZE_TABLE);
-		justExcuteBySQL(SQLMASTER_tester.DROP_FILE_TABLE);
-		justExcuteBySQL(SQLMASTER_tester.DROP_MM_TABLE);
-		justExcuteBySQL(SQLMASTER_tester.DROP_POST_TABLE);
-	}//end deleteAll
-
-	//db 테이블, 시퀀스, 제약조건 전부 생성하기
-	public void createAll() throws SQLException {
-		justExcuteBySQL(SQLMASTER_tester.CREATE_COMMENT_TABLE);
-		justExcuteBySQL(SQLMASTER_tester.CREATE_EMPATHIZE_TABLE);
-		justExcuteBySQL(SQLMASTER_tester.CREATE_FILE_TABLE);
-		justExcuteBySQL(SQLMASTER_tester.CREATE_MM_TABLE);
-		justExcuteBySQL(SQLMASTER_tester.CREATE_POST_TABLE);
-
-		justExcuteBySQL(SQLMASTER_tester.CREATE_COMMENT_AI_SQ);
-		justExcuteBySQL(SQLMASTER_tester.CREATE_FILE_AI_SQ);
-		justExcuteBySQL(SQLMASTER_tester.CREATE_MM_AI_SQ);
-		justExcuteBySQL(SQLMASTER_tester.CREATE_POST_AI_SQ);
-		
-		justExcuteBySQL(SQLMASTER_tester.ALTER_FOREIGN_KEY_C_POST_ID_REF_P_POST_ID);
-		justExcuteBySQL(SQLMASTER_tester.ALTER_FOREIGN_KEY_C_WRITER_REF_MM_ID);
-		justExcuteBySQL(SQLMASTER_tester.ALTER_FOREIGN_KEY_E_POST_ID_REF_P_POST_ID);
-		justExcuteBySQL(SQLMASTER_tester.ALTER_FOREIGN_KEY_MM_ID_REF_MM_ID);
-		justExcuteBySQL(SQLMASTER_tester.ALTER_FOREIGN_KEY_P_WRITER_REF_MM_ID);
-		justExcuteBySQL(SQLMASTER_tester.ALTER_FOREIGN_KEY_POST_CONTENTS_REF_FILE_ID);
-		
-		justExcuteBySQL(SQLMASTER_tester.CREATE_TOT_POST_VIEW);
-	}//end create all
-
-	//db 테이블, 시퀀스, 제약조건 전부 초기화
-	public void refreshAll() throws SQLException {
-		deleteAll();
-		createAll();
-	}
-	
-	//그냥 sql문 실행하는 메서드
-	public void justExcuteBySQL(String sql) throws SQLException {
+	//집어넣기
+	@Override
+	public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException {
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.executeQuery();
+			Post_DTO post_dto = (Post_DTO) dto;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, post_dto.getTitle());
+			pstmt.setInt(2, post_dto.getMm_id());
+			pstmt.setString(3, post_dto.getCategory());
+			pstmt.setInt(4, post_dto.getFile_id());
+			pstmt.executeUpdate();
+			pstmt.close();
+			
 		} catch (SQLException e) {
-			System.out.println("에러! : "+sql);
 			e.printStackTrace();
-		}finally {
-//			close();
+		} finally {
+			close();
 		}
+		return result;
 	}
 	
+	//한번에 여러개 집어넣기
+	@Override
+	public int insertBySQL_withDTO(String sql, DTO... dtos) throws SQLException {
+		int result = 0;
+		try {
+			for(DTO dto : dtos) {
+				Post_DTO post_dto = (Post_DTO) dto;
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, post_dto.getTitle());
+				pstmt.setInt(2, post_dto.getMm_id());
+				pstmt.setString(3, post_dto.getCategory());
+				pstmt.setInt(4, post_dto.getFile_id());
+				pstmt.executeUpdate();
+				pstmt.close();				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
 	
+	/////////////////////////////////
 	@Override
 	public DTO mkDTO(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	@Override
 	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
@@ -112,11 +108,13 @@ public class Master_DAO_tester implements DAO {
 		return null;
 	}
 
+
 	@Override
 	public DTO[] selectBySQL(String sql) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	@Override
 	public DTO[] selectBySQL(String sql, int integerParamForPstmt) throws SQLException {
@@ -124,11 +122,13 @@ public class Master_DAO_tester implements DAO {
 		return null;
 	}
 
+
 	@Override
 	public DTO[] selectBySQL(String sql, int... integerParamForPstmt) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	@Override
 	public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException {
@@ -136,11 +136,13 @@ public class Master_DAO_tester implements DAO {
 		return null;
 	}
 
+
 	@Override
 	public DTO[] selectBySQL(String sql, String... stringParamForPstmt) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	@Override
 	public DTO mkDTO(ResultSet rs, int signal) throws SQLException {
@@ -148,11 +150,13 @@ public class Master_DAO_tester implements DAO {
 		return null;
 	}
 
+
 	@Override
 	public DTO[] mkDTOs(ResultSet rs, int signal) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	@Override
 	public DTO[] withSignal(DTO[] _arr, int signal) throws SQLException {
@@ -160,11 +164,13 @@ public class Master_DAO_tester implements DAO {
 		return null;
 	}
 
+
 	@Override
 	public DTO[] selectBySQL_withSignal(String sql, int signal) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	@Override
 	public DTO[] selectBySQL_withSignal(String sql, int signal, int integerParamForPstmt) throws SQLException {
@@ -172,11 +178,13 @@ public class Master_DAO_tester implements DAO {
 		return null;
 	}
 
+
 	@Override
 	public DTO[] selectBySQL_withSignal(String sql, int signal, int... integerParamForPstmt) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	@Override
 	public DTO[] selectBySQL_withSignal(String sql, int signal, String stringParamForPstmt) throws SQLException {
@@ -184,22 +192,14 @@ public class Master_DAO_tester implements DAO {
 		return null;
 	}
 
+
 	@Override
 	public DTO[] selectBySQL_withSignal(String sql, int signal, String... stringParamForPstmt) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public int insertBySQL_withDTO(String sql, DTO... dtos) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 }

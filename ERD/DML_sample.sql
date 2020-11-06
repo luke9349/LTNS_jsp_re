@@ -21,6 +21,7 @@ SELECT SEQ_mm_table_mm_id.CURRVAL FROM DUAL;
 /*확인*/
 SELECT * FROM mm_table;
 
+SELECT mm_id FROM mm_table;
 
 DELETE FROM mm_table;
 
@@ -52,7 +53,6 @@ DELETE FROM file_table;
 
 
 
-
 /*게시글-----------------------------------------------------------------------------*/
 /*insert sample post*/
 /*
@@ -67,10 +67,10 @@ DELETE FROM file_table;
  * */
 --AI 활용
 INSERT INTO post_table(post_id,title,writer,category,regdate,post_contents,viewCnt)
-VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',2,'NOTICE',SYSTIMESTAMP,SEQ_file_table_file_id.CURRVAL,0);
+VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',2,'NOTICE',SYSTIMESTAMP,?,0);
 
 INSERT INTO post_table(post_id,title,writer,category,regdate,post_contents,viewCnt)
-VALUES (SEQ_post_table_post_id.NEXTVAL,'샘플 글입니다',3,'NOTICE',SYSTIMESTAMP,4,0);
+VALUES (SEQ_post_table_post_id.NEXTVAL,?,?,?,SYSTIMESTAMP,?,0);
 
 --최신 AI 값
 SELECT SEQ_post_table_post_id.CURRVAL FROM DUAL;
