@@ -28,6 +28,15 @@ public class MemberDAO {
 	public static final String SQL_ID_INFO_SELECT =
 			"SELECT * FROM MM_TABLE mt WHERE id = ? ";
 	
+	public static final String SQL_SELECT_JOIN =
+			"SELECT * FROM MM_TABLE WHERE ID=? AND NICKNAME= ? AND EMAIL=? " ;
+	
+	public static final String SQL_INSERT_JOIN =
+			" INSERT INTO mm_table(mm_id,id,password,nickname,email,grade) "
+			+ "VALUES"
+			+ "(SEQ_mm_table_mm_id.NEXTVAL,?,?,?,?,'MEMBER')";
+	
+	
 	
 	public MemberDAO() {
 
@@ -51,7 +60,7 @@ public class MemberDAO {
 	} // end close()
 	
 	
-	//멤버정보 꺼내오기 
+	//멤버정보 꺼내오기  회원가입완료후 정보출력
 	
 	public MemberDTO[] member_Select(int mm_id) throws SQLException {
 		int cnt = 0;
@@ -122,6 +131,61 @@ public class MemberDAO {
 		
 		return cnt;
 	}
+	
+	//회원가입 조회
+	public int select_join(String id, String nik, String email) throws SQLException {
+		
+		int cnt = 0;
+		try {
+			psmt = conn.prepareStatement(SQL_SELECT_JOIN);
+			psmt.setString(1, id);
+			psmt.setString(2, nik);
+			psmt.setString(3, email);
+			
+			cnt = psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		
+		return cnt;		
+		
+		
+		
+	}
+	
+
+	//회원가입 Insert
+	public int insert_join(String id, String pw, String nik, String email) throws SQLException {
+		
+		int cnt = 0;
+		try {
+			psmt = conn.prepareStatement(SQL_INSERT_JOIN);
+			psmt.setString(1, id);
+			psmt.setString(2, pw);
+			psmt.setString(3, nik);
+			psmt.setString(4, email);
+			
+			
+			cnt = psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		
+		return cnt;		
+		
+		
+		
+		
+	}
+	
 	
 	
 	

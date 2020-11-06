@@ -15,6 +15,7 @@
 
 <title>회원가입</title>
 </head>
+
 <body>
 	<div class="wrap text-center">
 		<div id="header">
@@ -28,7 +29,7 @@
 		<div class="container">
 		
 			
-			<form action="" method="post" name="signup" id="signup" onsubmit=" return formCheck();">
+			<form action="sign-up-complete.do" method="post" name="signup" id="signup" onsubmit=" return formCheck();">
 			
 			
 				<table class="table table-bordered table-hover" style="text-align: center" border="1px solid #dddddd">
