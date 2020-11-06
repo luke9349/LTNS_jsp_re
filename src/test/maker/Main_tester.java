@@ -21,8 +21,10 @@ public class Main_tester {
 
 		System.out.println("회원생성 작업 완료!");
 		
-		/*샘플 포스트 100개 생성*/
-		new SamplePost_Maker().mkStringOrTagOrImg(100);
+		/*샘플 포스트 1000개 생성*/
+//		new SamplePost_Maker().mkPosts(1000);
+		
+		System.out.println("파일생성 작업 완료!");
 	}
 
 }
