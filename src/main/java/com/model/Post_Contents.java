@@ -6,6 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 
 public class Post_Contents {
@@ -15,7 +18,10 @@ public class Post_Contents {
 	
 	
 	public Post_Contents(String filePath){
-		filePath="C:/ProjectWork/LTNS/LTNS_jsp/"+filePath;
+		Path relativePath = Paths.get("");
+		String path = relativePath.toAbsolutePath().toString();
+	    System.out.println("Working Directory = " + path);
+		filePath=path+filePath;
 		File file=new File(filePath);
 		System.out.println(file.getAbsolutePath());
 		StringBuffer _contentsText = null;
