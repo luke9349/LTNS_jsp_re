@@ -45,7 +45,8 @@
 	int streinger =  (int) session.getAttribute("writer");
 	
 	
-	
+	System.out.println("회원 : " + login_chk);
+	System.out.println("눅구: " + streinger);
 	
 	
 	
@@ -210,8 +211,7 @@ function recommend(){
 </div> 
 	<jsp:include page="../board/comment/component/comment.jsp"></jsp:include>
 	<script>
-		// commenInit('', '${param.post_id}');
-		commenInit('${param.post_id}');
+		commenInit('<%=streinger%>', '${param.post_id}', '<%=login_chk%>');
 	</script>
 	<jsp:include page="../modal/component/modal.jsp" />
 	<c:if test="${messageType != null &&  messageContent != null}">

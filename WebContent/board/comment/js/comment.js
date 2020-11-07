@@ -6,6 +6,8 @@ let initBody = {
   comment: null,
 };
 
+let profile = null;
+
 let body = {
   method: 'POST', // *GET, POST, PUT, DELETE, etc.
   mode: 'cors', // no-cors, cors, *same-origin
@@ -18,6 +20,8 @@ let body = {
   referrer: 'no-referrer', // no-referrer, *client
   body: null, // body data type must match "Content-Type" header
 };
+
+let getInfiniteComment = null;
 
 const loadDataEvent = () => {
   $('.inserBtn').each(function () {
@@ -208,12 +212,37 @@ const handleNextAjax = () => {
     });
 };
 
+const createInfinite = () => {
+  getInfiniteComment = setInterval(() => {
+    body.body = JSON.stringify(initBody);
+
+    fetch('commentLoad.ajax', body) //
+      .then((response) => response.json()) //
+      .then((json) => {
+        $('.comment__list').html('');
+        if (json.data === null) {
+          createDataNullMessage();
+          return;
+        }
+        const comment = createComment(json.data);
+        $('.comment__list').html(comment);
+        if (json.count != $('.commentContainer').length) createViewMoreBtn();
+        loadDataEvent();
+      })
+      .catch((e) => {
+        console.error(e);
+        location.reload();
+      });
+  }, 1000);
+};
+
 const handleLoadAjax = () => {
   $('#downArrow').toggleClass('active');
 
   if ($('#commentBtnText').text() === '닫기') {
     $('#commentBtnText').text('펼치기');
     $('.comment__list').slideToggle();
+    if (getInfiniteComment != null) clearInterval(getInfiniteComment);
   } else {
     $('#commentBtnText').text('닫기');
 
@@ -233,6 +262,7 @@ const handleLoadAjax = () => {
         if (json.count != $('.commentContainer').length) createViewMoreBtn();
         loadDataEvent();
         $('.comment__list').slideToggle();
+        createInfinite();
       })
       .catch((e) => {
         console.error(e);
@@ -245,7 +275,6 @@ const handleWriteAjax = (e) => {
   e.preventDefault();
 
   initBody.comment = $('#commentArea').val();
-  initBody.userId = 2;
 
   body.body = JSON.stringify(initBody);
   fetch('commentWrite.ajax', body) //
@@ -266,14 +295,23 @@ const handleWriteAjax = (e) => {
     });
 };
 
-const commenInit = (pid) => {
-	//uid,
-  // initBody.userId = uid;
-   initBody.postId = pid;
-  $('.comment__list').hide();
+const checkUser = () => {
+  if (profile != null && profile === 0) {
+    $('#commentArea').attr('disabled', 'disabled');
+    $('.card-footer').html(
+      '댓글을 작성하려면 <a href="/LTNS_jsp_re/membermanage/loginmain.do">로그인</a> 해주세요.'
+    );
+  }
+};
 
+const commenInit = (uid, pid, profile) => {
+  initBody.userId = parseInt(uid);
+  initBody.postId = parseInt(pid);
+  profile = parseInt(profile);
+  checkUser();
+  $('.comment__list').hide();
   $('#commentInsert').on('submit', handleWriteAjax);
   $('#commentArea').on('keyup', hadleTextArea);
   $('#commentArea').on('keydown', hadleTextArea);
   $('#commentBtn').on('click', handleLoadAjax);
- };
+};
