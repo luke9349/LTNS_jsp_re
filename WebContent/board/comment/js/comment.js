@@ -6,7 +6,7 @@ let initBody = {
   comment: null,
 };
 
-let profile = null;
+let userProfile = null;
 
 let body = {
   method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -296,7 +296,7 @@ const handleWriteAjax = (e) => {
 };
 
 const checkUser = () => {
-  if (profile != null && profile === 0) {
+  if (userProfile != null && userProfile === 0) {
     $('#commentArea').attr('disabled', 'disabled');
     $('.card-footer').html(
       '댓글을 작성하려면 <a href="/LTNS_jsp_re/membermanage/loginmain.do">로그인</a> 해주세요.'
@@ -307,7 +307,7 @@ const checkUser = () => {
 const commenInit = (uid, pid, profile) => {
   initBody.userId = parseInt(uid);
   initBody.postId = parseInt(pid);
-  profile = parseInt(profile);
+  userProfile = parseInt(profile);
   checkUser();
   $('.comment__list').hide();
   $('#commentInsert').on('submit', handleWriteAjax);

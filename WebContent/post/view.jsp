@@ -43,12 +43,7 @@
 	int post_content = arr[0].getPost_contents();
 	int post_id = Integer.parseInt(request.getParameter("post_id"));
 	int streinger =  (int) session.getAttribute("writer");
-	
-	
-	System.out.println("회원 : " + login_chk);
-	System.out.println("눅구: " + streinger);
-	
-	
+		
 	
 	//공감
 	int emp_cnt = tot_info[0].getEmpathize_cnt();
