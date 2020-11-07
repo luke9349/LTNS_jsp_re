@@ -54,15 +54,15 @@ public class DoController extends HttpServlet {
 		Command cmd = null; // 어떠한 로직을 수행할지 결정 
 		String viewPage = null; // 어떠한 페이지를 보여줄지 결정 
 		
-		switch (com) {
 		
-//		case "/index.do":
-//			viewPage = "index.jsp";
-//			break;
-			
+		switch (com) {
+
 		case "/board/board_list.do":
+			if(request.getSession().getAttribute("login") == null)  {
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.do");
+				return;
+			}
 			viewPage = "board_list.jsp";
-			System.out.println(viewPage);
 			break;
 			
 		case "/post/write.do":
@@ -80,10 +80,7 @@ public class DoController extends HttpServlet {
 			cmd = new ViewCommend();
 			cmd.execute(request, response);
 			viewPage = "view.jsp";
-			break;
-			
-
-		
+			break;	
 
 		case "/post/deleteOk.do":
 			cmd = new deleteCommend();
