@@ -7,6 +7,7 @@ let initBody = {
 };
 
 let userProfile = null;
+let grade = null;
 
 let body = {
   method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -53,8 +54,9 @@ const createDataNullMessage = () => {
 
 const createComment = (datas) => {
   let comment = '';
-  const icon =
-    '<i class="fas fa-pencil-alt ml-5 inserBtn"></i><i class="fas fa-trash ml-3 trashBtn"></i>';
+  const modyfyIcon = '<i class="fas fa-pencil-alt ml-5 inserBtn"></i>';
+  const deleteIncon = '<i class="fas fa-trash ml-3 trashBtn"></i>';
+    
   let form = '';
 
   datas.forEach((data) => {
@@ -70,7 +72,10 @@ const createComment = (datas) => {
     comment += `<span class="coment__writer">${data.nickName}</span>`;
     comment += '&nbsp;&nbsp;';
     comment += `<span class="coment_regdate">${data.regdate}</span>`;
-    if (initBody.userId === parseInt(data.writerId)) comment += icon;
+    if (initBody.userId === parseInt(data.writerId)) {
+	  comment += modyfyIcon;
+	  comment += deleteIncon;
+	} else if(grade === 'admin') comment += deleteIncon;
 
     comment += '</div>';
     comment += '</div>';
@@ -304,10 +309,11 @@ const checkUser = () => {
   }
 };
 
-const commenInit = (uid, pid, profile) => {
+const commenInit = (uid, pid, profile, sessionGrade) => {
   initBody.userId = parseInt(uid);
   initBody.postId = parseInt(pid);
   userProfile = parseInt(profile);
+  grad = sessionGrade;
   checkUser();
   $('.comment__list').hide();
   $('#commentInsert').on('submit', handleWriteAjax);
