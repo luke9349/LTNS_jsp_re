@@ -33,7 +33,6 @@
 %>
 
 <% 
-
 	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("contents_view");
 	MemberDTO[] member_info = (MemberDTO[])request.getAttribute("member");
 	TOT_Post_DTO[] tot_info = (TOT_Post_DTO[])request.getAttribute("tot");
