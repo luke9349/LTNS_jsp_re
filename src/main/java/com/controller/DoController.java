@@ -60,6 +60,8 @@ public class DoController extends HttpServlet {
 
 		case "/board/board_list.do":
 			if(request.getSession().getAttribute("login") == null)  {
+				request.getSession().setAttribute("messageType", "오류 메시지");
+				request.getSession().setAttribute("messageContent", "로그인이 필요한 서비스 입니다.");
 				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
 				return;
 			}
