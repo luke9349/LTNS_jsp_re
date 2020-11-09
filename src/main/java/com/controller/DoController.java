@@ -15,6 +15,7 @@ import main.java.com.command.membermanage.LoginOk_Cmd;
 import main.java.com.command.membermanage.Signup_complete_command;
 import main.java.com.command.membermanage.logOut_Cmd;
 import main.java.com.command.mypage.Mypage_command;
+import main.java.com.command.mypage.myPagerev_Ok;
 import main.java.com.command.post.WriteCommend;
 import main.java.com.command.post.deleteCommend;
 import main.java.com.command.post.recomendCommend;
@@ -119,6 +120,8 @@ public class DoController extends HttpServlet {
 			viewPage = "updateOk.jsp";
 			break;
 			
+			
+			
 		case "/post/recomendOk.do":	
 			cmd = new recomendCommend();
 			cmd.execute(request, response);
@@ -150,8 +153,13 @@ public class DoController extends HttpServlet {
 			viewPage= "logoutOk.jsp";
 			break;
 			
+		case "/mainpage/myPage_ok.do":
+			cmd = new myPagerev_Ok();
+			cmd.execute(request, response);
+			viewPage = "myPage_ok.jsp";
+			break;
 			
-	
+		
 		case "/membermanage/sign-up-complete.do":
 			cmd = new Signup_complete_command();
 			cmd.execute(request, response);

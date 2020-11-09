@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="main.java.com.view.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,8 +11,6 @@
 	int cnt = (Integer)request.getAttribute("loginOk");   
 	MemberDTO[] arrs = (MemberDTO[])request.getAttribute("info_chk");
 	String nick = arrs[0].getNickname();
-	System.out.println(nick);
-	
 %>
     
   
@@ -31,13 +31,12 @@
 	
 		<!-- 세션 생성  -->
 	<%
-	String sessionId = session.getId();
-	int sessionInterval = session.getMaxInactiveInterval();
-	session.setAttribute("writer", arrs[0].getMm_id());
-	session.setAttribute("login",1);
-	session.setAttribute("nickname",nick);
-	session.setAttribute("grade", arrs[0].getGrade());
-	session.setAttribute("rec_chk_write", 0);
+	String [] s_arr = {"writer","login","nickname","id","email","grade","rec_chk_write"};
+	Object [] v_arr = {arrs[0].getMm_id(), 1, arrs[0].getNickname(), arrs[0].getId(), arrs[0].getEmail(), arrs[0].getGrade(), 0};
+	
+	for(int i=0; i<s_arr.length; i++){
+		session.setAttribute(s_arr[i],v_arr[i]);
+	}
 	%>
 	
 	

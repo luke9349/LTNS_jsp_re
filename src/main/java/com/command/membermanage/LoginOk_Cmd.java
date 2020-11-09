@@ -54,11 +54,7 @@ public class LoginOk_Cmd implements Command {
 				e.printStackTrace();
 			}
 		
-		
-		
-		
-		
-		
+	
 
 	}
 
