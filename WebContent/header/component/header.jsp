@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <header>
 	<div id="login">
-     	<a class="nav__login btn btn-primary mr-2">로그인</a>
+     	<a class="nav__login btn btn-primary mr-2" href="<%=request.getContextPath() %>/mypage/mypage.do">Test</a>
        	<a id ="btn_login" class="btn btn-secondary">로그아웃</a>
 	</div>
 	<div>

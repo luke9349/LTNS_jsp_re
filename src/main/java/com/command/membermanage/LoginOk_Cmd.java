@@ -36,7 +36,7 @@ public class LoginOk_Cmd implements Command {
 				cnt = dao.login_member(id, pw);
 				request.setAttribute("loginOk", cnt);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				System.out.println("에러1");
 				e.printStackTrace();
 			}
 		}
@@ -50,7 +50,7 @@ public class LoginOk_Cmd implements Command {
 				arr = daos.member_INFO_Select(id);
 				request.setAttribute("info_chk", arr);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				System.out.println("에러1");
 				e.printStackTrace();
 			}
 		
