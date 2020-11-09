@@ -201,7 +201,7 @@ LEFT OUTER JOIN mm_table M
 ON P.writer=M.mm_id
 LEFT OUTER JOIN file_table F
 ON P.post_contents=F.file_id
-WHERE M.mm_id=?
+WHERE M.mm_id=1
 ORDER BY P.regdate DESC, P.post_id DESC 
 )
 WHERE ROWNUM <= 6
@@ -267,10 +267,10 @@ FROM empathize_table E
 LEFT OUTER JOIN mm_table M
 ON E.mm_id=M.mm_id
 LEFT OUTER JOIN post_table P
-ON M.mm_id=P.writer
+ON E.post_id=P.post_id
 LEFT OUTER JOIN file_table F
 ON P.post_contents=F.file_id
-WHERE E.mm_id=100
+WHERE E.mm_id=1
 ORDER BY regdate DESC, post_id DESC 
 )WHERE ROWNUM <= 6
 ;
@@ -290,7 +290,7 @@ FROM empathize_table E
 LEFT OUTER JOIN mm_table M
 ON E.mm_id=M.mm_id
 LEFT OUTER JOIN post_table P
-ON M.mm_id=P.writer
+ON E.post_id=P.post_id
 LEFT OUTER JOIN file_table F
 ON P.post_contents=F.file_id
 WHERE E.mm_id=100

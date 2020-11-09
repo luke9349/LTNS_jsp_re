@@ -42,6 +42,10 @@ public interface DAO {
 	
 	//시그널 추가 함수
 	public DTO[] withSignal(DTO[] _arr, int signal) throws SQLException;
+	
+	//시그널 추가 매개변수 함수
+	public DTO[] withSignal(DTO[] _arr, int signal, int integerParamForPstmt) throws SQLException;
+
 
 	// 0-0-0-1. sql => ResultSet : signal을 추가하여, 내부 switch문을 통한 다양한 DTO 생성
 	public DTO[] selectBySQL_withSignal(String sql, int signal) throws SQLException;

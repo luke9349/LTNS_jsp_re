@@ -217,4 +217,11 @@ public class File_DAO implements DAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+	@Override
+	public DTO[] withSignal(DTO[] _arr, int signal, int integerParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

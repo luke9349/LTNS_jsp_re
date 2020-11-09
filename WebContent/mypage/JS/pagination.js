@@ -1,131 +1,93 @@
-const pagination = document.getElementById('pagination');
-let params = null;
-let maxPagination = null;
+/*
+ * sql명령어가 마지막 포스트의 post_id 미만의 게시글만 가져온다!
+ */
 
-
-//태그 정의
-const createPaginationIcon = (idName, className) => {
-  const i = document.createElement('i');
-  i.className = className;
-  return i;
+//각 페이지 버튼마다, ajax 실행 함수 실행!
+//command_url은 mypage_mypost.ajax  mypage_mycomment.ajax  mypage_myempathize.ajax
+const sendByAJAX =(btn_id, command_url )=>{
+	//dao에 들어갈 값을 btn_id를 가공해서넣는다~!
+	url=command_url+"?reqType=json&btn_id="+(btn_id*6+1);
+	$.ajax({
+		url:url,
+		type:"GET",
+		cache:false,
+		success:function(data,status){
+			if(status == "success")
+				parseJSON(data);
+		}
+	});
 };
 
-const createPaginationAnchor = (link) => {
-  const a = document.createElement('a');
-  a.className = 'page-link';
-  a.href = link;
-  a.setAttribute('tabindex', '-1');
-  a.setAttribute('aria-disabled', 'true');
-  return a;
-};
+//버튼을 누른다		  	=>ajax=>리스트를 비운다=>리스트를 채운다=>두개의 버튼색이 바뀐다(토글)
+//꺽쇄 버튼=>+10 한다     	=>
+//쌍꺽쇄    =>맨 끝으로 간다	=>
+//맨 처음  : 이전 꺽쇄,쌍꺽쇄가 비활성화
+//맨 마지만 : 다음 꺽쇄,쌍꺽쇄가 비활성화
+//html을 써준다. (각 리스트 새로 생성)
 
-const createPaginationList = (className) => {
-  const li = document.createElement('li');
-  li.className = className;
-  return li;
-};
+//리스트 비우고, 만드는 총괄 함수
+const mkLists=(tag,jsonObj)=>{
+	$(tag).empty();
+	var data=jsonObj.data;
+	for(var i=0;i<6;i++){
+		const dto=data[i];
+		tag.append(mkList(dto.post_id,dto.title,dto.regdate));
+		tag.append("<hr>");
+	}
+}
+
+//리스트 만듦(각각 한개씩)
+const mkList=(post_id,title,regdate)=>{
+	var card_list=$('<a id="whole_'+post_id+'" class="card_post article" href="../post/view.do?post_id='+post_id+'"></a>').html(
+			'		   <div class="card_post-main"><p class="post_id" style="display:none">'+temp_post_id +'</p><p class="sm_card_list-title title">'+title+'</p>'+
+			'				<div class="sm_card_list-metadata"><time class="sm_card_list-regdate small">'+regdate+'</time></div>'+
+			'		</a>');
+	return card_list;
+//	<a class="sm_card_list list" href="../post/view.do?post_id=${post_id }">
+//	<p class="sm_card_list-title title">${param.title }</p>
+//	<div class="sm_card_list-metadata"><time class="sm_card_list-regdate small">${param.regdate }</time></div>
+//	</a>
+}
 
 
-//구조 구현 handledPagination
-const handledPagination = () => {
-  if (params.type === 'post') return;
-  let { root, type, page, searchType, search } = params;
-  page = parseInt(page);
-  let url = '';
-  if (searchType && search) {
-    url += `root=${root}&type=${type}&searchType=${searchType}&search=${search}`;
-  } else {
-    url += `root=${root}&type=${type}`;
-  }
-  //페이지 계산
-  const startPagination = Math.floor((page - 1) / 10) * 10 + 1;
-  // let endPagination = (Math.floor((page - 1) / 10) + 1) * 10;
-  let endPagination = startPagination + 9;
-  if (endPagination > maxPagination) endPagination = maxPagination;
+$(document).ready(function(){
 
-  //쌍꺽쇄
-  if (startPagination === 1) {
-    const li = createPaginationList('page-item disabled');
-    const i = createPaginationIcon('fas fa-angle-double-left');
-    const a = createPaginationAnchor('#');
-    a.appendChild(i);
-    li.appendChild(a);
-    pagination.appendChild(li);
-  } else {
-    page = 1;
-    const li = createPaginationList('page-item');
-    const i = createPaginationIcon('fas fa-angle-double-left');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
-    a.appendChild(i);
-    li.appendChild(a);
-    pagination.appendChild(li);
-  }
-  //꺽쇄
-  if (startPagination === 1) {
-    const li = createPaginationList('page-item disabled');
-    const i = createPaginationIcon('fas fa-chevron-left');
-    const a = createPaginationAnchor('#');
-    a.appendChild(i);
-    li.appendChild(a);
-    pagination.appendChild(li);
-  } else {
-    page = (Math.floor(page / 10) - 1) * 10 + 1;
-    const li = createPaginationList('page-item');
-    const i = createPaginationIcon('fas fa-chevron-left');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
-    a.appendChild(i);
-    li.appendChild(a);
-    pagination.appendChild(li);
-  }
+	$("button#nearest_board-add_post").click(function(){
+		//ajax request를 보냄
+		url="mainpage.ajax?reqType=json&regdate="+$("time.card_post-regdate").last().html()+"&post_id="+$('p.post_id').last().html();
+		$.ajax({
+			url:url,
+			type:"GET",
+			cache:false,
+			success:function(data,status){
+				if(status == "success")
+					parseJSON(data);
+			}
+		});	
+		
+	})//end - $("button#nearest_board-add_post").click
+})//end - $(document).ready
 
-  //1 2 3 4 생성해주는 애
-  for (let i = startPagination; i <= endPagination; i++) {
-    let li = createPaginationList('page-item');
-    if (i === page) li.classList.add('active');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${i}`);
-    a.innerText = i;
-    li.appendChild(a);
-    pagination.appendChild(li);
-  }
-  //꺽쇄
-  if (endPagination === maxPagination) {
-    const li = createPaginationList('page-item disabled');
-    const i = createPaginationIcon('fas fa-chevron-right');
-    const a = createPaginationAnchor('#');
-    a.appendChild(i);
-    li.appendChild(a);
-    pagination.appendChild(li);
-  } else {
-    page = (Math.floor(page / 10) + 1) * 10 + 1;
-    const li = createPaginationList('page-item');
-    const i = createPaginationIcon('fas fa-chevron-right');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
-    a.appendChild(i);
-    li.appendChild(a);
-    pagination.appendChild(li);
-  }
-  //쌍꺽쇄
-  if (endPagination === maxPagination) {
-    const li = createPaginationList('page-item disabled');
-    const i = createPaginationIcon('fas fa-angle-double-right');
-    const a = createPaginationAnchor('#');
-    a.appendChild(i);
-    li.appendChild(a);
-    pagination.appendChild(li);
-  } else {
-    page = maxPagination;
-    const li = createPaginationList('page-item');
-    const i = createPaginationIcon('fas fa-angle-double-right');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
-    a.appendChild(i);
-    li.appendChild(a);
-    pagination.appendChild(li);
-  }
-};
 
-//값 받아오기
-export const initPagination = (initialParams, datalength) => {
-  params = initialParams;
-  maxPagination = Math.ceil(datalength / 10);
-  handledPagination();
-};
+//받은 JSON객체를 이용하여 post 추가
+function parseJSON(jsonObj){
+	var data=jsonObj.data;
+	for(var i=0;i<3;i++){
+		//게시글을 카운트 i=다음 인덱스가 된다!
+		var temp_post_id=data[i].post_id;
+		var temp_title=data[i].post_contents.title;
+		var temp_picture=data[i].post_contents.thumbnailPath;
+		var temp_writer=data[i].nickname;
+		var temp_regdate=data[i].regdate;
+		var temp_contents=data[i].post_contents.contentsText;
+		var post_i=$("a.card_post").last().attr("id");
+		post_i=1+Number(post_i.slice(6));
+		var card_post=$('<a id="whole_'+post_i+'" class="card_post article" href="../post/view.do?post_id='+temp_post_id+'"></a>').html(
+				'		   <div class="card_post-main"><p class="post_id" style="display:none">'+temp_post_id +'</p><p class="card_post-title title">'+temp_title+'</p>'+
+				'				<div class="sm_card_list-metadata"><p class="card_post-writer small">'+temp_writer+'</p><time class="card_post-regdate small">'+temp_regdate+'</time></div>'+
+				'				<p class="card_post-contents small">'+temp_contents+'</p></div>'+
+				'		   <div class="card_post-picture"><img src="'+temp_picture+'"/></div>');
+		$("div#nearest_board").append(card_post);
+		$("div#nearest_board").append("<hr>");
+	}
+}

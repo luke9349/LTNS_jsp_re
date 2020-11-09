@@ -23,15 +23,8 @@
 <div id="mypost_board" class="sm_board card">
 	<div class="board">
 		<h3><a href="#">내가 쓴 글</a></h3>
-				<%
-				System.out.println("내가쓴글:"+request.getAttribute("mypost_board"));
-				DTO[] dtos=((DTO[])request.getAttribute("mypost_board"));
-				
-				for(DTO v: dtos){
-					System.out.println("내가쓴글게시판 dto닉넴 확인:"+((Post_DTO)v).getNickname());
-					
-				}
-				%>
+		
+				<c:set var="count" items="${mypost_board_cnt }"/>
 				<c:forEach var="dto" items="${mypost_board }">
 					<hr>
 					<jsp:include page="./card/sm_card_list.jsp" >

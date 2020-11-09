@@ -81,7 +81,7 @@ public class Mypage_DAO implements DAO {
 			"LEFT OUTER JOIN mm_table M " + 
 			"ON E.mm_id=M.mm_id " + 
 			"LEFT OUTER JOIN post_table P " + 
-			"ON M.mm_id=P.writer " + 
+			"ON E.post_id=P.post_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
 			"WHERE E.mm_id=? " + 
@@ -101,7 +101,7 @@ public class Mypage_DAO implements DAO {
 			"LEFT OUTER JOIN mm_table M " + 
 			"ON E.mm_id=M.mm_id " + 
 			"LEFT OUTER JOIN post_table P " + 
-			"ON M.mm_id=P.writer " + 
+			"ON E.post_id=P.post_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
 			"WHERE E.mm_id=?  " + 
@@ -142,9 +142,6 @@ public class Mypage_DAO implements DAO {
 			int empathCnt=0;//signal 2번, 3번 동시 처리 위해 switch 앞에 생성
 			
 			switch(signal) {
-			case 0: //카운트 반환
-				dto=new Count_DTO(rs.getInt("count"));
-				break;
 			case 2: //내가 작성한 댓글
 				System.out.println("아직 미구현");
 				break;
@@ -215,8 +212,9 @@ public class Mypage_DAO implements DAO {
 				arr=mkDTOs(rs);
 				pstmt.close();
 				
+				System.out.println("arr:"+arr);
 				//count DTO 추가
-				arr=withSignal(arr, signal);
+				arr=withSignal(arr, signal,1);
 				
 				System.out.println("DTO 배열 생성 성공!");
 				
@@ -240,11 +238,8 @@ public class Mypage_DAO implements DAO {
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setInt(1, integerParamForPstmt);
 				rs=pstmt.executeQuery();
-				arr=mkDTOs(rs);
+				arr=mkDTOs(rs,signal);
 				pstmt.close();
-				
-				//count DTO 추가
-				arr=withSignal(arr, signal);
 				
 				System.out.println("DTO 배열 생성 성공!");
 				
@@ -266,11 +261,8 @@ public class Mypage_DAO implements DAO {
 					pstmt.setInt(i+1, integerParamForPstmt[i]);					
 				}
 				rs=pstmt.executeQuery();
-				arr=mkDTOs(rs);
+				arr=mkDTOs(rs,signal);
 				pstmt.close();
-				
-				//count DTO 추가
-				arr=withSignal(arr, signal);
 				
 				System.out.println("DTO 배열 생성 성공!");
 				
@@ -283,29 +275,29 @@ public class Mypage_DAO implements DAO {
 		}
 
 		@Override
-		public DTO[] withSignal(DTO[] _arr, int signal) throws SQLException {
+		public DTO[] withSignal(DTO[] _arr, int signal, int mm_id) throws SQLException {
 			/*중간 과정 : 배열 길이 늘리는 과정*/
 			DTO[] arr=new DTO[_arr.length+1];
 			for(int i=0;i<_arr.length;i++) {
 				arr[i+1]=_arr[i];
 			}
-			
+			System.out.println("signal은 "+signal+"입니다");
 			/*count 가져와 배열[0]에 넣기 : 각각의 개수를 구해준다! (pagination을 위함!)*/
 			switch(signal) {
 			case 1: //my post cnt
-				pstmt=conn.prepareStatement(SELECT_MY_POSTS_CNT);
+				pstmt=conn.prepareStatement(SELECT_MY_POSTS_CNT,mm_id);
 				break;
 			case 2:
-				pstmt=conn.prepareStatement(SELECT_MY_COMMENTS_CNT);
+				pstmt=conn.prepareStatement(SELECT_MY_COMMENTS_CNT,mm_id);
 				break;
 			case 3:
-				pstmt=conn.prepareStatement(SELECT_MY_EMPATHIZE_CNT);
+				pstmt=conn.prepareStatement(SELECT_MY_EMPATHIZE_CNT,mm_id);
 				break;
 			}
 			rs=pstmt.executeQuery();
 			arr[0]=mkDTO(rs,0);
 			
-			System.out.println("count DTO 추가 성공!");
+			System.out.println("count DTO 추가 성공!"+((Count_DTO)arr[0]).getCount());
 			return arr;
 		}
 
@@ -387,5 +379,12 @@ public class Mypage_DAO implements DAO {
 		public int insertBySQL_withDTO(String sql, DTO... dtos) throws SQLException {
 			// TODO Auto-generated method stub
 			return 0;
+		}
+
+
+		@Override
+		public DTO[] withSignal(DTO[] _arr, int signal) throws SQLException {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }

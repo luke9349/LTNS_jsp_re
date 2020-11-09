@@ -1,7 +1,6 @@
-package main.java.com.model.mainpage;
+package main.java.com.model.mypage;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,16 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import main.java.com.model.DAO;
-import main.java.com.model.DB;
 import main.java.com.model.DTO;
-import main.java.com.model.membermanage.MM_DTO;
+import main.java.com.model.Post_Contents;
+import main.java.com.model.mainpage.Post_DTO;
+import main.java.com.util.DataUtil;
 
-public class MM_DAO implements DAO {
-	
-	public static final String SELECT_MM_BY_MM_ID="SELECT	 mm_id, id, password, nickname, email, grade " + 
-			"FROM mm_table " + 
-			"WHERE mm_id=?";
-
+public class Count_DAO implements DAO {
 	//DB 연결에 필요한 변수들
 		Connection conn;
 		PreparedStatement pstmt;
@@ -26,10 +21,10 @@ public class MM_DAO implements DAO {
 		ResultSet rs;
 		
 		//객체 생성시, DB Connection 생성
-		public MM_DAO() {
+		public Count_DAO() {
 			try {
-				Class.forName(DB.DRIVER);
-				conn=DriverManager.getConnection(DB.URL,DB.USERID,DB.USERPW);
+				System.out.println("DAO 생성");
+				conn=DataUtil.getConnection();
 				System.out.println("DAO 생성, DB 연결");
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -51,14 +46,11 @@ public class MM_DAO implements DAO {
 		// ResultSet => DTO
 		@Override
 		public DTO mkDTO(ResultSet rs) throws SQLException {
-			int mm_id=rs.getInt("mm_id");
-			String id=rs.getString("id");
-			String password=rs.getString("password");
-			String nickname=rs.getString("nickname");
-			String email=rs.getString("email");
-			String grade=rs.getString("grade");
+			System.out.println("카운트 DAO 생성시작");
+			int count=rs.getInt("count");			
+			System.out.println("0");
 			
-			DTO dto=new MM_DTO(mm_id, id, password, nickname, email, grade);
+			DTO dto=new Count_DTO(count);
 			return dto;
 		}//end mkDTO
 		
@@ -69,88 +61,38 @@ public class MM_DAO implements DAO {
 		public DTO[] mkDTOs(ResultSet rs) throws SQLException {
 			DTO[] arr=null;
 			ArrayList<DTO> list=new ArrayList<DTO>();
-			
-			while(rs.next()) {
-				list.add(mkDTO(rs));
+			System.out.println("엥?");
+			System.out.println(rs);
+			try {
+				while(rs.next()) {
+					System.out.println("엥2?");
+					list.add(mkDTO(rs));
+				}
+				int size=list.size();
+				if(size==0)return null;
+				arr=new DTO[size];
+				list.toArray(arr);
+			}catch(SQLException e){
+				if(arr.length==0) {
+					System.out.println("맞는 자료가 하나도 없다!");
+					throw new SQLException(); //하나도 안담겼으면 에러 반환해주자
+				}
+				return arr; //갯수 부족일땐 잘 출력해주자
 			}
-			int size=list.size();
-			if(size==0)return null;
-			arr=new DTO[size];
-			list.toArray(arr);
-			
 			return arr;
 		}//end mkDTOs()
 		
-		
-		
-		//sql문으로 가져오기
-		@Override
-		public DTO[] selectBySQL(String sql) throws SQLException {
-			DTO [] arr=null;
-			try {
-				pstmt=conn.prepareStatement(sql);
-				rs=pstmt.executeQuery();
-				arr=mkDTOs(rs);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close();
-			}
-			return arr;
-		}//end - sql문으로 가져오기
-		
-		
-		
-		//String 매개변수를 받는 sql문으로 가져오기
-		@Override
-		public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException {
-			DTO [] arr=null;
-			try {
-				pstmt=conn.prepareStatement(sql);
-				
-				pstmt.setString(1, stringParamForPstmt);
-				
-				rs=pstmt.executeQuery();
-				arr=mkDTOs(rs);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close();
-			}
-			return arr;
-		}//end - String 매개변수를 받는 sql문으로 가져오기	
-		
-		//String 매개변수를 받는 sql문으로 가져오기
-		@Override
-		public DTO[] selectBySQL(String sql, String ...stringParamForPstmt) throws SQLException {
-			DTO [] arr=null;
-			try {
-				pstmt=conn.prepareStatement(sql);
-				
-				for(int i=0;i<stringParamForPstmt.length;i++)
-					pstmt.setString(i+1, stringParamForPstmt[i]);
-				
-				rs=pstmt.executeQuery();
-				arr=mkDTOs(rs);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close();
-			}
-			return arr;
-		}//end - String 매개변수를 받는 sql문으로 가져오기
-
-
 		@Override
 		public DTO[] selectBySQL(String sql, int integerParamForPstmt) throws SQLException {
 			DTO [] arr=null;
 			try {
 				pstmt=conn.prepareStatement(sql);
-				
 				pstmt.setInt(1, integerParamForPstmt);
-				
 				rs=pstmt.executeQuery();
+				System.out.println("시벌");
 				arr=mkDTOs(rs);
+				System.out.println("수벌");
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
@@ -161,7 +103,29 @@ public class MM_DAO implements DAO {
 
 
 		@Override
+		public DTO[] selectBySQL(String sql) throws SQLException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		@Override
 		public DTO[] selectBySQL(String sql, int... integerParamForPstmt) throws SQLException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		@Override
+		public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		@Override
+		public DTO[] selectBySQL(String sql, String... stringParamForPstmt) throws SQLException {
+			// TODO Auto-generated method stub
 			return null;
 		}
 
@@ -182,6 +146,13 @@ public class MM_DAO implements DAO {
 
 		@Override
 		public DTO[] withSignal(DTO[] _arr, int signal) throws SQLException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		@Override
+		public DTO[] withSignal(DTO[] _arr, int signal, int integerParamForPstmt) throws SQLException {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -233,13 +204,6 @@ public class MM_DAO implements DAO {
 		public int insertBySQL_withDTO(String sql, DTO... dtos) throws SQLException {
 			// TODO Auto-generated method stub
 			return 0;
-		}
-
-
-		@Override
-		public DTO[] withSignal(DTO[] _arr, int signal, int integerParamForPstmt) throws SQLException {
-			// TODO Auto-generated method stub
-			return null;
 		}
 
 }
