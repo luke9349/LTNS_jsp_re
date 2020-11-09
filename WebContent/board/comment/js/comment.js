@@ -80,7 +80,7 @@ const createComment = (datas) => {
     comment += '</div>';
     comment += '</div>';
 
-    if (initBody.userId === parseInt(data.writerId)) {
+    if (initBody.userId === parseInt(data.writerId) || grade === 'admin') {
       form = '<form class="modifyDeleteform hide">';
       form += `<input type="hidden" class="comment_id" name="comment_id" data-id="${data.commentId}" />`;
       form += '<div class="input-group">';
