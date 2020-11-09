@@ -169,11 +169,10 @@ function recommend(){
 		
 		 <span class="text-right d-block"> 
 		 <i class="far fa-eye"> <%=viewCnt %></i>
-		 <%if(login_chk != 0){%> 
-	 	 <i class="likes" id="rec_btn" onclick="recommend()" class="fas fa-thumbs-up"> <%=emp_cnt %></i>
-	     <%} %>
+		 <i id="rec_btn" onclick="recommend()" class="fas fa-thumbs-up"> <%=emp_cnt %></i>
 		 </span>
-		 <!-- 좋아요 버튼 -->
+		
+		 <!-- 좋아요 버튼   -->
 	
 	</div>
 	<!-- 제목  -->
