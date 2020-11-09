@@ -23,6 +23,7 @@ public class Mypage_command implements Command {
 			//내가 작성한 글- 트랜잭션 수행
 			arr1=new Mainpage_DAO().selectBySQL(Mypage_DAO.SELECT_6_MY_POSTS);
 			System.out.println("서버 확인-내가작성한 글: "+arr1);
+			request.setAttribute("my", arg1);
 			for(DTO v : arr1) {
 				System.out.println(((Post_DTO)v).getNickname());
 			}
