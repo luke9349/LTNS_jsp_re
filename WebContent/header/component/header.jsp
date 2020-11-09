@@ -43,13 +43,3 @@
 	    </div>
 	</nav>
 </header>
-
-<script>
-	var btns =  document.getElementById("btn_login")
-	var cnt = 0;
-	btns.onclick = function(){
-		alert("로그아웃");
-	}	
-	
-
-</script>

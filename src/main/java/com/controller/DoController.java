@@ -126,7 +126,7 @@ public class DoController extends HttpServlet {
 			cmd.execute(request, response);
 			viewPage= "loginOk.jsp";
 			break;
-		
+	
 		case "/membermanage/sign-up-complete.do":
 			cmd = new Signup_complete_command();
 			cmd.execute(request, response);

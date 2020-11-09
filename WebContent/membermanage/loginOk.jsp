@@ -35,6 +35,7 @@
 	int sessionInterval = session.getMaxInactiveInterval();
 	session.setAttribute("writer", arrs[0].getMm_id());
 	session.setAttribute("login",1);
+	session.setAttribute("nickname",nick);
 	session.setAttribute("grade", arrs[0].getGrade());
 	session.setAttribute("rec_chk_write", 0);
 	%>
