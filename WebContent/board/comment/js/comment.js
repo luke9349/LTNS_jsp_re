@@ -112,6 +112,7 @@ const hadleInputChange = (e) => {
 };
 
 const handleChangeContent = (event) => {
+  if (getInfiniteComment != null) clearInterval(getInfiniteComment);
   const parent = $(event.target).parent().parent().parent();
   parent.find('.alertBox').hide();
   parent.find('.commentModify').val(parent.find('.comment_content').text());
@@ -162,6 +163,7 @@ const handleUpdateAjax = (e) => {
       const comment = createComment(json.data);
       $('.comment__list').html(comment);
       if (json.count != $('.commentContainer').length) createViewMoreBtn();
+      createInfinite();
       loadDataEvent();
     })
     .catch((e) => {
