@@ -4,7 +4,7 @@ let maxPagination = null;
 
 
 //태그 정의
-const createPaginationIcon = (className) => {
+const createPaginationIcon = (idName, className) => {
   const i = document.createElement('i');
   i.className = className;
   return i;

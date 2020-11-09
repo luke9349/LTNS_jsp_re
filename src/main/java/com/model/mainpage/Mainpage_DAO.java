@@ -10,7 +10,8 @@ import main.java.com.util.DataUtil;
 
 public class Mainpage_DAO implements DAO {
 	/*--공감 순으로 뷰를 정렬하여,포스트 3개  가져오기--*/
-	public final static String SELECT_3_POSTS_BY_EMPATHIZE_CNT="SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " +  
+	public final static String SELECT_3_POSTS_BY_EMPATHIZE_CNT="SELECT * FROM " + 
+			"(SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
 			"FROM tot_post_view V " + 
 			"LEFT OUTER JOIN post_table P " + 
 			"ON V.post_id=P.post_id " + 
@@ -18,11 +19,12 @@ public class Mainpage_DAO implements DAO {
 			"ON P.writer=M.mm_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE ROWNUM <= 3 " + 
-			"ORDER by V.empathize_cnt DESC";
+			"ORDER by empathize_cnt DESC, post_id DESC  " + 
+			") WHERE ROWNUM <=3 ";
 	
 	/*--조회수 순으로 뷰를 정렬하여,포스트 6개  가져오기--*/
-	public final static String SELECT_6_POSTS_BY_VIEWCNT="SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
+	public final static String SELECT_6_POSTS_BY_VIEWCNT="SELECT  * FROM " + 
+			"(SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
 			"FROM tot_post_view V " + 
 			"LEFT OUTER JOIN post_table P " + 
 			"ON V.post_id=P.post_id " + 
@@ -30,11 +32,12 @@ public class Mainpage_DAO implements DAO {
 			"ON P.writer=M.mm_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE ROWNUM <= 6 " + 
-			"ORDER by P.viewcnt DESC";
+			"ORDER by P.viewcnt DESC, post_id DESC  " + 
+			") WHERE ROWNUM <= 6";
 	
-	/*--최신 순으로 포스트 5개 가져오기--*/
-	public final static String SELECT_5_POSTS_BY_NEAREST="SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
+	/*--최신 순으로 포스트 5개 가져오기(여기서 갯수제한 안함!)--*/
+	public final static String SELECT_5_POSTS_BY_NEAREST="SELECT * FROM " + 
+			"(SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
 			"FROM tot_post_view V " + 
 			"LEFT OUTER JOIN post_table P " + 
 			"ON V.post_id=P.post_id " + 
@@ -42,20 +45,22 @@ public class Mainpage_DAO implements DAO {
 			"ON P.writer=M.mm_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE ROWNUM <= 5 " + 
-			"ORDER by P.regdate DESC";
+			"ORDER BY regdate DESC, post_id DESC  " + 
+			") WHERE ROWNUM <= 6";
 	
 	/*--최신 순으로, n번째 이후, 다음 포스트 3개 가져오기 매개변수로 regdate 받을것!--*/
-	public final static String SELECT_NEXT_3_POSTS_BY_NEAREST="SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
-			"FROM tot_post_view V " + 
+	public final static String SELECT_NEXT_3_POSTS_BY_NEAREST="SELECT * FROM " + 
+			"(SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
+			"FROM tot_post_view V  " + 
 			"LEFT OUTER JOIN post_table P " + 
 			"ON V.post_id=P.post_id " + 
 			"LEFT OUTER JOIN mm_table M " + 
 			"ON P.writer=M.mm_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE P.regdate<=? AND rownum <=5 " + 
-			"ORDER BY P.regdate DESC";
+			"WHERE P.post_id<? " + 
+			"ORDER BY regdate DESC, post_id DESC  " + 
+			") WHERE ROWNUM<=3";
 	
 	
 	//DB 연결에 필요한 변수들
@@ -102,7 +107,7 @@ public class Mainpage_DAO implements DAO {
 		String category=rs.getString("category");
 		System.out.println("4");
 		String regdate=rs.getString("regdate");
-		regdate=regdate.substring(0,16);
+//		regdate=regdate.substring(0,16);
 		System.out.println("5");
 		int viewCnt=rs.getInt("viewCnt");//받지 않음
 		System.out.println("6");
@@ -124,9 +129,11 @@ public class Mainpage_DAO implements DAO {
 	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
 		DTO[] arr=null;
 		ArrayList<DTO> list=new ArrayList<DTO>();
-		
+		System.out.println("엥?");
+		System.out.println(rs);
 		try {
 			while(rs.next()) {
+				System.out.println("엥2?");
 				list.add(mkDTO(rs));
 			}
 			int size=list.size();
@@ -134,8 +141,10 @@ public class Mainpage_DAO implements DAO {
 			arr=new DTO[size];
 			list.toArray(arr);
 		}catch(SQLException e){
-			if(arr.length==0)
+			if(arr.length==0) {
+				System.out.println("맞는 자료가 하나도 없다!");
 				throw new SQLException(); //하나도 안담겼으면 에러 반환해주자
+			}
 			return arr; //갯수 부족일땐 잘 출력해주자
 		}
 		return arr;
@@ -155,17 +164,41 @@ public class Mainpage_DAO implements DAO {
 			System.out.println("c");
 			arr=mkDTOs(rs);
 			System.out.println("d");
-			for(DTO dto : arr) {
-				System.out.println(((Post_DTO)dto).getNickname());
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}catch(Exception e) {
+			
 		} finally {
 			close();
 		}
 		return arr;
 	}//end - sql문으로 가져오기
 	
+	//String 매개변수를 받는 sql문으로 가져오기
+	public DTO[] selectBySQL(String sql, String stringParamForPstmt, int intParamForPstmt) throws SQLException {
+		DTO [] arr=null;
+		try {
+			System.out.println("아놔");
+			pstmt=conn.prepareStatement(sql);
+			System.out.println("a");
+			System.out.println(stringParamForPstmt);
+			System.out.println("b");
+			pstmt.setString(1, stringParamForPstmt);
+			System.out.println("c");
+			pstmt.setInt(2, intParamForPstmt);
+			System.out.println("d");
+			rs=pstmt.executeQuery();
+			System.out.println("시벌");
+			arr=mkDTOs(rs);
+			System.out.println("수벌");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return arr;
+	}//end - String 매개변수를 받는 sql문으로 가져오기
 	
 	
 	//String 매개변수를 받는 sql문으로 가져오기
@@ -179,9 +212,8 @@ public class Mainpage_DAO implements DAO {
 			rs=pstmt.executeQuery();
 			System.out.println("시벌");
 			arr=mkDTOs(rs);
-			for(DTO dto:arr) {
-				System.out.println("아"+dto);
-			}
+			System.out.println("수벌");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -213,7 +245,21 @@ public class Mainpage_DAO implements DAO {
 
 	@Override
 	public DTO[] selectBySQL(String sql, int integerParamForPstmt) throws SQLException {
-		return null;
+		DTO [] arr=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, integerParamForPstmt);
+			rs=pstmt.executeQuery();
+			System.out.println("시벌");
+			arr=mkDTOs(rs);
+			System.out.println("수벌");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return arr;
 	}
 
 

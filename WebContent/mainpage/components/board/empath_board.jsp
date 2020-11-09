@@ -23,15 +23,7 @@
 <div id="empath_board" class="sm_board card">
 	<div class="board">
 		<h3><a href="../board/board_list.do?root=EMPATHIZE">공감 게시판</a></h3>
-		<%
-			System.out.println("공감:"+request.getAttribute("empath_board"));
-			DTO[] dtos=((DTO[])request.getAttribute("empath_board"));
-			
-			for(DTO v: dtos){
-				System.out.println("공감 dto닉넴 확인:"+((Post_DTO)v).getNickname());
-				
-			}
-		%>
+
 		<c:forEach var="dto" items="${empath_board }">
 			<hr>
 			<jsp:include page="./card/sm_card_post.jsp" >
