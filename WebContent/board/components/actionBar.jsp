@@ -34,7 +34,7 @@
     </button>
     <c:choose>
     	<c:when test="${param.root eq 'NOTICE' }">
-    		<c:if test="${grade ne 'MEMBER' && grade ne 'gest' }">
+    		<c:if test="${grade eq 'admin'}">
 			    <a
 			      href="<%=request.getContextPath() %>/post/write.do"
 			      class="btn btn-outline-primary"
