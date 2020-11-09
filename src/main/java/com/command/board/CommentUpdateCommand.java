@@ -34,7 +34,6 @@ public class CommentUpdateCommand implements Command, Board_Command {
 			}
 			System.out.println(json.toString());
 			model = new ObjectMapper().readValue(json.toString(), CommentInsertModel.class);
-			System.out.println(model);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());
@@ -43,7 +42,6 @@ public class CommentUpdateCommand implements Command, Board_Command {
 			LogUtil.error(e.getMessage());
 		}
 
-		System.out.println(model);
 
 		String content = model.getComment();
 		int userId = -1;

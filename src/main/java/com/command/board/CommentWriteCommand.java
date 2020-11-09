@@ -36,9 +36,7 @@ public class CommentWriteCommand implements Command, Board_Command {
 			while ((str = reader.readLine()) != null) {
 				json.append(str + "\n");
 			}
-			System.out.println(json.toString());
 			model = new ObjectMapper().readValue(json.toString(), CommentInsertModel.class);
-			System.out.println(model);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());

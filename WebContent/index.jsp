@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script>
-	location.href='mainpage/mainpage.do';
+	location.href='membermanage/loginmain.jsp';
 </script>

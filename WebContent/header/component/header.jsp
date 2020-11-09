@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <header>
 	<div id="login">
-     	<a class="nav__login btn btn-primary mr-2" href="<%=request.getContextPath() %>/mypage/mypage.do">Test</a>
-       	<a id ="btn_login" class="btn btn-secondary">로그아웃</a>
+     	<a class="nav__login btn mr-2" href="<%=request.getContextPath() %>/mypage/mypage.do">${nickname }</a>
+       	<a id ="btn_login" class="btn btn-secondary" href="<%=request.getContextPath() %>/membermanage/logoutOk.do">로그아웃</a>
 	</div>
 	<div>
 		<a class="navbar-brand" href="../mainpage/mainpage.do">
@@ -43,13 +43,3 @@
 	    </div>
 	</nav>
 </header>
-
-<script>
-	var btns =  document.getElementById("btn_login")
-	var cnt = 0;
-	btns.onclick = function(){
-		alert("로그아웃");
-	}	
-	
-
-</script>

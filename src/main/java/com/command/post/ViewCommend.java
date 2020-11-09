@@ -25,11 +25,8 @@ public class ViewCommend implements Command {
 		WriteDTO[] arr = null;
 		FileWriteDTO[] file = null;
 		FileWriteDAO filedao = new FileWriteDAO();
-		int post_contents ;
+		int post_contents;
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
-		
-		HttpSession session =  request.getSession();
-	    int writer =  (int) session.getAttribute("writer");
 				
 				
 		if(post_id != 0) {
@@ -42,9 +39,16 @@ public class ViewCommend implements Command {
 			}
 		}
 		
-		
+		if(arr ==  null) {
+			System.out.println("여기가 널이니까 안되지");
+			request.setAttribute("views", null);
+		}else {
+			HttpSession session =  request.getSession();
+			int writer =  (int) session.getAttribute("writer");
+			
 		
 		post_contents = arr[0].getPost_contents();
+		int post_ids = arr[0].getWriter();
 		
 		if(post_contents != 0) {
 			try {
@@ -55,17 +59,16 @@ public class ViewCommend implements Command {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}// end if
+		}
 		
 		
-		//member에서 유저 정보 가져오기 
-		
-		if(writer != 0) {
+		//member에서 유저 정보 가져오기 		
+		if(post_ids != 0) {
 			MemberDTO[] memberarr = null;
 			MemberDAO memberdao = new MemberDAO();
 			
 			try {
-				memberarr = memberdao.member_Select(writer);
+				memberarr = memberdao.member_Select(post_ids);
 				request.setAttribute("member", memberarr);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -74,10 +77,7 @@ public class ViewCommend implements Command {
 			
 		}
 		
-		
-		
 		//공감수 가져오기 
-		
 		if (writer != 0 || post_id != 0) {
 			TOT_Post_DTO[] tdto = null;
 			TOT_Post_DAO tdao = new TOT_Post_DAO();
@@ -88,22 +88,8 @@ public class ViewCommend implements Command {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-	
-		
-		
-		
 
+	 }
 	}
 
 }

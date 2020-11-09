@@ -42,8 +42,8 @@ location.href = history.back()
 
 <!-- css link  -->
  <link rel="stylesheet" type="text/css" href="CSS/Write.css">
- <link rel="stylesheet" type="text/css" href="../mainpage/CSS/footer/footer.css">
- <link rel="stylesheet" type="text/css" href="../mainpage/CSS/header/header.css">
+ <link rel="stylesheet" type="text/css" href="../footer/css/footer.css">
+ <link rel="stylesheet" type="text/css" href="../header/css/header.css">
 
 <!-- bootstrep -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -112,8 +112,8 @@ function chkSubmit(){
 <body class="container">
 
 	<!--  헤더  -->
-		<jsp:include page="../header/component/header.jsp" />
-	<jsp:include page="CSS/ltns.html"/>
+	<jsp:include page="../header/component/header.jsp" />
+	
 	<div class=" col-12">
 	   <form name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
@@ -121,7 +121,7 @@ function chkSubmit(){
 		      		<td class="text-center" style="width:5%;">
 		      		<select class='selector' name="category">
 		 			
-		 			<%if(garde == "admin") {%>
+		 			<%if(garde.equals("admin")) {%>
 		 				<option value="NOTICE" > 공지사항 </option>
 		 			<%} %>
 		 			
@@ -157,7 +157,7 @@ function chkSubmit(){
 	  
 	</div> <!-- end container -->
 	
-	<jsp:include page="../mainpage/components/footer/footer.jsp" />
+	<jsp:include page="../footer/component/footer.jsp" />
 </body>
 
 </html>

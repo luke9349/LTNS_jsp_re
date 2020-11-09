@@ -7,6 +7,7 @@ let initBody = {
 };
 
 let userProfile = null;
+let grade = null;
 
 let body = {
   method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -53,8 +54,9 @@ const createDataNullMessage = () => {
 
 const createComment = (datas) => {
   let comment = '';
-  const icon =
-    '<i class="fas fa-pencil-alt ml-5 inserBtn"></i><i class="fas fa-trash ml-3 trashBtn"></i>';
+  const modyfyIcon = '<i class="fas fa-pencil-alt ml-5 inserBtn"></i>';
+  const deleteIncon = '<i class="fas fa-trash ml-3 trashBtn"></i>';
+    
   let form = '';
 
   datas.forEach((data) => {
@@ -69,13 +71,16 @@ const createComment = (datas) => {
     comment += '<div>';
     comment += `<span class="coment__writer">${data.nickName}</span>`;
     comment += '&nbsp;&nbsp;';
-    comment += `<span class="coment_regdate">${data.regdate}</span>`;
-    if (initBody.userId === parseInt(data.writerId)) comment += icon;
-
-    comment += '</div>';
-    comment += '</div>';
-
+    comment += `<span class="coment_regdate">${data.regdate}</span>`; 
     if (initBody.userId === parseInt(data.writerId)) {
+	  comment += modyfyIcon;
+	  comment += deleteIncon;
+	} else if(grade === 'admin') comment += deleteIncon;
+
+    comment += '</div>';
+    comment += '</div>';
+
+    if (initBody.userId === parseInt(data.writerId) || grade === 'admin') {
       form = '<form class="modifyDeleteform hide">';
       form += `<input type="hidden" class="comment_id" name="comment_id" data-id="${data.commentId}" />`;
       form += '<div class="input-group">';
@@ -107,6 +112,7 @@ const hadleInputChange = (e) => {
 };
 
 const handleChangeContent = (event) => {
+  if (getInfiniteComment != null) clearInterval(getInfiniteComment);
   const parent = $(event.target).parent().parent().parent();
   parent.find('.alertBox').hide();
   parent.find('.commentModify').val(parent.find('.comment_content').text());
@@ -157,6 +163,7 @@ const handleUpdateAjax = (e) => {
       const comment = createComment(json.data);
       $('.comment__list').html(comment);
       if (json.count != $('.commentContainer').length) createViewMoreBtn();
+      createInfinite();
       loadDataEvent();
     })
     .catch((e) => {
@@ -304,10 +311,11 @@ const checkUser = () => {
   }
 };
 
-const commenInit = (uid, pid, profile) => {
+const commenInit = (uid, pid, profile, sessionGrade) => {
   initBody.userId = parseInt(uid);
   initBody.postId = parseInt(pid);
   userProfile = parseInt(profile);
+  grade = sessionGrade;
   checkUser();
   $('.comment__list').hide();
   $('#commentInsert').on('submit', handleWriteAjax);

@@ -13,6 +13,7 @@ import main.java.com.command.Command;
 import main.java.com.command.mainpage.Mainpage_Command;
 import main.java.com.command.membermanage.LoginOk_Cmd;
 import main.java.com.command.membermanage.Signup_complete_command;
+import main.java.com.command.membermanage.logOut_Cmd;
 import main.java.com.command.mypage.Mypage_command;
 import main.java.com.command.post.WriteCommend;
 import main.java.com.command.post.deleteCommend;
@@ -59,13 +60,19 @@ public class DoController extends HttpServlet {
 
 		case "/board/board_list.do":
 			if(request.getSession().getAttribute("login") == null)  {
-				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.do");
+				request.getSession().setAttribute("messageType", "오류 메시지");
+				request.getSession().setAttribute("messageContent", "로그인이 필요한 서비스 입니다.");
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
 				return;
 			}
 			viewPage = "board_list.jsp";
 			break;
 			
 		case "/post/write.do":
+			if(request.getSession().getAttribute("login") == null)  {
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
+				return;
+			}
 			viewPage = "write.jsp";
 			break;
 			
@@ -77,18 +84,30 @@ public class DoController extends HttpServlet {
 			
 			
 		case "/post/view.do":
+			if(request.getSession().getAttribute("login") == null)  {
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
+				return;
+			}
 			cmd = new ViewCommend();
 			cmd.execute(request, response);
 			viewPage = "view.jsp";
 			break;	
 
 		case "/post/deleteOk.do":
+			if(request.getSession().getAttribute("login") == null)  {
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
+				return;
+			}
 			cmd = new deleteCommend();
 			cmd.execute(request, response);
 			viewPage = "deleteOk.jsp";
 			break;
 		
 		case "/post/update.do":
+			if(request.getSession().getAttribute("login") == null)  {
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
+				return;
+			}
 			cmd = new updateCommend();
 			cmd.execute(request, response);
 			viewPage = "update.jsp";
@@ -125,6 +144,14 @@ public class DoController extends HttpServlet {
 			viewPage= "loginOk.jsp";
 			break;
 		
+		case "/membermanage/logoutOk.do":
+			cmd = new logOut_Cmd();
+			cmd.execute(request, response);
+			viewPage= "logoutOk.jsp";
+			break;
+			
+			
+	
 		case "/membermanage/sign-up-complete.do":
 			cmd = new Signup_complete_command();
 			cmd.execute(request, response);

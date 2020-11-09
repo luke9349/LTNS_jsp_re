@@ -140,7 +140,7 @@ public class CommentDAO {
 			while (rs.next()) {
 				CommentDTO dto = new CommentDTO();
 				dto.setCommentId(rs.getLong("COMMENT_ID"));
-				dto.setCommentContents(rs.getString("COMMENT_CONTENTS"));
+				dto.setCommentContents(rs.getString("COMMENT_CONTENTS").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll(" ", "&nbsp;").replaceAll("\n", "<br />"));
 				dto.setWriterId(rs.getLong("WRITER"));
 				dto.setWriter(rs.getString("ID"));
 				dto.setNickName(rs.getString("NICKNAME"));
