@@ -226,7 +226,7 @@ function recommend(){
 </div> 
 	<jsp:include page="../board/comment/component/comment.jsp"></jsp:include>
 	<script>
-		commenInit('<%=streinger%>', '${param.post_id}', '<%=login_chk%>');
+		commenInit('<%=streinger%>', '${param.post_id}', '<%=login_chk%>', '<%=master%>');
 	</script>
 	<jsp:include page="../modal/component/modal.jsp" />
 	<c:if test="${messageType != null &&  messageContent != null}">

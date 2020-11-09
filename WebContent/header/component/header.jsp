@@ -6,7 +6,7 @@
 <header>
 	<div id="login">
      	<a class="nav__login btn mr-2" href="<%=request.getContextPath() %>/mypage/mypage.do">${nickname }</a>
-       	<a id ="btn_login" class="btn btn-secondary">로그아웃</a>
+       	<a id ="btn_login" class="btn btn-secondary" href="logoutOk.do">로그아웃</a>
 	</div>
 	<div>
 		<a class="navbar-brand" href="../mainpage/mainpage.do">

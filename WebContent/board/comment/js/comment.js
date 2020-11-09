@@ -71,7 +71,7 @@ const createComment = (datas) => {
     comment += '<div>';
     comment += `<span class="coment__writer">${data.nickName}</span>`;
     comment += '&nbsp;&nbsp;';
-    comment += `<span class="coment_regdate">${data.regdate}</span>`;
+    comment += `<span class="coment_regdate">${data.regdate}</span>`; 
     if (initBody.userId === parseInt(data.writerId)) {
 	  comment += modyfyIcon;
 	  comment += deleteIncon;
@@ -313,7 +313,7 @@ const commenInit = (uid, pid, profile, sessionGrade) => {
   initBody.userId = parseInt(uid);
   initBody.postId = parseInt(pid);
   userProfile = parseInt(profile);
-  grad = sessionGrade;
+  grade = sessionGrade;
   checkUser();
   $('.comment__list').hide();
   $('#commentInsert').on('submit', handleWriteAjax);
