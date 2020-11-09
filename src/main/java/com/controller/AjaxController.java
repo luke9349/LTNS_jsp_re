@@ -16,9 +16,9 @@ import main.java.com.command.board.CommentRemoveCommand;
 import main.java.com.command.board.CommentUpdateCommand;
 import main.java.com.command.board.CommentWriteCommand;
 import main.java.com.command.mainpage.Mainpage_Add_NearestBoard_Command_By_AJAX;
-import main.java.com.command.mypage.Mainpage_Add_MyComment_Command_By_AJAX;
-import main.java.com.command.mypage.Mainpage_Add_MyEmpathize_Command_By_AJAX;
-import main.java.com.command.mypage.Mainpage_Add_MyPost_Command_By_AJAX;
+import main.java.com.command.mypage.Mypage_Add_MyComment_Command_By_AJAX;
+import main.java.com.command.mypage.Mypage_Add_MyEmpathize_Command_By_AJAX;
+import main.java.com.command.mypage.Mypage_Add_MyPost_Command_By_AJAX;
 
 @WebServlet("*.ajax")
 public class AjaxController extends HttpServlet {
@@ -55,13 +55,13 @@ public class AjaxController extends HttpServlet {
 			new Mainpage_Add_NearestBoard_Command_By_AJAX().execute(request, response);
 			break;
 		case "/mypage/mypage_mypost.ajax":
-			new Mainpage_Add_MyPost_Command_By_AJAX().execute(request,response);
+			new Mypage_Add_MyPost_Command_By_AJAX().execute(request,response);
 			break;
 		case "/mypage/mypage_mycomment.ajax":
-			new Mainpage_Add_MyComment_Command_By_AJAX().execute(request,response);
+			new Mypage_Add_MyComment_Command_By_AJAX().execute(request,response);
 			break;
 		case "/mypage/mypage_myempathize.ajax":
-			new Mainpage_Add_MyEmpathize_Command_By_AJAX().execute(request,response);
+			new Mypage_Add_MyEmpathize_Command_By_AJAX().execute(request,response);
 			break;			
 		case "/board/board_list.ajax":
 			command = new BoarAjaxCommand();

@@ -11,7 +11,7 @@ import main.java.com.model.DTO;
 import main.java.com.model.mainpage.Mainpage_DAO;
 import main.java.com.model.mainpage.Post_DTO;
 
-public class Mainpage_Command implements Command {
+public class My_Command implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
