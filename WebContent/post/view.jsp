@@ -13,28 +13,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    
 <%	
-	//dao를 사용한 트랜잭션
+//dao를 사용한 트랜잭션
 	WriteDTO[] arr = (WriteDTO[])request.getAttribute("views");
+%>
+
+<%
+	if( arr == null || arr.length ==0){
+%>
+	<script>
+		alert("해당정보가 삭제되거나 없습니다");
+		history.back();
+	</script>
+<%
+	return;
+	}
+
+%>
+
+<% 
 	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("contents_view");
 	MemberDTO[] member_info = (MemberDTO[])request.getAttribute("member");
 	TOT_Post_DTO[] tot_info = (TOT_Post_DTO[])request.getAttribute("tot");
-	
-	//정보 읽어오기 
+		
+	//정보읽엉
 	String title = arr[0].getTitle();
 	String date = arr[0].getRegDate();
 	String category = arr[0].getCategory();
 	int wirters = arr[0].getWriter();
 	int rec_chk_write = 99;
 	int login_chk = (int)session.getAttribute("login");
-	String nickname ="";
+	String nickname =  member_info[0].getNickname();
+	
+	
 	
 	if(login_chk == 0){
-		nickname = (String)session.getAttribute("nickname");
-		 rec_chk_write =  99; // 0
+		rec_chk_write =  99; // 0
 		
 	}else {
-		nickname = member_info[0].getNickname();	
 		rec_chk_write =  (int) session.getAttribute("rec_chk_write"); // 0
 			
 	}
@@ -43,19 +60,18 @@
 	int post_content = arr[0].getPost_contents();
 	int post_id = Integer.parseInt(request.getParameter("post_id"));
 	int streinger =  (int) session.getAttribute("writer");
-		
+	String master = (String) session.getAttribute("grade");
 	
 	//공감
 	int emp_cnt = tot_info[0].getEmpathize_cnt();
-	
 	String ctx = request.getContextPath();
 	System.out.println(file_info[0].getFilename());
 	request.setCharacterEncoding("utf-8");
 	Date today = new Date();
 	SimpleDateFormat fomat = new SimpleDateFormat("[yyyy-mm-dd]");
-%>  
 
-<%
+ 
+
 	//파일읽어오기  (DB접근시 수정할것임)
 	String titles ="";	
 	String contents ="";
@@ -68,6 +84,7 @@
 	String line = null;
 
 	titles = br.readLine();
+	
 	
 	while((line = br.readLine())!=null){
 		if(!line.equals(titles)){
@@ -86,7 +103,6 @@
 	}
 %>
 
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -139,6 +155,7 @@ function back(){
 	
 	if(r){
 		location.href= "<%=ctx%>/board/board_list.do";
+		rec_chk_write = 0 ;
 	}
 }
 
@@ -158,6 +175,7 @@ function recommend(){
 	   
 
 </script>
+
 <body class="container">
 	<!--  헤더  -->
 	<jsp:include page="../header/component/header.jsp" />
@@ -168,8 +186,11 @@ function recommend(){
 		<h6 class ="text-info"><%=category %> 	</h6> <span class="d-block"> [<%=post_id %>] </span> 
 		
 		 <span class="text-right d-block"> 
-		 <i class="far fa-eye"> <%=viewCnt %></i>
-		 <i id="rec_btn" onclick="recommend()" class="fas fa-thumbs-up"> <%=emp_cnt %></i>
+		 <i class="far fa-eye"> <%=viewCnt %></i>&nbsp;
+		 
+		 <%if(login_chk != 0){%>
+		 <i id="rec_btn" onclick="recommend()" class="far fa-thumbs-up"> <%=emp_cnt %></i>
+		 <%} %>
 		 </span>
 		
 		 <!-- 좋아요 버튼   -->
@@ -196,7 +217,7 @@ function recommend(){
 	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="돌아가기" onclick='back()'>
 	
 	<!-- 수정삭제  -->
-	<%if(wirters == streinger){ %>
+	<%if(wirters == streinger ||  master.equals("admin")  ){ %>
 	<button type="button" class="fun-btn btn-sm font-weight-bold"  onclick="deletePost(<%=post_content%>)">삭제</button>
 	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="수정" onclick="location.href='update.do?post_id=<%=post_id%>'">
 	<%} %>
