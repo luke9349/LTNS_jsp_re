@@ -191,7 +191,7 @@ WHERE file_id=?
 
 
 /*-----------------------------------마이페이지 관련-----------------------------------*/
-/*--내가 작성한 글을 최신순으로, 포스트 5개  가져오기--*/
+/*--내가 작성한 글을 최신순으로, 포스트 6개  가져오기--*/
 SELECT * FROM (
 SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt
 FROM tot_post_view V 
@@ -204,7 +204,7 @@ ON P.post_contents=F.file_id
 WHERE M.mm_id=?
 ORDER BY P.regdate DESC, P.post_id DESC 
 )
-WHERE ROWNUM <= 5
+WHERE ROWNUM <= 6
 ;
 
 --count 가져오기(pagination 위함)
@@ -214,14 +214,31 @@ WHERE writer=?
 GROUP BY writer
 ;
 
-/*--내가 작성한 댓글을 최신순으로, 댓글 5개  가져오기--*/
+
+--post_id, post_title, writer, regdate
+SELECT * FROM(
+SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt
+FROM empathize_table E
+LEFT OUTER JOIN mm_table M
+ON E.mm_id=M.mm_id
+LEFT OUTER JOIN post_table P
+ON M.mm_id=P.writer
+LEFT OUTER JOIN file_table F
+ON P.post_contents=F.file_id
+WHERE E.mm_id=? 
+ORDER BY regdate DESC , post_id DESC 
+)WHERE ROWNUM >= ? AND ROWNUM <= ?+5
+;
+
+-----------------------------------------------------------------
+/*--내가 작성한 댓글을 최신순으로, 댓글 6개  가져오기--*/
 --comment_id, post_id, regdate, contents
 SELECT * FROM (
 SELECT  comment_id, post_id, regdate, comment_contents
 FROM comment_table
 WHERE writer=1
 ORDER BY regdate DESC, comment_id DESC
-)WHERE ROWNUM <=5
+)WHERE ROWNUM <=6
 ;
 
 --count 가져오기(pagination 위함)
@@ -231,7 +248,18 @@ WHERE writer=?
 GROUP BY writer
 ;
 
-/*--내가 공감한 게시글을 최신순으로, 포스트 5개 가져오기--*/
+/*--내가 작성한 댓글을 최신순으로, 댓글 6개  가져오기--*/
+--comment_id, post_id, regdate, contents
+SELECT * FROM (
+SELECT  comment_id, post_id, regdate, comment_contents
+FROM comment_table
+WHERE writer=? 
+ORDER BY regdate DESC, comment_id DESC
+)WHERE ROWNUM >= ? AND ROWNUM <= ?+5
+;
+
+-------------------------------------------------------------
+/*--내가 공감한 게시글을 최신순으로, 포스트 6개 가져오기--*/
 --post_id, post_title, writer, regdate
 SELECT * FROM(
 SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt
@@ -244,7 +272,7 @@ LEFT OUTER JOIN file_table F
 ON P.post_contents=F.file_id
 WHERE E.mm_id=100
 ORDER BY regdate DESC, post_id DESC 
-)WHERE ROWNUM <= 5
+)WHERE ROWNUM <= 6
 ;
 
 --count 가져오기(pagination 위함)
@@ -254,6 +282,7 @@ WHERE mm_id=?
 GROUP BY mm_id
 ;
 
+/*--내가 공감한 게시글을 최신순으로, 포스트 6개 가져오기--*/
 --post_id, post_title, writer, regdate
 SELECT * FROM(
 SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt
@@ -264,7 +293,7 @@ LEFT OUTER JOIN post_table P
 ON M.mm_id=P.writer
 LEFT OUTER JOIN file_table F
 ON P.post_contents=F.file_id
-WHERE E.mm_id=1 
-ORDER BY regdate
-)WHERE ROWNUM >= 1 AND ROWNUM <= 1+4
+WHERE E.mm_id=100
+ORDER BY regdate DESC, post_id DESC 
+)WHERE ROWNUM >= ? AND ROWNUM <= ?+5
 ;
