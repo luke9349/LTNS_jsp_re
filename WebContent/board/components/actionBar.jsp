@@ -32,11 +32,26 @@
       <i class="fas fa-search"></i>
       검색
     </button>
-    <a
-      href="<%=request.getContextPath() %>/post/write.do"
-      class="btn btn-outline-primary"
-      ><i class="fas fa-pencil-alt"></i>글쓰기</a
-    >
+    <c:choose>
+    	<c:when test="${param.root eq 'NOTICE' }">
+    		<c:if test="${grade ne 'MEMBER' && grade ne 'gest' }">
+			    <a
+			      href="<%=request.getContextPath() %>/post/write.do"
+			      class="btn btn-outline-primary"
+			      ><i class="fas fa-pencil-alt"></i>글쓰기</a
+			    >    	    	
+    		</c:if>
+    	</c:when>
+    	<c:otherwise>
+		    <c:if test="${login ne '0'}">
+			    <a
+			      href="<%=request.getContextPath() %>/post/write.do"
+			      class="btn btn-outline-primary"
+			      ><i class="fas fa-pencil-alt"></i>글쓰기</a
+			    >    	
+		    </c:if>    		
+    	</c:otherwise>
+    </c:choose>
   </div>
 </div>
 <div class="modal" id="modalForm" tabindex="-1">

@@ -6,11 +6,13 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.tribes.util.Arrays;
+
 import main.java.com.command.Command;
 import main.java.com.view.MemberDAO;
 import main.java.com.view.MemberDTO;
 
-public class loginOk_Cmd implements Command {
+public class LoginOk_Cmd implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -48,6 +50,7 @@ public class loginOk_Cmd implements Command {
 			MemberDTO[] arr = null; 
 			try {
 				arr = daos.member_INFO_Select(id);
+				System.out.println(arr[0].getGrade());
 				request.setAttribute("info_chk", arr);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

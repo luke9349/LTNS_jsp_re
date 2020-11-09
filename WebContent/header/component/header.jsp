@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 <header>
 	<div id="login">
      	<a class="nav__login btn btn-primary mr-2">로그인</a>

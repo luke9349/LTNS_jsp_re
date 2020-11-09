@@ -8,15 +8,17 @@
 	String saveDirectory =	getServletContext().getRealPath("/") + "data";
 	System.out.println(saveDirectory + "세이브디렉토리입니다.");
 	System.out.println(ctx + "/"+ "data" +"/");
-	
 	String writer = request.getParameter("writer");
+	System.out.println("asdlkjasdlkjals;;djkl;: " + writer);
+	
+	//게스트 처리하기 
+	
+	int login_chk = (int)session.getAttribute("login");
+	String garde = (String)session.getAttribute("grade");
 	
 	
 	
-	
-	
-%>   
-
+%>  
     
 <!DOCTYPE html>
 <html>
@@ -25,6 +27,19 @@
 
 <title> Write Page </title>
 </head>
+
+
+<%if(login_chk == 0){%> 
+<script>
+alert("게스트는 글을 쓸수 없어요");
+location.href = history.back()
+</script>
+
+<%} %>
+
+
+
+
 <!-- css link  -->
  <link rel="stylesheet" type="text/css" href="CSS/Write.css">
  <link rel="stylesheet" type="text/css" href="../mainpage/CSS/footer/footer.css">
@@ -93,6 +108,7 @@ function chkSubmit(){
 </script>
 
 
+
 <body class="container">
 
 	<!--  헤더  -->
@@ -104,8 +120,11 @@ function chkSubmit(){
 		        <tr class="tableheader">
 		      		<td class="text-center" style="width:5%;">
 		      		<select class='selector' name="category">
-		 		
-		 			<option value="NOTICE" > 공지사항 </option>
+		 			
+		 			<%if(garde == "admin") {%>
+		 				<option value="NOTICE" > 공지사항 </option>
+		 			<%} %>
+		 			
 		       		<option value="MOVIE" selected="selected" > 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
 		       		<option value="BOOK">도서 게시판  </option>

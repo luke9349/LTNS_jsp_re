@@ -91,7 +91,6 @@
 	</article>
 </main>
 <jsp:include page="../modal/component/modal.jsp" />
-${messageType }
 <c:if test="${messageType != null &&  messageContent != null}">
 	<script>
 		showModal("${messageType}", "${messageContent}");

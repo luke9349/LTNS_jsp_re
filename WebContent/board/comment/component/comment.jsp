@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="comment">
+<div class="comment mb-5">
   <div class="comment__insertForm">
     <form id="commentInsert">
       <div class="card text-center">
@@ -36,80 +36,5 @@
   </div>
 
   <div class="comment__list">
-    <div class="commentContainer hide">
-      <div id="alert" class="alert alert-success" role="alert">
-        <div class="alertBox">
-          <span class="comment_content">댓글임멘</span>
-          <div>
-            <span class="coment__writer">작성자</span>
-            <span class="coment_regdate">날짜</span>
-            <i class="fas fa-pencil-alt ml-5 inserBtn"></i>
-            <i class="fas fa-trash ml-3 trashBtn"></i>
-          </div>
-        </div>
-
-        <form class="modifyDeleteform hide">
-          <input
-            type="hidden"
-            class="comment_id"
-            name="comment_id"
-            value="1"
-          />
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control commentModify"
-              placeholder="수정할 댓글을 입력해주세요."
-            />
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">수정</button>
-            </div>
-            <div class="input-group-append">
-              <button class="btn btn-secondary cancelBtn" type="button">
-                취소
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="commentContainer hide">
-      <div id="alert" class="alert alert-success" role="alert">
-        <div class="alertBox">
-          <span class="comment_content">댓글임멘</span>
-          <div>
-            <span class="coment__writer">작성자</span>
-            <span class="coment_regdate">날짜</span>
-            <i class="fas fa-pencil-alt ml-5 inserBtn"></i>
-            <i class="fas fa-trash ml-3 trashBtn"></i>
-          </div>
-        </div>
-
-        <form class="modifyDeleteform hide">
-          <input
-            type="hidden"
-            class="comment_id"
-            name="comment_id"
-            value="2"
-          />
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control commentModify"
-              placeholder="수정할 댓글을 입력해주세요."
-            />
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">수정</button>
-            </div>
-            <div class="input-group-append">
-              <button class="btn btn-secondary cancelBtn" type="button">
-                취소
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
   </div>
 </div>
