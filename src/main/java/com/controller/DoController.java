@@ -13,6 +13,7 @@ import main.java.com.command.Command;
 import main.java.com.command.mainpage.Mainpage_Command;
 import main.java.com.command.membermanage.LoginOk_Cmd;
 import main.java.com.command.membermanage.Signup_complete_command;
+import main.java.com.command.membermanage.logOut_Cmd;
 import main.java.com.command.mypage.Mypage_command;
 import main.java.com.command.post.WriteCommend;
 import main.java.com.command.post.deleteCommend;
@@ -59,7 +60,7 @@ public class DoController extends HttpServlet {
 
 		case "/board/board_list.do":
 			if(request.getSession().getAttribute("login") == null)  {
-				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.do");
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
 				return;
 			}
 			viewPage = "board_list.jsp";
@@ -124,6 +125,14 @@ public class DoController extends HttpServlet {
 			cmd.execute(request, response);
 			viewPage= "loginOk.jsp";
 			break;
+		
+		case "/membermanage/logoutOk.do":
+			cmd = new logOut_Cmd();
+			cmd.execute(request, response);
+			viewPage= "logoutOk.jsp";
+			break;
+			
+			
 	
 		case "/membermanage/sign-up-complete.do":
 			cmd = new Signup_complete_command();

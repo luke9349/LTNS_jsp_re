@@ -118,8 +118,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="JS/view.js"></script>
 
-
-
 <!-- fontasome -->
 <script src="https://kit.fontawesome.com/5ccafa9b7a.js" crossorigin="anonymous"></script> 
 
