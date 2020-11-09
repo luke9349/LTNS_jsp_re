@@ -10,7 +10,7 @@
 	System.out.println(ctx + "/"+ "data" +"/");
 	String writer = request.getParameter("writer");
 	System.out.println("asdlkjasdlkjals;;djkl;: " + writer);
-	
+
 	//게스트 처리하기 
 	
 	int login_chk = (int)session.getAttribute("login");
