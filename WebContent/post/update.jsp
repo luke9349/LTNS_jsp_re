@@ -93,8 +93,8 @@
 </head>
 <!-- css link  -->
  <link rel="stylesheet" type="text/css" href="CSS/Write.css">
- <link rel="stylesheet" type="text/css" href="../mainpage/CSS/footer/footer.css">
- <link rel="stylesheet" type="text/css" href="../mainpage/CSS/header/header.css">
+ <link rel="stylesheet" type="text/css" href="../footer/css/footer.css">
+ <link rel="stylesheet" type="text/css" href="../header/css/header.css">
 
 
 <!-- bootstrep -->
@@ -206,7 +206,7 @@ function chkSubmit(){
 	</div>
 	
 	<!--  footer -->
-		<jsp:include page="../mainpage/components/footer/footer.jsp" />
+		<jsp:include page="../footer/component/footer.jsp" />
 	
 	
 </body>

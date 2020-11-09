@@ -67,6 +67,10 @@ public class DoController extends HttpServlet {
 			break;
 			
 		case "/post/write.do":
+			if(request.getSession().getAttribute("login") == null)  {
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
+				return;
+			}
 			viewPage = "write.jsp";
 			break;
 			
@@ -78,18 +82,30 @@ public class DoController extends HttpServlet {
 			
 			
 		case "/post/view.do":
+			if(request.getSession().getAttribute("login") == null)  {
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
+				return;
+			}
 			cmd = new ViewCommend();
 			cmd.execute(request, response);
 			viewPage = "view.jsp";
 			break;	
 
 		case "/post/deleteOk.do":
+			if(request.getSession().getAttribute("login") == null)  {
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
+				return;
+			}
 			cmd = new deleteCommend();
 			cmd.execute(request, response);
 			viewPage = "deleteOk.jsp";
 			break;
 		
 		case "/post/update.do":
+			if(request.getSession().getAttribute("login") == null)  {
+				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
+				return;
+			}
 			cmd = new updateCommend();
 			cmd.execute(request, response);
 			viewPage = "update.jsp";

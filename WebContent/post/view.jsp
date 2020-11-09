@@ -111,8 +111,8 @@
 </head>
 <!-- css link  -->
  <link rel="stylesheet" type="text/css" href="CSS/Write.css">
- <link rel="stylesheet" type="text/css" href="../mainpage/CSS/footer/footer.css">
- <link rel="stylesheet" type="text/css" href="../mainpage/CSS/header/header.css">
+ <link rel="stylesheet" type="text/css" href="../footer/css/footer.css">
+ <link rel="stylesheet" type="text/css" href="../header/css/header.css">
 
 <!-- javascript link -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -236,7 +236,7 @@ function recommend(){
 			session.removeAttribute("messageContent");
 		%>
 	</c:if>
-	<jsp:include page="../mainpage/components/footer/footer.jsp" />
+	<jsp:include page="../footer/component/footer.jsp" />
 
 </body>
 </html>

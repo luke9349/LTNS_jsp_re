@@ -26,7 +26,8 @@
 <jsp:include page="../header/component/header.jsp" />
 
 <div class="card border mt-4">
-<div class="board border">
+<div class="board">
+<h3>dfafasdf</h3>
 </div>
 
 </div>
