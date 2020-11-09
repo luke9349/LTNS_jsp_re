@@ -9,6 +9,7 @@
 	System.out.println(saveDirectory + "세이브디렉토리입니다.");
 	System.out.println(ctx + "/"+ "data" +"/");
 	String writer = request.getParameter("writer");
+	System.out.println("asdlkjasdlkjals;;djkl;: " + writer);
 	
 	//게스트 처리하기 
 	

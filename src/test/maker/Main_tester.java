@@ -36,7 +36,7 @@ public class Main_tester {
 		/*샘플 포스트 1000개 생성*/
 //		new SamplePost_Maker().mkPosts(200);
 		
-		System.out.println("파일생성 작업 완료!");
+//		System.out.println("파일생성 작업 완료!");
 	}
 
 }

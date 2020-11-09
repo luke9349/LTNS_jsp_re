@@ -62,12 +62,14 @@ public class Mainpage_Add_NearestBoard_Command_By_AJAX implements Command, By_AJ
 
 	public void responseJSONbyJackson(HttpServletRequest request, HttpServletResponse response) {
 		String regdate=request.getParameter("regdate");
-		
+		String post_id=request.getParameter("post_id");
 		//트랜잭션 수행
 		DTO[] dtoArr=null;
 		try {
 			System.out.println("dhkdkdkdkkdk");
-			dtoArr = new Mainpage_DAO().selectBySQL(Mainpage_DAO.SELECT_NEXT_3_POSTS_BY_NEAREST, regdate);
+			System.out.println("오긴했냐.."+post_id);
+			System.out.println("아니.."+Integer.parseInt(post_id));
+			dtoArr = new Mainpage_DAO().selectBySQL(Mainpage_DAO.SELECT_NEXT_3_POSTS_BY_NEAREST, Integer.parseInt(post_id));
 			System.out.println("dhkdkdkdkkdk2"+dtoArr);
 			for(DTO dto : dtoArr) {
 				System.out.println("dto:"+dto);

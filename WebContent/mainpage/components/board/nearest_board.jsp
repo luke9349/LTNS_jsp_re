@@ -22,23 +22,15 @@
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 
 <div id="nearest_board">
-		<%
-			System.out.println("최신순:"+request.getAttribute("newarest_board"));
-			DTO[] dtos=((DTO[])request.getAttribute("newarest_board"));
-			
-			for(DTO v: dtos){
-				System.out.println("최신 dto닉넴 확인:"+((Post_DTO)v).getNickname());
-				
-			}
-		%>
-	<c:forEach var="dto" items="${empath_board }">
+
+	<c:forEach var="i" begin="0" end="4" step="1">
 		<jsp:include page="./card/card_post.jsp" >
-			<jsp:param name="post_id" value="${dto.post_id }"/>
-			<jsp:param name="title" value="${dto.post_contents.title }"/>
-			<jsp:param name="writer" value="${dto.nickname }"/>
-			<jsp:param name="regdate" value="${dto.regdate }"/>
-			<jsp:param name="contents" value="${dto.post_contents.contentsText }"/>
-			<jsp:param name="thumbnailPath" value="${dto.post_contents.thumbnailPath }"/>
+			<jsp:param name="post_id" value="${nearest_board[i].post_id }"/>
+			<jsp:param name="title" value="${nearest_board[i].post_contents.title }"/>
+			<jsp:param name="writer" value="${nearest_board[i].nickname }"/>
+			<jsp:param name="regdate" value="${nearest_board[i].regdate }"/>
+			<jsp:param name="contents" value="${nearest_board[i].post_contents.contentsText }"/>
+			<jsp:param name="thumbnailPath" value="${nearest_board[i].post_contents.thumbnailPath }"/>
 		</jsp:include>
 		<hr>
 	</c:forEach>

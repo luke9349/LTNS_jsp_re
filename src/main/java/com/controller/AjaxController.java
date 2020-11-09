@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.command.board.BoarAjaxCommand;
+import main.java.com.command.board.CommentLoadCommand;
+import main.java.com.command.board.CommentNextCommand;
+import main.java.com.command.board.CommentRemoveCommand;
+import main.java.com.command.board.CommentUpdateCommand;
 import main.java.com.command.board.CommentWriteCommand;
 import main.java.com.command.mainpage.Mainpage_Add_NearestBoard_Command_By_AJAX;
 
@@ -51,12 +55,24 @@ public class AjaxController extends HttpServlet {
 			command = new BoarAjaxCommand();
 			command.execute(request, response);
 			return;
-		case "/board/comment/commentWrite.ajax":
+		case "/post/commentLoad.ajax":
+			command = new CommentLoadCommand();
+			command.execute(request, response);
+			return;
+		case "/post/commentWrite.ajax":
 			command = new CommentWriteCommand();
 			command.execute(request, response);
 			return;
-		case "/board/comment/commentLoad.ajax":
-			command = new CommentWriteCommand();
+		case "/post/commentRemove.ajax":
+			command = new CommentRemoveCommand();
+			command.execute(request, response);
+			return;
+		case "/post/commentNext.ajax":
+			command = new CommentNextCommand();
+			command.execute(request, response);
+			return;
+		case "/post/commentUpdate.ajax":
+			command = new CommentUpdateCommand();
 			command.execute(request, response);
 			return;
 		} // end switch

@@ -47,10 +47,9 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
-    page = 1;
     const li = createPaginationList('page-item');
     const i = createPaginationIcon('fas fa-angle-double-left');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${1}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);
@@ -63,14 +62,14 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
-    page = (Math.floor(page / 10) - 1) * 10 + 1;
     const li = createPaginationList('page-item');
     const i = createPaginationIcon('fas fa-chevron-left');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${(Math.floor(page / 10) - 1) * 10 + 1}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);
   }
+
   for (let i = startPagination; i <= endPagination; i++) {
     let li = createPaginationList('page-item');
     if (i === page) li.classList.add('active');
@@ -79,6 +78,7 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   }
+
   if (endPagination === maxPagination) {
     const li = createPaginationList('page-item disabled');
     const i = createPaginationIcon('fas fa-chevron-right');
@@ -87,10 +87,9 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
-    page = (Math.floor(page / 10) + 1) * 10 + 1;
     const li = createPaginationList('page-item');
     const i = createPaginationIcon('fas fa-chevron-right');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${(Math.floor(page / 10) + 1) * 10 + 1}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);
@@ -103,10 +102,9 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
-    page = maxPagination;
     const li = createPaginationList('page-item');
     const i = createPaginationIcon('fas fa-angle-double-right');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${page}`);
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${maxPagination}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);

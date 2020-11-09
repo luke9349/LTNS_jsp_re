@@ -1,5 +1,6 @@
 	
 
+
 	
 	$("#id").focusout(function() { //아이디 유효성
 		
@@ -18,6 +19,13 @@
 		if(!getidCheck.test($("#id").val())){  $("#iderror").html("아이디형식에 맞게 입력해주세요2"); return;} 
 		
 		if(getidCheck.test($("#id").val())){  $("#iderror").html("아이디 완벽함"); return true;}
+		
+		/*$.ajax({
+			type : "POST",
+			url : "sign-up.ajax",
+			
+			
+		})*/
 		
 			
 		

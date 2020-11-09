@@ -1,17 +1,18 @@
 package main.java.com.model.board;
 
 public class CommentInsertModel {
-	private String content;
+	private String comment;
 	private String userId;
 	private String postId;
 	private String page;
+	private String commentId;
 
-	public String getContent() {
-		return content;
+	public String getComment() {
+		return comment;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public String getUserId() {
@@ -38,10 +39,18 @@ public class CommentInsertModel {
 		this.page = page;
 	}
 
+	public String getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(String commentId) {
+		this.commentId = commentId;
+	}
+
 	@Override
 	public String toString() {
-		return "CommentInsertModel [content=" + content + ", userId=" + userId + ", postId=" + postId + ", page=" + page
-				+ "]";
+		return "CommentInsertModel [comment=" + comment + ", userId=" + userId + ", postId=" + postId + ", page=" + page
+				+ ", commentId=" + commentId + "]";
 	}
 
 }

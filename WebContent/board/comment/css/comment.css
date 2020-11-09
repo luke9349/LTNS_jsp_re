@@ -2,6 +2,13 @@
 	min-height: 10rem;
 }
 
+#zeroData {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+}
+
 .alert {
 	margin-bottom: 0.25rem;
 }
@@ -11,8 +18,13 @@
 	justify-content: space-between;
 }
 
-.alert:hover {
+.alert-success:hover {
 	background-color: #28a745;
+	color: #f8f9fa;
+}
+
+.alert-warning:hover {
+	background-color: #ffc107;
 	color: #f8f9fa;
 }
 
@@ -42,6 +54,10 @@
 
 #downArrow.active {
 	transform: rotate(180deg);
+}
+
+#commentBtn {
+	cursor: pointer;
 }
 
 .hide {

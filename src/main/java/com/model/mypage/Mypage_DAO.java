@@ -19,7 +19,8 @@ public class Mypage_DAO implements DAO {
 
 	//pagenation을 위해선 cnt를 가져와야 한다..
 	//1. 내가 작성한 글 : 5*n, pagination : /5, 제목, 작성일, 조회수, post_table에서  mm_id가 나와 일치해야 한다
-	final static public String SELECT_5_MY_POSTS="SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
+	final static public String SELECT_5_MY_POSTS="SELECT * FROM " + 
+			"(SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
 			"FROM tot_post_view V  " + 
 			"LEFT OUTER JOIN post_table P " + 
 			"ON V.post_id=P.post_id " + 
@@ -27,8 +28,9 @@ public class Mypage_DAO implements DAO {
 			"ON P.writer=M.mm_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE M.mm_id=? AND ROWNUM <= 5 " + 
-			"ORDER by V.empathize_cnt DESC";
+			"WHERE M.mm_id=? " + 
+			"ORDER BY P.regdate DESC, P.post_id DESC  " + 
+			") WHERE ROWNUM <= 5";
 	
 	//1. 내가 작성한 글 갯수-pagination cnt
 	final static public String SELECT_MY_POSTS_CNT="SELECT COUNT(*) AS count  " + 
@@ -49,9 +51,12 @@ public class Mypage_DAO implements DAO {
 			"ORDER by V.empathize_cnt DESC";
 	
 	//2. 내가 작성한 댓글 : 5*n, pagination : /5, 제목, 작성일, post_table에서  mm_id가 나와 일치해야 한다
-	final static public String SELECT_5_MY_COMMENTS="SELECT  comment_id, post_id, regdate, comment_contents " + 
+	final static public String SELECT_5_MY_COMMENTS="SELECT * FROM " + 
+			"(SELECT  comment_id, post_id, regdate, comment_contents " + 
 			"FROM comment_table " + 
-			"WHERE writer=? AND ROWNUM <= 5";
+			"WHERE writer=? " + 
+			"ORDER BY regdate DESC, comment_id DESC " + 
+			")WHERE ROWNUM <=5";
 	
 	//2. 내가 작성한 댓글 갯수 -pagination cnt
 	final static public String SELECT_MY_COMMENTS_CNT="SELECT COUNT(*) AS count " + 
@@ -65,7 +70,8 @@ public class Mypage_DAO implements DAO {
 			"WHERE writer=? AND ROWNUM >= ? AND ROWNUM <= ?+4";
 	
 	//3. 공감한 게시글 :  5*n, pagination : /5, 제목, 작성자, 작성일, empathize_table에서  mm_id가 나와 일치해야 한다
-	final static public String SELECT_5_MY_EMPATHIZE="SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt " + 
+	final static public String SELECT_5_MY_EMPATHIZE="SELECT * FROM( " + 
+			"SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt" + 
 			"FROM empathize_table E " + 
 			"LEFT OUTER JOIN mm_table M " + 
 			"ON E.mm_id=M.mm_id " + 
@@ -73,7 +79,9 @@ public class Mypage_DAO implements DAO {
 			"ON M.mm_id=P.writer " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE E.mm_id=? AND ROWNUM <= 5";
+			"WHERE E.mm_id=100 " + 
+			"ORDER BY regdate DESC, post_id DESC " + 
+			")WHERE ROWNUM <= 5";
 	
 	//3. 공감한 게시글 갯수-pagination cnt
 	final static public String SELECT_MY_EMPATHIZE_CNT="SELECT COUNT(*) AS count " + 
@@ -82,7 +90,8 @@ public class Mypage_DAO implements DAO {
 			"GROUP BY mm_id";
 	
 	//3. n번째 공감한 게시글 :  5*n, pagination : /5, 제목, 작성자, 작성일, empathize_table에서  mm_id가 나와 일치해야 한다
-	final static public String SELECT_5_MY_EMPATHIZE_NTH="SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt " + 
+	final static public String SELECT_5_MY_EMPATHIZE_NTH="SELECT * FROM( " + 
+			"SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt " + 
 			"FROM empathize_table E " + 
 			"LEFT OUTER JOIN mm_table M " + 
 			"ON E.mm_id=M.mm_id " + 
@@ -90,7 +99,9 @@ public class Mypage_DAO implements DAO {
 			"ON M.mm_id=P.writer " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE E.mm_id=? AND ROWNUM >= ? AND ROWNUM <= ?+4";
+			"WHERE E.mm_id=1  " + 
+			"ORDER BY regdate " + 
+			")WHERE ROWNUM >= ? AND ROWNUM <= ?+4";
 				
 	//DB 연결에 필요한 변수들
 		Connection conn;
