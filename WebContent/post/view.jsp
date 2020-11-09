@@ -161,17 +161,17 @@ function recommend(){
 
  <div class="col-12 mt-4">
 	<!-- 카테고리 -->
-	<div class="top title ">
+	<div class="top_title">
 		<h6 class ="text-info"><%=category %> 	</h6> <span class="d-block"> [<%=post_id %>] </span> 
 		
 		 <span class="text-right d-block"> 
 		 <i class="far fa-eye"> <%=viewCnt %></i>
-		 <!-- 좋아요 버튼 -->
 		 <%if(login_chk != 0){%> 
-	 	 <i id="rec_btn" onclick="recommend()" class="ml-2 fas fa-thumbs-up"> <%=emp_cnt %></i>
-		<%} %>
+	 	 <i class="likes" id="rec_btn" onclick="recommend()" class="fas fa-thumbs-up"> <%=emp_cnt %></i>
+	     <%} %>
+		 </span>
+		 <!-- 좋아요 버튼 -->
 	
-	 	 </span>
 	</div>
 	<!-- 제목  -->
 	<div class="top title">

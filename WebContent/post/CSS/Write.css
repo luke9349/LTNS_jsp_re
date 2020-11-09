@@ -1,15 +1,10 @@
 @charset "UTF-8";
 
 
-#rec_btn span{
-	background-color: black;
-}
-
-
-
-
 /* Input style */
-
+.likes:hover {
+	cursor: pointer;
+}
 
 table .selector {
 	border-radius: 4px;
