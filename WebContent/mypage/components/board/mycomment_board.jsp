@@ -23,7 +23,7 @@
 <div id="mycomment_board" class="sm_board card">
 	<div class="board">
 		<h3><a href="#">내 댓글</a></h3>
-				<c:set var="count" items="${mycomment_board_cnt }"/>
+				<c:set var="count" value="${mycomment_board_cnt }"/>
 				<c:forEach var="dto" items="${mypost_board }">
 					<hr>
 					<jsp:include page="./card/sm_card_list2.jsp" >

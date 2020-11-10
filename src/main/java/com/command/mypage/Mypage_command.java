@@ -30,11 +30,12 @@ public class Mypage_command implements Command {
 			//todo 1 대신 mm_id 를 넣어야 한다
 			arr1=new Mypage_DAO().selectBySQL_withSignal(Mypage_DAO.SELECT_6_MY_POSTS,1,mm_id);
 			System.out.println("서버 확인-내가작성한 글: "+arr1);
-			for(int i=1;i<arr1.length;i++) {
-				System.out.println(((Post_DTO)arr1[i]).getNickname());
-			}
 			request.setAttribute("mypost_board", arr1);
+			try {
 			count1=((Count_DTO)new Count_DAO().selectBySQL(Mypage_DAO.SELECT_MY_POSTS_CNT, mm_id)[0]).getCount();
+			}catch(NullPointerException e) {
+				count1=0;
+			}
 			request.setAttribute("mypost_board_cnt", count1);
 			
 			//내가 작성한 댓글
@@ -44,13 +45,21 @@ public class Mypage_command implements Command {
 //				System.out.println(((Post_DTO)v).getNickname());
 //			}
 			request.setAttribute("mycomment_board", arr2);
+			try {
 			count2=((Count_DTO)new Count_DAO().selectBySQL(Mypage_DAO.SELECT_MY_COMMENTS_CNT, mm_id)[0]).getCount();			
+			}catch(NullPointerException e) {
+				count2=0;
+			}
 			request.setAttribute("mycomment_board_cnt", count2);
 			
 			//공감한 게시글
 			arr3=new Mypage_DAO().selectBySQL_withSignal(Mypage_DAO.SELECT_6_MY_EMPATHIZE,3,mm_id);
 			request.setAttribute("myempathize_board", arr3);
+			try {
 			count3=((Count_DTO)new Count_DAO().selectBySQL(Mypage_DAO.SELECT_MY_EMPATHIZE_CNT, mm_id)[0]).getCount();
+			}catch(NullPointerException e) {
+				count3=0;
+			}
 			request.setAttribute("myempathize_board_cnt", count3);
 			// "~_board" 란 name 으로 request 에 arr 값 저장
 			// 즉, request 에 담아서 컨트롤러에 전달되는 셈

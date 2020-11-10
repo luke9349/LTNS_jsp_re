@@ -24,7 +24,7 @@
 	<div class="board">
 		<h3><a href="#">공감한 글 게시판</a></h3>
 				
-				<c:set var="count" items="${myempathize_board_cnt }"/>
+				<c:set var="count" value="${myempathize_board_cnt }"/>
 				<c:forEach var="dto" items="${myempathize_board }">
 					<hr>
 					<jsp:include page="./card/sm_card_list3.jsp" >
