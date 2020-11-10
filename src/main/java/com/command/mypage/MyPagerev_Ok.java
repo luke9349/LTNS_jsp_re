@@ -19,6 +19,7 @@ public class MyPagerev_Ok implements Command {
 		
 			String password = request.getParameter("password");
 			String nickname = request.getParameter("nickname");
+			
 			HttpSession session =  request.getSession();
 			int mm_id =  (int) session.getAttribute("writer");
 			
