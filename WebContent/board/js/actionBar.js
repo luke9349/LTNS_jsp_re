@@ -7,11 +7,22 @@ const handleInputChange = () => {
 
 const handleSearchSubmit = (e) => {
   e.preventDefault();
+  if($('#startDate').val() || $('#endDate').val()) {
+	if(!$('#startDate').val() || !$('#endDate').val()) {
+		sessionStorage.setItem('messageType', '오류 메시지');
+		sessionStorage.setItem('messageContent', '시작 날짜와 끝 날짜를 모두 입력해 주세요.');
+		location.href = `board_list.do${location.search}`;
+		return;
+	}
+}
   let { root, type, page } = params;
   page = parseInt(page);
-  let url = `root=${root}&type=${type}&page=${page}&searchType=${$(
-    '#searchType'
-  ).val()}&search=${$('#search').val()}`;
+  let url = `root=${root}&type=${type}&page=${page}`;
+  if($('#startDate').val() && $('#endDate').val()) 
+	url += `$startDate=${$('#startDate').val()}&endDate=${$('#endDate').val()}`;
+
+  if($('#searchType').val() && $('#search').val()) 
+	url += `&searchType=${$('#searchType').val()}&search=${$('#search').val()}`;
 
   location.href = `board_list.do?${url}`;
 };

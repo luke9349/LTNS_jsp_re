@@ -37,7 +37,10 @@
 		<% topic = "공감게시판"; %>												
 	</c:when>
 	<c:when test="${root eq 'VIEWCNT' }">		
-		<% topic = "조회수게시판"; %>														
+		<% topic = "인기게시판"; %>														
+	</c:when>
+	<c:when test="${root eq 'MYPAGE' }">		
+		<% topic = "내가쓴글"; %>														
 	</c:when>
 </c:choose>	
 	
@@ -79,7 +82,7 @@
 <body class="container">
 <jsp:include page="../header/component/header.jsp" />
 <main id="main" class="my-2">
-	<div class="board__title">#<%=topic %></div>
+	<div class="board__title text-secondary">#<%=topic %></div>
 	<jsp:include page="./components/actionBar.jsp">
 		<jsp:param value="${root }" name="root"/>
 	</jsp:include>
@@ -90,6 +93,8 @@
 	</c:if>
 	</article>
 </main>
+<jsp:include page="../loading/component/loading.jsp" />
+<jsp:include page="../footer/component/footer.jsp" />
 <jsp:include page="../modal/component/modal.jsp" />
 <c:if test="${messageType != null &&  messageContent != null}">
 	<script>
@@ -100,7 +105,5 @@
 		session.removeAttribute("messageContent");
 	%>
 </c:if>
-<jsp:include page="../loading/component/loading.jsp" />
-<jsp:include page="../footer/component/footer.jsp" />
 </body>
 </html>

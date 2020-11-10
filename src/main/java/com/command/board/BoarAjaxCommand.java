@@ -32,14 +32,16 @@ public class BoarAjaxCommand implements Command, Board_Command {
 		try {
 			request.setCharacterEncoding("UTF-8");
 
-			String[] categorys = { "NOTICE", "MOVIE", "BOOK", "GAME", "SPORTS", "VIEWCNT", "EMPATHIZE" };
+			String[] categorys = { "NOTICE", "MOVIE", "BOOK", "GAME", "SPORTS", "VIEWCNT", "EMPATHIZE", "MYPAGE" };
 			String[] types = { "list", "album", "post" };
-			String[] searchTypes = { "titleAndContent", "title", "content" };
+			String[] searchTypes = { "titleAndContent", "title", "content", "writer" };
 
 			String category = "NOTICE";
 			String type = "list";
 			String searchType = null;
 			String search = null;
+			String startDate = null;
+			String endDate = null;
 			int page = 1;
 
 			if (request.getParameter("root") != null) {
@@ -48,7 +50,9 @@ public class BoarAjaxCommand implements Command, Board_Command {
 					Exception e = new Exception("This value is not valid: " + category);
 					LogUtil.error(e.getMessage());
 					e.printStackTrace();
-					throw e;
+					request.getSession().setAttribute("messageType", "오류 메시지");
+					request.getSession().setAttribute("messageContent", "접근할수 없습니다.");
+					return;
 				}
 			}
 
@@ -58,7 +62,9 @@ public class BoarAjaxCommand implements Command, Board_Command {
 					Exception e = new Exception("This value is not valid: " + type);
 					LogUtil.error(e.getMessage());
 					e.printStackTrace();
-					throw e;
+					request.getSession().setAttribute("messageType", "오류 메시지");
+					request.getSession().setAttribute("messageContent", "접근할수 없습니다.");
+					return;
 				}
 			}
 
@@ -69,21 +75,58 @@ public class BoarAjaxCommand implements Command, Board_Command {
 					Exception e = new Exception("This value is not valid: " + searchType);
 					LogUtil.error(e.getMessage());
 					e.printStackTrace();
-					throw e;
+					request.getSession().setAttribute("messageType", "오류 메시지");
+					request.getSession().setAttribute("messageContent", "접근할수 없습니다.");
+					return;
 				}
 			}
 
 			if (request.getParameter("search") != null)
 				search = URLDecoder.decode(request.getParameter("search"), "UTF-8");
+
+			if (request.getParameter("startDate") != null && !request.getParameter("startDate").equals(""))
+				startDate = request.getParameter("startDate");
+
+			if (request.getParameter("endDate") != null && !request.getParameter("endDate").equals(""))
+				endDate = request.getParameter("endDate");
+
 			if (request.getParameter("page") != null) {
 				try {
 					page = Integer.parseInt(request.getParameter("page"));
 				} catch (Exception e) {
 					e.printStackTrace();
 					LogUtil.error("[BoarAjaxCommand] [page] " + e.getMessage());
+					request.getSession().setAttribute("messageType", "오류 메시지");
+					request.getSession().setAttribute("messageContent", "접근할수 없습니다.");
 					return;
 				}
 			}
+
+//			switch (category) {
+//			case "EMPATHIZE":
+//			case "VIEWCNT":
+//				if ("날짜검색" == true) {
+//					if ("검색이 있나 ?" == true) {
+//						if("검색이 있자면 작성자 검색인가?" == true) {
+//							날짜 + 작성자로 검색어 목록 get
+//						} else {
+//							날짜 로 목록 get
+//							검색 로직 시작
+//						}
+//					} else {
+//						날짜로만 검색된 목록 get
+//					}
+//				} else {
+//					기본적인 목록 get
+//				}
+//				break;
+//			case "MYPAGE":
+//
+//				break;
+//
+//			default:
+//				break;
+//			}
 
 			ArrayList<BoardListDTO> list = null;
 			ArrayList<JSONListDTO> result = null;

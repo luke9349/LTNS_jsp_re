@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
 	<div id="login">
      	<a class="nav__login btn mr-2" href="<%=request.getContextPath() %>/mypage/mypage.do">${nickname }</a>
@@ -39,6 +40,17 @@
 	         	<li class="nav-item">
 	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=GAME">게임게시판</a>
 	         	</li>
+	         	<li class="nav-item">
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=EMPATHIZE">공감게시판</a>
+	         	</li>
+	         	<li class="nav-item">
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=VIEWCNT">인기게시판</a>
+	         	</li>
+	         	<c:if test="${login == '1' }">
+	         	  <li class="nav-item">
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=MYPAGE">내가쓴글</a>
+	         	  </li>
+	         	</c:if>
 	       	</ul>
 	    </div>
 	</nav>

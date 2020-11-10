@@ -3,8 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String url = "";
-	if(request.getParameter("root") != null && !request.getParameter("root").equals(""))
+	String root = "NOTICE";
+	String type = "list";
+	if(request.getParameter("root") != null && !request.getParameter("root").equals("")) {
+		root = request.getParameter("root");		
 		url += "&root=" + request.getParameter("root");
+	}
 	if(request.getParameter("searchType") != null 
 			&& !request.getParameter("searchType").equals("")
 			&& request.getParameter("search") != null 
@@ -14,6 +18,11 @@
 	}
 	if(request.getParameter("page") != null && !request.getParameter("page").equals(""))
 		url += "&page=" + request.getParameter("page");
+	if(request.getParameter("type") != null && !request.getParameter("type").equals(""))
+		type = request.getParameter("type");
+	
+	String initialURL = "?root=" + root + "&type=" + type;
+	
 %> 
 <div class="actionBar py-3">
   <div class="actionBtns">
@@ -28,9 +37,12 @@
     </a>
   </div>
   <div class="actionbar__wrapper">
+    <a class="btn btn-outline-warning" href="board_list.do<%=initialURL%>">
+            검색초기화
+    </a>
     <button class="btn btn-outline-primary" id="searchBtn">
       <i class="fas fa-search"></i>
-      검색
+            검색
     </button>
     <c:choose>
     	<c:when test="${param.root eq 'NOTICE' }">
@@ -71,7 +83,10 @@
       <div class="modal-body">
         <form id="searchForm" name="searchForm" method="get">
           <select class="form-control" name="searchType" id="searchType">
-            <option value="title" selected>제목</option>
+            <c:if test="${param.root ne 'MYPAGE' }">        
+              <option value="writer">작성자</option>
+            </c:if>
+            <option value="title">제목</option>
             <option value="content">내용</option>
             <option value="titleAndContent" selected>제목 + 내용</option>
           </select>
@@ -81,6 +96,13 @@
             id="search"
             name="search"
           />
+          <div class="input-group mt-3">
+			<input class="form-control" type="date" id="startDate" />
+			  <div class="input-group-prepend">
+			    <span class="input-group-text">-</span>
+			  </div>
+			<input class="form-control" type="date" id="endDate">
+		  </div>
         </form>
       </div>
       <div class="modal-footer">
