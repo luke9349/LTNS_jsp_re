@@ -24,11 +24,11 @@
 	<div class="board">
 		<h3><a href="#">내 댓글</a></h3>
 				<c:set var="count" value="${mycomment_board_cnt }"/>
-				<c:forEach var="dto" items="${mypost_board }">
+				<c:forEach var="dto" items="${mycomment_board }">
 					<hr>
 					<jsp:include page="./card/sm_card_list2.jsp" >
 						<jsp:param name="post_id" value="${dto.post_id }"/>
-						<jsp:param name="title" value="${dto.regdate }"/>
+						<jsp:param name="title" value="${dto.title }"/>
 						<jsp:param name="regdate" value="${dto.regdate }"/>
 					</jsp:include>
 				</c:forEach>

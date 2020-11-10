@@ -21,6 +21,8 @@ public class Mypage_Add_MyPost_Command_By_AJAX implements Command, By_AJAX {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("세션살아있니?"+(int)request.getSession().getAttribute("writer"));
+
 		String reqType = request.getParameter("reqType");
 		if(reqType == null) reqType = "json";
 			responseJSON(request, response);  // org.json 사용
@@ -37,6 +39,7 @@ public class Mypage_Add_MyPost_Command_By_AJAX implements Command, By_AJAX {
 
 	/////////////////////////
 	public void responseJSONbyJackson(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("세션살아있니?"+(int)request.getSession().getAttribute("writer"));
 		//mm_id만 받자!
 		int mm_id=(int)request.getSession().getAttribute("writer");
 		int btn_id=Integer.parseInt(request.getParameter("btn_id"));

@@ -24,7 +24,7 @@
 <div id="mypost_board" class="sm_board card">
 	<div class="board">
 		<h3><a href="#">내가 쓴 글</a></h3>
-			<div id="mypost_board_contents" class="board-contents">
+			<div class="board-contents">
 				<c:set var="_count" value="${mypost_board_cnt }"/>
 				<fmt:parseNumber var= "count" integerOnly= "true" value= "${_count/10 }" />
 				<c:forEach var="dto" items="${mypost_board }">
@@ -44,11 +44,11 @@
 		<nav class="mt-5" aria-label="pagination">
 		  <ul class="pagination" id="pagination">
 		  	<!--이전 꺽쇄 비활성화  -->
-		  	<li id="page_first" class="page_btn">&lt&lt</li>
+		  	<li ><a id="page_first" class="page_btn" href="">&lt&lt</a></li>
 		  	<li id="page_before" class="page_btn">&lt</li>
 		  	
 		  	<c:forEach var="i" begin="1" end="${count }" step="1">
-		  		<li id="page_${i }" class="page_btn">${i }</li>
+		  		<li id="page_${i }" class="page_btn page_num_btn">${i }</li>
 		  	</c:forEach>
 		  	<li id="page_after" class="page_btn">&gt</li>
 			<li id="page_last" class="page_btn">&gt&gt</li>

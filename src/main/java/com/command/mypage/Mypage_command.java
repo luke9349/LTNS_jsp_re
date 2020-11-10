@@ -17,6 +17,7 @@ public class Mypage_command implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+try {
 		int mm_id=(int)request.getSession().getAttribute("writer");
 //		int btn_id=Integer.parseInt(request.getParameter("btn_id"));
 		DTO [] arr1 = null;
@@ -67,6 +68,10 @@ public class Mypage_command implements Command {
 			e.printStackTrace();
 		}
 		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
