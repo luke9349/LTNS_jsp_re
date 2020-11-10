@@ -29,9 +29,9 @@
 					<hr>
 					<jsp:include page="./card/sm_card_list3.jsp" >
 						<jsp:param name="post_id" value="${dto.post_id }"/>
-						<jsp:param name="title" value="${dto.post_contents.title }"/>
-						<jsp:param name="regdate" value="${dto.regdate }"/>
-						<jsp:param name="writer" value="${dto.nickname }"/>
+						<jsp:param name="post_title" value="${dto.post_contents.title }"/>
+						<jsp:param name="post_regdate" value="${dto.regdate }"/>
+						<jsp:param name="post_writer" value="${dto.nickname }"/>
 					</jsp:include>
 				</c:forEach>
 				

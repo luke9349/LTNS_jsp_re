@@ -218,16 +218,14 @@ GROUP BY writer
 --post_id, post_title, writer, regdate
 SELECT * FROM(
 SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt
-FROM empathize_table E
-LEFT OUTER JOIN mm_table M
-ON E.mm_id=M.mm_id
+FROM  mm_table M
 LEFT OUTER JOIN post_table P
 ON M.mm_id=P.writer
 LEFT OUTER JOIN file_table F
 ON P.post_contents=F.file_id
-WHERE E.mm_id=? 
+WHERE M.mm_id=1 
 ORDER BY regdate DESC , post_id DESC 
-)WHERE ROWNUM >= ? AND ROWNUM <= ?+5
+)WHERE ROWNUM >= 1 AND ROWNUM <= 1+5
 ;
 
 -----------------------------------------------------------------

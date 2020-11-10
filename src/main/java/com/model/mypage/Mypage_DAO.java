@@ -39,16 +39,14 @@ public class Mypage_DAO implements DAO {
 			"GROUP BY writer";
 	
 	//1. n번째 내가 작성한 글 : 5*n, pagination : /5, 제목, 작성일, 조회수, post_table에서  mm_id가 나와 일치해야 한다
-	final static public String SELECT_6_MY_POSTS_NTH="SELECT * FROM( " + 
+	final static public String SELECT_6_MY_POSTS_NTH="SELECT * FROM(" + 
 			"SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt " + 
-			"FROM empathize_table E " + 
-			"LEFT OUTER JOIN mm_table M " + 
-			"ON E.mm_id=M.mm_id " + 
+			"FROM  mm_table M " + 
 			"LEFT OUTER JOIN post_table P " + 
 			"ON M.mm_id=P.writer " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE E.mm_id=? " + 
+			"WHERE M.mm_id=? " + 
 			"ORDER BY regdate DESC , post_id DESC " + 
 			")WHERE ROWNUM >= ? AND ROWNUM <= ?+5";
 	

@@ -15,6 +15,7 @@
 function mkLists(tag, jsonObj){
 	$("#mypostboard .board-contents").empty();
 	var data=jsonObj.data;
+	console.log(jsonObj);
 	for(var i=0;i<6;i++){
 		const dto=data[i];
 		$("#mypostboard .board-contents").append(mkList(dto.post_id,dto.title,dto.regdate));
@@ -39,7 +40,7 @@ function mkPagenation(count,clicked){
 	$("#mypostboard ul#pagination").empty();
 
 	$("#mypostboard ul#pagination").append('<li id="page_first" class="page_btn">&lt&lt</li><li id="page_before" class="page_btn">&lt</li>');	
-	if(count==0){
+	if(clicked==0){
 		$("#mypostboard li#page_first").addClass('disable');
 		$("#mypostboard li#page_before").addClass('disable');
 	}
@@ -51,7 +52,7 @@ function mkPagenation(count,clicked){
 		$("#mypostboard ul#pagination").append('<li id="page_${i }" class="page_btn">${i }</li>');
 	}
 	$("ul#pagination").append('<li id="page_after" class="page_btn">&gt</li><li id="page_last" class="page_btn">&gt&gt</li>');
-	if(count==0){
+	if(clicked==0){
 		$("#mypostboard li#page_last").addClass('disable');
 		$("#mypostboard li#page_after").addClass('disable');
 	}
@@ -105,6 +106,7 @@ $(document).ready(function(){
 
 //받은 JSON객체를 이용하여 post 추가
 function parseJSON(jsonObj){
+	console.log("json:"+jsonObj);
 	mkLists("", jsonObj);
 }
 

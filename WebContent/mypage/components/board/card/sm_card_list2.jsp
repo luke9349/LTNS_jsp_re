@@ -12,8 +12,8 @@
 	System.out.println("sm_card_list : "+str);
 %>
 <c:set var="post_id" value='<%=request.getParameter("post_id") %>'/>
-<c:set var="contents" value='<%=request.getParameter("contents") %>'/>
-<c:set var="regdate" value='<%=request.getParameter("regdate") %>'/>
+<c:set var="post_contents" value='<%=request.getParameter("contents") %>'/>
+<c:set var="post_regdate" value='<%=request.getParameter("regdate") %>'/>
 
 <a class="sm_card_list list" href="../post/view.do?post_id=${post_id }">
 	<p class="sm_card_list-title title">${param.contents }</p>

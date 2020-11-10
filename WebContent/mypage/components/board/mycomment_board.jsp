@@ -28,8 +28,8 @@
 					<hr>
 					<jsp:include page="./card/sm_card_list2.jsp" >
 						<jsp:param name="post_id" value="${dto.post_id }"/>
-						<jsp:param name="title" value="${dto.title }"/>
-						<jsp:param name="regdate" value="${dto.regdate }"/>
+						<jsp:param name="post_title" value="${dto.title }"/>
+						<jsp:param name="post_regdate" value="${dto.regdate }"/>
 					</jsp:include>
 				</c:forEach>
 				<!-- 방안1.프론트 단에서 처리 :  response된 데이터를, ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (비추) -->

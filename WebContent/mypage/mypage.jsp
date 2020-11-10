@@ -39,5 +39,6 @@
 		<jsp:include page="./components/board/myempath_board.jsp"/>
 	</main>
 	<jsp:include page="./components/footer/footer.jsp" />
+	<script src="./JS/pagination.js"></script>
 </body>
 </html>

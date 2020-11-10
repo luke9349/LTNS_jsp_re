@@ -153,7 +153,9 @@ public class SamplePost_Maker {
 				DTO[] mmarr=new MM_DAO_tester().selectBySQL(MM_DAO_tester.SELECT_ALL_MM_ID);
 				String[] categoryArr= {"NOTICE","MOVIE","BOOK","SPORTS","GAME"};
 				
-				dto=new Post_DTO("몰랑파일열어서확인해랑이건샘플이당", ((MM_DTO)mmarr[(int)(Math.random()*(mmarr.length))]).getMm_id(), categoryArr[(int)(Math.random()*5)], file_id);
+//				dto=new Post_DTO("몰랑파일열어서확인해랑이건샘플이당", ((MM_DTO)mmarr[(int)(Math.random()*(mmarr.length))]).getMm_id(), categoryArr[(int)(Math.random()*5)], file_id);
+				dto=new Post_DTO("몰랑파일열어서확인해랑이건샘플이당", 1, categoryArr[(int)(Math.random()*5)], file_id);
+
 				dtoList.add(dto);
 				
 				Thread.sleep(10); //DB 기다려주기
