@@ -160,9 +160,13 @@ public class MemberDAO {
 			psmt.setString(1, id);
 			psmt.setString(2, nik);
 			psmt.setString(3, email);
+<<<<<<< HEAD
 			psmt.executeUpdate();
 			
 			cnt = 1;
+=======
+			cnt = psmt.executeUpdate();
+>>>>>>> branch 'master' of https://github.com/luke9349/LTNS_jsp_re.git
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

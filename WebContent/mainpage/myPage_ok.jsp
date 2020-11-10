@@ -5,13 +5,15 @@
 <%
 	int cnt = (Integer) request.getAttribute("rev_pw");
 	String ctx = request.getContextPath();
-	
 	String rev_f = (String) session.getAttribute("nickname");
-	
 	MemberDTO[] arr = (MemberDTO[]) request.getAttribute("rev_nick");
-	System.out.println("진입해요?여기요 닉네임변경요"); 
-	session.removeAttribute("nickname");
-	session.setAttribute("nickname", arr[0].getNickname());
+
+	
+	if(arr != null){
+		session.removeAttribute("nickname");
+		session.setAttribute("nickname", arr[0].getNickname());
+	}
+	
 %>
 
 
