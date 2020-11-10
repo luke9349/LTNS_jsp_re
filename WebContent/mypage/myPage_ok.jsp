@@ -20,6 +20,6 @@
 <%if(cnt ==1){ %>
 <script>
 	alert("정보가 변경되었습니다.")
-	location.href = "<%=ctx%>/mainpage/myPage_Info.jsp";
+	location.href = "<%=ctx%>/mypage/myPage_Info.jsp";
 </script>
 <%}%>

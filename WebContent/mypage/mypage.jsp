@@ -32,6 +32,7 @@
 <body class="container">
 		<jsp:include page="../header/component/header.jsp" />
 	<main class="my-2">
+		<jsp:include page="./myPage_Info.jsp"/>
 		<jsp:include page="./components/board/mypost_board.jsp"/>
 		<jsp:include page="./components/board/mycomment_board.jsp"/>
 		<hr>

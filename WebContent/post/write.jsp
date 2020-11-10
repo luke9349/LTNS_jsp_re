@@ -17,7 +17,6 @@
 	String garde = (String)session.getAttribute("grade");
 	
 	
-	
 %>  
     
 <!DOCTYPE html>
@@ -105,6 +104,13 @@ function chkSubmit(){
 
 }
  
+function beforeunload_btns(){
+	alert("test")
+    $(window).on('beforeunload', function () {
+        return '본 영상은 10분 이상 학습하셔야 합니다. 정말로 종료하시겠습니까?'
+    });
+}
+ 
 </script>
 
 
@@ -137,7 +143,7 @@ function chkSubmit(){
 		        </tr>
 		          <tr class="mt-2 text-right">
 		            <td colspan="2" >
-		                <input class="fun-btn btn-sm font-weight-bold" type="button" value="취소" onclick="history.back()"/>
+		                <input class="fun-btn btn-sm font-weight-bold" type="button" value="취소" onclick="beforeunload_btns()"/>
 		                <input class="fun-btn btn-sm font-weight-bold" type="submit" id="save" value="저장"/>
 		              
 		            </td>

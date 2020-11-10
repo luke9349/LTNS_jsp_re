@@ -12,7 +12,7 @@ import main.java.com.model.membermanage.MM_DTO;
 import main.java.com.view.MemberDAO;
 import main.java.com.view.MemberDTO;
 
-public class myPagerev_Ok implements Command {
+public class MyPagerev_Ok implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
