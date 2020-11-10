@@ -1,13 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- fontasome -->
+<script src="https://kit.fontawesome.com/5ccafa9b7a.js" crossorigin="anonymous"></script> 
+    
 <footer class="footer p-3">
   <div class="container-fluid">
     <h2 class="footer__title">2020 LTNS JSP PROJECT &copy;</h2>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Cras justo odio</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Morbi leo risus</li>
-      <li class="list-group-item">Porta ac consectetur ac</li>
-    </ul>
-  </div>
+    <hr>
+    <span class="spna_title"> 팀원 <span class="in_span">홍성혁 박성언 김현준 김휘진</span> </span>   
+    <hr>
+    <div class="info">
+  	<span class="spna_title"> Phone <span class="in_span"> 02 - 1234 - 1004 </span> </span> <br>
+  	<span class="spna_title"> Phone <span class="in_span"> 02 - 1234 - 1004 </span> </span> <br>
+    </div>
+  	<div class="donation"> 
+  	<img src="../images/donation.PNG" alt="doation" style="width: 100px; height: 100px;" />
+	</div>
+	
+  </div> 
 </footer>

@@ -218,6 +218,7 @@ function recommend(){
 	<%if(wirters == streinger ||  master.equals("admin")  ){ %>
 	<button type="button" class="fun-btn btn-sm font-weight-bold"  onclick="deletePost(<%=post_content%>)">삭제</button>
 	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="수정" onclick="location.href='update.do?post_id=<%=post_id%>'">
+	
 	<%} %>
 	</div>
 	<hr>

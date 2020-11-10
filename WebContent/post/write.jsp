@@ -17,8 +17,7 @@
 	String garde = (String)session.getAttribute("grade");
 	
 	
-%>  
-    
+%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,16 +103,14 @@ function chkSubmit(){
 
 }
  
-function beforeunload_btns(){
-	alert("test")
-    $(window).on('beforeunload', function () {
-        return '본 영상은 10분 이상 학습하셔야 합니다. 정말로 종료하시겠습니까?'
-    });
-}
+ 
+ 
+console.log(location.search);
  
 </script>
 
 
+<% %>
 
 <body class="container">
 
@@ -121,7 +118,7 @@ function beforeunload_btns(){
 	<jsp:include page="../header/component/header.jsp" />
 	
 	<div class=" col-12">
-	   <form name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
+	   <form id="frm" name="frm" action="writeOk.do" method="post" onsubmit="return chkSubmit()">
 			<table class="table">
 		        <tr class="tableheader">
 		      		<td class="text-center" style="width:5%;">
@@ -138,12 +135,12 @@ function beforeunload_btns(){
 		       		</select>
 		       		</td>     
 		            <td>
-		            <input class="tests" type="text" id="title" name="title" style="width:100%"/>
+		            <input class="tests" type="text" id="title" name="title" maxlength="30" style="width:100%"/>
 		            </td>
 		        </tr>
 		          <tr class="mt-2 text-right">
 		            <td colspan="2" >
-		                <input class="fun-btn btn-sm font-weight-bold" type="button" value="취소" onclick="beforeunload_btns()"/>
+		                <input class="fun-btn btn-sm font-weight-bold" type="button" value="취소" onclick="history.back()"/>
 		                <input class="fun-btn btn-sm font-weight-bold" type="submit" id="save" value="저장"/>
 		              
 		            </td>
@@ -165,5 +162,4 @@ function beforeunload_btns(){
 	
 	<jsp:include page="../footer/component/footer.jsp" />
 </body>
-
 </html>

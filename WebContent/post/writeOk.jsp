@@ -9,7 +9,7 @@
 <% 
 	int currval = (Integer) request.getAttribute("fileOk"); 
 	int writecnt = (Integer) request.getAttribute("result");
-
+	String title = request.getParameter("title");
  %>
  
  
@@ -21,7 +21,7 @@
 <%}else{%>
 	<script>
 		alert("등록성공" + <%=currval%>);		
-		location.href = "<%=request.getContextPath() %>/board/board_list.do"
+		location.href = "<%=request.getContextPath() %>/board/board_list.do";
 	</script>
 <%}%>
 

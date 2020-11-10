@@ -12,17 +12,17 @@
 
 
 <%
+	
 	request.setCharacterEncoding("utf-8");
 	WriteDTO[] arr = (WriteDTO[])request.getAttribute("update");	
 	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("file_view");
+
 	
 	String ctx = request.getContextPath();
-	
 	int post_id = Integer.parseInt(request.getParameter("post_id"));
 	int writer =  (int) session.getAttribute("writer");
+	String title = arr[0].getTitle();
 	String grade =  (String)session.getAttribute("grade");
-	
-	
 
 %>
 
@@ -49,7 +49,7 @@
 %>    
 
 <%
-	//파일읽어오기  (DB접근시 수정할것임)
+	//파일읽어오기  
 	String titles ="";	
 	String contents ="";
 	String filename = file_info[0].getFilename();
@@ -181,7 +181,7 @@ function chkSubmit(){
 		       		</select>
 		       		</td>     
 		            <td>
-		            <input type="text" id="title" name="title" style="width:100%"/>
+		            <input type="text" id="title" name="title" style="width:100%" value="<%=title %>"/>
 		            </td>
 		        </tr>
 		          <tr class="mt-2 text-right">
