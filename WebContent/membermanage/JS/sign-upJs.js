@@ -4,6 +4,7 @@
 	
 	$("#id").focusout(function() { //아이디 유효성
 		
+		
 		var getidCheck= RegExp(/^[a-z0-9]{4,12}$/);
 		
 		$("#iderror").attr('class','error');
@@ -18,11 +19,32 @@
 		//아이디 유효성검사 
 		if(!getidCheck.test($("#id").val())){  $("#iderror").html("아이디형식에 맞게 입력해주세요2"); return;} 
 		
-		if(getidCheck.test($("#id").val())){  $("#iderror").html("아이디 완벽함"); return true;}
+		//if(getidCheck.test($("#id").val())){  $("#iderror").html("아이디 완벽함"); return true;}
+		console.log( "/sign-up.ajax?id="+$('#id').val());
 		
 		$.ajax({
 			type : "GET",
-			url : "sign-up.ajax",
+			url :  "sign-up.ajax?id="+$('#id').val(),
+			success : function(data){
+				console.log(data);
+				
+				if(data == 1){
+					
+					$("#iderror").html("사용중인 아이디입니다");
+					$("#submit").attr("disabled", true);
+					
+				}else if(data == 0){
+					$("#iderror").html("아이디 완벽함");
+					$("#submit").attr("disabled", false);
+				}
+				
+			},
+			error : function() {
+				alert("실패");
+			}
+			
+			
+			
 			
 			
 			

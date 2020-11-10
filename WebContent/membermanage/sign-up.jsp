@@ -113,7 +113,7 @@
 				
 				</table>
 					<div class="text-center">
-					<button type="submit" class="btn btn-primary" value="회원가입">회원가입</button>
+					<button type="submit" class="btn btn-primary" value="회원가입" id="submit" disabled="disabled">회원가입</button>
 					</div>
 			</form>
 		

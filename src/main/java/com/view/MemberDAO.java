@@ -106,6 +106,26 @@ public class MemberDAO {
 		
 	}
 	
+	//id 유효성검사
+	public int id_overlap(String id) throws SQLException {
+		int cnt = 0;
+		
+		try {
+			psmt = conn.prepareStatement(SQL_ID_INFO_SELECT);
+			psmt.setString(1, id);
+			cnt = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		
+		return cnt;
+		
+	}
+	
 	//id 정보 출력 
 		public MemberDTO[] member_MM_ID_Select(int mm_id) throws SQLException {
 			int cnt = 0;
@@ -160,13 +180,9 @@ public class MemberDAO {
 			psmt.setString(1, id);
 			psmt.setString(2, nik);
 			psmt.setString(3, email);
-<<<<<<< HEAD
-			psmt.executeUpdate();
 			
-			cnt = 1;
-=======
+			
 			cnt = psmt.executeUpdate();
->>>>>>> branch 'master' of https://github.com/luke9349/LTNS_jsp_re.git
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

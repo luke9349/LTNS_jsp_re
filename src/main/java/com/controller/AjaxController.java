@@ -16,6 +16,7 @@ import main.java.com.command.board.CommentRemoveCommand;
 import main.java.com.command.board.CommentUpdateCommand;
 import main.java.com.command.board.CommentWriteCommand;
 import main.java.com.command.mainpage.Mainpage_Add_NearestBoard_Command_By_AJAX;
+import main.java.com.command.membermanage.Signup_ajax_command;
 import main.java.com.command.mypage.Mypage_Add_MyComment_Command_By_AJAX;
 import main.java.com.command.mypage.Mypage_Add_MyEmpathize_Command_By_AJAX;
 import main.java.com.command.mypage.Mypage_Add_MyPost_Command_By_AJAX;
@@ -85,6 +86,10 @@ public class AjaxController extends HttpServlet {
 			return;
 		case "/post/commentUpdate.ajax":
 			command = new CommentUpdateCommand();
+			command.execute(request, response);
+			return;
+		case "/membermanage/sign-up.ajax":
+			command = new Signup_ajax_command();
 			command.execute(request, response);
 			return;
 		} // end switch
