@@ -23,7 +23,7 @@
 <div id="mypost_board" class="sm_board card">
 	<div class="board">
 		<h3><a href="#">내가 쓴 글</a></h3>
-		
+			<div id="mypost_board_contents" class="board-contents">
 				<c:set var="count" items="${mypost_board_cnt }"/>
 				<c:forEach var="dto" items="${mypost_board }">
 					<hr>
@@ -37,11 +37,21 @@
 				<!-- 방안1.프론트 단에서 처리 :  response된 데이터를, ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (비추) -->
 				<!-- 방안2.백 단에서 처리 :  ajax와 script를 이용해, 값을 카드에 넣어주기. json 객체 활용 (for문 사용해야하나?) 
 				include 되야할 것에 변수를 어떻게 넘길까?-->
-			
+			</div>
+		<!--
 		<nav class="mt-5" aria-label="pagination">
 		  <ul class="pagination" id="pagination">
+		  	<!--이전 꺽쇄 비활성화  -->
+		  	<li id="page_first" class="page_btn">&lt&lt</li>
+		  	<li id="page_before" class="page_btn">&lt</li>
+		  	<c:forEach var="i" begin="1" end=${(int)mypost_board_cnt/10 } step="1">
+		  		<li id="page_${i }" class="page_btn">${i }</li>
+		  	</c:forEach>
+		  	<li id="page_after" class="page_btn">&gt</li>
+			<li id="page_last" class="page_btn">&gt&gt</li>
 		  </ul>
 		</nav>
+		-->
 	</div>
 </div>
 <!-- div 이외 부분은 실행시 주석화 할 것! -->

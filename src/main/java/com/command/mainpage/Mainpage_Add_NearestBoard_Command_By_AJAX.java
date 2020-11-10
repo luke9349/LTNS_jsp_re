@@ -21,6 +21,7 @@ public class Mainpage_Add_NearestBoard_Command_By_AJAX implements Command, By_AJ
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// parameter 받아오기, 없으면 json 으로 response(디폴트)
+		int mm_id=(int)request.getSession().getAttribute("writer");
 		String reqType = request.getParameter("reqType");
 		if(reqType == null) reqType = "json";
 

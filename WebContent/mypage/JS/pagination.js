@@ -26,7 +26,7 @@ const sendByAJAX =(btn_id, command_url )=>{
 //html을 써준다. (각 리스트 새로 생성)
 
 //리스트 비우고, 만드는 총괄 함수
-const mkLists=(tag,jsonObj)=>{
+const mkLists=(tag, jsonObj)=>{
 	$(tag).empty();
 	var data=jsonObj.data;
 	for(var i=0;i<6;i++){
@@ -49,6 +49,13 @@ const mkList=(post_id,title,regdate)=>{
 //	</a>
 }
 
+
+//카운트를 매개변수로 받아,
+//꺽쇄 비활성화, 카운트 숫자 계산하여 페이지네이션 숫자 생성
+//10개(글이 10*10) 초과시, 다음 꺽쇄 활성화
+//기본 꺽쇄는 만들어주기
+
+//해당 버튼을 누르면 ajax에서 자바스크립트를 통해, 해당 버튼의 숫자에 해당하는 리스트로 갱신
 
 $(document).ready(function(){
 
