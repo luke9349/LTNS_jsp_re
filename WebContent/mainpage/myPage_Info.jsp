@@ -83,7 +83,7 @@
 			<h6 class="h6_info">닉네임</h6>
 			</div>
 			</th>
-			
+			<!--myPage_ok.do -->
 			<td>
 			<div id ="td_cells" class="td_cell text-left ml-4">
 			<form id="myforms2" name="forms"  method="POST" action="myPage_ok.do">

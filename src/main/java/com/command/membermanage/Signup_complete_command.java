@@ -25,6 +25,8 @@ public class Signup_complete_command implements Command {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
+	
+	
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String nik = request.getParameter("nik");
@@ -34,14 +36,10 @@ public class Signup_complete_command implements Command {
 		MemberDAO dao = new MemberDAO();
 		MemberDTO[] dto = null;
 		
-		
-		
-		
 
 		
 		int cnt = 0;
 		//쿼리 실패 0 성공 1
-	
 		if (id != null)  {
 			
 			try {

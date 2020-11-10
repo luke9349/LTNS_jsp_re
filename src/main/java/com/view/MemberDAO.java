@@ -160,7 +160,6 @@ public class MemberDAO {
 			psmt.setString(1, id);
 			psmt.setString(2, nik);
 			psmt.setString(3, email);
-			
 			cnt = psmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
