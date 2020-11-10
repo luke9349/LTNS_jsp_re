@@ -7,3 +7,4 @@
 
 --이메일 중복검사 
 
+SELECT * FROM MM_TABLE mt ;

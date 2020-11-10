@@ -20,12 +20,14 @@
 		
 		if(getidCheck.test($("#id").val())){  $("#iderror").html("아이디 완벽함"); return true;}
 		
-		/*$.ajax({
-			type : "POST",
+		$.ajax({
+			type : "GET",
 			url : "sign-up.ajax",
 			
 			
-		})*/
+			
+			
+		})
 		
 			
 		

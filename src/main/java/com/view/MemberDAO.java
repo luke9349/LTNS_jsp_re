@@ -160,8 +160,9 @@ public class MemberDAO {
 			psmt.setString(1, id);
 			psmt.setString(2, nik);
 			psmt.setString(3, email);
+			psmt.executeUpdate();
 			
-			cnt = psmt.executeUpdate();
+			cnt = 1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -179,7 +180,7 @@ public class MemberDAO {
 
 	//회원가입 Insert
 	public int insert_join(String id, String pw, String nik, String email) throws SQLException {
-		
+		System.out.println("확인3");
 		int cnt = 0;
 		try {
 			psmt = conn.prepareStatement(SQL_INSERT_JOIN);
@@ -188,8 +189,13 @@ public class MemberDAO {
 			psmt.setString(3, nik);
 			psmt.setString(4, email);
 			
+			System.out.println(id);
+			System.out.println(pw);
+			System.out.println(nik);
+			System.out.println(email);
 			
 			cnt = psmt.executeUpdate();
+			System.out.println(cnt);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

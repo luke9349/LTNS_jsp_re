@@ -30,9 +30,15 @@ public class Signup_complete_command implements Command {
 		String nik = request.getParameter("nik");
 		String email = request.getParameter("email");
 		
+		System.out.println(id);
+		System.out.println(pw);
+		System.out.println(nik);
+		System.out.println(email);
 		
-		MemberDAO dao = new MemberDAO();
+		
+		MemberDAO dao;
 		MemberDTO[] dto = null;
+		System.out.println("확인");
 		
 		
 		
@@ -43,9 +49,10 @@ public class Signup_complete_command implements Command {
 		//쿼리 실패 0 성공 1
 	
 		if (id != null)  {
+			System.out.println("확인");
 			
 			try {
-				cnt = dao.select_join(id, nik, email);
+				cnt = new MemberDAO().select_join(id, nik, email);
 				request.setAttribute("joinOK", cnt);
 				
 			} catch (SQLException e) {
@@ -61,9 +68,9 @@ public class Signup_complete_command implements Command {
 		if(cnt == 1) { //유니크 조회 성공
 			
 			int cnt2=0;
-			
+			System.out.println("확인");
 			try {
-				cnt2 = dao.insert_join(id, pw, nik, email);
+				cnt2 = new MemberDAO().insert_join(id, pw, nik, email);
 				
 				
 				
@@ -75,10 +82,10 @@ public class Signup_complete_command implements Command {
 			
 			
 			try {
-				dto = dao.member_INFO_Select(id);
+				dto = new MemberDAO().member_INFO_Select(id);
 				
 				
-				request.setAttribute("", dto);
+				request.setAttribute("signOK", dto);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -1,9 +1,11 @@
+<%@page import="main.java.com.view.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 	<%
 		int ok = (Integer)request.getAttribute("joinOK");
 		int ok2 = (Integer)request.getAttribute("insertOK");
+		MemberDTO []  ok3 = (MemberDTO[])request.getAttribute("signOK");
 	
 	%>
 
@@ -46,22 +48,22 @@
 				<tbody>
 					<tr>
 						<td style="width: 110px;"><h5>아아디</h5></td>
-						<td><%=id %> </td>
+						<td> <%=ok3[0].getId() %> </td>
 					</tr>
 					
 					<tr>
 						<td style="width: 110px;">비밀번호</td>
-						<td> <%=pw %> </td>
+						<td> <%=ok3[0].getPassword() %> </td>
 					</tr>
 					
 					<tr>
 						<td style="width: 110px;">닉네임</td>
-						<td> <%=nik %> </td>
+						<td> <%=ok3[0].getNickname() %> </td>
 					</tr>
 					
 					<tr>
 						<td style="width: 110px;">이메일</td>
-						<td> <%=email %> </td>
+						<td> <%=ok3[0].getEmail() %> </td>
 					</tr>
 				
 				
@@ -71,7 +73,7 @@
 			
 			</table>
 			<div class="text-center">
-					<button type="button" class="btn btn-primary" value="확인" onclick="location.href=''"></button>
+					 <a class="btn btn-primary" href=""> 확인  </a>
 					</div>
 		
 		</div>
