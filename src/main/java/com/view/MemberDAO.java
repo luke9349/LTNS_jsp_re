@@ -28,6 +28,9 @@ public class MemberDAO {
 	public static final String SQL_ID_INFO_SELECT =
 			"SELECT * FROM MM_TABLE mt WHERE id = ? ";
 	
+	public static final String SQL_ID_INFO_SELECT_MM_ID =
+			"SELECT * FROM MM_TABLE mt WHERE MM_ID = ? ";
+	
 	public static final String SQL_SELECT_JOIN =
 			"SELECT * FROM MM_TABLE WHERE ID=? AND NICKNAME= ? AND EMAIL=? " ;
 	
@@ -83,7 +86,6 @@ public class MemberDAO {
 	}
 	
 	//id 정보 출력 
-	
 	public MemberDTO[] member_INFO_Select(String id) throws SQLException {
 		int cnt = 0;
 		MemberDTO[] arr = null;
@@ -104,9 +106,26 @@ public class MemberDAO {
 		
 	}
 	
-	
-	
-	
+	//id 정보 출력 
+		public MemberDTO[] member_MM_ID_Select(int mm_id) throws SQLException {
+			int cnt = 0;
+			MemberDTO[] arr = null;
+			
+			try {
+				psmt = conn.prepareStatement(SQL_ID_INFO_SELECT_MM_ID);
+				psmt.setInt(1, mm_id);
+				rs = psmt.executeQuery();
+				arr = createMember(rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+
+			
+			return arr;
+			
+		}
 	
 	
 	

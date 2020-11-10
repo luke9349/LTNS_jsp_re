@@ -21,6 +21,12 @@ public class MM_DAO implements DAO {
 	public static final String INSERT_MM_BY_DTO="INSERT INTO mm_table(mm_id,id,password,nickname,email,grade) " + 
 			"VALUES (SEQ_mm_table_mm_id.NEXTVAL,?,?,?,?,?)";
 	
+	public static final String UPDATE_PASSWORD = 
+			"UPDATE MM_TABLE  SET PASSWORD = ? WHERE mm_id = ?";
+	
+	public static final String UPDATE_NICK = 
+			"UPDATE MM_TABLE  SET NICKNAME = ? WHERE mm_id = ?";
+	
 	//DB 연결에 필요한 변수들
 		Connection conn;
 		PreparedStatement pstmt;
@@ -122,6 +128,8 @@ public class MM_DAO implements DAO {
 			return arr;
 		}//end - String 매개변수를 받는 sql문으로 가져오기	
 		
+		
+		
 		//String 매개변수를 받는 sql문으로 가져오기
 		@Override
 		public DTO[] selectBySQL(String sql, String ...stringParamForPstmt) throws SQLException {
@@ -159,6 +167,45 @@ public class MM_DAO implements DAO {
 				close();
 			}
 			return arr;
+		}
+		
+		public int update_pw(String pw, int mm_id) throws SQLException {
+			int cnt =0;
+			
+			try {
+				pstmt = conn.prepareStatement(UPDATE_PASSWORD);
+				pstmt.setString(1, pw);
+				pstmt.setInt(2, mm_id);
+				cnt = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			
+			
+			return cnt;
+		}
+		
+		//닉네임 변경
+		public int update_nick(String nick, int mm_id) throws SQLException {
+			int cnt =0;
+			
+			try {
+				pstmt = conn.prepareStatement(UPDATE_NICK);
+				pstmt.setString(1, nick);
+				pstmt.setInt(2, mm_id);
+				cnt = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			
+			
+			return cnt;
 		}
 
 		
