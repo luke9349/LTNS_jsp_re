@@ -23,17 +23,17 @@ public class Post_Contents {
 		System.out.println(file.getAbsolutePath());
 		StringBuffer _contentsText = null;
 		try {
-			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
 			_contentsText=new StringBuffer();
 			
 			//제목
 			int title_index=0;
 			int thumbnail_index=0;
-			while(br.read()!=-1) {
-				String beforeStr=br.readLine();
+			String beforeStr;
+			while((beforeStr=br.readLine())!=null) {
 				String afterStr=null;
 				if(title_index==0) {
-					title=beforeStr.replaceAll("itle","");
+					title=beforeStr.replaceAll("title","");
 					title_index++;
 					continue;
 				}//end title if
