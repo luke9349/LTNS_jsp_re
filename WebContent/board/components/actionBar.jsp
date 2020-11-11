@@ -48,7 +48,7 @@
     	<c:when test="${param.root eq 'NOTICE' }">
     		<c:if test="${grade eq 'admin'}">
 			    <a
-			      href="<%=request.getContextPath() %>/post/write.do"
+			      id="writeBtn"
 			      class="btn btn-outline-primary"
 			      ><i class="fas fa-pencil-alt"></i>글쓰기</a
 			    >    	    	
@@ -57,7 +57,7 @@
     	<c:otherwise>
 		    <c:if test="${login ne '0'}">
 			    <a
-			      href="<%=request.getContextPath() %>/post/write.do"
+			      id="writeBtn"
 			      class="btn btn-outline-primary"
 			      ><i class="fas fa-pencil-alt"></i>글쓰기</a
 			    >    	
@@ -97,11 +97,11 @@
             name="search"
           />
           <div class="input-group mt-3">
-			<input class="form-control" type="date" id="startDate" />
+			<input class="form-control" type="date" id="startDate" name="startDate" />
 			  <div class="input-group-prepend">
 			    <span class="input-group-text">-</span>
 			  </div>
-			<input class="form-control" type="date" id="endDate">
+			<input class="form-control" type="date" id="endDate" name="endDate" />
 		  </div>
         </form>
       </div>

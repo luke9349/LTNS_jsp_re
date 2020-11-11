@@ -13,16 +13,16 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import main.java.com.command.Command;
 import main.java.com.model.Post_Contents;
 import main.java.com.model.board.AjaxBoardListJSON;
-import main.java.com.model.board.BoardListDAO;
+import main.java.com.model.board.BoardListDAO2;
 import main.java.com.model.board.BoardListDTO;
 import main.java.com.model.board.JSONListDTO;
 import main.java.com.util.LogUtil;
 
-public class BoarAjaxCommand implements Command, Board_Command {
+public class BoardAjaxCommand2 implements Command, Board_Command {
 
 	long count;
 
-	public BoarAjaxCommand() {
+	public BoardAjaxCommand2() {
 		this.count = 0;
 	}
 
@@ -132,20 +132,20 @@ public class BoarAjaxCommand implements Command, Board_Command {
 			ArrayList<JSONListDTO> result = null;
 			if (inspectSearch(searchType, search)) {
 				if (inspectCategory(category)) {
-					list = new BoardListDAO().getAllList(category);
+					list = new BoardListDAO2().getAllList(category);
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page, type);
 				} else {
-					list = new BoardListDAO().getCategoryAllList(category);
+					list = new BoardListDAO2().getCategoryAllList(category);
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page, type);
 				} // end if
 			} else {
 				if (inspectCategory(category)) {
-					list = new BoardListDAO().getList(category, type, page);
+					list = new BoardListDAO2().getList(category, type, page);
 					result = contentToText(list);
 				} else {
-					list = new BoardListDAO().getCategoryList(category, type, page);
+					list = new BoardListDAO2().getCategoryList(category, type, page);
 					result = contentToText(list);
 				} // end if
 			} // end if

@@ -4,6 +4,8 @@ const initialParams = {
   page: 1,
   searchType: null,
   search: null,
+  startDate: null,
+  endDate: null,
 };
 
 let params = initialParams;
@@ -16,6 +18,8 @@ const handleParams = () => {
   if (searchParams.page) params.page = searchParams.page;
   if (searchParams.searchType) params.searchType = searchParams.searchType;
   if (searchParams.search) params.search = searchParams.search;
+  if (searchParams.startDate) params.startDate = searchParams.startDate;
+  if (searchParams.endDate) params.endDate = searchParams.endDate;
 };
 
 export const initParams = () => {

@@ -13,18 +13,18 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import main.java.com.command.Command;
 import main.java.com.model.Post_Contents;
 import main.java.com.model.board.AjaxBoardListJSON;
-import main.java.com.model.board.BoardListDAO;
 import main.java.com.model.board.BoardListDAO2;
+import main.java.com.model.board.BoardListDAO;
 import main.java.com.model.board.BoardListDTO;
 import main.java.com.model.board.Board_DAO;
 import main.java.com.model.board.JSONListDTO;
 import main.java.com.util.LogUtil;
 
-public class BoarAjaxCommand2 implements Command, Board_Command {
+public class BoardAjaxCommand implements Command, Board_Command {
 
 	private long dataLength;
 
-	public BoarAjaxCommand2() {
+	public BoardAjaxCommand() {
 		this.dataLength = 0;
 	}
 
@@ -71,7 +71,6 @@ public class BoarAjaxCommand2 implements Command, Board_Command {
 			}
 
 			if (request.getParameter("searchType") != null) {
-				System.out.println(request.getParameter("searchType"));
 				searchType = request.getParameter("searchType");
 				if (!inspectParameter(searchTypes, searchType)) {
 					Exception e = new Exception("This value is not valid: " + searchType);
@@ -110,9 +109,10 @@ public class BoarAjaxCommand2 implements Command, Board_Command {
 			case "EMPATHIZE":
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null && searchType.equals("writer")) {
-					dataLength = new BoardListDAO2()
-							.getEmpathizeSearchDateAndNicknameAllList(startDate, endDate, search).size();
-					list = new BoardListDAO2().getEmpathizeSearchDateAndNicknameList(startDate, endDate, search, type,
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getEmpathizeSearchDateAndNicknameAllList(startDate, endDate, search)
+							.size();
+					list = new BoardListDAO().getEmpathizeSearchDateAndNicknameList(startDate, endDate, search, type,
 							page);
 					result = contentToText(list);
 					break;
@@ -120,9 +120,10 @@ public class BoarAjaxCommand2 implements Command, Board_Command {
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null && searchType.equals("title")) {
-					dataLength = new BoardListDAO2().getEmpathizeSearchDateAndTitleAllList(startDate, endDate, search)
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getEmpathizeSearchDateAndTitleAllList(startDate, endDate, search)
 							.size();
-					list = new BoardListDAO2().getEmpathizeSearchDateAndTitleList(startDate, endDate, search, type,
+					list = new BoardListDAO().getEmpathizeSearchDateAndTitleList(startDate, endDate, search, type,
 							page);
 					result = contentToText(list);
 					break;
@@ -130,50 +131,53 @@ public class BoarAjaxCommand2 implements Command, Board_Command {
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null) {
-					list = new BoardListDAO2().getEmpathizeSearchDateAllList(startDate, endDate);
+					list = new BoardListDAO().getEmpathizeSearchDateAllList(startDate, endDate);
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page, type);
 					break;
 				}
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")) {
-					dataLength = new BoardListDAO2().getEmpathizeSearchDateAllList(startDate, endDate).size();
-					list = new BoardListDAO2().getEmpathizeSearchDateList(startDate, endDate, type, page);
+					dataLength = new BoardListDAO().getEmpathizeSearchDateAllList(startDate, endDate).size();
+					list = new BoardListDAO().getEmpathizeSearchDateList(startDate, endDate, type, page);
 					result = contentToText(list);
 					break;
 				}
 
 				if (searchType != null && searchType.equals("writer")) {
-					dataLength = new BoardListDAO2().getEmpathizeSearchNickNameAllList(search).size();
-					list = new BoardListDAO2().getEmpathizeSearchNickNameList(type, search, page);
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getEmpathizeSearchNickNameAllList(search).size();
+					list = new BoardListDAO().getEmpathizeSearchNickNameList(type, search, page);
 					result = contentToText(list);
 					break;
 				}
 
 				if (searchType != null && searchType.equals("title")) {
-					dataLength = new BoardListDAO2().getEmpathizeSearchTitleAllList(search).size();
-					list = new BoardListDAO2().getEmpathizeSearchTitleList(type, search, page);
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getEmpathizeSearchTitleAllList(search).size();
+					list = new BoardListDAO().getEmpathizeSearchTitleList(type, search, page);
 					result = contentToText(list);
 					break;
 				}
 
 				if (searchType != null && !searchType.equals("")) {
-					list = new BoardListDAO2().getEmpathizeAllList();
+					list = new BoardListDAO().getEmpathizeAllList();
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page, type);
 					break;
 				}
 
-				dataLength = new BoardListDAO2().getEmpathizeAllList().size();
-				list = new BoardListDAO2().getEmpathizeList(type, page);
+				dataLength = new BoardListDAO().getEmpathizeAllList().size();
+				list = new BoardListDAO().getEmpathizeList(type, page);
 				result = contentToText(list);
 				break;
 			case "VIEWCNT":
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null && searchType.equals("writer")) {
-					dataLength = new BoardListDAO2().getViewcntSearchDateAndNicknameAllList(startDate, endDate, search)
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getViewcntSearchDateAndNicknameAllList(startDate, endDate, search)
 							.size();
-					list = new BoardListDAO2().getViewcntSearchDateAndNicknameList(startDate, endDate, search, type,
+					list = new BoardListDAO().getViewcntSearchDateAndNicknameList(startDate, endDate, search, type,
 							page);
 					result = contentToText(list);
 					break;
@@ -181,138 +185,175 @@ public class BoarAjaxCommand2 implements Command, Board_Command {
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null && searchType.equals("title")) {
-					dataLength = new BoardListDAO2().getViewcntSearchDateAndTitleAllList(startDate, endDate, search)
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getViewcntSearchDateAndTitleAllList(startDate, endDate, search)
 							.size();
-					list = new BoardListDAO2().getViewcntSearchDateAndTitleList(startDate, endDate, search, type, page);
+					list = new BoardListDAO().getViewcntSearchDateAndTitleList(startDate, endDate, search, type, page);
 					result = contentToText(list);
 					break;
 				}
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null) {
-					list = new BoardListDAO2().getViewcntSearchDateAllList(startDate, endDate);
+					list = new BoardListDAO().getViewcntSearchDateAllList(startDate, endDate);
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page, type);
 					break;
 				}
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")) {
-					dataLength = new BoardListDAO2().getViewcntSearchDateAllList(startDate, endDate).size();
-					list = new BoardListDAO2().getViewcntSearchDateList(startDate, endDate, type, page);
+					dataLength = new BoardListDAO().getViewcntSearchDateAllList(startDate, endDate).size();
+					list = new BoardListDAO().getViewcntSearchDateList(startDate, endDate, type, page);
 					result = contentToText(list);
 					break;
 				}
 
 				if (searchType != null && searchType.equals("writer")) {
-					dataLength = new BoardListDAO2().getViewcntSearchNickNameAllList(search).size();
-					list = new BoardListDAO2().getViewcntSearchDateAndNicknameList(startDate, endDate, search, type,
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getViewcntSearchNickNameAllList(search).size();
+					list = new BoardListDAO().getViewcntSearchDateAndNicknameList(startDate, endDate, search, type,
 							page);
 					result = contentToText(list);
 					break;
 				}
 
 				if (searchType != null && searchType.equals("title")) {
-					dataLength = new BoardListDAO2().getViewCntSearchTitleAllList(search).size();
-					list = new BoardListDAO2().getViewcntSearchTitleList(type, search, page);
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getViewCntSearchTitleAllList(search).size();
+					list = new BoardListDAO().getViewcntSearchTitleList(type, search, page);
 					break;
 				}
 
 				if (searchType != null && !searchType.equals("")) {
-					list = new BoardListDAO2().getViewcntAllList();
+					list = new BoardListDAO().getViewcntAllList();
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page, type);
 					break;
 				}
 
-				dataLength = new BoardListDAO2().getViewcntAllList().size();
-				list = new BoardListDAO2().getViewcntList(type, page);
+				dataLength = new BoardListDAO().getViewcntAllList().size();
+				list = new BoardListDAO().getViewcntList(type, page);
 				result = contentToText(list);
 				break;
 
 			case "MYPAGE":
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
-						&& searchType != null && searchType.equals("writer")) {
-
-					break;
-				}
-
-				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null && searchType.equals("title")) {
-
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getMypageSearchDateAndTitleAllList(
+							(int) request.getSession().getAttribute("writer"), startDate, endDate, search).size();
+					list = new BoardListDAO().getMypageSearchDateAndTitleList(
+							(int) request.getSession().getAttribute("writer"), startDate, endDate, search, type, page);
+					result = contentToText(list);
 					break;
 				}
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null) {
-					// 검색
+					list = new BoardListDAO().getMypageSearchDateAllList(
+							(int) request.getSession().getAttribute("writer"), startDate, endDate);
+					result = contentToText(list);
+					result = createSearchList(result, searchType, search, page, type);
 					break;
 				}
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")) {
-
-					break;
-				}
-
-				if (searchType != null && searchType.equals("writer")) {
-
+					dataLength = new BoardListDAO().getMypageSearchDateAllList(
+							(int) request.getSession().getAttribute("writer"), startDate, endDate).size();
+					list = new BoardListDAO().getMypageSearchDateList((int) request.getSession().getAttribute("writer"),
+							startDate, endDate, type, page);
+					result = contentToText(list);
 					break;
 				}
 
 				if (searchType != null && searchType.equals("title")) {
-
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO()
+							.getMypageSearchTitleAllList((int) request.getSession().getAttribute("writer"), search)
+							.size();
+					list = new BoardListDAO().getMypageSearchTitleList(
+							(int) request.getSession().getAttribute("writer"), type, search, page);
+					result = contentToText(list);
 					break;
+
 				}
 
 				if (searchType != null && !searchType.equals("")) {
-					// 검색
+					list = new BoardListDAO().getMypageAllList((int) request.getSession().getAttribute("writer"));
+					result = contentToText(list);
+					result = createSearchList(result, searchType, search, page, type);
 					break;
 				}
 
-				dataLength = new BoardListDAO2().getEmpathizeAllList().size();
-				list = new BoardListDAO2().getEmpathizeList(type, page);
+				System.out.println("진입");
+				dataLength = new BoardListDAO().getMypageAllList((int) request.getSession().getAttribute("writer"))
+						.size();
+				list = new BoardListDAO().getMypageList((int) request.getSession().getAttribute("writer"), type, page);
 				result = contentToText(list);
 				break;
 			default:
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null && searchType.equals("writer")) {
-
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO()
+							.getCategorySearchDateAndNicknameAllList(category, startDate, endDate, search).size();
+					list = new BoardListDAO().getCategorySearchDateAndNicknameList(category, startDate, endDate, search,
+							type, page);
+					result = contentToText(list);
 					break;
 				}
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null && searchType.equals("title")) {
-
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO()
+							.getCategorySearchDateAndTitleAllList(category, startDate, endDate, search).size();
+					list = new BoardListDAO().getCategorySearchDateAndTitleList(category, startDate, endDate, search,
+							searchType, page);
+					result = contentToText(list);
 					break;
 				}
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
 						&& searchType != null) {
-					// 검색
+					list = new BoardListDAO().getCategorySearchDateAllList(category, startDate, endDate);
+					result = contentToText(list);
+					result = createSearchList(result, searchType, search, page, searchType);
 					break;
 				}
 
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")) {
-
+					dataLength = new BoardListDAO().getCategorySearchDateAllList(category, startDate, endDate).size();
+					list = new BoardListDAO().getCategorySearchDateList(category, startDate, endDate, type, page);
+					result = contentToText(list);
 					break;
 				}
 
 				if (searchType != null && searchType.equals("writer")) {
-
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getCategorySearchNickNameAllList(category, search).size();
+					list = new BoardListDAO().getCategorySearchNickNameList(category, type, search, page);
+					result = contentToText(list);
 					break;
 				}
 
 				if (searchType != null && searchType.equals("title")) {
-
+					search = "%" + search + "%";
+					dataLength = new BoardListDAO().getCategorySearchTitleAllList(category, search).size();
+					list = new BoardListDAO().getCategorySearchTitleList(category, type, search, page);
+					result = contentToText(list);
 					break;
 				}
 
 				if (searchType != null && !searchType.equals("")) {
-					// 검색
+					list = new BoardListDAO().getCategorySearchTitleAllList(category, search);
+					result = contentToText(list);
+					result = createSearchList(result, searchType, search, page, searchType);
 					break;
 				}
 
-				dataLength = new BoardListDAO2().getEmpathizeAllList().size();
-				list = new BoardListDAO2().getEmpathizeList(type, page);
+				dataLength = new BoardListDAO().getCategoryAllList(category).size();
+				list = new BoardListDAO().getCategoryList(category, type, page);
 				result = contentToText(list);
 				break;
 			}

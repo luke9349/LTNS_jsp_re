@@ -15,7 +15,15 @@ const createPost = (json) => {
     post += `<div class="card-wrapper" onclick=location.href="${contextPath}/post/view.do?${query}&post_id=${item.postId}">`;
     post += `<div class="card">`;
     post += `<div class="card-body">`;
-    post += `<h5 class="card-title">${item.title}</h5>`;
+    post += `<h5 class="card-title">${item.title}`;
+    const today = new Date();
+	const itemDay = new Date(item.regdate);
+    if(today.getFullYear() === itemDay.getFullYear()) {
+	  if(today.getMonth() === itemDay.getMonth()) {
+		if(today.getDate() === itemDay.getDate()) post += '&nbsp;<span class="badge badge-pill badge-danger">NEW</span>';
+	  }
+	} 
+    post += `</h5>`;
     post += `<div class="card-user">${item.nickName}</div>`;
     post += `<div class="card-text">${item.contentsText}</div>`;
     post += `<div class="info__boardDate">${item.regdate}</div>`;

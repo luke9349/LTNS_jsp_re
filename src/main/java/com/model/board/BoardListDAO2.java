@@ -15,50 +15,88 @@ import main.java.com.util.LogUtil;
 
 public class BoardListDAO2 {
 
+	public final static String SELECT_POST_BY_CATEGORY_PAGE = "SELECT * FROM " + "(SELECT ROWNUM AS NO, t.* FROM "
+			+ "(SELECT * FROM " + "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE WHERE CATEGORY = ?), "
+			+ "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE WHERE CATEGORY = ?)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY REGDATE DESC, VIEWCNT DESC, EMPATHIZE_CNT DESC, POST_ID DESC) t) "
+			+ "WHERE NO >= ? AND NO <= ?";
+
+	public final static String SELECT_POST_BY_VIEWCNT_PAGE = "SELECT * FROM " + "(SELECT ROWNUM AS NO, t.* FROM "
+			+ "(SELECT * FROM " + "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE), " + "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY VIEWCNT DESC, REGDATE DESC, EMPATHIZE_CNT DESC, POST_ID DESC) t) "
+			+ "WHERE NO >= ? AND NO <= ?";
+
+	public final static String SELECT_POST_BY_EMPATHIZE_PAGE = "SELECT * FROM " + "(SELECT ROWNUM AS NO, t.* FROM "
+			+ "(SELECT * FROM " + "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE), " + "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY EMPATHIZE_CNT DESC, REGDATE DESC, VIEWCNT DESC, POST_ID DESC) t) "
+			+ "WHERE NO >= ? AND NO <= ?";
+
+	public final static String SELECT_POST_BY_CATEGORY_ALL = "SELECT * FROM " + "(SELECT * FROM "
+			+ "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE WHERE CATEGORY = ?), "
+			+ "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE WHERE CATEGORY = ?)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY REGDATE DESC, VIEWCNT DESC, EMPATHIZE_CNT DESC, POST_ID DESC)";
+
+	public final static String SELECT_POST_BY_VIEWCNT_ALL = "SELECT * FROM " + "(SELECT * FROM "
+			+ "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE), " + "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY VIEWCNT DESC, REGDATE DESC, EMPATHIZE_CNT DESC, POST_ID DESC)";
+
+	public final static String SELECT_POST_BY_EMPATHIZE_ALL = "SELECT * FROM " + "(SELECT * FROM "
+			+ "(SELECT t.*, NVL(t.HIT, 0) AS EMPATHIZE_CNT FROM " + "(SELECT t1.*, t2.HIT FROM "
+			+ "(SELECT t1.*, t2.FILE_ID, t2.FILEKIND, t2.REAL_FILENAME, t2.FILENAME FROM " + "(SELECT * FROM "
+			+ "(SELECT *  FROM (SELECT * FROM POST_TABLE), " + "(SELECT COUNT(*) AS DATALENGTH FROM POST_TABLE)) t1, "
+			+ "MM_TABLE t2 WHERE t1.WRITER = t2.MM_ID) t1, " + "FILE_TABLE t2 WHERE t1.POST_CONTENTS = t2.FILE_ID) t1, "
+			+ "(SELECT COUNT(*) AS HIT, POST_ID FROM EMPATHIZE_TABLE GROUP BY POST_ID) t2 "
+			+ "WHERE t1.POST_ID = t2.POST_ID(+)) t) "
+			+ "ORDER BY EMPATHIZE_CNT DESC, REGDATE DESC, VIEWCNT DESC, POST_ID DESC)";
+
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	Statement stmt = null;
 	ResultSet rs = null;
-
-	public ArrayList<BoardListDTO> getCategoryAllList(String category) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_ALL);
-			psmt.setString(1, category);
-			psmt.setString(2, category);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategoryAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategoryAllList()
+	String contextPath = null;
 
 	public ArrayList<BoardListDTO> getCategoryList(String category, String type, int page) {
 		int startNo = 1;
 		int endNo = 1;
-		int cnt = 10;
 
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
+		if (type.equals("list")) {
+			startNo = (page - 1) * 10 + 1;
+			endNo = page * 10;
+		} else {
+			startNo = (page - 1) * 8 + 1;
+			endNo = page * 8;
+		}
 
 		ArrayList<BoardListDTO> list = null;
 
 		try {
 			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_PAGE);
+			psmt = conn.prepareStatement(SELECT_POST_BY_CATEGORY_PAGE);
 			psmt.setString(1, category);
 			psmt.setString(2, category);
 			psmt.setInt(3, startNo);
@@ -77,346 +115,51 @@ public class BoardListDAO2 {
 
 	} // end getCategoryList()
 
-	public ArrayList<BoardListDTO> getCategorySearchDateAndNicknameAllList(String category, String start, String end,
-			String nickname) {
+	public ArrayList<BoardListDTO> getCategoryAllList(String category) {
 
 		ArrayList<BoardListDTO> list = null;
 
 		try {
 			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_DATE_WRITER_ALL);
+			psmt = conn.prepareStatement(SELECT_POST_BY_CATEGORY_ALL);
 			psmt.setString(1, category);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			psmt.setString(4, nickname);
+			psmt.setString(2, category);
 			rs = psmt.executeQuery();
 			list = createList(rs);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchDateAndNicknameAllList] " + e.getMessage());
+			LogUtil.error("[BoardListDAO] [getCategoryAllList] " + e.getMessage());
 		} finally {
 			DataUtil.resourceClose(rs, psmt, conn);
 		} // end try
 
 		return list;
 
-	} // end getCategorySearchDateAndNicknameAllList()
+	} // end getCategoryAllList()
 
-	public ArrayList<BoardListDTO> getCategorySearchDateAndNicknameList(String category, String start, String end,
-			String nickname, String type, int page) {
+	public ArrayList<BoardListDTO> getList(String category, String type, int page) {
+		String SQL = null;
+		if (category.toLowerCase().equals("viewcnt"))
+			SQL = SELECT_POST_BY_VIEWCNT_PAGE;
+		else
+			SQL = SELECT_POST_BY_EMPATHIZE_PAGE;
+		
 		int startNo = 1;
 		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_DATE_WRITER_PAGE);
-			psmt.setString(1, category);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			psmt.setString(4, nickname);
-			psmt.setInt(5, startNo);
-			psmt.setInt(6, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchDateAndNicknameList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategorySearchDateAndNicknameList()
-
-	public ArrayList<BoardListDTO> getCategorySearchDateAndTitleAllList(String category, String start, String end,
-			String title) {
+		if (type.equals("list")) {
+			startNo = (page - 1) * 10 + 1;
+			endNo = page * 10;
+		} else {
+			startNo = (page - 1) * 8 + 1;
+			endNo = page * 8;
+		}
 
 		ArrayList<BoardListDTO> list = null;
 
 		try {
 			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_DATE_TITLE_ALL);
-			psmt.setString(1, category);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			psmt.setString(4, title);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchDateAndTitleAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategorySearchDateAndTitleAllList()
-
-	public ArrayList<BoardListDTO> getCategorySearchDateAndTitleList(String category, String start, String end,
-			String title, String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_DATE_TITLE_PAGE);
-			psmt.setString(1, category);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			psmt.setString(4, title);
-			psmt.setInt(5, startNo);
-			psmt.setInt(6, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchDateAndTitleList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategorySearchDateAndTitleList()
-
-	public ArrayList<BoardListDTO> getCategorySearchDateAllList(String category, String start, String end) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_DATE_ALL);
-			psmt.setString(1, category);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchDateAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategorySearchDateAllList()
-
-	public ArrayList<BoardListDTO> getCategorySearchDateList(String category, String start, String end, String type,
-			int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_DATE_PAGE);
-			psmt.setString(1, category);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			psmt.setInt(4, startNo);
-			psmt.setInt(5, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchDateList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategorySearchDateList()
-
-	public ArrayList<BoardListDTO> getCategorySearchNickNameAllList(String category, String nickname) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_WRITER_ALL);
-			psmt.setString(1, category);
-			psmt.setString(2, nickname);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchNickNameAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategorySearchNickNameAllList()
-
-	public ArrayList<BoardListDTO> getCategorySearchNickNameList(String category, String type, String nickname,
-			int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_WRITER_PAGE);
-			psmt.setString(1, category);
-			psmt.setString(2, nickname);
-			psmt.setInt(3, startNo);
-			psmt.setInt(4, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchNickNameList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategorySearchNickNameList()
-
-	public ArrayList<BoardListDTO> getCategorySearchTitleAllList(String category, String title) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_TITLE_ALL);
-			psmt.setString(1, category);
-			psmt.setString(2, title);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchTitleAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategorySearchTitleAllList()
-
-	public ArrayList<BoardListDTO> getCategorySearchTitleList(String category, String type, String title, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_CATEGORY_SEARCH_TITLE_PAGE);
-			psmt.setString(1, category);
-			psmt.setString(2, title);
-			psmt.setInt(3, startNo);
-			psmt.setInt(4, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getCategorySearchTitleList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getCategorySearchTitleList()
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public ArrayList<BoardListDTO> getViewcntAllList() {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_ALL);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewcntAllList()
-
-	public ArrayList<BoardListDTO> getViewcntList(String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_PAGE);
+			psmt = conn.prepareStatement(SQL);
 			psmt.setInt(1, startNo);
 			psmt.setInt(2, endNo);
 			rs = psmt.executeQuery();
@@ -424,882 +167,41 @@ public class BoardListDAO2 {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntList] " + e.getMessage());
+			LogUtil.error("[BoardListDAO] [getList] " + e.getMessage());
 		} finally {
 			DataUtil.resourceClose(rs, psmt, conn);
 		} // end try
 
 		return list;
 
-	} // end getViewcntList()
+	} // end getList()
 
-	public ArrayList<BoardListDTO> getViewcntSearchDateAndNicknameAllList(String start, String end, String nickname) {
+	public ArrayList<BoardListDTO> getAllList(String category) {
 
 		ArrayList<BoardListDTO> list = null;
 
+		String SQL = null;
+		if (category.toLowerCase().equals("viewcnt"))
+			SQL = SELECT_POST_BY_VIEWCNT_ALL;
+		else
+			SQL = SELECT_POST_BY_EMPATHIZE_ALL;
+
 		try {
 			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_DATE_WRITER_ALL);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setString(3, nickname);
+			psmt = conn.prepareStatement(SQL);
 			rs = psmt.executeQuery();
 			list = createList(rs);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntSearchDateAndNicknameAllList] " + e.getMessage());
+			LogUtil.error("[BoardListDAO] [getAllList] " + e.getMessage());
 		} finally {
 			DataUtil.resourceClose(rs, psmt, conn);
 		} // end try
 
 		return list;
 
-	} // end getViewcntSearchDateAndNicknameAllList()
-
-	public ArrayList<BoardListDTO> getViewcntSearchDateAndNicknameList(String start, String end, String nickname,
-			String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_DATE_WRITER_PAGE);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setString(3, nickname);
-			psmt.setInt(4, startNo);
-			psmt.setInt(5, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntSearchDateAndNicknameList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewcntSearchDateAndNicknameList()
-
-	public ArrayList<BoardListDTO> getViewcntSearchDateAndTitleAllList(String start, String end, String title) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_DATE_TITLE_ALL);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setString(3, title);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntSearchDateAndTitleAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewcntSearchDateAndTitleAllList()
-
-	public ArrayList<BoardListDTO> getViewcntSearchDateAndTitleList(String start, String end, String title, String type,
-			int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_DATE_TITLE_PAGE);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setString(3, title);
-			psmt.setInt(4, startNo);
-			psmt.setInt(5, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntSearchDateAndTitleList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewcntSearchDateAndTitleList()
-
-	public ArrayList<BoardListDTO> getViewcntSearchDateAllList(String start, String end) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_DATE_ALL);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntSearchDateAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewcntSearchDateAllList()
-
-	public ArrayList<BoardListDTO> getViewcntSearchDateList(String start, String end, String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_DATE_PAGE);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setInt(3, startNo);
-			psmt.setInt(4, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntSearchDateList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewcntSearchDateList()
-
-	public ArrayList<BoardListDTO> getViewcntSearchNickNameAllList(String nickname) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_WRITER_ALL);
-			psmt.setString(1, nickname);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntSearchNickNameAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewcntSearchNickNameAllList()
-
-	public ArrayList<BoardListDTO> getViewcntSearchNickNameList(String type, String nickname, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_WRITER_PAGE);
-			psmt.setString(1, nickname);
-			psmt.setInt(2, startNo);
-			psmt.setInt(3, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntSearchNickNameList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewcntSearchNickNameList()
-
-	public ArrayList<BoardListDTO> getViewCntSearchTitleAllList(String title) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_TITLE_ALL);
-			psmt.setString(1, title);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewCntSearchTitleAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewCntSearchTitleAllList()
-
-	public ArrayList<BoardListDTO> getViewcntSearchTitleList(String type, String title, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_VIEWCNT_SEARCH_TITLE_PAGE);
-			psmt.setString(1, title);
-			psmt.setInt(2, startNo);
-			psmt.setInt(3, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getViewcntSearchTitleList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getViewcntSearchTitleList()
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public ArrayList<BoardListDTO> getEmpathizeAllList() {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_ALL);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeAllList()
-
-	public ArrayList<BoardListDTO> getEmpathizeList(String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_PAGE);
-			psmt.setInt(1, startNo);
-			psmt.setInt(2, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmapthizeList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmapthizeList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchDateAndNicknameAllList(String start, String end, String nickname) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZET_SEARCH_DATE_WRITER_ALL);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setString(3, nickname);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchDateAndNicknameAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchDateAndNicknameAllList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchDateAndNicknameList(String start, String end, String nickname,
-			String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_SEARCH_DATE_WRITER_PAGE);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setString(3, nickname);
-			psmt.setInt(4, startNo);
-			psmt.setInt(5, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchDateAndNicknameList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchDateAndNicknameList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchDateAndTitleAllList(String start, String end, String title) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZET_SEARCH_DATE_TITLE_ALL);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setString(3, title);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchDateAndTitleAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchDateAndTitleAllList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchDateAndTitleList(String start, String end, String title,
-			String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_SEARCH_DATE_TITLE_PAGE);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setString(3, title);
-			psmt.setInt(4, startNo);
-			psmt.setInt(5, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchDateAndTitleList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchDateAndTitleList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchDateAllList(String start, String end) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_SEARCH_DATE_ALL);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchDateAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchDateAllList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchDateList(String start, String end, String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_SEARCH_DATE_PAGE);
-			psmt.setString(1, start);
-			psmt.setString(2, end);
-			psmt.setInt(3, startNo);
-			psmt.setInt(4, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchDateList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchDateList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchNickNameAllList(String nickname) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_SEARCH_WRITER_ALL);
-			psmt.setString(1, nickname);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchNickNameAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchNickNameAllList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchNickNameList(String type, String nickname, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_SEARCH_WRITER_PAGE);
-			psmt.setString(1, nickname);
-			psmt.setInt(2, startNo);
-			psmt.setInt(3, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchNickNameList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchNickNameList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchTitleAllList(String title) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_SEARCH_TITLE_ALL);
-			psmt.setString(1, title);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchTitleAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchTitleAllList()
-
-	public ArrayList<BoardListDTO> getEmpathizeSearchTitleList(String type, String title, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_EMPATHIZE_SEARCH_TITLE_PAGE);
-			psmt.setString(1, title);
-			psmt.setInt(2, startNo);
-			psmt.setInt(3, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getEmpathizeSearchTitleList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getEmpathizeSearchTitleList()
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public ArrayList<BoardListDTO> getMypageAllList(String writer) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_MYPAGE_ALL);
-			psmt.setString(1, writer);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getMypageAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getMypageAllList()
-
-	public ArrayList<BoardListDTO> getMypageList(String writer, String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_MYPAGE_PAGE);
-			psmt.setString(1, writer);
-			psmt.setInt(2, startNo);
-			psmt.setInt(3, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getMypageList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getMypageList()
-
-	public ArrayList<BoardListDTO> getMypageSearchDateAndTitleAllList(String writer, String start, String end,
-			String title) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_MYPAGE_SEARCH_DATE_TITLE_ALL);
-			psmt.setString(1, writer);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			psmt.setString(4, title);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getMypageSearchDateAndTitleAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getMypageSearchDateAndTitleAllList()
-
-	public ArrayList<BoardListDTO> getMypageSearchDateAndTitleList(String writer, String start, String end,
-			String title, String type, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_MYPAGE_SEARCH_DATE_TITLE_PAGE);
-			psmt.setString(1, writer);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			psmt.setString(4, title);
-			psmt.setInt(5, startNo);
-			psmt.setInt(6, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getMypageSearchDateAndTitleList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getMypageSearchDateAndTitleList()
-
-	public ArrayList<BoardListDTO> getMypageSearchDateAllList(String writer, String start, String end) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_MYPAGE_SEARCH_DATE_ALL);
-			psmt.setString(1, writer);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getMypageSearchDateAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getMypageSearchDateAllList()
-
-	public ArrayList<BoardListDTO> getMypageSearchDateList(String writer, String start, String end, String type,
-			int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_MYPAGE_SEARCH_DATE_PAGE);
-			psmt.setString(1, writer);
-			psmt.setString(2, start);
-			psmt.setString(3, end);
-			psmt.setInt(4, startNo);
-			psmt.setInt(5, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getMypageSearchDateList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getMypageSearchDateList()
-
-	public ArrayList<BoardListDTO> getMypageSearchTitleAllList(String writer, String title) {
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_MYPAGE_SEARCH_TITLE_ALL);
-			psmt.setString(1, writer);
-			psmt.setString(2, title);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getMypageSearchTitleAllList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getMypageSearchTitleAllList()
-
-	public ArrayList<BoardListDTO> getMypageSearchTitleList(String writer, String type, String title, int page) {
-		int startNo = 1;
-		int endNo = 1;
-		int cnt = 10;
-
-		if (!type.equals("list"))
-			cnt = 8;
-
-		startNo = (page - 1) * cnt + 1;
-		endNo = page * cnt;
-
-		ArrayList<BoardListDTO> list = null;
-
-		try {
-			conn = DataUtil.getConnection();
-			psmt = conn.prepareStatement(BoardList.SELECT_POST_BY_MYPAGE_SEARCH_TITLE_PAGE);
-			psmt.setString(1, writer);
-			psmt.setString(2, title);
-			psmt.setInt(3, startNo);
-			psmt.setInt(4, endNo);
-			rs = psmt.executeQuery();
-			list = createList(rs);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			LogUtil.error("[BoardListDAO] [getMypageSearchTitleList] " + e.getMessage());
-		} finally {
-			DataUtil.resourceClose(rs, psmt, conn);
-		} // end try
-
-		return list;
-
-	} // end getMypageSearchTitleList()
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	} // end getAllList()
 
 	public ArrayList<BoardListDTO> createList(ResultSet rs) {
 		ArrayList<BoardListDTO> list = new ArrayList<BoardListDTO>();
