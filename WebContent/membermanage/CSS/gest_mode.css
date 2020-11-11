@@ -73,3 +73,6 @@ button:hover {
 	color: tomato;
 }
 
+.hidden button{
+	background-color: black;
+}

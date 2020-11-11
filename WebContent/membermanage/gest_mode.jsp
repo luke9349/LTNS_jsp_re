@@ -21,7 +21,7 @@
 </div>
 
 <div class="div_box">
-   	 <span class="gest_header">Gest Mode</span> 
+   	<span class="gest_header">Gest Mode</span> 
    	<div class="gest_articles">
 	<span> 댓글, 추천 버튼을 사용할 수 없습니다. </span> <br>
 	</div>
@@ -41,6 +41,11 @@
 </div>
 
 
+
+	
+<div class="hidden">
+<button>버튼</button>
+</div>
 
 
 

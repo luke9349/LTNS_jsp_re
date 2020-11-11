@@ -77,7 +77,6 @@ if (ServletFileUpload.isMultipartContent(request)){
                     ///////////////// 서버에 파일쓰기 /////////////////
                      
                     return3 += "&bNewLine=true";
-                                // img 태그의 title 옵션에 들어갈 원본파일명
                     return3 += "&sFileName="+ name;
                     return3 += "&sFileURL=/LTNS_jsp_re/post/upload/"+realFileNm;
                 }

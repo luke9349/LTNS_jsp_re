@@ -105,8 +105,7 @@ function chkSubmit(){
  
  
  
-console.log(location.search);
- 
+
 </script>
 
 
@@ -147,8 +146,7 @@ console.log(location.search);
 		        </tr>
 		        <tr class="justify-content-center ">
 		            <td colspan="2" class="bg-white">
-		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px; ">
-		                </textarea>
+		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px; "> </textarea>
 		            </td>
 		        </tr>
 				</table>
