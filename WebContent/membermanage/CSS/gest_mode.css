@@ -23,6 +23,10 @@ body {
 	height: 350px;
 }
 
+.main_article #img_id:hover{
+	cursor: pointer;
+}
+
 .gest_header {
 	font-size: 40px;
 	font-style: italic;
@@ -49,6 +53,9 @@ body {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+
+
+
 
 
 button {
