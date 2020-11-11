@@ -105,7 +105,14 @@
 							<td><input class="form-control" type="email" id="email" name="email" maxlength="20"/>
 								<span class="error d-none" id="emailerror" >  </span> 	
 							</td>
-							<td style="width: 130px;"><button class="btn btn-primary" onclick="" type="button">인증번호</button> </td>
+							<td style="width: 130px;"><button class="btn btn-primary"  id="emailCK" onclick="" type="button">인증번호받기</button> </td>
+						</tr>
+						
+						<tr>
+							<td style="width: 110px;"><h5>이메일 인증</h5></td>
+							<td><input class="form-control" type="text" id="emailAC" name="emailAC" maxlength="20"/>
+							<td style="width: 130px;"><button class="btn btn-primary" onclick="" type="button">확인</button> </td>
+							
 						</tr>
 					</tbody>
 				
