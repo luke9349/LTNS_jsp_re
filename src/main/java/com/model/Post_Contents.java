@@ -35,19 +35,22 @@ public class Post_Contents {
 				if(title_index==0) {
 					title=beforeStr.replaceAll("title","");
 					title_index++;
+					System.out.println("제목:"+title);
 					continue;
 				}//end title if
 				if(thumbnail_index==0) {
 					if(beforeStr.contains("<img")) {
 						thumbnailPath=beforeStr.substring(beforeStr.indexOf("src=")+5);//첫번째 이미지 경로
+						thumbnailPath=thumbnailPath.replaceAll("\" .*","");
 						System.out.println("썸네일:"+thumbnailPath);//맞을까..
 						thumbnail_index++;
 					}
 				}
 				//replaceAll("<img.*","").replaceAll("\" title=.*\">","") 이미지 태그 제거용
-				afterStr=beforeStr.replaceAll("<img.*","").replaceAll(" title=.*\"clear:both;\">","").replaceAll("<br.*>", " ").replaceAll("<[^>]*>", "").replaceAll("&nbsp;"," ");
-				_contentsText.append(afterStr);
+//				afterStr=beforeStr.replaceAll("<img.*","").replaceAll(" title=.*\"clear:both;\">","").replaceAll("<br.*>", " ").replaceAll("<[^>]*>", "").replaceAll("&nbsp;"," ").replaceAll("&lt","<").replaceAll("&gt", ">");
+				_contentsText.append(beforeStr);
 			}//end while
+			System.out.println("전체 소스:"+_contentsText);
 			br.close();
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
@@ -55,6 +58,7 @@ public class Post_Contents {
 			e.printStackTrace();
 		}finally {
 			contentsText=_contentsText.toString();
+			contentsText=contentsText.replaceAll("<br.*>", " ").replaceAll("<[^>]*>", "").replaceAll("&nbsp;"," ").replaceAll("&lt","<").replaceAll("&gt", ">");
 			System.out.println("내용:"+contentsText);
 		}
 	}
