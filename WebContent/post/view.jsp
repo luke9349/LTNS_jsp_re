@@ -71,7 +71,6 @@
 	SimpleDateFormat fomat = new SimpleDateFormat("[yyyy-mm-dd]");
 
 
-
 	//파일읽어오기  (DB접근시 수정할것임)
 	String titles ="";	
 	String contents ="";
