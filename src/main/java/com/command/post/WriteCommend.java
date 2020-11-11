@@ -37,7 +37,7 @@ public class WriteCommend implements Command {
 		String saveDirectory = request.getServletContext().getRealPath("/") + "data";
 
         String category = request.getParameter("category");
-       // String wrtier = request.getParameter("writer");
+        
        HttpSession session =  request.getSession();
        int writer =  (int) session.getAttribute("writer");
         
@@ -67,12 +67,10 @@ public class WriteCommend implements Command {
 					file.mkdirs();
 				}
 				filePath = saveDirectory + file.separator + fName; // 파일경로
-				System.out.println("filePath 입니다" + filePath);
 				// 내용저장객체 생성
 				pw = new PrintWriter(filePath);
 				pw.println("title" + title);
 				pw.println(content);
-				System.out.println("저장되었습니다");
 			} catch (IOException e) {
 				
 				System.out.println("저장 실패 : 파일에 데이터를 쓸 수 없습니다.");
@@ -101,7 +99,6 @@ public class WriteCommend implements Command {
 		}
 
 		request.setAttribute("fileOk", file_quert_cnt);
-		System.out.println("파일쿼리성공" + file_quert_cnt);
 				
 		
 		
@@ -118,7 +115,6 @@ public class WriteCommend implements Command {
 		
 		
 		request.setAttribute("result", cnt);
-		System.out.println("쿼리 결과 성공:" + cnt);
 		
 		
 	}

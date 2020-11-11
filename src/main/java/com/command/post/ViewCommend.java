@@ -40,7 +40,6 @@ public class ViewCommend implements Command {
 		}
 		
 		if(arr ==  null) {
-			System.out.println("여기가 널이니까 안되지");
 			request.setAttribute("views", null);
 		}else {
 			HttpSession session =  request.getSession();
@@ -54,7 +53,6 @@ public class ViewCommend implements Command {
 			try {
 				file = filedao.view_cotent(post_contents);
 				request.setAttribute("contents_view", file);
-				System.out.println(post_contents);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

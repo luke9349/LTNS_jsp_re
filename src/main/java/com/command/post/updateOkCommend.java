@@ -110,15 +110,12 @@ public class updateOkCommend implements Command {
 				}
 
 				realPath = saveDirectory + File.separator + fName  ; // 파일경로
-				// out.println(saveDirectory+"세이브디렉토리 <br>"+fName +"파일이름 <br>"+filePath+"파일패스");
-				System.out.println(realPath + " 리얼패수");
-				System.out.println(saveDirectory + " 세이브 디렉토리");
-				
-				
 				// 내용저장객체 생성
 				pw = new PrintWriter(realPath);
 				pw.println("title" + title);
-				pw.println(content);
+				pw.print(content);
+				System.out.println(title +"타이틀");
+				System.out.println(content);
 				System.out.println("저장되었습니다");
 			} catch (IOException e) {
 				System.out.println("저장 실패 : 파일에 데이터를 쓸 수 없습니다.");
@@ -135,9 +132,7 @@ public class updateOkCommend implements Command {
 		
 		//파일업데이트 		
 		int file_quert_cnt = 0;
-		
 		if (realPath != null) {
-			System.out.println(realPath+ "널이냐?");
 			try {
 				System.out.println("파일업데이트진입");
 				System.out.println(post_contents);

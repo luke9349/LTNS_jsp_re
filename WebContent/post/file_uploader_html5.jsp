@@ -64,7 +64,7 @@
         sFileInfo += "&bNewLine=true";    
         sFileInfo += "&sFileName=" + filename;    
         sFileInfo += "&sFileURL=/LTNS_jsp_re/post/multiupload/"+realFileNm;
-        out.println(sFileInfo);
+        out.print(sFileInfo);
     }
 %>
 

@@ -3,7 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
 	<div id="login">
+		<%
+			String gest_s = (String) session.getAttribute("grade");
+		%>
+		<%if(!gest_s.equals("gest")){ %>
      	<a class="nav__login btn mr-2" href="<%=request.getContextPath() %>/mypage/mypage.do">${nickname }</a>
+       	<%} %>
        	<a id ="btn_login" class="btn btn-secondary" href="<%=request.getContextPath() %>/membermanage/logoutOk.do">로그아웃</a>
 	</div>
 	<div>
