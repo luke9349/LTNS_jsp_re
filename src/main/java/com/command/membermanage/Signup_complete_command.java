@@ -52,6 +52,7 @@ public class Signup_complete_command implements Command {
 			try {
 				cnt = new MemberDAO().select_join(id, nik, email);
 				request.setAttribute("joinOK", cnt);
+				System.out.println("두번째확인 뒤"+cnt);
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -63,7 +64,7 @@ public class Signup_complete_command implements Command {
 		
 		
 		
-		if(cnt == 1) { //유니크 조회 성공
+		if(cnt == 0) { //유니크 조회 성공
 			
 			int cnt2=0;
 			System.out.println("확인");
@@ -82,6 +83,7 @@ public class Signup_complete_command implements Command {
 			try {
 				dto = new MemberDAO().member_INFO_Select(id);
 				
+				System.out.println("확인Signup"+dto);
 				
 				request.setAttribute("signOK", dto);
 			} catch (SQLException e) {

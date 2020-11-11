@@ -230,6 +230,7 @@ public class MemberDAO {
 			
 			
 			cnt = psmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

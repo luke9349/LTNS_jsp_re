@@ -141,6 +141,10 @@ public class DoController extends HttpServlet {
 			 viewPage="mypage.jsp";
 			break;
 			
+		case "/membermanage/loginmain.do":
+			viewPage= "loginmain.jsp";
+			break;
+			
 		case "/membermanage/loginOk.do":
 			cmd = new LoginOk_Cmd();
 			cmd.execute(request, response);

@@ -73,7 +73,7 @@
 			
 			</table>
 			<div class="text-center">
-					 <a class="btn btn-primary" href=""> 확인  </a>
+					 <a class="btn btn-primary" href="loginmain.do"> 확인  </a>
 					</div>
 		
 		</div>
