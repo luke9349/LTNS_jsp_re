@@ -27,7 +27,7 @@
 	<link href="./CSS/board/card/sm_card_list.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/board/card/sm_card_post.css" rel="stylesheet" type="text/css">
 	<link href="../header/css/header.css" rel="stylesheet" type="text/css">
-	<link href="./CSS/footer/footer.css" rel="stylesheet" type="text/css">
+	<link href="../footer/css/footer.css" rel="stylesheet" type="text/css">
 </head>
 <body class="container">
 		<jsp:include page="../header/component/header.jsp" />
@@ -38,7 +38,6 @@
 		<hr>
 		<jsp:include page="./components/board/myempath_board.jsp"/>
 	</main>
-	<jsp:include page="./components/footer/footer.jsp" />
-	<script src="./JS/pagination.js"></script>
+	<jsp:include page="../footer/component/footer.jsp" />
 </body>
 </html>

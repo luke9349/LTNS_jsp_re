@@ -252,4 +252,10 @@ public class MM_DAO_tester implements DAO {
 		return null;
 	}
 
+	@Override
+	public DTO[] withSignal(DTO[] _arr, int signal, int integerParamForPstmt) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -23,7 +23,7 @@
 <%}else{%>
 	<script>
 		alert("로그인 성공  <%=nick%> 님 환영합니다.");		
-		location.href = "<%=request.getContextPath() %>/board/board_list.do"
+		location.href = "<%=request.getContextPath() %>/mainpage/mainpage.do"
 	</script>
 	
 	
