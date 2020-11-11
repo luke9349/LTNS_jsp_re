@@ -29,7 +29,7 @@
 	<span> 글을 읽는것만 가능합니다. </span> <br>
 	</div>	
 	<div class="gest_articles">
-	<span> (조회수 반영)</span> <br>
+	<span> ( 조회수 반영 )</span> <br>
 	</div>	
 	
 	
@@ -44,7 +44,7 @@
 
 	
 <div class="hidden">
-<button>버튼</button>
+<button id="hidden_btn">버튼</button>
 </div>
 
 

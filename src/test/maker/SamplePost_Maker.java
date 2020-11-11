@@ -15,7 +15,6 @@ import main.java.com.model.membermanage.MM_DTO;
 
 public class SamplePost_Maker {
 
-	String _str="";
 	String mkRandomString() {
 		String result="";
 		int whilelimit=(int)(Math.random()*8)+4;
@@ -80,8 +79,6 @@ public class SamplePost_Maker {
 		String title=mkRandomString();
 		String content=mkLongString();
 		
-		_str=title;
-		
 		Date d = new Date();
 		SimpleDateFormat sm = new SimpleDateFormat("yyyyMMddHHmmss");
 
@@ -113,7 +110,7 @@ public class SamplePost_Maker {
 			}
 		}
 		
-		return new File_DTO(0, "POST", fName, file.getAbsolutePath()+"\\"+fName);
+		return new File_DTO(0, "POST", title, file.getAbsolutePath()+"\\"+fName);
 	}
 	
 	//2. 파일 테이블 삽입
@@ -157,7 +154,7 @@ public class SamplePost_Maker {
 				String[] categoryArr= {"NOTICE","MOVIE","BOOK","SPORTS","GAME"};
 				
 //				dto=new Post_DTO("몰랑파일열어서확인해랑이건샘플이당", ((MM_DTO)mmarr[(int)(Math.random()*(mmarr.length))]).getMm_id(), categoryArr[(int)(Math.random()*5)], file_id);
-				dto=new Post_DTO(_str, 1, categoryArr[(int)(Math.random()*5)], file_id);
+				dto=new Post_DTO("몰랑파일열어서확인해랑이건샘플이당", 1, categoryArr[(int)(Math.random()*5)], file_id);
 
 				dtoList.add(dto);
 				
@@ -180,7 +177,7 @@ public class SamplePost_Maker {
 	
 	public static void main(String[] args) {
 
-		new SamplePost_Maker().mkPosts(1000);
+		new SamplePost_Maker().mkPosts(10);
 		System.out.println("전체 작업 완료!");
 	}
 
