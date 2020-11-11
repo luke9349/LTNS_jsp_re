@@ -28,6 +28,12 @@ public class MemberDAO {
 	public static final String SQL_ID_INFO_SELECT =
 			"SELECT * FROM MM_TABLE mt WHERE id = ? ";
 	
+	public static final String SQL_NIK_INFO_SELECT =
+			"SELECT * FROM MM_TABLE mt WHERE nickname = ? ";
+	
+	public static final String SQL_EMAIL_INFO_SELECT =
+			"SELECT * FROM MM_TABLE mt WHERE email = ? ";
+	
 	public static final String SQL_ID_INFO_SELECT_MM_ID =
 			"SELECT * FROM MM_TABLE mt WHERE MM_ID = ? ";
 	
@@ -106,13 +112,54 @@ public class MemberDAO {
 		
 	}
 	
-	//id 유효성검사
+	//id 중복검사
 	public int id_overlap(String id) throws SQLException {
 		int cnt = 0;
 		
 		try {
 			psmt = conn.prepareStatement(SQL_ID_INFO_SELECT);
 			psmt.setString(1, id);
+			cnt = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		
+		return cnt;
+		
+	}
+	
+	//닉네임 중복검사
+	public int nik_overlap(String nik) throws SQLException {
+		int cnt = 0;
+		
+		try {
+			psmt = conn.prepareStatement(SQL_NIK_INFO_SELECT);
+			psmt.setString(1, nik);
+			cnt = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		
+		return cnt;
+		
+	}
+	
+	
+	//email 중복검사
+	public int email_overlap(String email) throws SQLException {
+		int cnt = 0;
+		
+		try {
+			psmt = conn.prepareStatement(SQL_EMAIL_INFO_SELECT);
+			psmt.setString(1, email);
 			cnt = psmt.executeUpdate();
 			
 		} catch (SQLException e) {

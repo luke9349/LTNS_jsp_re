@@ -73,12 +73,10 @@
 						<tr>
 							
 							<td style="width: 110px;"><h5>아아디</h5></td>
-							<td><input class="form-control" type="text" id="id" name="id" maxlength="20" />
-								<span class="error d-none" id="iderror" >  </span>	 
+							<td colspan="2"><input class="form-control" type="text" id="id" name="id" maxlength="20" />
+								<span class="error d-none" id="iderror" >  </span>
 							
 							</td>
-							<td style="width: 110px;"><button class="btn btn-primary" onclick="" type="button">중복</button> </td>
-							
 						</tr>
 						
 						<tr> 
@@ -96,10 +94,10 @@
 						
 						<tr> 
 							<td style="width: 110px;"><h5>닉네임</h5></td>
-							<td ><input class="form-control" type="text" id="nik" name="nik" maxlength="20"/> 
+							<td colspan="2"><input class="form-control" type="text" id="nik" name="nik" maxlength="20"/> 
 								<span class="error d-none" id="nikerror" >  </span>
 							</td>
-							<td style="width: 110px;"><button class="btn btn-primary" onclick="" type="button">중복</button> </td>
+							
 						</tr>
 						
 						<tr> 
