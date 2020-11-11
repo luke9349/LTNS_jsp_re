@@ -7,7 +7,10 @@ public class File_DTO implements DTO {
 	private String filekind;
 	private String filename;
 	private String real_filename;
-	
+	private String title="";
+
+
+
 	public File_DTO(int file_id, String filekind, String filename, String real_filename) {
 		super();
 		this.file_id = file_id;
@@ -26,4 +29,6 @@ public class File_DTO implements DTO {
 	public String getReal_filename() {return real_filename;}
 	public void setReal_filename(String real_filename) {this.real_filename = real_filename;}
 	
+	public String getTitle() {return title;}
+	public void setTitle(String title) {this.title = title;}
 }
