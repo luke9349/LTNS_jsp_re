@@ -84,7 +84,7 @@
         <form id="searchForm" name="searchForm" method="get">
           <select class="form-control" name="searchType" id="searchType">
             <c:if test="${param.root ne 'MYPAGE' }">        
-              <option value="writer">작성자</option>
+              <option value="writer">닉네임(작성자)</option>
             </c:if>
             <option value="title">제목</option>
             <option value="content">내용</option>
