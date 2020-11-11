@@ -41,9 +41,6 @@ public class Post_Contents {
 					if(beforeStr.contains("<img")) {
 						thumbnailPath=beforeStr.substring(beforeStr.indexOf("src=")+5);//첫번째 이미지 경로
 						System.out.println("썸네일:"+thumbnailPath);//맞을까..
-						br.readLine();
-						br.readLine();
-						br.readLine();
 						thumbnail_index++;
 					}
 				}
@@ -58,7 +55,7 @@ public class Post_Contents {
 			e.printStackTrace();
 		}finally {
 			contentsText=_contentsText.toString();
-			System.out.println(contentsText);
+			System.out.println("내용:"+contentsText);
 		}
 	}
 	
