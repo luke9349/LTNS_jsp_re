@@ -33,7 +33,7 @@ public class Post_Contents {
 				String beforeStr=br.readLine();
 				String afterStr=null;
 				if(title_index==0) {
-					title=beforeStr.replaceAll("title","");
+					title=beforeStr.replaceAll("itle","");
 					title_index++;
 					continue;
 				}//end title if

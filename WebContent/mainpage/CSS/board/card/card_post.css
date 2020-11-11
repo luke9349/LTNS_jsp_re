@@ -59,4 +59,12 @@ p.card_post-contents{
 div.card_post-picture{
 	float:right;
 	width:19%;
+	text-align: center;
+	height:144px;
+	overflow: hidden;
+}
+.card_post-picture img{
+	max-width:100%;
+	height:auto;
+	border-radius:0.25rem;
 }
