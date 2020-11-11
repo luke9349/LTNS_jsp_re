@@ -11,12 +11,18 @@ const createList = (json) => {
   json.data.forEach((item) => {
     table += '<tr>';
     table += `<td class="text-center table__no">${item.postId}</td>`;
-    table += `<td class="text-center table__title"><a class="list__link" href="${contextPath}/post/view.do?${query}&post_id=${item.postId}">${item.title}`;
+	let title = item.title;
+	
+	if(title.length > 20) {
+	  title = title.substring(0, 20);
+	  title += '...';
+	} 
+    table += `<td class="text-center table__title"><a class="list__link" href="${contextPath}/post/view.do?${query}&post_id=${item.postId}">${title}`;
 	const today = new Date();
 	const itemDay = new Date(item.regdate);
 	if(today.getFullYear() === itemDay.getFullYear()) {
 		if(today.getMonth() === itemDay.getMonth()) {
-			if(today.getDate() === itemDay.getDate()) table += '&nbsp;<span class="badge badge-pill badge-danger">NEW</span>';
+			if(today.getDate() === itemDay.getDate()) table += '&nbsp;<span class="badge badge-pill badge-danger">N</span>';
 		}
 	} 
 	table += `</a></td>`;
@@ -39,15 +45,23 @@ const createcards = (json) => {
     post += `<div class="card-wrapper" onclick=location.href="${contextPath}/post/view.do?${query}&post_id=${item.postId}">`;
     post += `<div class="card">`;
     post += `<div class="card-body">`;
-    post += `<h5 class="card-title">${item.title}`;
+ 	
+	let title = item.title;
+	
+	if(title.length > 13) {
+	  title = title.substring(0, 13);
+	  title += '...';
+	} 
+	
+    post += `<h5 class="card-title">${title}`;
 	const today = new Date();
 	const itemDay = new Date(item.regdate);
     if(today.getFullYear() === itemDay.getFullYear()) {
 	  if(today.getMonth() === itemDay.getMonth()) {
-		if(today.getDate() === itemDay.getDate()) post += '&nbsp;<span class="badge badge-pill badge-danger">NEW</span>';
+		if(today.getDate() === itemDay.getDate()) post += '&nbsp;<span class="badge badge-pill badge-danger">N</span>';
 	  }
-	} 
-    post += `</h5>`;
+	}
+	post += `</h5>`;
     post += `<div class="card-user">${item.nickName}</div>`;
     post += `<div class="card-text">${item.contentsText}</div>`;
     post += `<div class="info__boardDate">${item.regdate}</div>`;

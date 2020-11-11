@@ -15,7 +15,12 @@ const createPost = (json) => {
     post += `<div class="card-wrapper" onclick=location.href="${contextPath}/post/view.do?${query}&post_id=${item.postId}">`;
     post += `<div class="card">`;
     post += `<div class="card-body">`;
-    post += `<h5 class="card-title">${item.title}`;
+	let title = item.title;
+	if(title.length > 13) {
+	  title = title.substring(0, 13);
+	  title += '...';
+	} 
+    post += `<h5 class="card-title">${title}`;
     const today = new Date();
 	const itemDay = new Date(item.regdate);
     if(today.getFullYear() === itemDay.getFullYear()) {
