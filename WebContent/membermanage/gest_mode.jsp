@@ -34,9 +34,9 @@
 	
 	
 	
-	<button >입장하기</button>
-	<button>회원가입</button>
-	<button>돌아가기</button>
+	<button onclick="location.href='gest.jsp'">입장하기</button>
+	<button onclick="location.href='loginmain.jsp'">회원가입</button>
+	<button onclick="location.href='loginmain.jsp'">돌아가기</button>
 
 </div>
 
