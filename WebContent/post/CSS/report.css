@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+
+.main {
+	
+	background-color: blue;
+
+}
+
+.aticle_1 {
+	border:1px solid black;
+}
+
+
+
+.select_s {
+	padding: 5px;
+	width: 300px;
+}
+
+
+
+
+
+
+.main_imgs{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.report_section {
+	margin: 15px;
+	background-color: gray;
+
+
+}
