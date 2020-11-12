@@ -34,10 +34,8 @@ public class Email_ajax_command implements Command {
 		
 		
 		String emailck1 = Integer.toString(ms.random);
-		String emailck2 = request.getParameter("emailAC");
 		
 		System.out.println(emailck1);
-		System.out.println(emailck2);
 		
 		response.setContentType("text/html; charset=utf-8");
 		

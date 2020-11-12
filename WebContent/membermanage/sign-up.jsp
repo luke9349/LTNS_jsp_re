@@ -127,7 +127,7 @@
 
 	
 	</div>
-<script src="JS/sign-upJs.js"></script>
+<script src="JS/sign-upJS.js"></script>
 <script src="JS/emailJS.js"></script>	
 </body>
 </html>

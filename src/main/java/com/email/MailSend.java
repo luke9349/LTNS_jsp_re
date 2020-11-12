@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 public class MailSend {
 	
 	public int random = (int)(Math.random()*1000);
-	boolean chk = false;
 	
 	public void MailSend(String email) {
 		Properties prop = System.getProperties();
@@ -42,7 +41,6 @@ public class MailSend {
         
     
         try {
-        	if (chk == false) {
         		
         		 msg.setSentDate(new Date());
                  
@@ -59,7 +57,6 @@ public class MailSend {
                  
                  Transport.send(msg);
 				
-			}
         	
            
             
