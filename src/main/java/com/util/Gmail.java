@@ -51,6 +51,7 @@ public class Gmail {
 			msg.addRecipient(Message.RecipientType.TO, toAddr);
 			msg.setContent(content, "text/html; charset=UTF-8");
 			Transport.send(msg);
+			System.out.println("메일전송완료");
 		} catch (Exception e) {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());
