@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.view.MemberDAO;
+import main.java.com.email.*;
 
-public class Signup_ajax_command implements Command {
+public class Signup_ajax_command implements Command{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -54,6 +55,8 @@ public class Signup_ajax_command implements Command {
 			e.printStackTrace();
 		}
 		
+		
+		
 		String nik = request.getParameter("nik");
 		
 		
@@ -74,6 +77,8 @@ public class Signup_ajax_command implements Command {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		
 	String email = request.getParameter("email");
 		
@@ -97,15 +102,21 @@ public class Signup_ajax_command implements Command {
 		}
 		
 		
-	
-		
-		
-		
-		
 		
 		
 
+		
+	
+		
+
 	}
+	
+
+	
+	
+	
+	
+	
 	
 	
 

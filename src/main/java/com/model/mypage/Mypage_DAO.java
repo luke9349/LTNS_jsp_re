@@ -12,6 +12,7 @@ import main.java.com.model.DAO;
 import main.java.com.model.DB;
 import main.java.com.model.DTO;
 import main.java.com.model.Post_Contents;
+import main.java.com.model.board.CommentDTO;
 import main.java.com.model.mainpage.Post_DTO;
 import main.java.com.util.DataUtil;
 
@@ -39,20 +40,22 @@ public class Mypage_DAO implements DAO {
 			"GROUP BY writer";
 	
 	//1. n번째 내가 작성한 글 : 5*n, pagination : /5, 제목, 작성일, 조회수, post_table에서  mm_id가 나와 일치해야 한다
-	final static public String SELECT_6_MY_POSTS_NTH="SELECT * FROM(" + 
-			"SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt " + 
-			"FROM  mm_table M " + 
+	final static public String SELECT_6_MY_POSTS_NTH="SELECT * FROM " + 
+			"(SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt " + 
+			"FROM tot_post_view V  " + 
 			"LEFT OUTER JOIN post_table P " + 
-			"ON M.mm_id=P.writer " + 
+			"ON V.post_id=P.post_id " + 
+			"LEFT OUTER JOIN mm_table M " + 
+			"ON P.writer=M.mm_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
 			"WHERE M.mm_id=? " + 
-			"ORDER BY regdate DESC , post_id DESC " + 
+			"ORDER BY P.regdate DESC, P.post_id DESC  " +  
 			")WHERE ROWNUM >= ? AND ROWNUM <= ?+5";
 	
 	//2. 내가 작성한 댓글 : 5*n, pagination : /5, 제목, 작성일, post_table에서  mm_id가 나와 일치해야 한다
-	final static public String SELECT_6_MY_COMMENTS="SELECT * FROM " + 
-			"(SELECT  comment_id, post_id, regdate, comment_contents " + 
+	final static public String SELECT_6_MY_COMMENTS="SELECT * FROM ( " + 
+			"SELECT  comment_id, post_id, regdate, comment_contents " + 
 			"FROM comment_table " + 
 			"WHERE writer=? " + 
 			"ORDER BY regdate DESC, comment_id DESC " + 
@@ -74,7 +77,7 @@ public class Mypage_DAO implements DAO {
 	
 	//3. 공감한 게시글 :  5*n, pagination : /5, 제목, 작성자, 작성일, empathize_table에서  mm_id가 나와 일치해야 한다
 	final static public String SELECT_6_MY_EMPATHIZE="SELECT * FROM( " + 
-			"SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt" + 
+			"SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, P.viewcnt AS viewcnt " + 
 			"FROM empathize_table E " + 
 			"LEFT OUTER JOIN mm_table M " + 
 			"ON E.mm_id=M.mm_id " + 
@@ -83,7 +86,7 @@ public class Mypage_DAO implements DAO {
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
 			"WHERE E.mm_id=? " + 
-			"ORDER BY regdate DESC, post_id DESC " + 
+			"ORDER BY regdate DESC, post_id DESC  " + 
 			")WHERE ROWNUM <= 6";
 	
 	//3. 공감한 게시글 갯수-pagination cnt
@@ -102,8 +105,8 @@ public class Mypage_DAO implements DAO {
 			"ON E.post_id=P.post_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"WHERE E.mm_id=?  " + 
-			"ORDER BY regdate " + 
+			"WHERE E.mm_id=? " + 
+			"ORDER BY regdate DESC, post_id DESC  " + 
 			")WHERE ROWNUM >= ? AND ROWNUM <= ?+5";
 				
 	//DB 연결에 필요한 변수들
@@ -138,32 +141,30 @@ public class Mypage_DAO implements DAO {
 			
 			DTO dto=null;
 			int empathCnt=0;//signal 2번, 3번 동시 처리 위해 switch 앞에 생성
-			
+			int post_id;
+			String regdate;
 			switch(signal) {
 			case 2: //내가 작성한 댓글
-				System.out.println("아직 미구현");
+				int comment_id=rs.getInt("comment_id");
+				post_id=rs.getInt("post_id");
+				regdate=rs.getString("regdate");
+				String comment_contents=rs.getString("comment_contents");
+				
+				dto=new CommentDTO(comment_id, comment_contents, post_id, regdate);
 				break;
 			
 			case 1: //내가 작성한 글
 				empathCnt=rs.getInt("empathize_cnt");
 			case 3: //내가 공감한 글
-				int post_id=rs.getInt("post_id");
-				System.out.println("0");
+				post_id=rs.getInt("post_id");
 				String title=rs.getString("title");
-				System.out.println("1");
 				String nickname=rs.getString("nickname");
-				System.out.println("2");
 				String id=rs.getString("id");
-				System.out.println("3");
 				String category=rs.getString("category");
-				System.out.println("4");
-				String regdate=rs.getString("regdate");
+				regdate=rs.getString("regdate");
 				regdate=regdate.substring(0,16);
-				System.out.println("5");
 				int viewCnt=rs.getInt("viewCnt");
-				System.out.println("6");
 				int mm_id=rs.getInt("mm_id");// mm_id
-				System.out.println("7");
 				Post_Contents post_contents=new Post_Contents(rs.getString("real_filename"));
 				
 				dto=new Post_DTO(post_id, title, mm_id, category, regdate,

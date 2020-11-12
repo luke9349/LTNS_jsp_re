@@ -1,36 +1,47 @@
 @charset "UTF-8";
 
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
-.main {
+body *{
+	 font-family: 'Hanna', fantasy;
 	
-	background-color: blue;
-
 }
 
+.hanna * {
+ font-family: 'Hanna', fantasy;
+}
+
+
+
+
 .aticle_1 {
-	border:1px solid black;
+ font-family: 'Hanna', fantasy;
+
 }
 
 
 
 .select_s {
+	margin:3px;
 	padding: 5px;
 	width: 300px;
 }
 
-
-
-
-
-
-.main_imgs{
-	display: flex;
-	justify-content: flex-end;
+.title_contents_2 {
+		margin:3px;
+	
 }
+
+
+.tables_title{
+	margin: 5px;
+}
+
+
 
 .report_section {
 	margin: 15px;
-	background-color: gray;
 
 
 }
+

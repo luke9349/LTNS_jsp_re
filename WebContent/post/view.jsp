@@ -251,6 +251,5 @@ function recommend(){
 		%>
 	</c:if>
 	<jsp:include page="../footer/component/footer.jsp" />
-
 </body>
 </html>

@@ -19,7 +19,7 @@ public class Mainpage_DAO implements DAO {
 			"ON P.writer=M.mm_id " + 
 			"LEFT OUTER JOIN file_table F " + 
 			"ON P.post_contents=F.file_id " + 
-			"ORDER by empathize_cnt DESC, post_id DESC  " + 
+			"ORDER by empathize_cnt DESC NULLS LAST, post_id DESC  " + 
 			") WHERE ROWNUM <=3 ";
 	
 	/*--조회수 순으로 뷰를 정렬하여,포스트 6개  가져오기--*/

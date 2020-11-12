@@ -11,5 +11,5 @@
 
 <script>
 	alert("게스트 모드로 입장하셨습니다.");
-	location.href = "<%=request.getContextPath() %>/board/board_list.do"
+	location.href = "<%=request.getContextPath() %>/mainpage/mainpage.do"
 </script>

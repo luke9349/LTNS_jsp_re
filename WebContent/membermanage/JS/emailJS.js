@@ -1,4 +1,4 @@
-
+var chk=null;
 
 function emailSend() {
 	let clientEmail = $("#email").val();
@@ -6,9 +6,15 @@ function emailSend() {
 	$.ajax({
 		
 		type: "post",
-		url: "sign-up.ajax?email="+$('#email').val(),
-		data:{email:clientEmail},
+		url: "email.ajax?email="+$('#email').val(),
 		success : function(data) {
+			console.log(data);
+			chk=data;
+//			if (data.equals($("#emailAC"))) {
+//				
+//				alert("이메일인증완료");
+//				
+//			}
 			
 			
 		},
@@ -18,8 +24,27 @@ function emailSend() {
 		}
 		
 		
-	});
+	});	
 	
+}
+
+function emailChk() {
+	console.log(chk);
+	emailck = $("#emailAC").val();
+	
+	if (chk == emailck) {
+		
+		alert("이메일 인증완료")
+		
+		chk=null;
+		
+		$("#emailACbtn").attr("disabled", false)
+		
+		
+	}else{
+		
+		alert("이메일 인증실패")
+	}
 	
 	
 	

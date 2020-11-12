@@ -56,16 +56,18 @@ public class DoController extends HttpServlet {
 		Command cmd = null; // 어떠한 로직을 수행할지 결정 
 		String viewPage = null; // 어떠한 페이지를 보여줄지 결정 
 		
-		
-		switch (com) {
-
-		case "/board/board_list.do":
+		if((com.equals("/membermanage/loginmain.do"))&&(com.equals("/membermanage/loginOk.do"))&&(com.equals("/membermanage/sign-up-complete.do"))) {
 			if(request.getSession().getAttribute("login") == null)  {
 				request.getSession().setAttribute("messageType", "오류 메시지");
 				request.getSession().setAttribute("messageContent", "로그인이 필요한 서비스 입니다.");
 				response.sendRedirect(request.getContextPath() + "/membermanage/loginmain.jsp");
 				return;
 			}
+		}
+		
+		switch (com) {
+
+		case "/board/board_list.do":
 			viewPage = "board_list.jsp";
 			break;
 			
