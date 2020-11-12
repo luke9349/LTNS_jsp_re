@@ -136,7 +136,7 @@
 <script src="../board/comment/js/comment.js"></script>
 
 <!-- modal -->
-<script src="../modal/js/modal.js"></script>
+<script defer src="../modal/js/modal.js"></script>
 
 
 

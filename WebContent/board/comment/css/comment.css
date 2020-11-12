@@ -1,5 +1,6 @@
 .comment_area {
 	min-height: 10rem;
+	resize: none;
 }
 
 #zeroData {
@@ -28,6 +29,10 @@
 	color: #f8f9fa;
 }
 
+.inserBtn, .trashBtn, .declarationBtn {
+	cursor: pointer;
+}
+
 .inserBtn:active {
 	color: #dc3545;
 	transform: scale(0.98);
@@ -46,6 +51,11 @@
 
 .trashBtn:hover {
 	color: #dc3545;
+}
+
+.declarationBtn:active {
+	transform: scale(0.98);
+	opacity: 0.8;
 }
 
 #downArrow {

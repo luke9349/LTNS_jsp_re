@@ -40,7 +40,7 @@
 	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=BOOK">도서게시판</a>
 	         	</li>
 	         	<li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=SPORTS">운동게시판</a>
+	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=SPORTS">스포츠게시판</a>
 	         	</li>
 	         	<li class="nav-item">
 	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=GAME">게임게시판</a>
@@ -51,11 +51,6 @@
 	         	<li class="nav-item">
 	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=VIEWCNT">인기게시판</a>
 	         	</li>
-	         	<c:if test="${login == '1' }">
-	         	  <li class="nav-item">
-	           		<a class="nav-link" href="<%=request.getContextPath() %>/board/board_list.do?root=MYPAGE">내가쓴글</a>
-	         	  </li>
-	         	</c:if>
 	       	</ul>
 	    </div>
 	</nav>
