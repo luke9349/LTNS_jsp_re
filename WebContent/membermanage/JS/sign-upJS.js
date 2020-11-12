@@ -33,7 +33,6 @@
 					
 				}else if(data == 0){
 					$("#iderror").html("아이디 완벽함");
-					$("#submit").attr("disabled", "disabled");
 				}
 				
 			},
@@ -204,7 +203,7 @@
 		
 		
 		//약관동의 확인
-		if(privacyCheck == "N" || $("#provisionYn").val() == ""){ alert("약관동의 확인"); return false;}
+		if(privacyCheck == "N" || privacyCheck == "" ){ alert("약관동의 확인"); return false;}
 		
 		//아이디 공백 확인 
 		if($("#id").val() == ""){ 

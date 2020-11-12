@@ -51,13 +51,13 @@
                         </textarea>
                         <div class="radio" id="radio">
                             <label>
-                                <input type="radio"  id="provisionYn" name="provisionYn" value="Y" checked="checked" autofocus="autofocus">
+                                <input type="radio"  id="provisionYn1" name="provisionYn" value="Y" checked="checked" autofocus="autofocus">
                               			  동의합니다. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                              
                              </label>
                              
                           <label>
-                                <input type="radio"  id="provisionYn" name="provisionYn" value="N">
+                                <input type="radio"  id="provisionYn2" name="provisionYn" value="N">
                           		      	동의하지 않습니다.
                             </label>
                         </div>
