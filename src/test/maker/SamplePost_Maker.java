@@ -47,6 +47,37 @@ public class SamplePost_Maker {
 		System.out.println(result);
 		return result;
 	}
+	String mkRandomStringHangle() {
+		return mkRandomStringHangle(1);
+	}
+	String mkRandomStringHangle(int num) {
+		String[] noun= {"나","너","고양이","개","어머니","사랑","우리","죽음","존경","게시글","영화","게임","운동","현준","성언","휘진"};
+		String[] postition= {"은","는","이","가","을","를"};
+		String[] verb= {"갖다","가지다","가졌다","가졌었다","달리다","달렸다","달렸었다","날다","날았다","날았었다","죽다","죽었다","죽었었다","살다","살았다","살았었다","날뛰다","날뛰었다","날뛰었었다","미치다","미쳤다","미쳤었다","갈다","갈았다","갈았었다","뛰다","뛰었다","뛰었었다","기어온다","기어왔다","기었었다","타다","탔다","탔었다"};
+
+		String result="";
+		//1형식 명사+조사 명사+이다. 
+		//2형식 명사+조사 동사
+		//3형식 명사+조사 명사+조사 동사
+		int[] form= {1,2,3};
+		for(int i=0;i<num;i++) {
+			String _result="";
+			switch(form[(int)(Math.random()*3)]) {
+			case 1:
+				_result=noun[(int)(Math.random()*(noun.length-1))]+postition[(int)(Math.random()*(postition.length-1))]+" "+noun[(int)(Math.random()*(noun.length-1))]+"이다.";
+				break;
+			case 2:
+				_result=noun[(int)(Math.random()*(noun.length-1))]+postition[(int)(Math.random()*(postition.length-1))]+" "+verb[(int)(Math.random()*(verb.length-1))];
+				break;
+			case 3:
+				_result=noun[(int)(Math.random()*(noun.length-1))]+postition[(int)(Math.random()*(postition.length-1))]+" "+noun[(int)(Math.random()*(noun.length-1))]+postition[(int)(Math.random()*(postition.length-1))]+" "+verb[(int)(Math.random()*(verb.length-1))];
+				break;
+			}
+			result+=_result;
+		}
+		
+		return result;
+	}
 	
 	String returnImgTag() {
 
@@ -67,13 +98,13 @@ public class SamplePost_Maker {
 			result="&nbsp";
 			break;
 		case 4:
-			result="<"+mkRandomString()+">"+mkRandomString()+"</"+mkRandomString()+">";
+			result="<"+mkRandomString()+">"+mkRandomStringHangle((int)(Math.random()*4)+4)+"</"+mkRandomString()+">";
 			break;
 		case 5:
 			result="&gt";
 			break;
 		default:
-			result=mkRandomString();
+			result=mkRandomStringHangle((int)(Math.random()*4)+4);
 			break;
 		}
 		
@@ -92,7 +123,7 @@ public class SamplePost_Maker {
 	//1. 물리 파일 생성
 	DTO mkRealFile() {
 		String filePath="";
-		String title=mkRandomString();
+		String title=mkRandomStringHangle();
 		String content=mkLongString();
 		
 		Date d = new Date();
