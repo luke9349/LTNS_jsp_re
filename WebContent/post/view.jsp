@@ -46,6 +46,11 @@
 	int login_chk = (int)session.getAttribute("login");
 	String nickname =  member_info[0].getNickname();
 	
+	String nick_ssessions = (String) session.getAttribute("nickname");
+	System.out.println(nick_ssessions + " 나는 방문자닉네임이다.....");
+
+	
+	
 	
 	
 	if(login_chk == 0){
@@ -233,7 +238,7 @@ function recommend(){
 </div> 
 	<jsp:include page="../board/comment/component/comment.jsp"></jsp:include>
 	<script>
-		commenInit('<%=streinger%>', '${param.post_id}', '<%=login_chk%>', '<%=master%>', '<%=nickname%>');
+		commenInit('<%=streinger%>', '${param.post_id}', '<%=login_chk%>', '<%=master%>', '<%=nick_ssessions%>');
 	</script>
 	<jsp:include page="../modal/component/modal.jsp" />
 	<c:if test="${messageType != null &&  messageContent != null}">
