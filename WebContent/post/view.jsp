@@ -46,6 +46,11 @@
 	int login_chk = (int)session.getAttribute("login");
 	String nickname =  member_info[0].getNickname();
 	
+	String nick_ssessions = (String) session.getAttribute("nickname");
+	System.out.println(nick_ssessions + " 나는 방문자닉네임이다.....");
+
+	
+	
 	
 	
 	if(login_chk == 0){
@@ -109,7 +114,7 @@
 <title>View</title>
 </head>
 <!-- css link  -->
- <link rel="stylesheet" type="text/css" href="CSS/Write.css">
+ <link rel="stylesheet" type="text/css" href="CSS/view.css">
  <link rel="stylesheet" type="text/css" href="../footer/css/footer.css">
  <link rel="stylesheet" type="text/css" href="../header/css/header.css">
 
@@ -136,6 +141,13 @@
 
 
 <script>
+
+function report_btn(post_id){
+	var r = confirm("신고 하시겠습니까?");
+	
+	if(r){	location.href= 'report.jsp?post_id='+post_id+'';	}
+}
+
 function deletePost(uid){
 	// 삭제 여부, 다시 확인하고 진행하기
 	var r = confirm("삭제 하시겠습니까?");
@@ -182,16 +194,18 @@ function recommend(){
 	<div class="top_title">
 		<h6 class ="text-info"><%=category %> 	</h6> <span class="d-block"> [<%=post_id %>] </span> 
 		
-		 <span class="text-right d-block"> 
-		 <i class="far fa-eye"> <%=viewCnt %></i>&nbsp;
-		 
-		 <%if(login_chk != 0){%>
-		 <i id="rec_btn" onclick="recommend()" class="far fa-thumbs-up"> <%=emp_cnt %></i>
-		 <%} %>
-		 </span>
 		
-		 <!-- 좋아요 버튼   -->
+		 <div class="spans text-right d-block">
+		 <span class="divspan">  <i id="report" onclick='report_btn(<%=post_id %>)' class="fas fa-bullhorn text-danger mr-2"></i></span>
+		 <span class="divspan">  <i class="far fa-eye"> <%=viewCnt %></i>&nbsp;</span>
+		 <%if(login_chk != 0){%>
+		 <span class="divspan"> <i id="rec_btn" onclick="recommend()" class="far fa-thumbs-up text-info"> <%=emp_cnt %></i>	 </span>
+		 <%} %>
 	
+		 </div>
+		
+		
+
 	</div>
 	<!-- 제목  -->
 	<div class="top title">
@@ -214,7 +228,7 @@ function recommend(){
 	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="돌아가기" onclick='back()'>
 	
 	<!-- 수정삭제  -->
-	<%if(wirters == streinger ||  master.equals("admin")  ){ %>
+	<%if(wirters == streinger ||  master.equals("admin") ){ %>
 	<button type="button" class="fun-btn btn-sm font-weight-bold"  onclick="deletePost(<%=post_content%>)">삭제</button>
 	<input type="button" class="fun-btn btn-sm font-weight-bold"  value="수정" onclick="location.href='update.do?post_id=<%=post_id%>'">
 	
@@ -224,7 +238,7 @@ function recommend(){
 </div> 
 	<jsp:include page="../board/comment/component/comment.jsp"></jsp:include>
 	<script>
-		commenInit('<%=streinger%>', '${param.post_id}', '<%=login_chk%>', '<%=master%>');
+		commenInit('<%=streinger%>', '${param.post_id}', '<%=login_chk%>', '<%=master%>', '<%=nick_ssessions%>');
 	</script>
 	<jsp:include page="../modal/component/modal.jsp" />
 	<c:if test="${messageType != null &&  messageContent != null}">
@@ -237,6 +251,5 @@ function recommend(){
 		%>
 	</c:if>
 	<jsp:include page="../footer/component/footer.jsp" />
-
 </body>
 </html>

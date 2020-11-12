@@ -107,7 +107,7 @@ DELETE FROM comment_table;
 INSERT INTO empathize_table(post_id,mm_id)
 VALUES (post_id를넣어주세요, mm_id를넣어주세요);
 
-
+SELECT * FROM EMPATHIZE_TABLE;
 
 
 /*-----------------------------------메인페이지 관련-----------------------------------*/
@@ -122,10 +122,12 @@ LEFT OUTER JOIN mm_table M
 ON P.writer=M.mm_id
 LEFT OUTER JOIN file_table F
 ON P.post_contents=F.file_id
-ORDER by empathize_cnt DESC, post_id DESC 
+ORDER by empathize_cnt DESC NULLS LAST, post_id DESC 
 )
 WHERE ROWNUM <=3
 ;
+
+SELECT * FROM TOT_POST_VIEW ORDER by empathize_cnt DESC NULLS LAST;
 
 --viewCnt와 file_realname 뽑아야 한다!!
 /*--조회수 순으로 뷰를 정렬하여,포스트 6개  가져오기--*/
@@ -291,7 +293,7 @@ LEFT OUTER JOIN post_table P
 ON E.post_id=P.post_id
 LEFT OUTER JOIN file_table F
 ON P.post_contents=F.file_id
-WHERE E.mm_id=100
+WHERE E.mm_id=1
 ORDER BY regdate DESC, post_id DESC 
-)WHERE ROWNUM >= ? AND ROWNUM <= ?+5
+)WHERE ROWNUM >= 1 AND ROWNUM <= 1+5
 ;

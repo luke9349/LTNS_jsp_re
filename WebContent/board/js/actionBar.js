@@ -1,6 +1,12 @@
 const searchForm = $('#searchForm');
 let params = null;
 
+const handleLoadedLink = () => {
+  const contextPath = location.pathname.substring(0, location.pathname.indexOf('/', 1));
+  const link = `${contextPath}/post/write.do${location.search}`;
+  $('#writeBtn').attr('href', link)  ;
+}
+
 const handleInputChange = () => {
   search.focus();
 };
@@ -19,7 +25,7 @@ const handleSearchSubmit = (e) => {
   page = parseInt(page);
   let url = `root=${root}&type=${type}&page=${page}`;
   if($('#startDate').val() && $('#endDate').val()) 
-	url += `$startDate=${$('#startDate').val()}&endDate=${$('#endDate').val()}`;
+	url += `&startDate=${$('#startDate').val()}&endDate=${$('#endDate').val()}`;
 
   if($('#searchType').val() && $('#search').val()) 
 	url += `&searchType=${$('#searchType').val()}&search=${$('#search').val()}`;
@@ -66,6 +72,11 @@ const btns = document.querySelectorAll('.actionBtn');
   }
 };
 
+const aa = (e) => {
+	console.log(e.target);
+	console.log(e.target.href)
+}
+
 export const initActionbar = (initialParams) => {
   params = initialParams;
   handledType();
@@ -74,4 +85,5 @@ export const initActionbar = (initialParams) => {
   $('#searchSubmitBtn').on('click', handleClickSubmit);
   searchForm.on('submit', handleSearchSubmit);
   $('#searchType').on('change', handleInputChange);
+  $(window).on('load', handleLoadedLink)
 };

@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 
+
+
 /* Input style */
 .likes:hover {
 	cursor: pointer;
@@ -11,9 +13,6 @@ table .selector {
 	text-align: center;
     padding: 2.5px;
 }
-
-
-
 
 
 /* toggle this class */
@@ -83,7 +82,6 @@ table .selector {
     transform: scale(1);
   }
 }
-
 
 
 
