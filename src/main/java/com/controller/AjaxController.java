@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.command.board.BoardAjaxCommand;
+import main.java.com.command.board.CommentDeclarationCommand;
 import main.java.com.command.board.CommentLoadCommand;
 import main.java.com.command.board.CommentNextCommand;
 import main.java.com.command.board.CommentRemoveCommand;
@@ -87,6 +88,10 @@ public class AjaxController extends HttpServlet {
 			return;
 		case "/post/commentUpdate.ajax":
 			command = new CommentUpdateCommand();
+			command.execute(request, response);
+			return;
+		case "/post/commentDeclaration.ajax":
+			command = new CommentDeclarationCommand();
 			command.execute(request, response);
 			return;
 		case "/membermanage/sign-up.ajax":

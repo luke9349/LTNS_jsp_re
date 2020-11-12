@@ -58,9 +58,13 @@
               <th class="align-middle text-center">신고 날짜</th>
               <td>
                 <input
-                  type="text"
+                  type="hidden"
                   id="declarationDate"
                   name="declarationDate"
+                />
+                <input
+                  type="text"
+                  id="copyDate"
                   class="form-control"
                   disabled
                 />
@@ -70,9 +74,13 @@
               <th class="align-middle text-center">신고자 ID</th>
               <td>
                 <input
-                  type="text"
+                  type="hidden"
                   id="declarationNickname"
                   name="declarationNickname"
+                />
+                <input
+                  type="text"
+                  id="copyNickname"
                   class="form-control"
                   disabled
                 />

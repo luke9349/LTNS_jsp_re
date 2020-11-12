@@ -16,14 +16,14 @@ import main.java.com.command.Command;
 import main.java.com.model.board.AjaxCommentListJSON;
 import main.java.com.model.board.CommentDAO;
 import main.java.com.model.board.CommentDTO;
-import main.java.com.model.board.CommentInsertModel;
+import main.java.com.model.board.CommentJSONModel;
 import main.java.com.util.LogUtil;
 
 public class CommentNextCommand implements Command, Board_Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		CommentInsertModel model = null;
+		CommentJSONModel model = null;
 
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
@@ -32,7 +32,7 @@ public class CommentNextCommand implements Command, Board_Command {
 			while ((str = reader.readLine()) != null) {
 				json.append(str + "\n");
 			}
-			model = new ObjectMapper().readValue(json.toString(), CommentInsertModel.class);
+			model = new ObjectMapper().readValue(json.toString(), CommentJSONModel.class);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());
