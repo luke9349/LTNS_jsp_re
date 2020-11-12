@@ -19,6 +19,7 @@ import main.java.com.command.mypage.MyPagerev_Ok;
 import main.java.com.command.post.WriteCommend;
 import main.java.com.command.post.deleteCommend;
 import main.java.com.command.post.recomendCommend;
+import main.java.com.command.post.report_Cmd;
 import main.java.com.command.post.updateCommend;
 import main.java.com.command.post.updateOkCommend;
 import main.java.com.command.post.ViewCommend;
@@ -171,6 +172,14 @@ public class DoController extends HttpServlet {
 			cmd.execute(request, response);
 			viewPage= "sign-up-complete.jsp";
 			break;
+			
+			
+		case "/post/report_ok.do":
+			cmd = new report_Cmd();
+			cmd.execute(request, response);
+			viewPage = "report_ok.jsp";
+			break;
+			
 			
 		}//end swithc
 		

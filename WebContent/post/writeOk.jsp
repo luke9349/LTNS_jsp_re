@@ -9,9 +9,7 @@
 <% 
 	int currval = (Integer) request.getAttribute("fileOk"); 
 	int writecnt = (Integer) request.getAttribute("result");
-	String title = request.getParameter("title");
-	System.out.println(title+"타티일타알팅ㄹ탕ㄹ팅랕ㅇ맅앑일");
-	
+	String title = request.getParameter("category");
 	
  %>
  
@@ -24,7 +22,7 @@
 <%}else{%>
 	<script>
 		alert("등록성공" + <%=currval%>);		
-		location.href = "<%=request.getContextPath() %>/board/board_list.do?type=list&root=<%=title%>";
+		location.href = "<%=request.getContextPath() %>/board/board_list.do?root=<%=title%>";
 	</script>
 <%}%>
 

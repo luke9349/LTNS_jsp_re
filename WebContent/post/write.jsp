@@ -9,12 +9,13 @@
 	System.out.println(saveDirectory + "세이브디렉토리입니다.");
 	System.out.println(ctx + "/"+ "data" +"/");
 	String writer = request.getParameter("writer");
-	System.out.println("asdlkjasdlkjals;;djkl;: " + writer);
 
 	//게스트 처리하기 
 	
 	int login_chk = (int)session.getAttribute("login");
 	String garde = (String)session.getAttribute("grade");
+
+	String root = request.getParameter("root");
 	
 	
 %>      
@@ -123,14 +124,23 @@ function chkSubmit(){
 		      		<td class="text-center" style="width:5%;">
 		      		<select class='selector' name="category">
 		 			
-		 			<%if(garde.equals("admin")) {%>
-		 				<option value="NOTICE" > 공지사항 </option>
+		 			<%if(garde.equals("admin") || root.equals("NOTICE")) {%>
+		 				<option value="NOTICE" selected="selected" > 공지사항 </option>
 		 			<%} %>
 		 			
-		       		<option value="MOVIE" selected="selected" > 영화 게시판 </option>
-		       		<option value="GAME"> 게임 게시판 </option>
-		       		<option value="BOOK">도서 게시판  </option>
-		       		<option value="SPORTS"> 운동 게시판 </option>	
+		 			<%if(root.equals("MOVIE")) {%>
+		 				<option value="MOVIE" selected="selected"> 영화 게시판 </option>
+		       		<%} %>
+		 			
+		 			<%if(root.equals("GAME")) {%>
+		 			<option value="GAME"  selected="selected"> 게임 게시판 </option>
+		 					<%} %>
+		       		<%if(root.equals("BOOK")) {%>
+		       		<option value="BOOK"  selected="selected"> 도서 게시판  </option>
+		       				<%} %>
+		       		<%if(root.equals("SPORTS")) {%>
+		       		<option value="SPORTS"  selected="selected"> 운동 게시판 </option>	
+		       				<%} %>
 		       		</select>
 		       		</td>     
 		            <td>
