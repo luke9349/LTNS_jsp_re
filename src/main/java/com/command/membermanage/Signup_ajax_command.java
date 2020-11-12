@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import main.java.com.command.Command;
 import main.java.com.view.MemberDAO;
 
-public class Signup_ajax_command implements Command{
+public class Signup_ajax_command implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -97,6 +97,8 @@ public class Signup_ajax_command implements Command{
 		}
 		
 		
+	
+		
 		
 		
 		
@@ -104,5 +106,7 @@ public class Signup_ajax_command implements Command{
 		
 
 	}
+	
+	
 
 }

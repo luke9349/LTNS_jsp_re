@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
-import main.java.com.command.board.BoarAjaxCommand;
+import main.java.com.command.board.BoardAjaxCommand;
 import main.java.com.command.board.CommentLoadCommand;
 import main.java.com.command.board.CommentNextCommand;
 import main.java.com.command.board.CommentRemoveCommand;
@@ -65,7 +65,7 @@ public class AjaxController extends HttpServlet {
 			new Mypage_Add_MyEmpathize_Command_By_AJAX().execute(request,response);
 			break;			
 		case "/board/board_list.ajax":
-			command = new BoarAjaxCommand();
+			command = new BoardAjaxCommand();
 			command.execute(request, response);
 			return;
 		case "/post/commentLoad.ajax":
