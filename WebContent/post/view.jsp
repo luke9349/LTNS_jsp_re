@@ -182,11 +182,15 @@ function recommend(){
 	<div class="top_title">
 		<h6 class ="text-info"><%=category %> 	</h6> <span class="d-block"> [<%=post_id %>] </span> 
 		
-		 <span class="text-right d-block"> 
+		
+		
+		 <span class="spnas text-right d-block"> 
+		 <i class="fas fa-bullhorn text-danger mr-2"></i>
+		 
 		 <i class="far fa-eye"> <%=viewCnt %></i>&nbsp;
 		 
 		 <%if(login_chk != 0){%>
-		 <i id="rec_btn" onclick="recommend()" class="far fa-thumbs-up"> <%=emp_cnt %></i>
+		 <i id="rec_btn" onclick="recommend()" class="far fa-thumbs-up text-info"> <%=emp_cnt %></i>
 		 <%} %>
 		 </span>
 		

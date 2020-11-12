@@ -85,5 +85,7 @@ table .selector {
 }
 
 
-
+.spans #rec_btn:hover {
+	cursor: pointer;
+}
 
