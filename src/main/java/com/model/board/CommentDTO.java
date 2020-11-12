@@ -2,19 +2,21 @@ package main.java.com.model.board;
 
 import main.java.com.model.DTO;
 
-public class CommentDTO implements DTO{
+public class CommentDTO implements DTO {
 
 	private long commentId;
 	private String commentContents;
 	private long writerId;
 	private String writer;
 	private String nickName;
+	private String email;
+	private String grade;
 	private long postId;
 	private String regdate;
 
-	
-	public CommentDTO() {	}
-	
+	public CommentDTO() {
+	}
+
 	public CommentDTO(long commentId, String commentContents, long postId, String regdate) {
 		this.commentId = commentId;
 		this.commentContents = commentContents;
@@ -62,6 +64,22 @@ public class CommentDTO implements DTO{
 		this.nickName = nickName;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
 	public long getPostId() {
 		return postId;
 	}
@@ -81,7 +99,8 @@ public class CommentDTO implements DTO{
 	@Override
 	public String toString() {
 		return "CommentDTO [commentId=" + commentId + ", commentContents=" + commentContents + ", writerId=" + writerId
-				+ ", writer=" + writer + ", nickName=" + nickName + ", postId=" + postId + ", regdate=" + regdate + "]";
+				+ ", writer=" + writer + ", nickName=" + nickName + ", email=" + email + ", grade=" + grade
+				+ ", postId=" + postId + ", regdate=" + regdate + "]";
 	}
 
 }

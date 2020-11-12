@@ -110,8 +110,14 @@
             </tr>
           </table>
         </form>
+      <span class="text-danger">
+      * 신고까지의 약간의 소요시간이 필요합니다. <br />
+      &nbsp;&nbsp;신고하기 버튼을 누르고 팝업메시지가 나올때까지 <br />
+      &nbsp;&nbsp;잠시만 기다려주세요.
+      </span>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
         <button id="declarationSubmit" type="button" class="btn btn-danger">신고하기</button>
       </div>
     </div>

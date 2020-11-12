@@ -49,7 +49,6 @@ const loadDataEvent = () => {
     $(this).on('submit', handleUpdateAjax);
   });
  
-
 };
 
 const createDataNullMessage = () => {
@@ -72,7 +71,7 @@ const createComment = (datas) => {
     if (initBody.userId === parseInt(data.writerId)) {
       comment += '<div id="alert" class="alert alert-warning" role="alert">';
     } else {
-      comment += '<div id="alert" class="alert alert-success" role="alert">';
+      comment += '<div id="alert" class="alert alert-light" role="alert">';
     }
     comment += '<div class="alertBox">';
     comment += `<span class="comment_content">${data.commentContents}</span>`;
@@ -142,10 +141,15 @@ const handleChangeContent = (event) => {
 
 const handleDeclarationSubmit = (e) => {
   e.preventDefault();
-  if($('#declarationTitle').val() === null || $('#declarationTitle').val() === '' || $('#declarationContent').val() === null || $('#declarationContent').val() === '') {
+  if (
+    $('#declarationTitle').val() === null ||
+    $('#declarationTitle').val() === '' ||
+    $('#declarationContent').val() === null ||
+    $('#declarationContent').val() === ''
+  ) {
     $('#declarationModal').modal('hide');
     jsShowModal('오류 메시지', '신고 제목과 내용을 모두 입력해 주세요.');
-	return;
+    return;
   }
   const form = new FormData(document.getElementById('declarationForm'));
   const formData = Object.fromEntries(form);
@@ -160,8 +164,19 @@ const handleDeclarationSubmit = (e) => {
     redirect: 'follow', // manual, *follow, error
     referrer: 'no-referrer', // no-referrer, *client
     body: JSON.stringify(formData), // body data type must match "Content-Type" header
-  })
-}
+  }) //
+    .then((response) => response.text()) //
+    .then((text) => {
+      $('#declarationModal').modal('hide');
+      if (text === 'true') jsShowModal('성공 메시지', '신고가 접수되었습니다.');
+      else
+        jsShowModal(
+          '오류 메시지',
+          '일시적인 서버 오류로 인해 신고처리가 되지 않았습니다.'
+        );
+    });
+};
+
 
 const handleDeclarationClick = () => {
   $('#declarationForm').submit();

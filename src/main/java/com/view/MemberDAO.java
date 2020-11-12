@@ -193,6 +193,25 @@ public class MemberDAO {
 			return arr;
 			
 		}
+		
+		public MemberDTO[] member_MM_NICK_Select(String nickname) throws SQLException {
+			MemberDTO[] arr = null;
+			
+			try {
+				psmt = conn.prepareStatement(SQL_NIK_INFO_SELECT);
+				psmt.setString(1, nickname);
+				rs = psmt.executeQuery();
+				arr = createMember(rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			
+			
+			return arr;
+			
+		}
 	
 	
 	

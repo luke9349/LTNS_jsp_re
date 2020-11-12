@@ -26,6 +26,7 @@ public class MM_DAO implements DAO {
 	
 	public static final String UPDATE_NICK = 
 			"UPDATE MM_TABLE  SET NICKNAME = ? WHERE mm_id = ?";
+
 	
 	//DB 연결에 필요한 변수들
 		Connection conn;

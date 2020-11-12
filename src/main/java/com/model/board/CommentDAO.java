@@ -19,6 +19,9 @@ public class CommentDAO {
 	ResultSet rs = null;
 
 	final static String INSERT_COMMENT = "INSERT INTO COMMENT_TABLE (COMMENT_ID, COMMENT_CONTENTS, WRITER, POST_ID, REGDATE) VALUES (SEQ_comment_table_comment_id.NEXTVAL, ?, ?, ?, sysdate)";
+	final static String SELECT_COMMENT_BY_CCOMMENTID = "SELECT * FROM COMMENT_TABLE c"
+			+ " JOIN MM_TABLE m ON c.WRITER = m.MM_ID"
+			+" WHERE COMMENT_ID = ?";
 	final static String SELECT_COMMENT_BY_POSTID_ALL = "SELECT * FROM COMMENT_TABLE c"
 			+ " JOIN MM_TABLE m ON c.WRITER = m.MM_ID"
 			+" WHERE POST_ID = ?";
@@ -51,6 +54,26 @@ public class CommentDAO {
 		return -1;
 	} // end createComment()
 
+	// read
+	public ArrayList<CommentDTO> getCommendById(long commentId) {
+		ArrayList<CommentDTO> list = null;
+		String sql = SELECT_COMMENT_BY_CCOMMENTID;
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setLong(1, commentId);
+			rs = psmt.executeQuery();
+			list = createArray(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.error(e.getMessage());
+		} finally {
+			DataUtil.resourceClose(psmt, conn);
+		} // end try
+		
+		return list;
+	} // end getAllCommentByPostId()
+	
 	// read
 	public ArrayList<CommentDTO> getAllCommentByPostId(int postId) {
 		ArrayList<CommentDTO> list = null;
@@ -145,6 +168,8 @@ public class CommentDAO {
 				dto.setWriter(rs.getString("ID"));
 				dto.setNickName(rs.getString("NICKNAME"));
 				dto.setPostId(rs.getLong("POST_ID"));
+				dto.setEmail(rs.getString("EMAIL"));
+				dto.setGrade(rs.getString("GRADE"));
 
 				Date date = rs.getDate("REGDATE");
 				Time time = rs.getTime("REGDATE");
