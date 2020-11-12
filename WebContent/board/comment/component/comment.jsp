@@ -34,7 +34,86 @@
     </div>
     <div class="clearfix"></div>
   </div>
-
   <div class="comment__list">
+  </div>
+</div>
+<div id="declarationModal" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">신고하기 양식</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="declarationForm">
+          <input
+            type="hidden"
+            name="declarationCommentId"
+            id="declarationCommentId"
+          />
+          <table class="table table-bordered">
+            <tr>
+              <th class="align-middle text-center">신고 날짜</th>
+              <td>
+                <input
+                  type="hidden"
+                  id="declarationDate"
+                  name="declarationDate"
+                />
+                <input
+                  type="text"
+                  id="copyDate"
+                  class="form-control"
+                  disabled
+                />
+              </td>
+            </tr>
+            <tr>
+              <th class="align-middle text-center">신고자 ID</th>
+              <td>
+                <input
+                  type="hidden"
+                  id="declarationNickname"
+                  name="declarationNickname"
+                />
+                <input
+                  type="text"
+                  id="copyNickname"
+                  class="form-control"
+                  disabled
+                />
+              </td>
+            </tr>
+            <tr>
+              <th class="align-middle text-center">신고 제목</th>
+              <td>
+                <input
+                  type="text"
+                  id="declarationTitle"
+                  name="declarationTitle"
+                  class="form-control"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th class="align-middle text-center">신고 내용</th>
+              <td>
+                <textarea
+                  id="declarationContent"
+                  name="declarationContent"
+                  class="form-control"
+                  style="height: 15rem; resize: none"
+                ></textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="declarationSubmit" type="button" class="btn btn-danger">신고하기</button>
+      </div>
+    </div>
   </div>
 </div>

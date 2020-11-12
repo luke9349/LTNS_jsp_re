@@ -19,28 +19,28 @@
 	
 <c:choose>	
 	<c:when test="${root eq 'NOTICE' }">
-		<% topic = "공지사항"; %>				
+		<% topic = "<i class=\"fab fa-neos\"></i>공지사항"; %>				
 	</c:when>
 	<c:when test="${root eq 'BOOK' }">		
-		<% topic = "도서게시판"; %>						
+		<% topic = "<i class=\"fas fa-book-open\"></i>도서게시판"; %>						
 	</c:when>
 	<c:when test="${root eq 'MOVIE' }">					
-		<% topic = "영화게시판"; %>						
+		<% topic = "<i class=\"fas fa-video\"></i>영화게시판"; %>						
 	</c:when>
 	<c:when test="${root eq 'SPORTS' }">
-		<% topic = "운동게시판"; %>										
+		<% topic = "<i class=\"fas fa-running\"></i>스포츠게시판"; %>										
 	</c:when>
 	<c:when test="${root eq 'GAME' }">		
-		<% topic = "게임게시판"; %>											
+		<% topic = "<i class=\"fas fa-gamepad\"></i>게임게시판"; %>											
 	</c:when>
 	<c:when test="${root eq 'EMPATHIZE' }">					
-		<% topic = "공감게시판"; %>												
+		<% topic = "<i class=\"far fa-eye\"></i>공감게시판"; %>												
 	</c:when>
 	<c:when test="${root eq 'VIEWCNT' }">		
-		<% topic = "인기게시판"; %>														
+		<% topic = "<i class=\"fas fa-thumbs-up\"></i>인기게시판"; %>														
 	</c:when>
 	<c:when test="${root eq 'MYPAGE' }">		
-		<% topic = "내가쓴글"; %>														
+		<% topic = "<i class=\"far fa-clipboard\"></i>내가쓴글"; %>														
 	</c:when>
 </c:choose>	
 	
@@ -82,7 +82,7 @@
 <body class="container">
 <jsp:include page="../header/component/header.jsp" />
 <main id="main" class="my-2">
-	<div class="board__title text-secondary">#<%=topic %></div>
+	<div class="board__title text-secondary"><%=topic %></div>
 	<jsp:include page="./components/actionBar.jsp">
 		<jsp:param value="${root }" name="root"/>
 	</jsp:include>

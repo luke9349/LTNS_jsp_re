@@ -8,6 +8,7 @@ let initBody = {
 
 let userProfile = null;
 let grade = null;
+let myNick = null;
 
 let body = {
   method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -40,9 +41,15 @@ const loadDataEvent = () => {
     $(this).on('click', handleCancel);
   });
 
+  $('.declarationBtn').each(function() {
+	$(this).on('click', handleDeclaration);
+  })
+
   $('.modifyDeleteform').each(function () {
     $(this).on('submit', handleUpdateAjax);
   });
+ 
+
 };
 
 const createDataNullMessage = () => {
@@ -56,6 +63,7 @@ const createComment = (datas) => {
   let comment = '';
   const modyfyIcon = '<i class="fas fa-pencil-alt ml-5 inserBtn"></i>';
   const deleteIncon = '<i class="fas fa-trash ml-3 trashBtn"></i>';
+  const declarationIncon = '<i class="fas fa-bullhorn ml-5 text-danger declarationBtn"></i>';
     
   let form = '';
 
@@ -69,6 +77,7 @@ const createComment = (datas) => {
     comment += '<div class="alertBox">';
     comment += `<span class="comment_content">${data.commentContents}</span>`;
     comment += '<div>';
+    comment += `<span class="coment__commendId hide">${data.commentId}</span>`;
     comment += `<span class="coment__writer">${data.nickName}</span>`;
     comment += '&nbsp;&nbsp;';
     comment += `<span class="coment_regdate">${data.regdate}</span>`; 
@@ -76,6 +85,8 @@ const createComment = (datas) => {
 	  comment += modyfyIcon;
 	  comment += deleteIncon;
 	} else if(grade === 'admin') comment += deleteIncon;
+	
+	if(initBody.userId !== parseInt(data.writerId) && userProfile !== 0 && grade !== 'admin') comment += declarationIncon;
 
     comment += '</div>';
     comment += '</div>';
@@ -103,6 +114,15 @@ const createComment = (datas) => {
   return comment;
 };
 
+const jsShowModal = (messageType, messageContent) => {
+  $('#modalTitle').text(messageType);
+  $('#modalContent').text(messageContent);
+  if (messageType === '오류 메시지') $('#messageModal').addClass('bg-warning');
+  else $('#messageModal').addClass('bg-success');
+  $('#modal').modal('show');
+};
+
+
 const hadleInputChange = (e) => {
   const value = $(e.target).val();
   if (value.length >= 300) {
@@ -120,10 +140,48 @@ const handleChangeContent = (event) => {
   parent.find('.commentModify').focus();
 };
 
+const handleDeclarationSubmit = (e) => {
+  e.preventDefault();
+  if($('#declarationTitle').val() === null || $('#declarationTitle').val() === '' || $('#declarationContent').val() === null || $('#declarationContent').val() === '') {
+    $('#declarationModal').modal('hide');
+    jsShowModal('오류 메시지', '신고 제목과 내용을 모두 입력해 주세요.');
+	return;
+  }
+  const form = new FormData(document.getElementById('declarationForm'));
+  const formData = Object.fromEntries(form);
+  fetch('commentDeclaration.ajax', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, cors, *same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrer: 'no-referrer', // no-referrer, *client
+    body: JSON.stringify(formData), // body data type must match "Content-Type" header
+  })
+}
+
+const handleDeclarationClick = () => {
+  $('#declarationForm').submit();
+}
+
+const handleDeclaration = (e) => {
+  const date = (new Date().toLocaleDateString()) + " " + (new Date().toLocaleTimeString());
+  $('#declarationCommentId').val($(e.target).parent().find('.coment__commendId').text());
+  $('#declarationDate').val(date);
+  $('#copyDate').val(date);
+  $('#declarationNickname').val(myNick);
+  $('#copyNickname').val(myNick);
+  $('#declarationModal').modal('show');
+}
+
 const handleCancel = (event) => {
   const parent = $(event.target).parent().parent().parent().parent();
   parent.find('.modifyDeleteform').addClass('hide');
   parent.find('.alertBox').show();
+  createInfinite();
 };
 
 const hadleTextArea = (e) => {
@@ -163,8 +221,8 @@ const handleUpdateAjax = (e) => {
       const comment = createComment(json.data);
       $('.comment__list').html(comment);
       if (json.count != $('.commentContainer').length) createViewMoreBtn();
-      createInfinite();
       loadDataEvent();
+      createInfinite();
     })
     .catch((e) => {
       console.error(e);
@@ -311,15 +369,18 @@ const checkUser = () => {
   }
 };
 
-const commenInit = (uid, pid, profile, sessionGrade) => {
+const commenInit = (uid, pid, profile, sessionGrade, nickname) => {
   initBody.userId = parseInt(uid);
   initBody.postId = parseInt(pid);
   userProfile = parseInt(profile);
   grade = sessionGrade;
+  myNick = nickname;
   checkUser();
   $('.comment__list').hide();
   $('#commentInsert').on('submit', handleWriteAjax);
   $('#commentArea').on('keyup', hadleTextArea);
   $('#commentArea').on('keydown', hadleTextArea);
   $('#commentBtn').on('click', handleLoadAjax);
+  $('#declarationSubmit').on('click', handleDeclarationClick);
+  $('#declarationForm').on('submit', handleDeclarationSubmit);
 };

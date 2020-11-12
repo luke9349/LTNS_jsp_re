@@ -51,13 +51,13 @@
                         </textarea>
                         <div class="radio" id="radio">
                             <label>
-                                <input type="radio"  id="provisionYn" name="provisionYn" value="Y" checked="checked" autofocus="autofocus">
+                                <input type="radio"  id="provisionYn1" name="provisionYn" value="Y" checked="checked" autofocus="autofocus">
                               			  동의합니다. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                              
                              </label>
                              
                           <label>
-                                <input type="radio"  id="provisionYn" name="provisionYn" value="N">
+                                <input type="radio"  id="provisionYn2" name="provisionYn" value="N">
                           		      	동의하지 않습니다.
                             </label>
                         </div>
@@ -105,13 +105,13 @@
 							<td><input class="form-control" type="email" id="email" name="email" maxlength="20"/>
 								<span class="error d-none" id="emailerror" >  </span> 	
 							</td>
-							<td style="width: 130px;"><button class="btn btn-primary"  id="emailCK" onclick="" type="button">인증번호받기</button> </td>
+							<td style="width: 130px;"><button class="btn btn-primary"  id="emailCK" value="0" onclick="emailSend();" type="button">인증번호받기</button> </td>
 						</tr>
 						
 						<tr>
 							<td style="width: 110px;"><h5>이메일 인증</h5></td>
 							<td><input class="form-control" type="text" id="emailAC" name="emailAC" maxlength="20"/>
-							<td style="width: 130px;"><button class="btn btn-primary" onclick="" type="button">확인</button> </td>
+							<td style="width: 130px;"><button class="btn btn-primary" disabled="disabled" id="emailACbtn" onclick="emailChk();" type="button">확인</button> </td>
 							
 						</tr>
 					</tbody>
@@ -127,6 +127,7 @@
 
 	
 	</div>
-<script src="JS/sign-upJs.js"></script>	
+<script src="JS/sign-upJS.js"></script>
+<script src="JS/emailJS.js"></script>	
 </body>
 </html>
