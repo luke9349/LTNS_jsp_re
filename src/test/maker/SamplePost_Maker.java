@@ -14,7 +14,21 @@ import main.java.com.model.mainpage.Post_DTO;
 import main.java.com.model.membermanage.MM_DTO;
 
 public class SamplePost_Maker {
-
+	
+	String[] imgTagArr= {
+			"/LTNS_jsp_re/images/너의이름은_도시_밤.png",
+			"/LTNS_jsp_re/images/너의이름은_도시_새벽.png",
+			"/LTNS_jsp_re/images/너의이름은_사당_황혼.png",
+			"/LTNS_jsp_re/images/너의이름은_사당_황혼의시간.png",
+			"/LTNS_jsp_re/images/너의이름은_신사_황혼.png",
+			"/LTNS_jsp_re/images/너의이름은_신사.png",
+			"/LTNS_jsp_re/images/너의이름은_혜성.png",
+			"/LTNS_jsp_re/images/너의이름은_황혼.png",
+			"/LTNS_jsp_re/images/너의이름은.png",
+			"/LTNS_jsp_re/images/부엉이.gif",
+			"/LTNS_jsp_re/images/요리.gif"
+			};
+	
 	String mkRandomString() {
 		String result="";
 		int whilelimit=(int)(Math.random()*8)+4;
@@ -35,8 +49,9 @@ public class SamplePost_Maker {
 	}
 	
 	String returnImgTag() {
-		String[] imgTagArr= {"","",""};
-		return imgTagArr[(int)(Math.random()*3)];
+
+		String str="<img src=\""+imgTagArr[(int)(Math.random()*11)]+"\" title=\"11.PNG\" style=\"clear:both;\">";
+		return str;
 	}
 	
 	String mkStringOrTagOrImg(int i) {
@@ -67,6 +82,7 @@ public class SamplePost_Maker {
 	
 	String mkLongString() {
 		String longlongstr="";
+		longlongstr+="<img src=\""+imgTagArr[(int)(Math.random()*11)]+"\" title=\"11.PNG\" style=\"clear:both;\">";
 		for(int i=0;i<(int)(Math.random()*100);i++) {
 			longlongstr+=mkStringOrTagOrImg((int)(Math.random()*7));
 		}

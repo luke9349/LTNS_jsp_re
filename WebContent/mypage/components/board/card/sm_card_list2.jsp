@@ -8,15 +8,12 @@
 
 <!--  -->
 <% 
-	String str=request.getParameter("title");
-	System.out.println("sm_card_list : "+str);
+	String str=request.getParameter("comment_contents");
+	System.out.println("댓글 : "+str);
 %>
-<c:set var="post_id" value='<%=request.getParameter("post_id") %>'/>
-<c:set var="post_contents" value='<%=request.getParameter("contents") %>'/>
-<c:set var="post_regdate" value='<%=request.getParameter("regdate") %>'/>
 
-<a class="sm_card_list list" href="../post/view.do?post_id=${post_id }">
-	<p class="sm_card_list-title title">${param.contents }</p>
-	<div class="sm_card_list-metadata"><time class="sm_card_list-regdate small">${param.regdate }</time></div>
+<a class="sm_card_list list" href="../post/view.do?post_id=${param.post_id }">
+	<p class="sm_card_list-title title">${param.comment_contents }</p>
+	<div class="sm_card_list-metadata"><time class="sm_card_list-regdate small">${param.comment_regdate }</time></div>
 </a>
 <!-- -->

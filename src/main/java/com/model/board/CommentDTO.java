@@ -1,6 +1,8 @@
 package main.java.com.model.board;
 
-public class CommentDTO {
+import main.java.com.model.DTO;
+
+public class CommentDTO implements DTO{
 
 	private long commentId;
 	private String commentContents;
@@ -9,6 +11,16 @@ public class CommentDTO {
 	private String nickName;
 	private long postId;
 	private String regdate;
+
+	
+	public CommentDTO() {	}
+	
+	public CommentDTO(long commentId, String commentContents, long postId, String regdate) {
+		this.commentId = commentId;
+		this.commentContents = commentContents;
+		this.postId = postId;
+		this.regdate = regdate;
+	}
 
 	public long getCommentId() {
 		return commentId;

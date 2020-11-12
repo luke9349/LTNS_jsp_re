@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.model.DTO;
+import main.java.com.model.board.CommentDTO;
 import main.java.com.model.mainpage.Mainpage_DAO;
 import main.java.com.model.mainpage.Post_DTO;
 import main.java.com.model.mypage.Count_DAO;
@@ -42,9 +43,9 @@ try {
 			//내가 작성한 댓글
 			arr2=new Mypage_DAO().selectBySQL_withSignal(Mypage_DAO.SELECT_6_MY_COMMENTS,2,mm_id);
 			System.out.println("서버 확인-내가작성한댓글: "+arr2);
-//			for(DTO v : arr2) {
-//				System.out.println(((Post_DTO)v).getNickname());
-//			}
+			for(DTO v : arr2) {
+				System.out.println(((CommentDTO)v).getCommentContents());
+			}
 			request.setAttribute("mycomment_board", arr2);
 			try {
 			count2=((Count_DTO)new Count_DAO().selectBySQL(Mypage_DAO.SELECT_MY_COMMENTS_CNT, mm_id)[0]).getCount();			
