@@ -31,12 +31,15 @@
 </head>
 <body class="container">
 	<jsp:include page="../header/component/header.jsp" />
+	<br>
 	<main class="my-2">
 		<jsp:include page="./components/board/viewcnt_board.jsp"/>
 		<jsp:include page="./components/board/empath_board.jsp"/>
 		<hr>
+		<br>
 		<jsp:include page="./components/board/nearest_board.jsp"/>
 	</main>
+	<br>
 	<jsp:include page="../footer/component/footer.jsp" />
 </body>
 </html>

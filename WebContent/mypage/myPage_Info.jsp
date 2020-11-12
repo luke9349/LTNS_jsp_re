@@ -20,6 +20,11 @@
 <head>
 <meta charset="UTF-8">
 <title>myPage_Info</title>
+<style type="text/css">
+	#myinfo{
+		width:100%;
+	}
+</style>
 </head>
 <!-- css link  -->
  <link rel="stylesheet" type="text/css" href="CSS/myPage_Info.css">
@@ -36,7 +41,7 @@
 >
 <body class="container">
 
-<div class="card border mt-4">
+<div id="myinfo" class="card border mt-4">
 
 	
 	<table>

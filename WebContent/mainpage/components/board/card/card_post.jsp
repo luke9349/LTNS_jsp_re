@@ -7,13 +7,13 @@
 
 <!-- -->
 <a id="whole_${param.post_id }" class="card_post article" href="../post/view.do?post_id=${param.post_id }">
+	<div class="card_post-picture"><img src="${param.thumbnailPath }"/></div>
 	<div class="card_post-main">
 		<p class="post_id" style="display:none">${param.post_id }</p>
 		<p class="card_post-title title">${param.title }</p>
 		<div class="sm_card_list-metadata"><p class="card_post-writer small">${param.writer }</p><time class="card_post-regdate small">${param.regdate }</time></div>
 		<p class="card_post-contents small">${param.contents }</p>
 	</div>
-	<div class="card_post-picture"><img src="${param.thumbnailPath }"/></div>
 </a>
 <!--  -->
 

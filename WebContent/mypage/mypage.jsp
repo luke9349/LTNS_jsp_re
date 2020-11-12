@@ -33,11 +33,14 @@
 		<jsp:include page="../header/component/header.jsp" />
 	<main class="my-2">
 		<jsp:include page="./myPage_Info.jsp"/>
+		<br>
 		<jsp:include page="./components/board/mypost_board.jsp"/>
 		<jsp:include page="./components/board/mycomment_board.jsp"/>
 		<hr>
+		<br>
 		<jsp:include page="./components/board/myempath_board.jsp"/>
 	</main>
+	<br>
 	<jsp:include page="../footer/component/footer.jsp" />
 </body>
 </html>
