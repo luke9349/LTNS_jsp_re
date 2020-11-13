@@ -15,16 +15,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.css">
-<link href='CSS/sign-upCSS.css' rel='stylesheet' style='text/css'/>
 
 
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
+
 <title>회원가입 완료</title>
 </head>
 
@@ -38,7 +36,7 @@
 	
 		<div class="container text-center">
 			
-			<table class="table-bordered table-hover" style="text-align: center" border="1px solid #dddddd">
+			<table class="table table-bordered table-hover" style="text-align: center" border="1px solid #dddddd">
 				<thead>
 					<tr >
 						<td colspan="2"> 회원가입 완료 </td>
@@ -80,7 +78,7 @@
 		
 	</div>
 
-
-<script src="JS/sign-up-completeJS.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
 </body>
 </html>

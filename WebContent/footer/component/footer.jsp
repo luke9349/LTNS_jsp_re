@@ -1,11 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
+<!-- bootstrep -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    
+    
 <!-- fontasome -->
 <script src="https://kit.fontawesome.com/5ccafa9b7a.js" crossorigin="anonymous"></script> 
     
+    
+    
+    
+    
+    
 <footer class="footer p-3">
   <div class="container-fluid">
-    <h2 class="footer__title">2020 LTNS JSP PROJECT &copy;</h2>
+    <h2 class="footer__title">2020 LTNS JSP PROJECT</h2>
     <hr>
     <span class="spna_title"> 팀원 <span class="in_span">홍성혁 박성언 김현준 김휘진</span> </span>   
     <hr>
@@ -21,14 +35,6 @@
   	<a href=""><i class="fab fa-google-plus-g"></i></a>
   	</span> 
   	</span> <br>
- 
-    </div>
-  	<div class="donation"> 
-  	<span class="donation_info_text"> LTNS Team 후원하기 <br>
-  	 CODE : KAKAO_PAY  </span>
-	
-  	<img src="../images/donation.PNG" alt="doation" style="width: 150px; height: 150px;" />
-  	</div>
-	
-  </div> 
+  </div>
+  </div>
 </footer>

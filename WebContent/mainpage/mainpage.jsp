@@ -17,7 +17,7 @@
 	<script src="../lib/jquery.js"></script>
 	<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/5d1d5aa1e7.js" crossorigin="anonymous"></script>
-
+	<script src="../fixedbtn/fixedbtn.js"></script>
 	<link href="./CSS/mainpage.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/board/empath_board.css" rel="stylesheet" type="text/css">
 	<link href="./CSS/board/nearest_board.css" rel="stylesheet" type="text/css">
@@ -28,6 +28,8 @@
 	<link href="./CSS/board/card/sm_card_post.css" rel="stylesheet" type="text/css">
 	<link href="../header/css/header.css" rel="stylesheet" type="text/css">
 	<link href="../footer/css/footer.css" rel="stylesheet" type="text/css">
+	<link href="../fixedbtn/fixedbtn.css" rel="stylesheet" type="text/css">
+	
 </head>
 <body class="container">
 	<jsp:include page="../header/component/header.jsp" />
@@ -41,5 +43,7 @@
 	</main>
 	<br>
 	<jsp:include page="../footer/component/footer.jsp" />
+	<jsp:include page="../fixedbtn/fixedbtn.jsp"/>
+
 </body>
 </html>

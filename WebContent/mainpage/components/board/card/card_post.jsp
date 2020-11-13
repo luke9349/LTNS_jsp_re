@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!-- -->
-<a id="whole_${param.post_id }" class="card_post article" href="../post/view.do?post_id=${param.post_id }">
+<a id="whole_${param.i }" class="card_post article" href="../post/view.do?post_id=${param.post_id }">
 	<div class="card_post-picture"><img src="${param.thumbnailPath }"/></div>
 	<div class="card_post-main">
 		<p class="post_id" style="display:none">${param.post_id }</p>

@@ -102,6 +102,7 @@ public class AjaxController extends HttpServlet {
 			command = new Email_ajax_command();
 			command.execute(request, response);
 			return;
+
 		
 			
 		

@@ -43,7 +43,7 @@ VALUES (SEQ_FILE_TABLE_FILE_ID.NEXTVAL,'POST','?','?');
 SELECT SEQ_file_table_file_id.CURRVAL FROM DUAL;
 
 /*확인*/
-SELECT * FROM file_table;
+SELECT * FROM MM_TABLE mt ;
 DELETE FROM file_table WHERE FILE_ID =2;
 
 

@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="main.java.com.view.MemberDTO"%>
+    
+    <%
+		MemberDTO []  ok = (MemberDTO[])request.getAttribute("emailOK");
+	%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.css">
 <title>아이디 비번 찾기 완료</title>
 
 </head>
@@ -13,7 +20,7 @@
 	
 		<div class="container text-center">
 			
-			<table class="table-bordered table-hover" style="text-align: center" border="1px solid #dddddd">
+			<table class="table table-bordered table-hover" style="text-align: center" border="1px solid #dddddd">
 				<thead>
 					<tr >
 						<td colspan="2"> 아찾비찾 완료 </td>
@@ -23,12 +30,12 @@
 				<tbody>
 					<tr>
 						<td style="width: 110px;"><h5>아아디</h5></td>
-						<td>  </td>
+						<td><%=ok[0].getId() %>  </td>
 					</tr>
 					
 					<tr>
 						<td style="width: 110px;">비밀번호</td>
-						<td>  </td>
+						<td><%=ok[0].getPassword() %> </td>
 					</tr>
 					
 					
@@ -46,6 +53,6 @@
 		</div>
 		
 	</div>
-
+<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
 </body>
 </html>
