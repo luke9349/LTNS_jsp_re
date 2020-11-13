@@ -4,12 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.css">
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
+
 
 
 
@@ -127,6 +126,8 @@
 
 	
 	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
 <script src="JS/sign-upJS.js"></script>
 <script src="JS/emailJS.js"></script>	
 </body>

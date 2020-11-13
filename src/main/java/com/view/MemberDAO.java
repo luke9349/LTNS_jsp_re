@@ -91,6 +91,27 @@ public class MemberDAO {
 		
 	}
 	
+	//이메일 정보 출력
+		public MemberDTO[] member_FIND_Select(String email) throws SQLException {
+			int cnt = 0;
+			MemberDTO[] arr = null;
+			
+			try {
+				psmt = conn.prepareStatement(SQL_EMAIL_INFO_SELECT);
+				psmt.setString(1, email);
+				rs = psmt.executeQuery();
+				arr = createMember(rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+
+			
+			return arr;
+			
+		}
+	
 	//id 정보 출력 
 	public MemberDTO[] member_INFO_Select(String id) throws SQLException {
 		int cnt = 0;
@@ -111,6 +132,8 @@ public class MemberDAO {
 		return arr;
 		
 	}
+	
+	
 	
 	//id 중복검사
 	public int id_overlap(String id) throws SQLException {

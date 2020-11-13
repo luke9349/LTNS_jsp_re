@@ -151,6 +151,10 @@ const handleDeclarationSubmit = (e) => {
     jsShowModal('오류 메시지', '신고 제목과 내용을 모두 입력해 주세요.');
     return;
   }
+  $('#declarationModal').modal('hide');
+  $('#declarationTitle').val('');
+  $('#declarationContent').val('');
+  $('#staticBackdrop').modal('show');
   const form = new FormData(document.getElementById('declarationForm'));
   const formData = Object.fromEntries(form);
   fetch('commentDeclaration.ajax', {
@@ -167,7 +171,7 @@ const handleDeclarationSubmit = (e) => {
   }) //
     .then((response) => response.text()) //
     .then((text) => {
-      $('#declarationModal').modal('hide');
+      $('#staticBackdrop').modal('hide');
       if (text === 'true') jsShowModal('성공 메시지', '신고가 접수되었습니다.');
       else
         jsShowModal(

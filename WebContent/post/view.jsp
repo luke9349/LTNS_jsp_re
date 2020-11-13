@@ -132,10 +132,11 @@
 
 <!-- comment -->
 <link rel="stylesheet" href="../board/comment/css/comment.css">
+<link rel="stylesheet" href="../loading/css/emailLoading.css">
 <script src="../board/comment/js/comment.js"></script>
 
 <!-- modal -->
-<script defer src="../modal/js/modal.js"></script>
+<script src="../modal/js/modal.js"></script>
 
 
 
