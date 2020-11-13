@@ -158,27 +158,27 @@ const handleDeclarationSubmit = (e) => {
   const form = new FormData(document.getElementById('declarationForm'));
   const formData = Object.fromEntries(form);
   fetch('commentDeclaration.ajax', {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, cors, *same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    redirect: 'follow', // manual, *follow, error
-    referrer: 'no-referrer', // no-referrer, *client
-    body: JSON.stringify(formData), // body data type must match "Content-Type" header
-  }) //
-    .then((response) => response.text()) //
-    .then((text) => {
-      $('#staticBackdrop').modal('hide');
-      if (text === 'true') jsShowModal('성공 메시지', '신고가 접수되었습니다.');
-      else
-        jsShowModal(
-          '오류 메시지',
-          '일시적인 서버 오류로 인해 신고처리가 되지 않았습니다.'
-        );
-    });
+	    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+	    mode: 'cors', // no-cors, cors, *same-origin
+	    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+	    credentials: 'same-origin', // include, *same-origin, omit
+	    headers: {
+	      'Content-Type': 'application/json',
+	    },
+	    redirect: 'follow', // manual, *follow, error
+	    referrer: 'no-referrer', // no-referrer, *client
+	    body: JSON.stringify(formData), // body data type must match "Content-Type" header
+	  }) //
+	    .then((response) => response.text()) //
+	    .then((text) => {
+	      $('#staticBackdrop').modal('hide');
+	      if (text === 'true') jsShowModal('성공 메시지', '신고가 접수되었습니다.');
+	      else
+	        jsShowModal(
+	          '오류 메시지',
+	          '일시적인 서버 오류로 인해 신고처리가 되지 않았습니다.'
+	        );
+	    });
 };
 
 

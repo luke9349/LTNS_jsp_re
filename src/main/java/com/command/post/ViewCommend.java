@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.lang.Integer;
 import main.java.com.command.Command;
 import main.java.com.model.post.FileWriteDAO;
 import main.java.com.model.post.FileWriteDTO;
@@ -26,8 +27,9 @@ public class ViewCommend implements Command {
 		FileWriteDTO[] file = null;
 		FileWriteDAO filedao = new FileWriteDAO();
 		int post_contents;
+		
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
-				
+		System.out.println(post_id);
 				
 		if(post_id != 0) {
 			try {

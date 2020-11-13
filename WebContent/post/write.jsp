@@ -154,7 +154,7 @@ function chkSubmit(){
 		              
 		            </td>
 		        </tr>
-		        <tr class="justify-content-center ">
+		        <tr class="justify-content-center">
 		            <td colspan="2" class="bg-white">
 		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px; "> </textarea>
 		            </td>
@@ -162,8 +162,6 @@ function chkSubmit(){
 				</table>
 				<input type="hidden" name="writer" value="<%=writer%>">
 			</form>
-	  
-	  
 	  
 	  
 	</div> <!-- end container -->
