@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
     pageEncoding="UTF-8"%>
  
 <!-- bootstrep 
@@ -17,6 +18,9 @@
     
     
     
+=======
+    pageEncoding="UTF-8"%>    
+>>>>>>> branch 'master' of https://github.com/luke9349/LTNS_jsp_re.git
 <footer class="footer p-3">
   <div class="container-fluid">
     <h2 class="footer__title">2020 LTNS JSP PROJECT</h2>
