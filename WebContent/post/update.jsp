@@ -14,21 +14,11 @@
 <%
 	
 	request.setCharacterEncoding("utf-8");
-	WriteDTO[] arr = (WriteDTO[])request.getAttribute("update");	
-	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("file_view");
-
-	
-	String ctx = request.getContextPath();
-	int post_id = Integer.parseInt(request.getParameter("post_id"));
-	int writer =  (int) session.getAttribute("writer");
-	String title = arr[0].getTitle();
-	String grade =  (String)session.getAttribute("grade");
-
+	WriteDTO[] arr = (WriteDTO[])request.getAttribute("update");
 %>
 
-
 <%
-	if( arr == null || arr.length ==0){
+	if( arr == null || arr.length ==0  ){
 %>
 	<script>
 		alert("해당정보가 삭제되거나 없습니다");
@@ -39,6 +29,25 @@
 	}
 
 %>
+
+<% 
+	FileWriteDTO[] file_info = (FileWriteDTO[])request.getAttribute("file_view");
+
+	
+	String ctx = request.getContextPath();
+	int writer =  (int) session.getAttribute("writer");
+	String title = arr[0].getTitle();
+	String grade =  (String)session.getAttribute("grade");
+	int  post_id = Integer.parseInt(request.getParameter("post_id"));
+	
+	
+%>
+
+
+
+
+
+
 
 
 
@@ -155,6 +164,41 @@ function chkSubmit(){
 	}
 
 }
+
+var delay = 300;
+var timer = null;
+var cnt = 0;
+
+$(window).on('resize', function(){
+	clearTimeout(timer);
+	timer = setTimeout(function(){
+		 var width_size = window.outerWidth;
+		 var td = document.getElementById("tds");
+		 if (width_size <= 780) {
+		
+			 while ( td.hasChildNodes() ) 
+			 { td.removeChild( td.firstChild ); }
+
+			 if(td.hasChildNodes()==0){
+					cnt++;
+					alert("네이버 스마트 에디터는 width:800(이상) 사용이 가능합니다.")
+					var imgs_ele = document.createElement("textarea");
+					 //  <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px; "> </textarea>
+			    	imgs_ele.setAttribute("rows", "10");
+			    	imgs_ele.setAttribute("cols", "30");
+			    	imgs_ele.setAttribute("name", "content");
+			    	imgs_ele.setAttribute("style", "width:100%; height:350px;");
+			    	td.appendChild(imgs_ele);
+			    	<%=contents %>
+			    
+			}
+		
+		}else if(width_size >=800){
+			 location.reload();
+		}
+	}, delay);
+});
+
  
 </script>
 
@@ -191,7 +235,7 @@ function chkSubmit(){
 		            </td>
 		        </tr>
 		        <tr class="justify-content-center">
-		            <td colspan="2">
+		            <td colspan="2" id="tds">
 		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px;">
 		                <%=contents %>
 		                </textarea>

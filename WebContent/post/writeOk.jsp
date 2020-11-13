@@ -8,14 +8,11 @@
 
 <% 
 
-	String tests = (String)request.getAttribute("fileOk");
-	int currval = 0;
-	String title = null;
-	if(tests != null){
-		currval = (Integer) request.getAttribute("fileOk"); 
+	
+		int currval = (Integer) request.getAttribute("fileOk"); 
 		int writecnt = (Integer) request.getAttribute("result");
-		 title = request.getParameter("category");
-	}	
+		String title = request.getParameter("category");
+	
  %>
  
  
