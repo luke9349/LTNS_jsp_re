@@ -1,7 +1,6 @@
 var chk=null;
 
 function emailSend() {
-	let clientEmail = $("#email").val();
 	 let emailck = $("#emailAC").val();
 	 var getemail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 	 
@@ -48,6 +47,9 @@ function emailChk() {
 		
 		alert("이메일 인증실패")
 	}
+	
+	
+
 	
 	
 	

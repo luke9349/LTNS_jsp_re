@@ -64,6 +64,8 @@ public class Signup_complete_command implements Command {
 		
 		
 		
+		
+		
 		if(cnt == 0) { //유니크 조회 성공
 			
 			int cnt2=0;

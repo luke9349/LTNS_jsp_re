@@ -53,9 +53,8 @@
 
 		<!-- 찾기 라인  -->
 			<div class="id_area ">
-			<span class="spans col-6 col-sm-2 "><a class="finds" href="find-id.jsp"> 아이디 찾기</a> </span> 
-			<span class="spans col-6 col-sm-2 "><a class="finds" href="find-id.jsp"> 비밀번호 찾기</a> </span> 
-			<span class="spans col-6 col-sm-2 "><a class="finds" href="find-id.jsp"> 회원 가입 </a> </span> 
+			<span class="spans col-6 col-sm-2 "><a class="finds" href="find.jsp"> 아이디,비번 찾기</a> </span> 
+			<span class="spans col-6 col-sm-2 "><a class="finds" href="sign-up.jsp"> 회원 가입 </a> </span> 
 			<span class="spans col-6 col-sm-2 "><a class="finds" href="gest_mode.jsp"> 비밀 입장하기 </a> </span> 
 			
 			</div>

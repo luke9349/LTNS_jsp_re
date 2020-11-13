@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.com.command.Command;
 import main.java.com.command.mainpage.Mainpage_Command;
+import main.java.com.command.membermanage.FindOK_command;
 import main.java.com.command.membermanage.LoginOk_Cmd;
 import main.java.com.command.membermanage.Signup_complete_command;
 import main.java.com.command.membermanage.logOut_Cmd;
@@ -178,6 +179,12 @@ public class DoController extends HttpServlet {
 			cmd = new report_Cmd();
 			cmd.execute(request, response);
 			viewPage = "report_ok.jsp";
+			break;
+			
+		case "/membermanage/findOK.do":
+			cmd = new FindOK_command();
+			cmd.execute(request, response);
+			viewPage = "findOK.jsp";
 			break;
 			
 			
