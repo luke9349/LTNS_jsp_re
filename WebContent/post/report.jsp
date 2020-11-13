@@ -89,77 +89,56 @@ function chk_Submit() {
 <div id="cotents" class="border">
 		<div class="jumbotron ">
 			<h1>신고하기 </h1>	
-			<span> LTNS(주) 서비스 이용약관에 기존하여  서비스 운영원칙에 따라 <br> 불량 이용자 처리 규정을 정하고 있습니다.</span> 
+			<span> LTNS(주) 서비스 이용약관에 기존하여  서비스 운영원칙에 따라 <br> 불량 이용자 처리 규정을 정하고 있습니다. <br> 허위 신고 또는 과한 신고시 제제 대상이 될 수 있습니다.</span> 
 				
 		</div> <!-- end jumbo -->
 	
-		<div class="report_section">
+		<div class="col-12  text-secondary mt-2">
 		<form name="report_form"  method="POST" action="report_ok.do?post_id=<%=post_id %>" onsubmit="return chk_Submit()" >
-			<table class="table" style="width:100%">
 			
-			<tr>
-			<th class="text-center" style="width:20%">
-				 <h4 class="tables_title"> 신고 게시판 번호 </h4>
-			</th>
-			<th>
-				<h4 class="title_contents_2"> <%=post_id %></h4>
-			</th>
-			</tr>
+			<div class=" row mt-2 ">				
+				<h4 class="col-sm-4 text-center mt-2"> 게시판 번호  </h4>
+			 	<h4 class="col-sm-8 text-center mt-2"><%=post_id %> </h4>
+			</div>
 			
-			<tr>
-			<th class="text-center" style="width:20%">
-				 <h4 class="tables_title"> 신고 사항 </h4>
-			</th>
-			<th>
-				 <select class="select_s" name="select" >
+			<div class="row mt-2">
+				 <h4 class ="col-sm-4 text-center mt-2"> 신고 사항 </h4>
+				<div class ="col-sm-2">
+				</div>
+				 <select class="col-sm-4 selectpicker  d-flex justify-content-right" name="select" >
 					<option selected="selected">부적절한 컨탠츠</option>
 					<option>명예훼손</option>
 					<option>욕설과 비방</option>
+				
 				</select>
-			</th>
-			</tr>
+			
+			</div>
+			
+			<div class="row mt-2">
+				 <h4 class="col-sm-4 text-center mt-2"> 신고자 ID </h4>
+				<h4 class="col-sm-8 text-center mt-2"><%=report_man %></h4>
+			</div>
+			
+			<div class=" row mt-2">
+				 <h4 class="col-sm-4 text-center mt-2"> 제목 </h4>
+			
+				<h4 class="col-sm-8 text-center mt-2"> <input type="text" name="subjects"></h4>
+			</div>
 			
 			
-			<tr>
-			<th class="text-center" style="width:20%">
-				 <h4 class="tables_title"> 신고자 ID </h4>
-			</th>
-			<th>
-				<h4 class="title_contents_2"><%=report_man %></h4>
-			</th>
+			<div class=" row mt-2">
+				 <h4 class="col-sm-4 text-center mt-2"> 내용 </h4>
+				<h4 class="col-sm-8 text-center mt-2"> <textarea rows="3" cols="20" name="artcle"></textarea> </h4>
+			</div>
+		<div class="row mt-2 d-flex justify-content-center">
+			<div class="g-recaptcha " data-sitekey="6LffD-IZAAAAANuqCjSeHuEyjZ9AXUQn9jFkn5NZ"></div>
+		</div>
 			
 			
-			<tr>
-			<th class="text-center" style="width:20%">
-				 <h4 class="tables_title"> 제목 </h4>
-			</th>
-			<th>
-				<h4 class="title_contents_2"> <input type="text" name="subjects"></h4>
-			</th>
-			</tr>
-			
-		
-			<tr>
-			<th class="text-center" style="width:20%">
-				 <h4 class="tables_title"> 내용 </h4>
-			</th>
-			<th>
-				<h4 class="title_contents_2"> <textarea rows="5" cols="40" name="artcle"></textarea> </h4>
-			</th>
-			</tr>
-			
-			<tr>
-			<th colspan="4">
-			<div class="g-recaptcha float-right" data-sitekey="6LffD-IZAAAAANuqCjSeHuEyjZ9AXUQn9jFkn5NZ"></div>
-			</th>
-			</tr>
-			
-			<tr class="text-right">
-			<th colspan="4">
-			<button class="btn-lg bg-success text-white" type="button" onclick="history.back()">취소</button>
-			<input class="btn-lg bg-success text-white" type="submit" value="신고">
-			</th>
-			</tr>
+			<div class=" row mt-2 d-flex justify-content-center">
+			<button class="btn-lg bg-success text-white  " type="button" onclick="history.back()">취소</button>
+			<input class="btn-lg bg-success text-white " type="submit" value="신고">
+			</div>
 			
 			
 			
