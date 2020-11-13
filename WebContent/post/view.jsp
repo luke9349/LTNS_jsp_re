@@ -112,13 +112,6 @@
 	}
 %>
 
-<<<<<<< HEAD
-
-
-<!DOCTYPE html>
-=======
-<!DOCTYPE html>  
->>>>>>> branch 'master' of https://github.com/luke9349/LTNS_jsp_re.git
 <html>
 <head>
 <meta charset="UTF-8">

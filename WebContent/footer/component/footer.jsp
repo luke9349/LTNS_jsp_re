@@ -1,26 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-<<<<<<< HEAD
-    pageEncoding="UTF-8"%>
- 
-<!-- bootstrep 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/5ccafa9b7a.js" crossorigin="anonymous"></script> 
-
--->
-    
-    
-    
-    
-    
-    
-    
-    
-=======
     pageEncoding="UTF-8"%>    
->>>>>>> branch 'master' of https://github.com/luke9349/LTNS_jsp_re.git
 <footer class="footer p-3">
   <div class="container-fluid">
     <h2 class="footer__title">2020 LTNS JSP PROJECT</h2>
