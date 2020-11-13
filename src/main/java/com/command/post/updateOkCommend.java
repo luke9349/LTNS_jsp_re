@@ -114,8 +114,7 @@ public class updateOkCommend implements Command {
 				pw = new PrintWriter(realPath);
 				pw.println("title" + title);
 				pw.print(content);
-				System.out.println(title +"타이틀");
-				System.out.println(content);
+				
 				System.out.println("저장되었습니다");
 			} catch (IOException e) {
 				System.out.println("저장 실패 : 파일에 데이터를 쓸 수 없습니다.");
@@ -134,9 +133,6 @@ public class updateOkCommend implements Command {
 		int file_quert_cnt = 0;
 		if (realPath != null) {
 			try {
-				System.out.println("파일업데이트진입");
-				System.out.println(post_contents);
-				System.out.println(fName);
 				FileWriteDAO fileupdate = new FileWriteDAO();
 				file_quert_cnt = fileupdate.File_Update(fName, realPath, post_contents);
 			} catch (SQLException e) {
@@ -146,7 +142,6 @@ public class updateOkCommend implements Command {
 		}// end if 
 
 		request.setAttribute("fileUpdateOk", file_quert_cnt);
-		System.out.println("파일업데이트 성공 " + file_quert_cnt);
 		
 		
 		
@@ -157,16 +152,13 @@ public class updateOkCommend implements Command {
 		
 		if(title != null) {
 			try {
-				System.out.println("글업데이트 진입");
 				WriteDAO wrdao = new WriteDAO();
-				System.out.println(title);
-				System.out.println(category);
 				write_update_cnt = wrdao.post_Update(title, category,post_id);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}// end if
-		System.out.println("업데이트 성공 " + write_update_cnt);
+	
 		
 		
 	}

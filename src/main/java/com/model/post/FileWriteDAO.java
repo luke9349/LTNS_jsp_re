@@ -87,13 +87,13 @@ public class FileWriteDAO implements DAO {
 			
 			psmt = conn.prepareStatement(sql2);
 			ResultSet tmprs = psmt.executeQuery();
-			System.out.println("커발동작?");
+			
 			
 			if(tmprs.next()) {
 				currval=tmprs.getInt("currval");
 			}
 			
-			System.out.println("커발동작중!");
+			
 			conn.commit();
 			System.out.println(currval);
 			
@@ -102,7 +102,7 @@ public class FileWriteDAO implements DAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			conn.rollback();
-			System.out.println("트랜잭션 실패 roll back");
+		
 			throw e;
 		} finally {
 			close();
@@ -139,7 +139,7 @@ public class FileWriteDAO implements DAO {
 			int cnt = 0;
 			try {
 				psmt = conn.prepareStatement(SQL_FILE_UPDATE);
-				System.out.println("sql문작동하나요?");
+			
 				psmt.setString(1, file_name);
 				psmt.setString(2, file_real_path);
 				psmt.setInt(3, file_id);

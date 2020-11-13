@@ -30,10 +30,8 @@ public class deleteCommend implements Command {
 		} // end try
 
 		request.setAttribute("deletePost", cnt);
-		System.out.println("쿼리성공"+cnt);
+		realfilename = arr[0].real_filename; //패스 경로 꺼내옴 
 		
-		 realfilename = arr[0].real_filename; //패스 경로 꺼내옴 
-		System.out.println(realfilename);	
 		//경로에 있는 파일 삭제  
 		 if(realfilename != null) {
 				File fileDelete = new File(realfilename);

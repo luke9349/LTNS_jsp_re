@@ -5,7 +5,6 @@
 	String report_man = (String) session.getAttribute("nickname");
 	int post_id = Integer.parseInt(request.getParameter("post_id"));
 
-	System.out.println(report_man);
 %>
 
 
@@ -150,7 +149,8 @@ function chk_Submit() {
 			
 			<tr class="text-right">
 			<th colspan="4">
-			<input class="btn-lg" type="submit" value="신고하기">
+			<button class="btn-lg bg-success text-white" type="button" onclick="history.back()">취소</button>
+			<input class="btn-lg bg-success text-white" type="submit" value="신고">
 			</th>
 			</tr>
 			

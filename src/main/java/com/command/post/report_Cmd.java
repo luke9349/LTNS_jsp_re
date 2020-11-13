@@ -31,18 +31,20 @@ public class report_Cmd implements Command {
 		StringBuffer sbu = new StringBuffer();
 		
 		
-		sbu.append("<p> 게시글 번호:"+post_id +"</p");
-		sbu.append("<p> 발신한 사람:"+nickname +"</p");
-		sbu.append("<p> 신고 사유 :"+select +"</p");
-		sbu.append("<p> 제목 : "+titles +"</p");
-		sbu.append("<p> 내용 : "+artcle +"</p");
+		sbu.append("<p> 게시글 번호:"+post_id +"</p>");
+		sbu.append("<p> 발신한 사람:"+nickname +"</p>");
+		sbu.append("<p> 신고 사유 :"+select +"</p>");
+		sbu.append("<p> 제목 : "+titles +"</p>");
+		sbu.append("<p> 내용 : "+artcle +"</p>");
+		
+		String contents = sbu.toString();
 		
 		
 		
-		System.out.println(sbu);
+		
 		
 		String myMail= "nbnloper@gmail.com";
-		new Gmail(request).emailSend(myMail, "LTNSReport@gmail.com", titles, artcle);
+		new Gmail(request).emailSend(myMail, "LTNSReport@gmail.com", titles, contents);
 		
 	
 

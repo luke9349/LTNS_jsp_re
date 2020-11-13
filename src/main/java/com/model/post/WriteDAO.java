@@ -156,12 +156,10 @@ public class WriteDAO implements DAO {
 			rs = psmt.executeQuery();
 			arr= createArray(rs);
 			conn.commit();
-			System.out.println("트랜잭션성공"+post_id);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			conn.rollback();
-			System.out.println("트랜잭션 실패 roll back");
 			throw e;
 		} finally {
 			close();

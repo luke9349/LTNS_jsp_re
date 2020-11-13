@@ -47,7 +47,6 @@
 	String nickname =  member_info[0].getNickname();
 	
 	String nick_ssessions = (String) session.getAttribute("nickname");
-	System.out.println(nick_ssessions + " 나는 방문자닉네임이다.....");
 
 	
 	
