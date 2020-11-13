@@ -106,8 +106,8 @@
 	</c:if>
 	</article>
 </main>
-<jsp:include page="../footer/component/footer.jsp" />
 <jsp:include page="../loading/component/loading.jsp" />
+<jsp:include page="../footer/component/footer.jsp" />
 <jsp:include page="../modal/component/modal.jsp" />
 <c:if test="${messageType != null &&  messageContent != null}">
 	<script>
