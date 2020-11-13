@@ -1065,7 +1065,6 @@ public class BoardListDAO {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public ArrayList<BoardListDTO> getMypageAllList(int writer) {
-		System.out.println("진입");
 
 		ArrayList<BoardListDTO> list = null;
 
@@ -1146,8 +1145,8 @@ public class BoardListDAO {
 
 	} // end getMypageSearchDateAndTitleAllList()
 
-	public ArrayList<BoardListDTO> getMypageSearchDateAndTitleList(int writer, String start, String end,
-			String title, String type, int page) {
+	public ArrayList<BoardListDTO> getMypageSearchDateAndTitleList(int writer, String start, String end, String title,
+			String type, int page) {
 		int startNo = 1;
 		int endNo = 1;
 		int cnt = 10;
@@ -1334,7 +1333,7 @@ public class BoardListDAO {
 				dto.setRealFilePath(rs.getString("REAL_FILENAME"));
 				dto.setEmpathizeCnt(rs.getLong("EMPATHIZE_CNT"));
 				dto.setViewcnt(rs.getLong("VIEWCNT"));
-				
+
 				list.add(dto);
 			} // end while
 		} catch (SQLException e) {

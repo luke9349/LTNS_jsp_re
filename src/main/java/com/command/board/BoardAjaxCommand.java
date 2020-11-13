@@ -285,7 +285,6 @@ public class BoardAjaxCommand implements Command, Board_Command {
 					break;
 				}
 
-				System.out.println("진입");
 				dataLength = new BoardListDAO().getMypageAllList((int) request.getSession().getAttribute("writer"))
 						.size();
 				list = new BoardListDAO().getMypageList((int) request.getSession().getAttribute("writer"), type, page);
@@ -346,7 +345,7 @@ public class BoardAjaxCommand implements Command, Board_Command {
 				}
 
 				if (searchType != null && !searchType.equals("")) {
-					list = new BoardListDAO().getCategorySearchTitleAllList(category, search);
+					list = new BoardListDAO().getCategoryAllList(category);
 					result = contentToText(list);
 					result = createSearchList(result, searchType, search, page, searchType);
 					break;

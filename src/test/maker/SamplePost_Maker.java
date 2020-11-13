@@ -234,7 +234,7 @@ public class SamplePost_Maker {
 	
 	public static void main(String[] args) {
 
-		new SamplePost_Maker().mkPosts(10);	
+		new SamplePost_Maker().mkPosts(1000);	
 
 		System.out.println("전체 작업 완료!");
 	}
