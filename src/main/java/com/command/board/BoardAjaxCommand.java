@@ -13,10 +13,8 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import main.java.com.command.Command;
 import main.java.com.model.Post_Contents;
 import main.java.com.model.board.AjaxBoardListJSON;
-import main.java.com.model.board.BoardListDAO2;
 import main.java.com.model.board.BoardListDAO;
 import main.java.com.model.board.BoardListDTO;
-import main.java.com.model.board.Board_DAO;
 import main.java.com.model.board.JSONListDTO;
 import main.java.com.util.LogUtil;
 
