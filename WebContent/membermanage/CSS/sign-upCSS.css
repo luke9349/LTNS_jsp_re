@@ -1,23 +1,27 @@
-@charset "UTF-8";
 
+ @charset "UTF-8";
+/*
 #wrap{
     width:530px;
     margin-left:auto; 
     margin-right:auto;
     text-align:center;
 }
+
         
 table{
-    margin-left:auto; 
-    margin-right:auto;
-    border:3px solid skyblue
+    style= text-align: center 
+    border="1px solid #dddddd"
 }
         
 td{
-    border:1px solid skyblue
+    style = width: 200px;
 }
         
 #title{
     background-color:skyblue
 }
 
+
+
+ */
