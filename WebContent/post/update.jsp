@@ -177,7 +177,7 @@ function chkSubmit(){
 		       		<option value="MOVIE" selected="selected" > 영화 게시판 </option>
 		       		<option value="GAME"> 게임 게시판 </option>
 		       		<option value="BOOK">도서 게시판  </option>
-		       		<option value="SPORTS"> 운동 게시판 </option>	
+		       		<option value="SPORTS"> 스포츠 게시판 </option>	
 		       		</select>
 		       		</td>     
 		            <td>

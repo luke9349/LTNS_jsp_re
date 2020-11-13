@@ -139,7 +139,7 @@ function chkSubmit(){
 		       		<option value="BOOK"  selected="selected"> 도서 게시판  </option>
 		       				<%} %>
 		       		<%if(root.equals("SPORTS")) {%>
-		       		<option value="SPORTS"  selected="selected"> 운동 게시판 </option>	
+		       		<option value="SPORTS"  selected="selected"> 스포츠 게시판 </option>	
 		       				<%} %>
 		       		</select>
 		       		</td>     
