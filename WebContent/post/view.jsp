@@ -12,6 +12,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
+  
+    
     
     
 <%	
@@ -62,7 +66,9 @@
 	
 	int viewCnt = arr[0].getViewCnt();
 	int post_content = arr[0].getPost_contents();
-	int post_id = Integer.parseInt(request.getParameter("post_id"));
+	String post_String = request.getParameter("post_id");
+	int post_id = Integer.parseInt(post_String);
+	
 	int streinger =  (int) session.getAttribute("writer");
 	String master = (String) session.getAttribute("grade");
 	
@@ -106,6 +112,8 @@
 	}
 %>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,11 +140,10 @@
 
 <!-- comment -->
 <link rel="stylesheet" href="../board/comment/css/comment.css">
-<link rel="stylesheet" href="../loading/css/emailLoading.css">
 <script src="../board/comment/js/comment.js"></script>
 
 <!-- modal -->
-<script src="../modal/js/modal.js"></script>
+<script defer src="../modal/js/modal.js"></script>
 
 
 
@@ -197,7 +204,6 @@ function recommend(){
 		
 		 <div class="spans text-right d-block">
 		 <span class="divspan">  <i id="report" onclick='report_btn(<%=post_id %>)' class="fas fa-bullhorn text-danger mr-2"></i></span>
-		 
 		 <span class="divspan">  <i class="far fa-eye"> <%=viewCnt %></i>&nbsp;</span>
 		 <%if(login_chk != 0){%>
 		 <span class="divspan"> <i id="rec_btn" onclick="recommend()" class="far fa-thumbs-up text-info"> <%=emp_cnt %></i>	 </span>

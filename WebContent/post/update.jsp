@@ -181,7 +181,7 @@ function chkSubmit(){
 		       		</select>
 		       		</td>     
 		            <td>
-		            <input type="text" id="title" name="title" style="width:100%" value="<%=title %>"/>
+		            <input type="text" id="title" name="title" style="width:100%" maxlength="30" value="<%=title %>"/>
 		            </td>
 		        </tr>
 		          <tr class="mt-2 text-right">

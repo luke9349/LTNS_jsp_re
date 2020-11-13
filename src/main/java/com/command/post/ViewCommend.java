@@ -28,9 +28,13 @@ public class ViewCommend implements Command {
 		FileWriteDAO filedao = new FileWriteDAO();
 		int post_contents;
 		
-		int post_id = Integer.parseInt(request.getParameter("post_id"));
-		System.out.println(post_id);
+		
+		try {
+			String post_ids_qqq = request.getParameter("post_id");
+			int post_id = Integer.parseInt(post_ids_qqq);
 				
+		
+		
 		if(post_id != 0) {
 			try {
 				arr =  dao.wr_view(post_id);
@@ -90,6 +94,11 @@ public class ViewCommend implements Command {
 		}
 
 	 }
-	}
+	 
+	}catch (Exception e) {
+		System.out.println("넘버포멧입셉셥");
+	}//end try 
+		
+	}// end else
 
 }

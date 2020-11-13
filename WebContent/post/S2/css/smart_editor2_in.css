@@ -34,8 +34,3 @@ body, .se2_inputarea { margin: 0; padding: 0; font-family: '돋움',Dotum,Helvet
 
 .se2_quote10 { margin: 0 0 30px; padding: 12px 10px 11px; border: 2px solid #e5e5e5; background: #fafafa; color: #888; }
 
-@media screen and (min-width:512px) {
-	.se2_inputarea {
-		width:380px;
-	}
-}
