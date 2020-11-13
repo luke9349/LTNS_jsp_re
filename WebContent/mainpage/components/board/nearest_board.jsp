@@ -25,6 +25,7 @@
 
 	<c:forEach var="i" begin="0" end="4" step="1">
 		<jsp:include page="./card/card_post.jsp" >
+			<jsp:param name="i" value="${i }"/>
 			<jsp:param name="post_id" value="${nearest_board[i].post_id }"/>
 			<jsp:param name="title" value="${nearest_board[i].post_contents.title }"/>
 			<jsp:param name="writer" value="${nearest_board[i].nickname }"/>
