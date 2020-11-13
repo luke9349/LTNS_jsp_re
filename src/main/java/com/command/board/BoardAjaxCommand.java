@@ -211,8 +211,7 @@ public class BoardAjaxCommand implements Command, Board_Command {
 				if (searchType != null && searchType.equals("writer")) {
 					search = "%" + search + "%";
 					dataLength = new BoardListDAO().getViewcntSearchNickNameAllList(search).size();
-					list = new BoardListDAO().getViewcntSearchDateAndNicknameList(startDate, endDate, search, type,
-							page);
+					list = new BoardListDAO().getViewcntSearchNickNameList(type, search, page);
 					result = contentToText(list);
 					break;
 				}
@@ -221,6 +220,7 @@ public class BoardAjaxCommand implements Command, Board_Command {
 					search = "%" + search + "%";
 					dataLength = new BoardListDAO().getViewCntSearchTitleAllList(search).size();
 					list = new BoardListDAO().getViewcntSearchTitleList(type, search, page);
+					result = contentToText(list);
 					break;
 				}
 
@@ -347,7 +347,7 @@ public class BoardAjaxCommand implements Command, Board_Command {
 				if (searchType != null && !searchType.equals("")) {
 					list = new BoardListDAO().getCategoryAllList(category);
 					result = contentToText(list);
-					result = createSearchList(result, searchType, search, page, searchType);
+					result = createSearchList(result, searchType, search, page, type);
 					break;
 				}
 

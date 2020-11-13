@@ -22,7 +22,7 @@ const handleSearchSubmit = (e) => {
 	}
 }
   let { root, type, page } = params;
-  page = parseInt(page);
+  page = 1;
   let url = `root=${root}&type=${type}&page=${page}`;
   if($('#startDate').val() && $('#endDate').val()) 
 	url += `&startDate=${$('#startDate').val()}&endDate=${$('#endDate').val()}`;
