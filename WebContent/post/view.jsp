@@ -130,11 +130,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<!-- comment -->
-<link rel="stylesheet" href="../board/comment/css/comment.css">
-<link rel="stylesheet" href="../loading/css/emailLoading.css">
-<script src="../board/comment/js/comment.js"></script>
-
 <!-- modal -->
 <script src="../modal/js/modal.js"></script>
 
@@ -237,20 +232,6 @@ function recommend(){
 	</div>
 	<hr>
 </div> 
-	<jsp:include page="../board/comment/component/comment.jsp"></jsp:include>
-	<script>
-		commenInit('<%=streinger%>', '${param.post_id}', '<%=login_chk%>', '<%=master%>', '<%=nick_ssessions%>');
-	</script>
-	<jsp:include page="../modal/component/modal.jsp" />
-	<c:if test="${messageType != null &&  messageContent != null}">
-		<script>
-			showModal("${messageType}", "${messageContent}");
-		</script>
-		<%
-			session.removeAttribute("messageType");
-			session.removeAttribute("messageContent");
-		%>
-	</c:if>
 	<jsp:include page="../footer/component/footer.jsp" />
 </body>
 </html>
