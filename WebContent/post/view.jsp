@@ -135,13 +135,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<<<<<<< HEAD
 <!-- comment -->
 <link rel="stylesheet" href="../board/comment/css/comment.css">
 <script src="../board/comment/js/comment.js"></script>
 
-=======
->>>>>>> branch 'master' of https://github.com/luke9349/LTNS_jsp_re.git
 <!-- modal -->
 <script defer src="../modal/js/modal.js"></script>
 
