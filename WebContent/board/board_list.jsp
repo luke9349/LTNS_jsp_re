@@ -15,32 +15,41 @@
 <%!
 	String topic = null;
 	String title = null;
+	String icon = null;
 %>
 	
 <c:choose>	
 	<c:when test="${root eq 'NOTICE' }">
-		<% topic = "<i class=\"fab fa-neos\"></i>공지사항"; %>				
+		<% topic = "공지사항"; %>
+		<% icon = "<i class=\"fab fa-neos\"></i>"; %>				
 	</c:when>
 	<c:when test="${root eq 'BOOK' }">		
-		<% topic = "<i class=\"fas fa-book-open\"></i>도서게시판"; %>						
+		<% topic = "도서게시판"; %>	
+		<% icon = "<i class=\"fas fa-book-open\"></i>"; %>					
 	</c:when>
 	<c:when test="${root eq 'MOVIE' }">					
-		<% topic = "<i class=\"fas fa-video\"></i>영화게시판"; %>						
+		<% topic = "영화게시판"; %>	
+		<% icon = "<i class=\"fas fa-video\"></i>"; %>					
 	</c:when>
 	<c:when test="${root eq 'SPORTS' }">
-		<% topic = "<i class=\"fas fa-running\"></i>스포츠게시판"; %>										
+		<% topic = "스포츠게시판"; %>	
+		<% icon = "<i class=\"fas fa-running\"></i>"; %>									
 	</c:when>
 	<c:when test="${root eq 'GAME' }">		
-		<% topic = "<i class=\"fas fa-gamepad\"></i>게임게시판"; %>											
+		<% topic = "게임게시판"; %>		
+		<% icon = "<i class=\"fas fa-gamepad\"></i>"; %>									
 	</c:when>
 	<c:when test="${root eq 'EMPATHIZE' }">					
-		<% topic = "<i class=\"far fa-eye\"></i>공감게시판"; %>												
+		<% topic = "공감게시판"; %>		
+		<% icon = "<i class=\"far fa-eye\"></i>"; %>										
 	</c:when>
 	<c:when test="${root eq 'VIEWCNT' }">		
-		<% topic = "<i class=\"fas fa-thumbs-up\"></i>인기게시판"; %>														
+		<% topic = "인기게시판"; %>
+		<% icon = "<i class=\"fas fa-thumbs-up\"></i>"; %>														
 	</c:when>
 	<c:when test="${root eq 'MYPAGE' }">		
-		<% topic = "<i class=\"far fa-clipboard\"></i>내가쓴글"; %>														
+		<% topic = "내가쓴글"; %>		
+		<% icon = "<i class=\"far fa-clipboard\"></i>"; %>												
 	</c:when>
 </c:choose>	
 	
@@ -82,7 +91,11 @@
 <body class="container">
 <jsp:include page="../header/component/header.jsp" />
 <main id="main" class="my-2">
-	<div class="board__title text-secondary"><%=topic %></div>
+	<div class="board__title text-secondary">
+	<%=icon %>
+	&nbsp;
+	<%=topic %>
+	</div>
 	<jsp:include page="./components/actionBar.jsp">
 		<jsp:param value="${root }" name="root"/>
 	</jsp:include>
