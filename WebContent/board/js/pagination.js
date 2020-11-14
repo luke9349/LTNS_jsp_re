@@ -113,6 +113,9 @@ const handledPagination = () => {
 
 export const initPagination = (initialParams, datalength) => {
   params = initialParams;
-  maxPagination = Math.ceil(datalength / 10);
+  if(params.type === 'list')
+    maxPagination = Math.ceil(datalength / 10);
+  else 
+    maxPagination = Math.ceil(datalength / 8);
   handledPagination();
 };

@@ -16,8 +16,6 @@
 		url += "&searchType=" + request.getParameter("searchType");
 		url += "&search=" + request.getParameter("search");
 	}
-	if(request.getParameter("page") != null && !request.getParameter("page").equals(""))
-		url += "&page=" + request.getParameter("page");
 	if(request.getParameter("type") != null && !request.getParameter("type").equals(""))
 		type = request.getParameter("type");
 	

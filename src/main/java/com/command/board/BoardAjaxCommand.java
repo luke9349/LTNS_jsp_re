@@ -12,12 +12,10 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import main.java.com.command.Command;
 import main.java.com.model.Post_Contents;
-import main.java.com.model.board.AjaxBoardListJSON;
-import main.java.com.model.board.BoardListDAO2;
+import main.java.com.model.board.BoardListAjaxJSON;
 import main.java.com.model.board.BoardListDAO;
 import main.java.com.model.board.BoardListDTO;
-import main.java.com.model.board.Board_DAO;
-import main.java.com.model.board.JSONListDTO;
+import main.java.com.model.board.BoardListJSON;
 import main.java.com.util.LogUtil;
 
 public class BoardAjaxCommand implements Command, Board_Command {
@@ -104,7 +102,7 @@ public class BoardAjaxCommand implements Command, Board_Command {
 			}
 
 			ArrayList<BoardListDTO> list = null;
-			ArrayList<JSONListDTO> result = null;
+			ArrayList<BoardListJSON> result = null;
 			switch (category) {
 			case "EMPATHIZE":
 				if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")
@@ -379,12 +377,12 @@ public class BoardAjaxCommand implements Command, Board_Command {
 		return false;
 	}
 
-	private ArrayList<JSONListDTO> contentToText(ArrayList<BoardListDTO> list) {
-		ArrayList<JSONListDTO> result = new ArrayList<JSONListDTO>();
+	private ArrayList<BoardListJSON> contentToText(ArrayList<BoardListDTO> list) {
+		ArrayList<BoardListJSON> result = new ArrayList<BoardListJSON>();
 		for (BoardListDTO temp : list) {
 			Post_Contents content = new Post_Contents(temp.getRealFilePath());
 
-			JSONListDTO dto = new JSONListDTO();
+			BoardListJSON dto = new BoardListJSON();
 			dto.setPostId(temp.getPostId());
 			dto.setTitle(temp.getTitle());
 			dto.setWriter(temp.getWriter());
@@ -403,11 +401,11 @@ public class BoardAjaxCommand implements Command, Board_Command {
 		return result;
 	} // end contentToText()
 
-	private ArrayList<JSONListDTO> createSearchList(ArrayList<JSONListDTO> list, String searchType, String search,
+	private ArrayList<BoardListJSON> createSearchList(ArrayList<BoardListJSON> list, String searchType, String search,
 			int page, String type) {
-		ArrayList<JSONListDTO> result = new ArrayList<JSONListDTO>();
-		ArrayList<JSONListDTO> temp = new ArrayList<JSONListDTO>();
-		for (JSONListDTO dto : list) {
+		ArrayList<BoardListJSON> result = new ArrayList<BoardListJSON>();
+		ArrayList<BoardListJSON> temp = new ArrayList<BoardListJSON>();
+		for (BoardListJSON dto : list) {
 			StringBuffer content = new StringBuffer();
 			switch (searchType) {
 			case "titleAndContent":
@@ -460,9 +458,9 @@ public class BoardAjaxCommand implements Command, Board_Command {
 
 	@Override
 	public void responseJSON(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<JSONListDTO> list = (ArrayList<JSONListDTO>) request.getAttribute("list");
+		ArrayList<BoardListJSON> list = (ArrayList<BoardListJSON>) request.getAttribute("list");
 
-		AjaxBoardListJSON result = new AjaxBoardListJSON();
+		BoardListAjaxJSON result = new BoardListAjaxJSON();
 
 		if (list.size() == 0) {
 			result.setStatus("FAIL");

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import main.java.com.command.Command;
 import main.java.com.model.board.CommentDAO;
 import main.java.com.model.board.CommentDTO;
-import main.java.com.model.board.CommentDeclarationJSONModel;
+import main.java.com.model.board.CommentDeclarationJSON;
 import main.java.com.util.Gmail;
 import main.java.com.util.LogUtil;
 import main.java.com.view.MemberDAO;
@@ -26,7 +26,7 @@ public class CommentDeclarationCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-		CommentDeclarationJSONModel model = null;
+		CommentDeclarationJSON model = null;
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
@@ -35,7 +35,7 @@ public class CommentDeclarationCommand implements Command {
 			while ((str = br.readLine()) != null) {
 				json.append(str + "\n");
 			}
-			model = new ObjectMapper().readValue(json.toString(), CommentDeclarationJSONModel.class);
+			model = new ObjectMapper().readValue(json.toString(), CommentDeclarationJSON.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 			LogUtil.error(e.getMessage());
