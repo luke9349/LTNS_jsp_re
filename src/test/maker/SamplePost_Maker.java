@@ -202,7 +202,7 @@ public class SamplePost_Maker {
 				
 				int file_id=spm.insertFileToDB(dto);
 				
-				Thread.sleep(1000); //DB 기다려주기
+				Thread.sleep(10); //DB 기다려주기
 				
 				//회원 dto array를 이용해서 mm_id를 랜덤하게 뿌려줌 dtoarr[(int)(Math.random()*(dtoarr.length))]
 				DTO[] mmarr=new MM_DAO_tester().selectBySQL(MM_DAO_tester.SELECT_ALL_MM_ID);

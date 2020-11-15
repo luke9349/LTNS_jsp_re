@@ -27,7 +27,7 @@ public class MM_DAO implements DAO {
 		
 		//객체 생성시, DB Connection 생성
 		public MM_DAO() {
-			try {
+			try { 
 				Class.forName(DB.DRIVER);
 				conn=DriverManager.getConnection(DB.URL,DB.USERID,DB.USERPW);
 				System.out.println("DAO 생성, DB 연결");
