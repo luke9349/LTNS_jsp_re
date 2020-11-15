@@ -95,6 +95,11 @@ SELECT SEQ_comment_table_comment_id.CURRVAL FROM DUAL;
 SELECT * FROM comment_table;
 DELETE FROM comment_table;
 
+SELECT * FROM MM_TABLE mt ;
+
+DELETE FROM  MM_TABLE mt ;
+DELETE FROM  POST_TABLE pt ;
+DELETE FROM  FILE_TABLE ft ;
 
 
 /*공감-----------------------------------------------------------------------------*/
@@ -204,6 +209,7 @@ SELECT * FROM MM_TABLE mt WHERE MM_ID = 1;
 
 SELECT * FROM MM_TABLE mt WHERE id = 'a'; 
 SELECT * FROM MM_TABLE ;
+DELETE  FROM MM_TABLE ;
 
 SELECT * FROM MM_TABLE WHERE ID='a' AND NICKNAME= '우리의미족' AND EMAIL='admin@LTNS.com';
 
@@ -212,7 +218,11 @@ DELETE FROM FILE_TABLE ft ;
 
 SELECT * FROM POST_TABLE pt;
 SELECT * FROM FILE_TABLE ft;
+SELECT * FROM MM_TABLE mt ;
 
+
+
+DELETE FROM FILE_TABLE ft ;
 
 SELECT * FROM FILE_TABLE ft WHERE REAL_FILENAME ="C:\WebProJ\LT_PJ\LTNS_jsp_re\WebContent\data\20201113163105_sample.txt";
 

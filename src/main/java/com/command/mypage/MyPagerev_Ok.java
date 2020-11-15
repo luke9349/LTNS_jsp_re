@@ -30,7 +30,7 @@ public class MyPagerev_Ok implements Command {
 			
 			if(password != null) {
 				try {
-					MM_DAO dao = new MM_DAO();
+					MemberDAO dao = new MemberDAO();
 					int cnt = 0; 
 					cnt = dao.update_pw(password, mm_id);
 					System.out.println("비번변경진입");
@@ -43,7 +43,7 @@ public class MyPagerev_Ok implements Command {
 			
 			
 			if(nickname != null) {
-				MM_DAO dao = new MM_DAO();
+				MemberDAO dao = new MemberDAO();
 				int cnt = 0; 
 				try {
 					cnt = dao.update_nick(nickname, mm_id);
