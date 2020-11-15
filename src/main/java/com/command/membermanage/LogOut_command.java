@@ -9,7 +9,7 @@ import javax.websocket.Session;
 
 import main.java.com.command.Command;
 
-public class logOut_Cmd implements Command {
+public class LogOut_command implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {

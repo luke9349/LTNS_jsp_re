@@ -10,7 +10,7 @@ import main.java.com.command.Command;
 import main.java.com.view.MemberDAO;
 import main.java.com.view.MemberDTO;
 
-public class LoginOk_Cmd implements Command {
+public class LoginOK_command implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
