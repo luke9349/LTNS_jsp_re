@@ -64,7 +64,7 @@ function chk_Submit() {
     var v = grecaptcha.getResponse();
     if(v.length == 0)
     {
-    	alert("당신은 로봇입니까?")
+    	alert("Captcha 를 체크해주세요");
         return false;
     }
     if(v.length != 0)
@@ -128,7 +128,7 @@ function chk_Submit() {
 			
 			<div class=" row mt-2">
 				 <h4 class="col-sm-4 text-center mt-2"> 내용 </h4>
-				<h4 class="col-sm-8 text-center mt-2"> <textarea rows="3" cols="20" name="artcle"></textarea> </h4>
+				<h4 class="col-sm-8 text-center mt-2"> <textarea class="text_aer" rows="3" cols="20" name="artcle"></textarea> </h4>
 			</div>
 		<div class="row mt-2 d-flex justify-content-center">
 			<div class="g-recaptcha " data-sitekey="6LffD-IZAAAAANuqCjSeHuEyjZ9AXUQn9jFkn5NZ"></div>

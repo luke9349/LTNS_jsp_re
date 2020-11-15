@@ -45,7 +45,7 @@ public class MailSend {
         		 msg.setSentDate(new Date());
                  
                  //발송자 지정 발송자의 메일 , 발송자명
-                 msg.setFrom(new InternetAddress("shxorld@gmail.com", "VISITOR"));
+                 msg.setFrom(new InternetAddress("LTNSReport@gmail.com", "LTNS"));
                  
                  //수신자의 메일 생성
                  InternetAddress to = new InternetAddress(email);         

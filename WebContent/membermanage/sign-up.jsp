@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.css">
+<link rel="stylesheet" href="CSS/sign-upCSS.css">
 
 
 
@@ -14,7 +15,7 @@
 
 <body>
 	<div class="wrap">
-		<div class="" id="header">
+		<div class="header" id="header">
 		<h1>
 			<a id="login_logo" href="loginmain.jsp">
 				<img alt="Login_logo" src="../images/favicon.ico">
@@ -54,50 +55,50 @@
 				
 				
 				
-				<div class="form-group has-feedback">
+				<div class="form-group  text-left">
 				
-					<label class="control-label" for="id">아이디</label>
-					<input class="form-control" type="text" id="id" name="id" maxlength="20" placeholder="아이디를 입력해 주세요." required="required" />
-								<span class="error d-none" id="iderror" >  </span>
+					<label class="control-label text-left" for="id">아이디</label>
+					<input class="form-control" type="text" id="id" name="id" maxlength="20" placeholder="아이디를 입력해 주세요."  />
+								<span class="error d-none" id="iderror" style="color: red">  </span>
 				
 				</div>
 				
 				
 				
-				<div class="form-group has-feedback">
+				<div class="form-group text-left">
 		            <label class="control-label" for="pw">비밀번호</label>
 		            <input class="form-control" type="password" id="pw" name="pw" maxlength="20" placeholder="비밀번호를 입력해 주세요." />
 		
 		        </div>
 				
-				<div class="form-group has-feedback">
+				<div class="form-group text-left">
            			 <label class="control-label" for="pwck">비밀번호 재확인</label>
 			         <input class="form-control" type="password" id="pwck" name="pwck" maxlength="20" placeholder="비밀번호를 재확인해 주세요." />
-			         <span class="error d-none" id="pwerror" > </span>
+			         <span class="error d-none" id="pwerror" style="color: red" > </span>
        			 </div>
        			 
-				<div class="form-group has-feedback">
+				<div class="form-group text-left">
            			 <label class="control-label" for="rePwd">닉네임</label>
 			         <input class="form-control" type="text" id="nik" name="nik" maxlength="20" placeholder="닉네임을 입력해 주세요." />
-			         <span class="error d-none" id="nikerror" >  </span>
+			         <span class="error d-none" id="nikerror" style="color: red" >  </span>
        			 </div>
        			 
-				<div class="form-group has-feedback">
+				<div class="form-group text-left">
            			 <label class="control-label" for="email">이메일</label>
 			         <input class="form-control" type="email" id="email" name="email" maxlength="20"/>
-						<span class="error d-none" id="emailerror" >  </span> 
+						<span class="error d-none" id="emailerror" style="color: red" >  </span> 
 						<button class="btn btn-primary"  id="emailCK" value="0" onclick="emailSend();" type="button">인증번호받기</button>
 									
        			 </div>
        			        			 
-				<div class="form-group has-feedback">
+				<div class="form-group text-left">
            			 <label class="control-label" for="emailAC">이메일 인증</label>
 			         <input class="form-control" type="text" id="emailAC" name="emailAC" maxlength="20"/>
 					<button class="btn btn-primary" disabled="disabled" id="emailACbtn" onclick="emailChk();" type="button">확인</button>
 									
        			 </div>
        			 
-       			 <div>
+       			 <div class="text-center">
        			 	<button type="submit" class="btn btn-primary" value="회원가입" id="submit" disabled="disabled">회원가입</button>
        			 
        			 </div>

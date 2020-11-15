@@ -45,6 +45,14 @@ public class MemberDAO {
 			+ "VALUES"
 			+ "(SEQ_mm_table_mm_id.NEXTVAL,?,?,?,?,'MEMBER')";
 	
+	public static final String UPDATE_PASSWORD = 
+			"UPDATE MM_TABLE  SET PASSWORD = ? WHERE mm_id = ?";
+	
+
+	public static final String UPDATE_NICK = 
+			"UPDATE MM_TABLE  SET NICKNAME = ? WHERE mm_id = ?";
+
+	
 	
 	
 	public MemberDAO() {
@@ -287,7 +295,59 @@ public class MemberDAO {
 		
 	}
 	
+	//비밀번호 변경 
+	
 
+	public int update_pw(String pw, int mm_id) throws SQLException {
+		int cnt =0;
+		
+		try {
+			psmt = conn.prepareStatement(UPDATE_PASSWORD);
+			psmt.setString(1, pw);
+			psmt.setInt(2, mm_id);
+			cnt = psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		
+		return cnt;
+	}
+	
+	
+	
+
+	//닉네임 변경
+	public int update_nick(String nick, int mm_id) throws SQLException {
+		int cnt =0;
+		
+		try {
+			psmt = conn.prepareStatement(UPDATE_NICK);
+			psmt.setString(1, nick);
+			psmt.setInt(2, mm_id);
+			cnt = psmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		
+		return cnt;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 	//회원가입 Insert
 	public int insert_join(String id, String pw, String nik, String email) throws SQLException {
 		System.out.println("확인3");

@@ -175,31 +175,14 @@ $(window).on('resize', function(){
 		 var width_size = window.outerWidth;
 		 var td = document.getElementById("tds");
 		 if (width_size <= 780) {
-		
-			 while ( td.hasChildNodes() ) 
-			 { td.removeChild( td.firstChild ); }
-
-			 if(td.hasChildNodes()==0){
-					cnt++;
-					alert("네이버 스마트 에디터는 width:800(이상) 사용이 가능합니다.")
-					var imgs_ele = document.createElement("textarea");
-					 //  <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px; "> </textarea>
-			    	imgs_ele.setAttribute("rows", "10");
-			    	imgs_ele.setAttribute("cols", "30");
-			    	imgs_ele.setAttribute("name", "content");
-			    	imgs_ele.setAttribute("style", "width:100%; height:350px;");
-			    	td.appendChild(imgs_ele);
-			    	<%=contents %>
-			    
-			}
-		
+			alert("네이버 스마트 에디터는 width:800(이상) 사용이 가능합니다.")
 		}else if(width_size >=800){
 			 location.reload();
 		}
 	}, delay);
 });
 
- 
+
 </script>
 
 <body class="container">

@@ -160,7 +160,7 @@ function deletePost(uid){
 
 function back(){
 	// 삭제 여부, 다시 확인하고 진행하기
-	var r = confirm("취소 하시겠습니까?");
+	var r = confirm("리스트로 돌아 가시겠습니까?");
 	
 	if(r){
 		location.href= "<%=ctx%>/board/board_list.do";

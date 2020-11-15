@@ -36,10 +36,12 @@ public class recomendCommend implements Command{
 			recomendDAO dao = new recomendDAO();
 			cnt = dao.empathize_insert(post_id, mm_id);
 			request.setAttribute("rec", cnt);
+			request.setAttribute("like", 0);
 		}else if(cns == 1) {
 			recomendDAO dao = new recomendDAO();
 			cnt = dao.empathize_delete(post_id, mm_id);
 			request.setAttribute("rec", cnt);
+			request.setAttribute("like", 1);
 		}
 		
 		

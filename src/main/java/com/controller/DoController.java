@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import main.java.com.command.Command;
 import main.java.com.command.mainpage.Mainpage_Command;
 import main.java.com.command.membermanage.FindOK_command;
-import main.java.com.command.membermanage.LoginOk_Cmd;
+import main.java.com.command.membermanage.LoginOK_command;
 import main.java.com.command.membermanage.Signup_complete_command;
-import main.java.com.command.membermanage.logOut_Cmd;
+import main.java.com.command.membermanage.LogOut_command;
 import main.java.com.command.mypage.Mypage_command;
 import main.java.com.command.mypage.MyPagerev_Ok;
 import main.java.com.command.post.WriteCommend;
@@ -150,13 +150,13 @@ public class DoController extends HttpServlet {
 			break;
 			
 		case "/membermanage/loginOk.do":
-			cmd = new LoginOk_Cmd();
+			cmd = new LoginOK_command();
 			cmd.execute(request, response);
 			viewPage= "loginOk.jsp";
 			break;
 		
 		case "/membermanage/logoutOk.do":
-			cmd = new logOut_Cmd();
+			cmd = new LogOut_command();
 			cmd.execute(request, response);
 			viewPage= "logoutOk.jsp";
 			break;
