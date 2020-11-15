@@ -35,7 +35,12 @@ public class updateOkCommend implements Command {
 		FileWriteDTO[] file = null;
 		FileWriteDAO filedao = new FileWriteDAO();
 		int post_contents ;
-		int post_id = Integer.parseInt(request.getParameter("post_id"));
+		
+		try {
+			int post_id = Integer.parseInt(request.getParameter("post_id"));
+			
+		
+		
 		
 		
 		//정보들을 가지고옴 
@@ -159,7 +164,9 @@ public class updateOkCommend implements Command {
 			}
 		}// end if
 	
-		
+	}catch (Exception e) {
+		System.out.println("넘범폽맵입셉션");
+	}//end try
 		
 	}
 

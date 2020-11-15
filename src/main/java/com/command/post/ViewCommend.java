@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.lang.Integer;
 import main.java.com.command.Command;
 import main.java.com.model.post.FileWriteDAO;
 import main.java.com.model.post.FileWriteDTO;
@@ -26,9 +27,14 @@ public class ViewCommend implements Command {
 		FileWriteDTO[] file = null;
 		FileWriteDAO filedao = new FileWriteDAO();
 		int post_contents;
-		int post_id = Integer.parseInt(request.getParameter("post_id"));
+		
+		
+		try {
+			String post_ids_qqq = request.getParameter("post_id");
+			int post_id = Integer.parseInt(post_ids_qqq);
 				
-				
+		
+		
 		if(post_id != 0) {
 			try {
 				arr =  dao.wr_view(post_id);
@@ -88,6 +94,11 @@ public class ViewCommend implements Command {
 		}
 
 	 }
-	}
+	 
+	}catch (Exception e) {
+		System.out.println("넘버포멧입셉셥");
+	}//end try 
+		
+	}// end else
 
 }

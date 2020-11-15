@@ -48,8 +48,8 @@ const createcards = (json) => {
  	
 	let title = item.title;
 	
-	if(title.length > 13) {
-	  title = title.substring(0, 13);
+	if(title.length > 7) {
+	  title = title.substring(0, 7);
 	  title += '...';
 	} 
 	

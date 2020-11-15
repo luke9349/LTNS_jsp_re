@@ -51,7 +51,7 @@ public class SamplePost_Maker {
 		return mkRandomStringHangle(1);
 	}
 	String mkRandomStringHangle(int num) {
-		String[] noun= {"나","너","고양이","개","어머니","사랑","우리","죽음","존경","게시글","영화","게임","운동","현준","성언","휘진"};
+		String[] noun= {"나","너","고양이","개","사랑","우리","죽음","존경","게시글","영화","게임","운동","현준","성언","휘진"};
 		String[] postition= {"은(는) ","이(가) ","을(를) "};
 		String[] verb= {"갖다. ","가지다. ","가졌다. ","가졌었다. ","달리다. ","달렸다. ","달렸었다. ","날다. ","날았다. ","날았었다. ","죽다. ","죽었다. ","죽었었다. ","살다. ","살았다. ","살았었다. ","날뛰다. ","날뛰었다. ","날뛰었었다. ","미치다. ","미쳤다. ","미쳤었다. ","갈다. ","갈았다. ","갈았었다. ","뛰다. ","뛰었다. ","뛰었었다. ","기어온다. ","기어왔다. ","기었었다. ","타다. ","탔다. ","탔었다. "};
 
@@ -126,10 +126,15 @@ public class SamplePost_Maker {
 		String title=mkRandomStringHangle();
 		String content=mkLongString();
 		
-		Date d = new Date();
-		SimpleDateFormat sm = new SimpleDateFormat("yyyyMMddHHmmss");
+//		Date d = new Date();
+//		SimpleDateFormat sm = new SimpleDateFormat("yyyyMMddHHmmss");
+//
+//		String fName = sm.format(d) + "_sample.txt";
 
-		String fName = sm.format(d) + "_sample.txt";
+		
+		long time = System.currentTimeMillis();
+		String fName = time + "_sample.txt";
+		
 		PrintWriter pw=null;
 		//
 		String saveDirectory ="WebContent\\data";
@@ -210,7 +215,13 @@ public class SamplePost_Maker {
 				
 //				dto=new Post_DTO("몰랑파일열어서확인해랑이건샘플이당", ((MM_DTO)mmarr[(int)(Math.random()*(mmarr.length))]).getMm_id(), categoryArr[(int)(Math.random()*5)], file_id);
 
-				dto=new Post_DTO(title, 1, categoryArr[(int)(Math.random()*5)], file_id);
+				// dto=new Post_DTO(title, 1, categoryArr[(int)(Math.random()*5)], file_id);
+
+				int mm_id = (int)(Math.random() * 105) + 1;
+				String category = categoryArr[(int)(Math.random()*5)];
+				if(category.equals("NOTICE")) mm_id = 1;
+				
+				dto=new Post_DTO(title, mm_id, category, file_id);
 
 
 				dtoList.add(dto);
@@ -234,7 +245,7 @@ public class SamplePost_Maker {
 	
 	public static void main(String[] args) {
 
-		new SamplePost_Maker().mkPosts(10);	
+		new SamplePost_Maker().mkPosts(1000);	
 
 		System.out.println("전체 작업 완료!");
 	}

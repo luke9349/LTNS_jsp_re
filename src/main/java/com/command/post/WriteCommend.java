@@ -32,11 +32,15 @@ public class WriteCommend implements Command {
 			e1.printStackTrace();
 		} 
 		// request data
-		String title = request.getParameter("title"); // 요청에서, title, content라는 name을 가진 파라미터 리턴
-		String content = request.getParameter("content");
-		String saveDirectory = request.getServletContext().getRealPath("/") + "data";
+	    
+        
 
-        String category = request.getParameter("category");
+        	String title = request.getParameter("title"); // 요청에서, title, content라는 name을 가진 파라미터 리턴
+    		String content = request.getParameter("content");
+    		String saveDirectory = request.getServletContext().getRealPath("/") + "data";
+            String category = request.getParameter("category");
+            
+        
         
        HttpSession session =  request.getSession();
        int writer =  (int) session.getAttribute("writer");
@@ -115,8 +119,8 @@ public class WriteCommend implements Command {
 		
 		
 		request.setAttribute("result", cnt);
-		
-		
+      
+        
 	}
 
 }

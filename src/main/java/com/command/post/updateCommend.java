@@ -22,6 +22,8 @@ public class updateCommend implements Command {
 		FileWriteDAO filedao = new FileWriteDAO();
 		
 		int post_contents ;
+		
+		try {
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
 		
 		
@@ -48,6 +50,9 @@ public class updateCommend implements Command {
 		} // end try
 	
 		
+		}catch (Exception e) {
+			
+		} 
 		
 		
 		

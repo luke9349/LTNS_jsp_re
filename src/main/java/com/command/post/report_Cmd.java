@@ -1,8 +1,6 @@
 package main.java.com.command.post;
 
 
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import main.java.com.command.Command;
 import main.java.com.util.Gmail;
-import main.java.com.util.MailInfo;
 
 public class report_Cmd implements Command {
 
@@ -47,7 +44,9 @@ public class report_Cmd implements Command {
 		new Gmail(request).emailSend(myMail, "LTNSReport@gmail.com", titles, contents);
 		
 	
+		request.setAttribute("mailOk", post_id);
 
+		
 	}
 
 }

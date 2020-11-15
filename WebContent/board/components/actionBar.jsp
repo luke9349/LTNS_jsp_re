@@ -16,8 +16,6 @@
 		url += "&searchType=" + request.getParameter("searchType");
 		url += "&search=" + request.getParameter("search");
 	}
-	if(request.getParameter("page") != null && !request.getParameter("page").equals(""))
-		url += "&page=" + request.getParameter("page");
 	if(request.getParameter("type") != null && !request.getParameter("type").equals(""))
 		type = request.getParameter("type");
 	
@@ -56,11 +54,19 @@
     	</c:when>
     	<c:otherwise>
 		    <c:if test="${login ne '0'}">
-			    <a
-			      id="writeBtn"
-			      class="btn btn-outline-primary"
-			      ><i class="fas fa-pencil-alt"></i>글쓰기</a
-			    >    	
+		      <c:choose>
+		        <c:when test="${param.root eq 'EMPATHIZE' }">
+		        </c:when>
+		        <c:when test="${param.root eq 'VIEWCNT' }">
+		        </c:when>
+		        <c:otherwise>
+			      <a
+			        id="writeBtn"
+			        class="btn btn-outline-primary"
+			        ><i class="fas fa-pencil-alt"></i>글쓰기</a
+			      >    	
+		        </c:otherwise>
+		      </c:choose>
 		    </c:if>    		
     	</c:otherwise>
     </c:choose>

@@ -64,7 +64,7 @@ const handledPagination = () => {
   } else {
     const li = createPaginationList('page-item');
     const i = createPaginationIcon('fas fa-chevron-left');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${(Math.floor(page / 10) - 1) * 10 + 1}`);
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${(Math.floor((page - 1) / 10) - 1) * 10 + 1}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);
@@ -87,9 +87,9 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
-    const li = createPaginationList('page-item');
+    const li = createPaginationList('page-item a');
     const i = createPaginationIcon('fas fa-chevron-right');
-    const a = createPaginationAnchor(`board_list.do?${url}&page=${(Math.floor(page / 10) + 1) * 10 + 1}`);
+    const a = createPaginationAnchor(`board_list.do?${url}&page=${(Math.floor((page - 1) / 10 ) + 1) * 10 + 1}`);
     a.appendChild(i);
     li.appendChild(a);
     pagination.appendChild(li);
@@ -102,7 +102,7 @@ const handledPagination = () => {
     li.appendChild(a);
     pagination.appendChild(li);
   } else {
-    const li = createPaginationList('page-item');
+    const li = createPaginationList('page-item b');
     const i = createPaginationIcon('fas fa-angle-double-right');
     const a = createPaginationAnchor(`board_list.do?${url}&page=${maxPagination}`);
     a.appendChild(i);
@@ -113,6 +113,9 @@ const handledPagination = () => {
 
 export const initPagination = (initialParams, datalength) => {
   params = initialParams;
-  maxPagination = Math.ceil(datalength / 10);
+  if(params.type === 'list')
+    maxPagination = Math.ceil(datalength / 10);
+  else 
+    maxPagination = Math.ceil(datalength / 8);
   handledPagination();
 };

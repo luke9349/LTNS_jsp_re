@@ -83,7 +83,7 @@
 			
 			$("#pwerror").attr('class','error');
 
-			
+			if($("#pwck").val() == ""){  $("#pwerror").html("비밀번호형식에 맞게 입력해주세요1 4 ~ 12 글자 "); return;}
 			 
 			if($("#pw").val() != $("#pwck").val()){$("#pwerror").html("비밀번호가 상이합니다"); return; }
 			

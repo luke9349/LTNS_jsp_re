@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import main.java.com.command.Command;
-import main.java.com.model.board.AjaxCommentListJSON;
+import main.java.com.model.board.CommentListAjaxJSON;
 import main.java.com.model.board.CommentDAO;
 import main.java.com.model.board.CommentDTO;
 import main.java.com.model.board.CommentJSONModel;
@@ -94,7 +94,7 @@ public class CommentRemoveCommand implements Command, Board_Command {
 		long count = (long) request.getAttribute("count");
 		ArrayList<CommentDTO> list = (ArrayList<CommentDTO>) request.getAttribute("list");
 
-		AjaxCommentListJSON result = new AjaxCommentListJSON();
+		CommentListAjaxJSON result = new CommentListAjaxJSON();
 
 		if (list.size() == 0) {
 			result.setStatus("FAIL");

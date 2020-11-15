@@ -1,3 +1,5 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="javax.tools.DocumentationTool.Location"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -14,11 +16,12 @@
 	
 	int login_chk = (int)session.getAttribute("login");
 	String garde = (String)session.getAttribute("grade");
-
 	String root = request.getParameter("root");
+
+%>
 	
-	
-%>      
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,13 +31,48 @@
 </head>
 
 
+<%
+
+	switch(root){
+	
+	case "NOTICE":
+		break;
+	
+	case "MOVIE":
+		break;
+	
+	case "BOOK":
+		break;
+	
+	case "SPORTS":
+		break;
+	
+	case "GAME":
+		break;
+	
+		
+	default:%>
+		<script>
+		alert("비정상적인 접근입니다.");
+		location.href = history.back()
+		</script>
+	<% 
+		break;
+	}
+
+%>
+
+	
+
+
+
 <%if(login_chk == 0){%> 
 <script>
 alert("게스트는 글을 쓸수 없어요");
 location.href = history.back()
 </script>
-
 <%} %>
+
 
 
 
@@ -103,14 +141,40 @@ function chkSubmit(){
 	}
 
 }
- 
- 
- 
 
+var delay = 300;
+var timer = null;
+var cnt = 0;
+
+$(window).on('resize', function(){
+	clearTimeout(timer);
+	timer = setTimeout(function(){
+		 var width_size = window.outerWidth;
+		 var td = document.getElementById("tds");
+		 if (width_size <= 780) {
+		
+			 while ( td.hasChildNodes() ) 
+			 { td.removeChild( td.firstChild ); }
+
+			 if(td.hasChildNodes()==0){
+					cnt++;
+					alert("네이버 스마트 에디터는 width:800(이상) 사용이 가능합니다.")
+					var imgs_ele = document.createElement("textarea");
+					 //  <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px; "> </textarea>
+			    	imgs_ele.setAttribute("rows", "10");
+			    	imgs_ele.setAttribute("cols", "30");
+			    	imgs_ele.setAttribute("name", "content");
+			    	imgs_ele.setAttribute("style", "width:100%; height:350px;");
+			    	td.appendChild(imgs_ele);	    
+			}
+		
+		}else if(width_size >=800){
+			 location.reload();
+		}
+	}, delay);
+});
 </script>
 
-
-<% %>
 
 <body class="container">
 
@@ -154,16 +218,14 @@ function chkSubmit(){
 		              
 		            </td>
 		        </tr>
-		        <tr class="justify-content-center ">
-		            <td colspan="2" class="bg-white">
+		        <tr class="justify-content-center">
+		            <td id="tds" colspan="2" class="bg-white">
 		                <textarea rows="10" cols="30" id="ir1" name="content" style="width:100%; height:350px; "> </textarea>
 		            </td>
 		        </tr>
 				</table>
 				<input type="hidden" name="writer" value="<%=writer%>">
 			</form>
-	  
-	  
 	  
 	  
 	</div> <!-- end container -->

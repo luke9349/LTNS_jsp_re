@@ -46,6 +46,8 @@ body, #smart_editor2, #smart_editor2 p, #smart_editor2 h1, #smart_editor2 h2, #s
 /* EDITINGMODE */
 #smart_editor2 .se2_conversion_mode { position: relative; height: 15px; padding-top: 1px; border-top: 1px solid #b5b5b5; background: url("../img/icon_set.gif") 0 -896px repeat-x; }
 
+
+
 #smart_editor2 .se2_inputarea_controller { display: block; clear: both; position: relative; width: 100%; height: 15px; text-align: center; cursor: n-resize; }
 
 #smart_editor2 .se2_inputarea_controller span, #smart_editor2 .controller_on span { background: url("../img/ico_extend.png") no-repeat; }

@@ -196,7 +196,9 @@ function recommend(){
 		
 		
 		 <div class="spans text-right d-block">
+		 <%if(login_chk != 0){%>
 		 <span class="divspan">  <i id="report" onclick='report_btn(<%=post_id %>)' class="fas fa-bullhorn text-danger mr-2"></i></span>
+		 <%} %>
 		 <span class="divspan">  <i class="far fa-eye"> <%=viewCnt %></i>&nbsp;</span>
 		 <%if(login_chk != 0){%>
 		 <span class="divspan"> <i id="rec_btn" onclick="recommend()" class="far fa-thumbs-up text-info"> <%=emp_cnt %></i>	 </span>

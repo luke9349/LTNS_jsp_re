@@ -11,37 +11,9 @@ body *{
  font-family: 'Hanna', fantasy;
 }
 
-
-
-
-.aticle_1 {
- font-family: 'Hanna', fantasy;
-
+.row .divs .sele{
+	padding:15px;
 }
 
 
-
-.select_s {
-	margin:3px;
-	padding: 5px;
-	width: 300px;
-}
-
-.title_contents_2 {
-		margin:3px;
-	
-}
-
-
-.tables_title{
-	margin: 5px;
-}
-
-
-
-.report_section {
-	margin: 15px;
-
-
-}
 
