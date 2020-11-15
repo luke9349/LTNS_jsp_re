@@ -8,7 +8,9 @@ function emailSend() {
 	 if(getemail.test($("#email").val())){alert("이메일 전송"); $("#emailACbtn").attr("disabled", false);
 	 	$( '#email' ).attr( 'readonly', true );
 	 }
+
 	
+		
 	$.ajax({
 		
 		type: "post",
