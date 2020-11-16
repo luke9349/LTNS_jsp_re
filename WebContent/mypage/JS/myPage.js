@@ -26,14 +26,14 @@ $(document).ready(function() {
 				document.getElementById("myforms").appendChild(y);
 				
 				
-				var getpwCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+				var getpwCheck= RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/);
 				//
 				
 				var btns = document.getElementById("sub_btns2");
 				btns.onclick = function(){
 					var x_form = document.forms["myforms"]["password"].value;
 					if(x_form == "" || x_form == null || !getpwCheck.test(x_form)){
-						alert("비밀번호는 숫자 또는 영문으로 4글자 이상입니다.")
+						alert("비밀번호는 대문자와 특수문자 포함 8자리 입니다. ")
 						return false;
 					}
 					
