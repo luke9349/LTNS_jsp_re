@@ -8,3 +8,6 @@
 --이메일 중복검사 
 
 SELECT * FROM MM_TABLE mt ;
+SELECT * FROM POST_TABLE pt ;
+
+DELETE  FROM  FILE_TABLE ft ;
