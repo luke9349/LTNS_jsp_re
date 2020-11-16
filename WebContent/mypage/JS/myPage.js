@@ -69,11 +69,13 @@ $(document).ready(function() {
 				document.getElementById("myforms2").appendChild(y);
 		
 				
+				 var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/);
+				
 				
 				var btns = document.getElementById("sub_btns");
 				btns.onclick = function(){
 					var x_form = document.forms["myforms2"]["nickname"].value;
-					if(x_form == "" || x_form == null){
+					if(x_form == "" || x_form == null || !getNik.test(x_form)){
 						alert("닉네임 값을 입력해주세요")
 						return false;
 					}

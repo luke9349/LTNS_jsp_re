@@ -17,7 +17,7 @@ SELECT SEQ_mm_table_mm_id.CURRVAL FROM DUAL;
 /*확인*/
 
 DELETE FROM mm_table;
-
+SELECT * FROM MM_TABLE mt ;
 
 --시퀀스 테이블 확인
 SELECT * FROM USER_SEQUENCES;

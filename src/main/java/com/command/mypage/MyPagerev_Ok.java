@@ -42,6 +42,10 @@ public class MyPagerev_Ok implements Command {
 			 }
 			
 			
+			
+			
+			
+			
 			if(nickname != null) {
 				MemberDAO dao = new MemberDAO();
 				int cnt = 0; 
