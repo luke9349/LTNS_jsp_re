@@ -6,6 +6,7 @@ $(document).ready(function() {
 	var cnt = 0;
 	var cnt2 = 0;
 
+	
 
 		$("#rev_btn").on("click",function(){
 				if(cnt==0){
@@ -69,7 +70,6 @@ $(document).ready(function() {
 				document.getElementById("myforms2").appendChild(y);
 		
 				
-				
 				var btns = document.getElementById("sub_btns");
 				btns.onclick = function(){
 					var x_form = document.forms["myforms2"]["nickname"].value;
@@ -78,6 +78,43 @@ $(document).ready(function() {
 						return false;
 					}
 					
+					console.log(x_form);
+					
+					//유효성
+					var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/);	
+					
+					if(!getNik.test(x_form)){ 
+						alert("2 ~ 5 글자 한글,영어,숫자가능2"); 
+						return false;
+						} 
+					
+					
+					
+					 console.log( "../membermanage/sign-up.ajax?nik="+x_form);
+					 
+					 var ajaxreturn=false;
+					 $.ajax({
+							type : "GET",
+							url :  "../membermanage/sign-up.ajax?nik="+x_form,   //닉네임 확인
+							async: false,
+							success : function(data){
+								console.log(data);
+								
+								if(data != 0){
+									alert("사용중인 닉네임입니다");
+								}else if(data == 0){
+									console.log("변경 성공");
+									ajaxreturn=true;
+								}
+								
+							},
+							error : function() {
+								alert("실패");
+							}
+					 });
+					 console.log(ajaxreturn);
+					 return ajaxreturn;
+//					return false; //디폴트는 false
 					
 				}
 					
