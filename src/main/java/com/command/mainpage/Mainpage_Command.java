@@ -50,5 +50,4 @@ public class Mainpage_Command implements Command {
 			// 즉, request 에 담아서 컨트롤러에 전달되는 셈
 	}
 
-
 }
