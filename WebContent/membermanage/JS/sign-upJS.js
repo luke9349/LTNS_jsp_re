@@ -118,7 +118,7 @@
 		if($("#nik").val() == ""){ $("#nikerror").html("필수 정보입니다."); return;}
 		
 		
-		if(!getNik.test($("#nik").val())){  $("#nikerror").html("2 ~ 5 글자 한글,영어,숫자가능2"); return;} 
+		if(!getNik.test($("#nik").val())){  $("#nikerror").html("2 ~ 5 글자 한글,영어,숫자가능"); return;} 
 		
 		
 		
@@ -223,7 +223,7 @@
 		
 		
 		//약관동의 확인
-		if(privacyCheck == "N" || privacyCheck == "" ){ alert("약관동의 확인"); return false;}
+		if(privacyCheck == "N" || privacyCheck == "" ){ alert("서비스 이용약관에 동의해 주세요."); return false;}
 		
 		//아이디 공백 확인 
 		if($("#id").val() == ""){ 
@@ -233,34 +233,34 @@
 		} 
 		
 		//아이디 유효성검사 
-		if(!getidCheck.test($("#id").val())){ alert("아이디형식에 맞게 입력해주세요"); $("#id").val(""); $("#id").focus(); return false; } 
+		if(!getidCheck.test($("#id").val())){ $("#id").focus(); return false; } 
 		
 		//비밀번호 공백 확인
-		 if($("#pw").val() == ""){ alert("패스워드 입력바람"); $("#pw").focus(); return false; } 
+		 if($("#pw").val() == ""){ $("#pw").focus(); return false; } 
 		
 		//아이디 비밀번호 같음 확인 
-		if($("#id").val() == $("#pw").val()){ alert("아이디와 비밀번호가 같습니다"); $("#pw").val(""); $("#pw").focus(); return false; } 
+		if($("#id").val() == $("#pw").val()){ $("#pw").val(""); $("#pw").focus(); return false; } 
 		
 		//비밀번호 유효성검사 
-		if(!getpwCheck.test($("#pw").val())){ alert("비밀번호형식에 맞게 입력해주세요"); $("#pw").val(""); $("#pw").focus(); return false; } 
+		if(!getpwCheck.test($("#pw").val())){ $("#pw").val(""); $("#pw").focus(); return false; } 
 		
 		//비밀번호 확인란 공백 확인 
-		if($("#pwck").val() == ""){ alert("패스워드 확인란을 입력해주세요"); $("#pwck").focus(); return false; } 
+		if($("#pwck").val() == ""){ $("#pwck").focus(); return false; } 
 		
 		//비밀번호 서로확인 
-		if($("#pw").val() != $("#pwck").val()){ alert("비밀번호가 상이합니다"); $("#pw").val(""); $("#pwck").val(""); $("#pw").focus(); return false; } 
+		if($("#pw").val() != $("#pwck").val()){ $("#pw").focus(); return false; } 
 		
 		//닉네임 공백 확인
-		if($("nik").val() ==""){alert("닉네임 입력"); $("#nik").focus(); return false;}
+		if($("nik").val() ==""){ $("#nik").focus(); return false;}
 		
 		//닉네임 유효성 검사
-		if(!getNik.test($("#nik").val())){alert("닉네임형식이맞지않다"); $("#nik").val(""); $("nik").focus(); return false;}
+		if(!getNik.test($("#nik").val())){ $("nik").focus(); return false;}
 		
 		//이메일 공백 확인 
-		if($("#email").val() == ""){ alert("이메일을 입력해주세요"); $("#email").focus(); return false; } 
+		if($("#email").val() == ""){ $("#email").focus(); return false; } 
 		
 		//이메일 유효성 검사 
-		if(!getemail.test($("#email").val())){ alert("이메일 주소를 다시 확인해주세요."); $("#email").val(""); $("#email").focus(); return false; }
+		if(!getemail.test($("#email").val())){ $("#email").focus(); return false; }
 		
 		
 	

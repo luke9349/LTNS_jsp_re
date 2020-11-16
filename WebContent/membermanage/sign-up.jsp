@@ -67,13 +67,13 @@
 				
 				<div class="form-group text-left">
 		            <label class="control-label" for="pw">비밀번호</label>
-		            <input class="form-control" type="password" id="pw" name="pw" maxlength="20" placeholder="비밀번호를 입력해 주세요." />
+		            <input class="form-control" type="password" id="pw" name="pw" maxlength="16" placeholder="비밀번호를 입력해 주세요." />
 		
 		        </div>
 				
 				<div class="form-group text-left">
            			 <label class="control-label" for="pwck">비밀번호 재확인</label>
-			         <input class="form-control" type="password" id="pwck" name="pwck" maxlength="20" placeholder="비밀번호를 재확인해 주세요." />
+			         <input class="form-control" type="password" id="pwck" name="pwck" maxlength="16" placeholder="비밀번호를 재확인해 주세요." />
 			         <span class="error d-none" id="pwerror" style="color: red" > </span>
        			 </div>
        			 
