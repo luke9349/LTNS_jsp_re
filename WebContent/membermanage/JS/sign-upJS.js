@@ -6,7 +6,7 @@
 	$("#id").focusout(function() { //아이디 유효성
 		
 		
-		var getidCheck= RegExp(/^[a-z0-9]{5,20}$/);
+		var getidCheck= new RegExp(/^[a-z0-9]{5,20}$/);
 		
 		$("#iderror").attr('class','error');
 			
@@ -55,9 +55,11 @@
 		});	
 		
 	
-	$("#pw").focusout(function() {  //비밀번호 유효성 
+	$("#pw").focusout(function() {  //비밀번호 유효성 1
 			
-		var getpwCheck= RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/);
+		var getpwCheck= RegExp(/[^0-9a-zA-Z#?!@$%^&*-]/);            
+        var getpwCheck2= RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,16}$/);
+		
 			
 			$("#pwerror").attr('class','error');
 
@@ -65,13 +67,16 @@
 			if($("#pw").val() == ""){  $("#pwerror").html("필수 정보입니다."); return;}
 			
 			
-			if(!getpwCheck.test($("#pw").val())){  $("#pwerror").html("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."); return;} 
+			
+			if(getpwCheck.test($("#pw").val()) || !getpwCheck2.test($("#pw").val()) ){ $("#pwerror").html("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."); return;}
+			
+			else{$("#pwerror").html(""); return;}
+		
 			
 			
+				 
 			if($("#id").val() == $("#pw").val()){ $("#pwerror").html("아이디와비밀번호가 같습니다"); return; }
-			
-			if(getpwCheck.test($("#pw").val())){  $("#pwerror").html(""); return;}
-			
+						
 				
 			
 			
@@ -83,9 +88,12 @@
 //		$("#pwerror").attr('class','error d-none');
 //		});	
 	
-	$("#pwck").focusout(function() {  //비밀번호 유효성 
+	$("#pwck").focusout(function() {  //비밀번호확인 유효성 2
 		
-		var getpwCheck= RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/);
+		var getpwCheck= RegExp(/[^0-9a-zA-Z#?!@$%^&*-]/);            
+        var getpwCheck2= RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,16}$/);
+		
+		
 			
 			$("#pwerror").attr('class','error');
 
@@ -95,15 +103,9 @@
 			
 			if($("#pw").val() == $("#pwck").val()){
 				
-				if(!getpwCheck.test($("#pwck").val())){
-					
-					$("#pwerror").html("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."); return;
-				}else{
-					
+				if(getpwCheck.test($("#pw").val()) || !getpwCheck2.test($("#pw").val()) ){ $("#pwerror").html("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."); return;}			
 				
-				
-				$("#pwerror").attr('style','color:blue'); $("#pwerror").html("비밀번호완벽");  return; 
-				}
+				else{ $("#pwerror").attr('style','color:blue'); $("#pwerror").html("비밀번호완벽");  return; }
 				
 			
 			}
@@ -226,11 +228,12 @@
 	function formCheck(signup) { //폼 유효성 검사
 		
 		
-		var getemail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/); 
-		var getidCheck= RegExp(/^[a-z0-9]{5,20}$/);
-		var getpwCheck= RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/);
-		var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/); 
 		var privacyCheck = $(":input:radio[name=provisionYn]:checked").val();
+		var getidCheck= RegExp(/^[a-z0-9]{5,20}$/);
+		var getpwCheck= RegExp(/[^0-9a-zA-Z#?!@$%^&*-]/);            
+        var getpwCheck2= RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,16}$/);
+		var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/); 
+		var getemail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/); 
 
 		
 		
@@ -239,11 +242,7 @@
 		if(privacyCheck == "N" || privacyCheck == "" ){ alert("서비스 이용약관에 동의해 주세요."); return false;}
 		
 		//아이디 공백 확인 
-		if($("#id").val() == ""){ 
-			 alert("아이디 입력바람");
-			 $("#id").focus(); 
-			return false; 
-		} 
+		if($("#id").val() == ""){ $("#id").focus();return false; } 
 		
 		//아이디 유효성검사 
 		if(!getidCheck.test($("#id").val())){ $("#id").focus(); return false; } 
@@ -252,10 +251,10 @@
 		 if($("#pw").val() == ""){ $("#pw").focus(); return false; } 
 		
 		//아이디 비밀번호 같음 확인 
-		if($("#id").val() == $("#pw").val()){ $("#pw").val(""); $("#pw").focus(); return false; } 
+		if($("#id").val() == $("#pw").val()){ $("#pw").focus(); return false; } 
 		
 		//비밀번호 유효성검사 
-		if(!getpwCheck.test($("#pw").val())){ $("#pw").val(""); $("#pw").focus(); return false; } 
+		if(getpwCheck.test($("#pw").val()) || !getpwCheck2.test($("#pw").val()) ){  $("#pw").focus(); return false;}
 		
 		//비밀번호 확인란 공백 확인 
 		if($("#pwck").val() == ""){ $("#pwck").focus(); return false; } 

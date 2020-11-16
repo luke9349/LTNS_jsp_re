@@ -19,7 +19,7 @@ public class MyPagerev_Ok implements Command {
 		
 			String password = request.getParameter("password");
 			String nickname = request.getParameter("nickname");
-			
+			MemberDTO[] arrs = null;
 			HttpSession session =  request.getSession();
 			int mm_id =  (int) session.getAttribute("writer");
 			
@@ -27,6 +27,9 @@ public class MyPagerev_Ok implements Command {
 			System.out.println(nickname + "닉네임");
 			System.out.println(mm_id + "mm id");
 			
+		
+			//닉네임 중복 cnt 
+			String chk_name ="";
 			
 			if(password != null) {
 				try {
@@ -43,15 +46,36 @@ public class MyPagerev_Ok implements Command {
 			
 			
 			
+			if(nickname != null) {
+				
+				MemberDAO dao = new MemberDAO();
+				System.out.println("진입??");
+				try {
+					System.out.println("진입??");
+
+					try {
+					arrs = dao.member_MM_NICK_Select(nickname);
+					chk_name = arrs[0].getNickname();
+					}catch (NullPointerException e) {
+						chk_name = "clean";
+						System.out.println("중복 닉네임 없음");
+					}
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+
+				}
+				
+			}
 			
 			
+			if(chk_name.equals("clean")) {
 			
 			if(nickname != null) {
 				MemberDAO dao = new MemberDAO();
 				int cnt = 0; 
 				try {
 					cnt = dao.update_nick(nickname, mm_id);
-					System.out.println("닉네임변경진입");
 					request.setAttribute("rev_pw", cnt);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -64,11 +88,9 @@ public class MyPagerev_Ok implements Command {
 			if(nickname != null) {
 				MemberDTO[] arr = null;
 				MemberDAO das = new MemberDAO();
-				System.out.println("진입해요?");
 				try {
 					arr = das.member_MM_ID_Select(mm_id);
 					request.setAttribute("rev_nick", arr);
-					System.out.println("진입해요?");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -76,8 +98,7 @@ public class MyPagerev_Ok implements Command {
 			}
 			
 			
-			
-			
+			}
 			
 			
 	}
