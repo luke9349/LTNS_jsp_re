@@ -27,13 +27,14 @@ $(document).ready(function() {
 				document.getElementById("myforms").appendChild(y);
 				
 				
-				var getpwCheck= RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/);
-				//
+				var getpwCheck= RegExp(/[^0-9a-zA-Z#?!@$%^&*-]/);				//
+				var getpwCheck2= RegExp(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,16}$/);
 				
 				var btns = document.getElementById("sub_btns2");
 				btns.onclick = function(){
 					var x_form = document.forms["myforms"]["password"].value;
-					if(x_form == "" || x_form == null || !getpwCheck.test(x_form)){
+					console.log(x_form);
+					if(x_form == "" || x_form == null || getpwCheck.test(x_form) || !getpwCheck2.test(x_form)){
 						alert("비밀번호는 대문자와 특수문자 포함 8자리 입니다. ")
 						return false;
 					}
