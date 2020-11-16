@@ -42,7 +42,7 @@
 		<jsp:include page="./components/board/nearest_board.jsp"/>
 	</main>
 	<br>
-	<jsp:include page="../footer/component/footer.jsp" />
+<jsp:include page="../footer/component/footer.jsp" />
 	<jsp:include page="../fixedbtn/fixedbtn.jsp"/>
 
 </body>

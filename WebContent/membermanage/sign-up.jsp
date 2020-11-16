@@ -83,20 +83,31 @@
 			         <span class="error d-none" id="nikerror" style="color: red" >  </span>
        			 </div>
        			 
-				<div class="form-group text-left">
-           			 <label class="control-label" for="email">이메일</label>
-			         <input class="form-control" type="email" id="email" name="email" maxlength="20"/>
-						<span class="error d-none" id="emailerror" style="color: red" >  </span> 
-						<button class="btn btn-primary"  id="emailCK" value="0" onclick="emailSend();" type="button">인증번호받기</button>
-									
-       			 </div>
+       			 
+				      <div class="form-group text-left"> <label class="control-label" for="email">이메일</label> </div>
+				  <div class="input-group mb-3 text-left">
+				  <input class="form-control" type="email" id="email" name="email" maxlength="20" placeholder="이메일을 입력해 주세요." />
+				  <div class="input-group-append">
+				  <button class="btn btn-primary"  disabled="disabled" id="emailCK"  onclick="emailSend();" type="button">인증번호받기</button>
+				  </div>
+				</div>
+				  	<div class="form-group text-left"> <span class="error d-none" id="emailerror" style="color: red" >  </span>  </div>
+			
+						
        			        			 
-				<div class="form-group text-left">
-           			 <label class="control-label" for="emailAC">이메일 인증</label>
-			         <input class="form-control" type="text" id="emailAC" name="emailAC" maxlength="20"/>
-					<button class="btn btn-primary" disabled="disabled" id="emailACbtn" onclick="emailChk();" type="button">확인</button>
+           			 
+			       
+					
 									
-       			 </div>
+       			 <div class="form-group text-left"><label class="control-label" for="emailAC">이메일 인증</label></div>
+       			  <div class="input-group mb-3 text-left">
+				   <input class="form-control" type="text" id="emailAC" name="emailAC" maxlength="20"/>
+				  	<span class="error d-none" id="emailerror" style="color: red" >  </span> 
+				  <div class="input-group-append">
+				  <button class="btn btn-primary" disabled="disabled" id="emailACbtn" onclick="emailChk();" type="button">확인</button>
+				  </div>
+				</div>
+       			 
        			 
        			 <div class="text-center">
        			 	<button type="submit" class="btn btn-primary" value="회원가입" id="submit" disabled="disabled">회원가입</button>

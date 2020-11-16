@@ -26,9 +26,12 @@ public class LoginOK_command implements Command {
 		int cnt = 0;
 		MemberDAO dao = new MemberDAO();
 	
+		
+		try {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("password");
 	
+		
 		
 		//로그인 
 		if(id != null && pw != null) {
@@ -55,6 +58,9 @@ public class LoginOK_command implements Command {
 			}
 		
 	
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 
 	}
 

@@ -17,12 +17,17 @@
 	width:100%;
 }
 
+body * {
+	font-family: 'Hanna', fantasy;
+}
 
 .container-fluid .spna_title{
 	font-size : 16px;
-	font-family: 'Hanna', fantasy;
+	
 	
 }
+
+
 
 
 .container-fluid .spna_title .in_span {

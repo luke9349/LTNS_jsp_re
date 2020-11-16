@@ -15,7 +15,7 @@ import main.java.com.model.DAO;
 import main.java.com.model.DB;
 import main.java.com.model.DTO;
 
-public class WriteDAO implements DAO {
+public class WriteDAO  {
 	
 	Connection conn = null;
 	PreparedStatement psmt = null;
@@ -206,118 +206,5 @@ public class WriteDAO implements DAO {
 			return cnt;
 		}//유저테이블 정보 가져오기 
 	
-	
-	
 
-	@Override
-	public DTO[] selectBySQL(String sql) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] selectBySQL(String sql, String stringParamForPstmt) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] selectBySQL(String sql, String... stringParamForPstmt) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO mkDTO(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] selectBySQL(String sql, int integerParamForPstmt) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] selectBySQL(String sql, int... integerParamForPstmt) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO mkDTO(ResultSet rs, int signal) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] mkDTOs(ResultSet rs, int signal) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] withSignal(DTO[] _arr, int signal) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] selectBySQL_withSignal(String sql, int signal) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] selectBySQL_withSignal(String sql, int signal, int integerParamForPstmt) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] selectBySQL_withSignal(String sql, int signal, int... integerParamForPstmt) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] selectBySQL_withSignal(String sql, int signal, String stringParamForPstmt) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DTO[] selectBySQL_withSignal(String sql, int signal, String... stringParamForPstmt) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int insertBySQL_withDTO(String sql, DTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int insertBySQL_withDTO(String sql, DTO... dtos) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public DTO[] withSignal(DTO[] _arr, int signal, int integerParamForPstmt) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	
-	
 }

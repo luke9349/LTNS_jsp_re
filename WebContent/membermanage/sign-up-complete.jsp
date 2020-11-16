@@ -26,15 +26,15 @@
 <title>회원가입 완료</title>
 </head>
 
-<body>
+<body style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
 
 
 
 
 	<div class="wrap text-center" id="wrap">
-	
 		<div class="container text-center">
+	
 			
 			<table class="table table-bordered table-hover" style="text-align: center" border="1px solid #dddddd">
 				<thead>

@@ -9,7 +9,7 @@
 
 <title>아이디찾기</title>
 </head>
-<body>
+<body style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 	<div id="wrap">
 		<div id="header" class="text-center">
 		<h1>
@@ -19,7 +19,7 @@
 		</h1>			
 		</div>
 		
-		<div class="continer">
+		<div class="container">
 			<form action="findOK.do" method="post">
 				<table class="table table-bordered table-hover" style="text-align: center" border="1px solid #dddddd">
 					<thead>

@@ -38,8 +38,6 @@ public class report_Cmd implements Command {
 		
 		
 		
-		
-		
 		String myMail= "nbnloper@gmail.com";
 		new Gmail(request).emailSend(myMail, "LTNSReport@gmail.com", titles, contents);
 		

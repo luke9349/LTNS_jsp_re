@@ -153,6 +153,7 @@
 	$("#email").focusin(function() { 
 		$("#emailerror").attr('style','color:red');
 		$("#emailerror").attr('class','error d-none');
+		$("#emailCK").attr("disabled", true);
 		});	
 	
 	$("#email").focusout(function() { //이메일 유효성
@@ -168,7 +169,7 @@
 		}
 		
 		
-		if(!getemail.test($("#email").val())){  $("#emailerror").html("이메일 형식맞게"); return;} 
+		if(!getemail.test($("#email").val())){  $("#emailerror").html("이메일 주소를 다시 확인해주세요."); return;} 
 		
 		
 		$.ajax({
@@ -180,12 +181,14 @@
 				if(data != 0){
 					
 					$("#emailerror").html("사용중인 이메일입니다");
+					$("#emailCK").attr("disabled", true);
 					
 					return;
 					
 				}else if(data == 0){
 					$("#emailerror").attr('style','color:blue');
 					$("#emailerror").html("이메일 완벽함");
+					$("#emailCK").attr("disabled", false);
 				}
 				
 			},
@@ -257,7 +260,7 @@
 		if($("#email").val() == ""){ alert("이메일을 입력해주세요"); $("#email").focus(); return false; } 
 		
 		//이메일 유효성 검사 
-		if(!getemail.test($("#email").val())){ alert("이메일형식에 맞게 입력해주세요"); $("#email").val(""); $("#email").focus(); return false; }
+		if(!getemail.test($("#email").val())){ alert("이메일 주소를 다시 확인해주세요."); $("#email").val(""); $("#email").focus(); return false; }
 		
 		
 	
