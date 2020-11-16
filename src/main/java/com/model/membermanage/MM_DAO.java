@@ -20,7 +20,8 @@ public class MM_DAO implements DAO {
 			"WHERE mm_id=?";
 	public static final String INSERT_MM_BY_DTO="INSERT INTO mm_table(mm_id,id,password,nickname,email,grade) " + 
 			"VALUES (SEQ_mm_table_mm_id.NEXTVAL,?,?,?,?,?)";
-	
+	public static final String DELETE_MM_BY_DTO="DELETE FROM mm_table " + 
+			"WHERE mm_id=?";
 	
 	
 	//DB 연결에 필요한 변수들
@@ -214,6 +215,22 @@ public class MM_DAO implements DAO {
 			return cnt;
 		}//end insert dtos
 		
+		public int deleteBySQL_withDTO(String sql,DTO ...dtos) throws SQLException {
+			int cnt=0;
+			try {
+			for(DTO dto:dtos) {
+				MM_DTO mm_dto=(MM_DTO)dto;
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, mm_dto.getMm_id());
+			}
+				cnt=pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close();
+			}
+			return cnt;
+		}
 		
 		
 		

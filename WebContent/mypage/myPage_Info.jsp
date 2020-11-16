@@ -118,6 +118,7 @@
 			
 			</tbody>
 	</table>
+	<button id="withdrawal">회원 탈퇴</button>
 </div> <!-- end card  -->
 
 

@@ -23,7 +23,8 @@ SELECT * FROM mm_table;
 
 SELECT mm_id FROM mm_table;
 
-DELETE FROM mm_table;
+DELETE FROM mm_table
+WHERE mm_id=?;
 
 
 --시퀀스 테이블 확인

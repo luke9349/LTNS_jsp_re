@@ -119,5 +119,30 @@ $(document).ready(function() {
 					
 			}
 		})
+		
+		
+		$("#withdrawal").on("click",function(){
+			if(confirm("정말 삭제하시겠습니까\n삭제시 모든 작성 글과 댓글이 영구히 사라집니다")){
+			  console.log("회원 정보가 삭제됩니다.");
+			  $.ajax({
+					type : "GET",
+					url :  "../membermanage/deleteMM.ajax",   //mm_id는 커멘더에서 세션으로 삭제
+					async: false,
+					success : function(data){
+						console.log(data);
+						if(data != 1){
+							alert("실패");
+						}else if(data == 1){
+							console.log("탈퇴 성공");
+						}
+					},
+					error : function() {
+						alert("실패");
+					}
+			 });
+			  alert("탈퇴하셨습니다.");
+			  location.href='../membermanage/loginmain.do';
+			}
+		})
 
 })

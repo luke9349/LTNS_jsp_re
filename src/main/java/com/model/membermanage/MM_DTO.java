@@ -11,8 +11,11 @@ public class MM_DTO implements DTO {
 	private String grade;
 	
 	
+	public MM_DTO(int mm_id) {
+		this.mm_id = mm_id;
+	}
+
 	public MM_DTO(int mm_id, String id, String password, String nickname, String email, String grade) {
-		super();
 		this.mm_id = mm_id;
 		this.id = id;
 		this.password = password;
