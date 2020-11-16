@@ -22,4 +22,10 @@
 	alert("정보가 변경되었습니다.")
 	location.href = "<%=ctx%>/mypage/mypage.do";
 </script>
+<%}else{%>
+<script>
+	alert("중복된 닉네임 입니다. 또는 정보가 올바르지 않습니다.")
+	location.href = "<%=ctx%>/mypage/mypage.do";
+</script>
+
 <%}%>

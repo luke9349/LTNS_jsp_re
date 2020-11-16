@@ -137,7 +137,11 @@ ON P.post_contents=F.file_id
 WHERE ROWNUM <= 6
 ORDER by P.viewcnt DESC
 ;
-				
+			
+SELECT * FROM MM_TABLE mt WHERE nickname = 'ㅁㄴㅇ'; 
+
+SELECT * FROM MM_TABLE mt2 ;
+SELECT * FROM MM_TABLE mt  WHERE NICKNAME ='운영자';
 
 /*--최신 순으로 포스트 5개 가져오기--*/
 SELECT P.post_id AS post_id, M.mm_id AS mm_id, M.ID AS id, M.nickname AS nickname, P.title AS title, P.regdate AS regdate, P.category AS category, F.real_filename AS real_filename, V.empathize_cnt AS empathize_cnt, P.viewcnt AS viewcnt
