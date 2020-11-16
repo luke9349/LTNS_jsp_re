@@ -95,30 +95,22 @@ public class Mainpage_DAO implements DAO {
 	// ResultSet => DTO
 	@Override
 	public DTO mkDTO(ResultSet rs) throws SQLException {
-		System.out.println("메인페이지 DAO 생성시작");
 		int post_id=rs.getInt("post_id");
-		System.out.println("0");
 		String title=rs.getString("title");
-		System.out.println("1");
 		String nickname=rs.getString("nickname");
-		System.out.println("2");
 		String id=rs.getString("id");
-		System.out.println("3");
 		String category=rs.getString("category");
-		System.out.println("4");
 		String regdate=rs.getString("regdate");
 //		regdate=regdate.substring(0,16);
-		System.out.println("5");
 		int viewCnt=rs.getInt("viewCnt");//받지 않음
-		System.out.println("6");
 		int empathCnt=rs.getInt("empathize_cnt");//받지 않음
-		System.out.println("7");
 		int mm_id=rs.getInt("mm_id");// mm_id
-		System.out.println("8");
 		Post_Contents post_contents=new Post_Contents(rs.getString("real_filename"));
 		
 		DTO dto=new Post_DTO(post_id, title, mm_id, category, regdate,
 				post_contents, nickname, id, viewCnt, empathCnt);
+		System.out.println("메인페이지 DAO 생성");
+
 		return dto;
 	}//end mkDTO
 	
@@ -129,11 +121,9 @@ public class Mainpage_DAO implements DAO {
 	public DTO[] mkDTOs(ResultSet rs) throws SQLException {
 		DTO[] arr=null;
 		ArrayList<DTO> list=new ArrayList<DTO>();
-		System.out.println("엥?");
 		System.out.println(rs);
 		try {
 			while(rs.next()) {
-				System.out.println("엥2?");
 				list.add(mkDTO(rs));
 			}
 			int size=list.size();
@@ -157,13 +147,9 @@ public class Mainpage_DAO implements DAO {
 	public DTO[] selectBySQL(String sql) throws SQLException {
 		DTO [] arr=null;
 		try {
-			System.out.println("a");
 			pstmt=conn.prepareStatement(sql);
-			System.out.println("b");
 			rs=pstmt.executeQuery();
-			System.out.println("c");
 			arr=mkDTOs(rs);
-			System.out.println("d");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}catch(Exception e) {
@@ -178,19 +164,12 @@ public class Mainpage_DAO implements DAO {
 	public DTO[] selectBySQL(String sql, String stringParamForPstmt, int intParamForPstmt) throws SQLException {
 		DTO [] arr=null;
 		try {
-			System.out.println("아놔");
 			pstmt=conn.prepareStatement(sql);
-			System.out.println("a");
 			System.out.println(stringParamForPstmt);
-			System.out.println("b");
 			pstmt.setString(1, stringParamForPstmt);
-			System.out.println("c");
 			pstmt.setInt(2, intParamForPstmt);
-			System.out.println("d");
 			rs=pstmt.executeQuery();
-			System.out.println("시벌");
 			arr=mkDTOs(rs);
-			System.out.println("수벌");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -210,9 +189,7 @@ public class Mainpage_DAO implements DAO {
 			System.out.println(stringParamForPstmt);
 			pstmt.setString(1, stringParamForPstmt);
 			rs=pstmt.executeQuery();
-			System.out.println("시벌");
 			arr=mkDTOs(rs);
-			System.out.println("수벌");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -250,9 +227,7 @@ public class Mainpage_DAO implements DAO {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, integerParamForPstmt);
 			rs=pstmt.executeQuery();
-			System.out.println("시벌");
 			arr=mkDTOs(rs);
-			System.out.println("수벌");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
