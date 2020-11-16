@@ -27,7 +27,7 @@ public class MyPagerev_Ok implements Command {
 			System.out.println(nickname + "닉네임");
 			System.out.println(mm_id + "mm id");
 			
-			
+		
 			//닉네임 중복 cnt 
 			String chk_name ="";
 			
