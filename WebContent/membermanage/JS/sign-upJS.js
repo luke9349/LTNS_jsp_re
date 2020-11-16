@@ -78,14 +78,14 @@
 			
 		});//비밀번호 끝
 		
-		$("#pwck").focusin(function() { 
-		$("#pwerror").attr('style','color:red');
-		$("#pwerror").attr('class','error d-none');
-		});	
+//		$("#pwck").focusin(function() { 
+//		$("#pwerror").attr('style','color:red');
+//		$("#pwerror").attr('class','error d-none');
+//		});	
 	
 	$("#pwck").focusout(function() {  //비밀번호 유효성 
 		
-		
+		var getpwCheck= RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/);
 			
 			$("#pwerror").attr('class','error');
 
@@ -93,7 +93,20 @@
 			 
 			if($("#pw").val() != $("#pwck").val()){$("#pwerror").html("비밀번호가 다릅니다."); return; }
 			
-			if($("#pw").val() == $("#pwck").val()){$("#pwerror").attr('style','color:blue'); $("#pwerror").html("비밀번호완벽");  return; }
+			if($("#pw").val() == $("#pwck").val()){
+				
+				if(!getpwCheck.test($("#pwck").val())){
+					
+					$("#pwerror").html("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."); return;
+				}else{
+					
+				
+				
+				$("#pwerror").attr('style','color:blue'); $("#pwerror").html("비밀번호완벽");  return; 
+				}
+				
+			
+			}
 			
 			
 			

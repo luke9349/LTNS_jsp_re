@@ -49,10 +49,10 @@
 						<td> <%=ok3[0].getId() %> </td>
 					</tr>
 					
-					<tr>
+					<%-- <tr>
 						<td style="width: 110px;">비밀번호</td>
 						<td> <%=ok3[0].getPassword() %> </td>
-					</tr>
+					</tr> --%>
 					
 					<tr>
 						<td style="width: 110px;">닉네임</td>
