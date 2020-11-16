@@ -43,7 +43,7 @@
 </div>
 	<!-- 프론트 단에서 처리 : 버튼을 누르면 request를 보내고, response된 데이터를, ajax와 script를 이용해,
 	카드를 3개 추가 생성, 값을 카드에 넣어주기. json 객체 활용 -->
-<button id="nearest_board-add_post">추가 글 버튼</button>
+<button id="nearest_board-add_post">더보기</button>
 <script src="JS/board/nearest_board.js"></script>
 <!-- div 이외 부분은 실행시 주석화 할 것! -->
 
