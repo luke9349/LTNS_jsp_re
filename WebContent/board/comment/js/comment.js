@@ -85,7 +85,7 @@ const createComment = (datas) => {
 	  comment += deleteIncon;
 	} else if(grade === 'admin') comment += deleteIncon;
 	
-	if(initBody.userId !== parseInt(data.writerId) && userProfile !== 0 && grade !== 'admin') comment += declarationIncon;
+	if(initBody.userId !== parseInt(data.writerId) && userProfile !== 0 && grade !== 'admin' && data.grade !== 'admin') comment += declarationIncon;
 
     comment += '</div>';
     comment += '</div>';
