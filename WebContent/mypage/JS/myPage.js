@@ -69,17 +69,11 @@ $(document).ready(function() {
 				document.getElementById("myforms2").appendChild(x);
 				document.getElementById("myforms2").appendChild(y);
 		
-				
-<<<<<<< HEAD
-=======
-				 var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/);
-				
-				
->>>>>>> branch 'master' of https://github.com/luke9349/LTNS_jsp_re.git
+				var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/);
 				var btns = document.getElementById("sub_btns");
 				btns.onclick = function(){
 					var x_form = document.forms["myforms2"]["nickname"].value;
-					if(x_form == "" || x_form == null || !getNik.test(x_form)){
+					if(x_form == "" || x_form == null ){
 						alert("닉네임 값을 입력해주세요")
 						return false;
 					}
@@ -87,8 +81,6 @@ $(document).ready(function() {
 					console.log(x_form);
 					
 					//유효성
-					var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/);	
-					
 					if(!getNik.test(x_form)){ 
 						alert("2 ~ 5 글자 한글,영어,숫자가능2"); 
 						return false;
