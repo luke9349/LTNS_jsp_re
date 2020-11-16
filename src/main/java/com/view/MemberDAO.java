@@ -55,8 +55,8 @@ public class MemberDAO {
 	
 	
 	
+	
 	public MemberDAO() {
-
 		try {
 			Class.forName(DB.DRIVER);
 			conn = DriverManager.getConnection(DB.URL, DB.USERID, DB.USERPW);
@@ -143,15 +143,17 @@ public class MemberDAO {
 	
 	
 	
-	//id 중복검사
-	public int id_overlap(String id) throws SQLException {
+	
+
+	public MemberDTO[] member_Nick_name_Select(String nickname) throws SQLException {
 		int cnt = 0;
+		MemberDTO[] arr = null;
 		
 		try {
-			psmt = conn.prepareStatement(SQL_ID_INFO_SELECT);
-			psmt.setString(1, id);
-			cnt = psmt.executeUpdate();
-			
+			psmt = conn.prepareStatement(SQL_NIK_INFO_SELECT);
+			psmt.setString(1, nickname);
+			rs = psmt.executeQuery();
+			arr = createMember(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -159,9 +161,40 @@ public class MemberDAO {
 		}
 
 		
-		return cnt;
+		return arr;
 		
 	}
+	
+	
+	
+	
+	
+	
+		
+	//닉네임 확인하기
+		public int nik_select(String nik) throws SQLException {
+			int cnt = 0;
+			
+			try {
+				psmt = conn.prepareStatement(SQL_NIK_INFO_SELECT);
+				psmt.setString(1, nik);
+				cnt = psmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+
+			
+			return cnt;
+			
+		}
+	
+	
+	
+	
+	
 	
 	//닉네임 중복검사
 	public int nik_overlap(String nik) throws SQLException {
@@ -246,6 +279,8 @@ public class MemberDAO {
 	
 	
 	
+		
+		
 	
 	
 	//멤버 id검색
@@ -294,10 +329,31 @@ public class MemberDAO {
 		
 		
 	}
+
+	//id chk
+	//id 중복검사
+		public int id_overlap(String id) throws SQLException {
+			int cnt = 0;
+			
+			try {
+				psmt = conn.prepareStatement(SQL_ID_INFO_SELECT);
+				psmt.setString(1, id);
+				cnt = psmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+
+			
+			return cnt;
+			
+		}
+	
+	
 	
 	//비밀번호 변경 
-	
-
 	public int update_pw(String pw, int mm_id) throws SQLException {
 		int cnt =0;
 		
@@ -339,8 +395,6 @@ public class MemberDAO {
 		
 		return cnt;
 	}
-
-	
 	
 	
 	
