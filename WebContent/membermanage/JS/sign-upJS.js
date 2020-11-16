@@ -122,7 +122,7 @@
 		$("#nikerror").attr('class','error d-none');
 		});	
 	
-	$("#nik").focusout(function() { //닉네임 유효성
+	$("#nik").focusout(function() { //닉네임 유효성 
 		
 		var getNik= RegExp(/^[a-zA-Z0-9가-힣]{2,5}$/);
 		
