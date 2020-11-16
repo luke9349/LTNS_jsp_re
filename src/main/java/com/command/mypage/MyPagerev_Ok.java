@@ -98,12 +98,7 @@ public class MyPagerev_Ok implements Command {
 			}
 			
 			
-			}else {
-				request.setAttribute("rev_pw", 0);
-				request.setAttribute("rev_nick", null);
-				
 			}
-			
 			
 			
 	}

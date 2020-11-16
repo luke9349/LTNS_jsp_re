@@ -329,10 +329,31 @@ public class MemberDAO {
 		
 		
 	}
+
+	//id chk
+	//id 중복검사
+		public int id_overlap(String id) throws SQLException {
+			int cnt = 0;
+			
+			try {
+				psmt = conn.prepareStatement(SQL_ID_INFO_SELECT);
+				psmt.setString(1, id);
+				cnt = psmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+
+			
+			return cnt;
+			
+		}
+	
+	
 	
 	//비밀번호 변경 
-	
-
 	public int update_pw(String pw, int mm_id) throws SQLException {
 		int cnt =0;
 		
