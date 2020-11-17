@@ -30,7 +30,8 @@ public class Post_Contents {
 			int title_index=0;
 			int thumbnail_index=0;
 			String beforeStr;
-			while((beforeStr=br.readLine())!=null) {
+			int line=0;
+			while((beforeStr=br.readLine())!=null&&line++<10) {
 				String afterStr=null;
 				if(title_index==0) {
 					title=beforeStr.replaceAll("title","");
