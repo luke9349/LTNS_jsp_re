@@ -14,7 +14,7 @@
 <title>아이디 비번 찾기 완료</title>
 
 </head>
-<body>
+<body style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
 <div class="wrap text-center" id="wrap">
 	
@@ -23,7 +23,7 @@
 			<table class="table table-bordered table-hover" style="text-align: center" border="1px solid #dddddd">
 				<thead>
 					<tr >
-						<td colspan="2"> 아찾비찾 완료 </td>
+						<td colspan="2"> 아이디, 비밀번호 찾기 완료 </td>
 					</tr>
 				</thead>
 				
