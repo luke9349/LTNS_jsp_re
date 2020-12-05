@@ -10,7 +10,6 @@ VALUES (1,'sampleid','sample_pwd1','샘플닉네임','sampleemail@sample.com','M
 INSERT INTO mm_table(mm_id,id,password,nickname,email,grade)
 VALUES (SEQ_mm_table_mm_id.NEXTVAL,?,?,?,?,?);
 
-
 --AI 활용
 INSERT INTO mm_table(mm_id,id,password,nickname,email,grade)
 VALUES (SEQ_mm_table_mm_id.NEXTVAL,'sampleid23','sample_pwd1','샘플닉네임23','sample23email@sample.com','MEMBER');
